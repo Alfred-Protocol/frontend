@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import { Inter } from "@next/font/google";
 import Head from "next/head";
 
@@ -13,9 +14,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <p className="text-3xl font-bold underline">Hello world</p>
-        </div>
+        <header>
+          <Header />
+        </header>
+        <p className="text-3xl font-bold underline">Hello world</p>
       </main>
     </>
   );

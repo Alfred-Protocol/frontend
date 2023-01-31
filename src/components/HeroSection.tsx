@@ -15,7 +15,7 @@ const HeroSection = () => {
           sequence={[
             'Earn with the best in crypto.', // Types 'One'
             2000, // Waits 1s
-            'Invesment made easy.', // Deletes 'One' and types 'Two'
+            'Investment made easy.', // Deletes 'One' and types 'Two'
             2000, // Waits 2s
             'Best in the market.', // Types 'Three' without deleting 'Two'
             () => {

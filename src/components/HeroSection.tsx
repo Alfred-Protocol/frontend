@@ -6,10 +6,12 @@ const HeroSection = () => {
   return (
     <div className="px-6 min-h-screen bg-purple-900">
       <div className="text-center">
-        <h1 className="font-bold text-[#fff] text-7xl max-w-4xl mx-auto pt-40 pb-12">
+        <h1 className="font-bold text-[#fff] text-4xl md:text-7xl max-w-4xl mx-auto pt-40 md:pb-12 pb-6">
           Decentralised Fund Manager
         </h1>
-        <p className="text-[#fff] text-3xl">Earn with the best in crypto.</p>
+        <p className="text-[#fff] text-xl md:text-3xl">
+          Earn with the best in crypto.
+        </p>
         <FancyButton className="mt-8">
           <span>
             Get Started

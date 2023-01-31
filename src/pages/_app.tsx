@@ -24,12 +24,12 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [
-    mainnet,
     polygon,
+    mainnet,
     optimism,
     arbitrum,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true'
-      ? [goerli, polygonMumbai]
+      ? [polygonMumbai, goerli]
       : []),
   ],
   [publicProvider()]

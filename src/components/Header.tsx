@@ -1,6 +1,7 @@
 import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Link from 'next/link';
 import { Fragment } from 'react';
 
 function classNames(...classes: string[]) {
@@ -9,17 +10,13 @@ function classNames(...classes: string[]) {
 
 export default function Header() {
   return (
-    <Popover className="relative bg-white">
+    <Popover className="relative bg-purple-900" as={'header'}>
       <div className="mx-auto px-6">
-        <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div className="flex items-center justify-between border-b-2 border-purple-900 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
               <span className="sr-only">Fund Asset Manager</span>
-              <img
-                className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
+              <p className="text-purple-100">Fund Asset Manager</p>
             </a>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
@@ -29,18 +26,18 @@ export default function Header() {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
+            <Link
+              href="/leaderboard"
+              className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
             >
               Leaderboard
-            </a>
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900"
+            </Link>
+            <Link
+              href="/funds"
+              className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
             >
               Funds
-            </a>
+            </Link>
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <ConnectButton />
@@ -65,11 +62,7 @@ export default function Header() {
             <div className="px-5 pt-5 pb-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company"
-                  />
+                  <p>Logo</p>
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">

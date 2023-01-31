@@ -1,8 +1,8 @@
-import Header from "@/components/Header";
-import { Inter } from "@next/font/google";
-import Head from "next/head";
+import Header from '@/components/Header';
+import { Inter } from '@next/font/google';
+import Head from 'next/head';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   return (
@@ -17,7 +17,6 @@ export default function Home() {
         <header>
           <Header />
         </header>
-        <p className="text-3xl font-bold underline">Hello world</p>
       </main>
     </>
   );

@@ -4,11 +4,19 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
       purple: {
         100: '#EDDAFD',
         200: '#D8B6FC',
         800: '#331684',
         900: '#220D6D',
+      },
+      white: 'white',
+      gray: {
+        900: '#111827',
+        800: '#1f2937',
+        500: '#6b7280',
       },
     },
     backgroundImage: {

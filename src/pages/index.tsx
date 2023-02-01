@@ -13,6 +13,8 @@ export default function HomePage() {
   useEffect(() => {
     if (signer) {
       setWalletConnected(true);
+    } else {
+      setWalletConnected(false);
     }
   }, [signer]);
 

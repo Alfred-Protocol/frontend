@@ -100,13 +100,13 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
         chains={chains}
       >
-        <Component {...pageProps} />
-        <Particles
+        {/* <Particles
           id="tsparticles"
           url={require('../assets/particles.json')}
           init={particlesInit}
           loaded={particlesLoaded}
-        />
+        /> */}
+        <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
   );

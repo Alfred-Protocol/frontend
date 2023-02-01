@@ -23,10 +23,10 @@ export default function Header({ isWalletConnected }: Props) {
       <div className="mx-auto px-6">
         <div className="flex items-center justify-between border-b-2 border-purple-900 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <Link href="/">
               <span className="sr-only">Fund Asset Manager</span>
               <p className="text-purple-100">Fund Asset Manager</p>
-            </a>
+            </Link>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
             <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">

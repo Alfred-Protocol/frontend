@@ -1,18 +1,22 @@
+import AssetsSection from '@/components/AssetsSection';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import { sign } from 'crypto';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
 
 export default function HomePage() {
+  const router = useRouter();
   const [isWalletConnected, setWalletConnected] = useState(false);
   const { data: signer } = useSigner();
 
   useEffect(() => {
     if (signer) {
       setWalletConnected(true);
+    } else {
+      setWalletConnected(false);
+      router.push('/');
     }
   }, [signer]);
 
@@ -26,7 +30,7 @@ export default function HomePage() {
       </Head>
       <main>
         <Header isWalletConnected={isWalletConnected} />
-        <HeroSection />
+        <AssetsSection />
         <Footer />
       </main>
     </>

@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
+import { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { WagmiConfig, configureChains, createClient } from 'wagmi';
+import { WagmiConfig, configureChains, createClient, useFeeData } from 'wagmi';
 import {
   mainnet,
   polygon,
@@ -25,8 +26,9 @@ import { useCallback } from 'react';
 import Particles from 'react-tsparticles';
 import type { Container, Engine } from 'tsparticles-engine';
 import { loadFull } from 'tsparticles';
+import Link from 'next/link';
 
-const { chains, provider, webSocketProvider } = configureChains(
+export const { chains, provider, webSocketProvider } = configureChains(
   [
     polygon,
     mainnet,
@@ -56,7 +58,7 @@ const connectors = connectorsForWallets([
   },
 ]);
 
-const wagmiClient = createClient({
+export const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
@@ -64,6 +66,12 @@ const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
 
@@ -79,6 +87,10 @@ export default function App({ Component, pageProps }: AppProps) {
     },
     []
   );
+
+  if (typeof window === 'undefined' || !domLoaded) {
+    return <></>;
+  }
 
   return (
     <WagmiConfig client={wagmiClient}>

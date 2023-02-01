@@ -1,14 +1,23 @@
 import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { TypeAnimation } from 'react-type-animation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { FetchSignerResult } from '@wagmi/core';
+import { Signer } from 'ethers';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import { useRouter } from 'next/router';
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
+interface Props {
+  isWalletConnected: Boolean;
 }
 
-export default function Header() {
+export default function Header({ isWalletConnected }: Props) {
+  const router = useRouter();
+
+  const navigateToAsset = () => {
+    router.push('assets');
+  };
   return (
     <Popover className="relative bg-purple-900" as={'header'}>
       <div className="mx-auto px-6">
@@ -41,6 +50,18 @@ export default function Header() {
             >
               Funds
             </Link>
+            {isWalletConnected && (
+              <div onClick={navigateToAsset}>
+                <TypeAnimation
+                  sequence={['Your Assets', 3000]}
+                  wrapper="div"
+                  cursor={true}
+                  repeat={Infinity}
+                  className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
+                  style={{ cursor: 'pointer' }}
+                />
+              </div>
+            )}
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <ConnectButton />

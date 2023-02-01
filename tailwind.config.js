@@ -12,7 +12,7 @@ module.exports = {
         800: '#331684',
         900: '#220D6D',
       },
-      white: 'white',
+      white: '#FFFFFF',
       gray: {
         900: '#111827',
         800: '#1f2937',

@@ -18,6 +18,7 @@ export default function HeaderHedgeFund({ isWalletConnected }: Props) {
   const navigateToAsset = () => {
     router.push('/manager/assets');
   };
+
   return (
     <Popover className="relative bg-purple-900" as={'header'}>
       <div className="mx-auto px-6">
@@ -39,7 +40,7 @@ export default function HeaderHedgeFund({ isWalletConnected }: Props) {
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
             <Link
-              href="/"
+              href="/manager"
               className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
             >
               Pool

@@ -1,4 +1,4 @@
-import AssetsSection from '@/components/AssetsSection';
+import HedgeFundAssets from '@/components/HedgeFundAssets';
 import Footer from '@/components/Footer';
 import HeaderHedgeFund from '@/components/HeaderHedgeFund';
 import Head from 'next/head';
@@ -30,7 +30,7 @@ export default function ManagerPageAsset() {
       </Head>
       <main>
         <HeaderHedgeFund isWalletConnected={isWalletConnected} />
-        <AssetsSection />
+        <HedgeFundAssets />
         <Footer />
       </main>
     </>

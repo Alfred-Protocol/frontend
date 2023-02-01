@@ -16,7 +16,7 @@ function App() {
   //function to fetch nfts by collection
   const fetchCollection = async () => {
     const provider = new ethers.providers.JsonRpcProvider(
-      process.env.QUICK_NODE_HTTP_PROVIDER
+      'https://hardworking-late-firefly.quiknode.pro/65fc8167ff913b5f6e127f71b9f6deeddd651f71/'
     );
     let collection = await provider.send('qn_fetchNFTsByCollection', {
       collection: address,

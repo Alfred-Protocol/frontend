@@ -24,7 +24,7 @@ export default function HeaderHedgeFund({ isWalletConnected }: Props) {
       <div className="mx-auto px-6">
         <div className="flex items-center justify-between border-b-2 border-purple-900 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link href="/">
+            <Link href="/manager">
               <span className="sr-only">Fund Asset Manager</span>
               <p className="text-purple-100">Fund Asset Manager</p>
             </Link>

@@ -1,15 +1,46 @@
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowRightIcon,
+  ArrowTopRightOnSquareIcon,
+} from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import FundLiquidityGraph from './FundLiquidityGraph';
 
-interface FundProps {}
+interface FundProps {
+  tokenA: string;
+  tokenB: string;
+  manager: string;
+  totalLiquidity: number;
+  fundAddress: string;
+}
 
-const Fund = ({}: FundProps) => {
+const Fund = ({
+  fundAddress,
+  manager,
+  tokenA,
+  tokenB,
+  totalLiquidity,
+}: FundProps) => {
   const router = useRouter();
   return (
     <div className="bg-white py-4 px-4 flex-1 rounded shadow text-left flex">
       <div>
-        <h3 className="font-bold text-purple-900 text-xl mb-2">DAI / USDC</h3>
+        <div className="flex items-center space-x-4 mb-2">
+          <h3 className="font-bold text-purple-900 text-xl">
+            {tokenA} / {tokenB}
+          </h3>
+          <Link
+            className="py-2 px-4 bg-purple-600 text-purple-100 rounded-lg hover:bg-purple-800 transition-all"
+            href={`/${fundAddress}/positions`}
+          >
+            Positions
+            <ArrowRightIcon
+              height={20}
+              width={20}
+              className="inline pb-1 ml-2 cursor-pointer stroke-2"
+            />
+          </Link>
+        </div>
         <div>
           <span className="font-semibold">Total Liquidity: </span>
           <span>10 ETH</span>
@@ -31,7 +62,7 @@ const Fund = ({}: FundProps) => {
           </span>
         </div>
       </div>
-      <div className="flex h-full w-[60%]">
+      <div className="flex h-full flex-1">
         <FundLiquidityGraph />
       </div>
     </div>

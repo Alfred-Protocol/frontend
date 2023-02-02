@@ -1,6 +1,8 @@
 import AssetsSection from '@/components/AssetsSection';
 import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
+import Layout from '@/components/Layout/Layout';
+
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -16,7 +18,6 @@ export default function HomePage() {
       setWalletConnected(true);
     } else {
       setWalletConnected(false);
-      router.push('/');
     }
   }, [signer]);
 
@@ -30,7 +31,9 @@ export default function HomePage() {
       </Head>
       <main>
         <Header />
-        <AssetsSection />
+        <Layout>
+          <AssetsSection />
+        </Layout>
         <Footer />
       </main>
     </>

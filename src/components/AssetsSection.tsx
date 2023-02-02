@@ -1,11 +1,14 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
 import { useState } from 'react';
+import PageTitle from './Layout/PageTitle';
+
 const AssetsSection = () => {
   const [assets, setAssets] = useState([]);
 
   const fetchData = () => {};
   return (
-    <div className="flex justify-center min-h-screen bg-purple-900">
+    <>
+      <PageTitle title="Assets" />
       <div className="col-span-12">
         <div className="overflow-auto lg:overflow-visible">
           <table className="table text-gray-400 border-separate space-y-6 text-sm">
@@ -149,7 +152,7 @@ const AssetsSection = () => {
           </table>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default AssetsSection;

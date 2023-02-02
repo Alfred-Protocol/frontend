@@ -69,6 +69,7 @@ const FundLiquidityGraph = () => {
         data,
         primaryAxis: primaryAxis as AxisOptions<unknown>,
         secondaryAxes: secondaryAxes as AxisOptions<unknown>[],
+        interactionMode: 'closest',
       }}
     />
   );

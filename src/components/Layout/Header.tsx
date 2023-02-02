@@ -13,7 +13,7 @@ const links = [
 
 export default function Header() {
   const router = useRouter();
-  console.log('ropiuter ', router.asPath);
+
   return (
     <Popover className="relative bg-purple-900" as={'header'}>
       <div className="mx-auto px-6">

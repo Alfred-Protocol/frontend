@@ -3,12 +3,6 @@ import react, { ChangeEvent, useState } from 'react';
 import { Fund } from './AssetsSection';
 import MultiRangeSlider from './Slider';
 
-interface ModalProp {
-  closeModal: () => void;
-  fund?: Fund;
-  addPosition: (number: string) => void;
-}
-
 interface DropdownProps {
   value?: string;
   options: string[];
@@ -78,6 +72,26 @@ const DropDown = ({ value, options, setValue }: DropdownProps) => {
   );
 };
 
+interface ModalProp {
+  closeModal: () => void;
+  fund?: Fund;
+  addPosition: ({
+    token1,
+    token2,
+    amount1,
+    amount2,
+    minPrice,
+    maxPrice,
+  }: {
+    token1: string;
+    token2: string;
+    amount1: number;
+    amount2: number;
+    minPrice: number;
+    maxPrice: number;
+  }) => void;
+}
+
 const AddPositionModal = ({ closeModal, fund, addPosition }: ModalProp) => {
   const [number, setNumber] = useState<string>('');
   const [token1, setToken1] = useState('ETH');
@@ -101,7 +115,7 @@ const AddPositionModal = ({ closeModal, fund, addPosition }: ModalProp) => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      addPosition(number);
+      addPosition({ token1, token2, amount1, amount2, minPrice, maxPrice });
       closeModal();
     }, 1000);
   };

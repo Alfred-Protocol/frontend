@@ -24,7 +24,14 @@ const FundManagePage = () => {
         <AddPositionModal
           closeModal={() => setShowModal(false)}
           fund={undefined}
-          addPosition={() => {}}
+          addPosition={({
+            token1,
+            token2,
+            amount1,
+            amount2,
+            minPrice,
+            maxPrice,
+          }) => {}}
         />
       )}
       <div>

@@ -2,6 +2,7 @@ import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
 const links = [
@@ -11,6 +12,8 @@ const links = [
 ];
 
 export default function Header() {
+  const router = useRouter();
+  console.log('ropiuter ', router.asPath);
   return (
     <Popover className="relative bg-purple-900" as={'header'}>
       <div className="mx-auto px-6">
@@ -36,6 +39,10 @@ export default function Header() {
                 key={name}
                 href={href}
                 className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
+                style={{
+                  textDecoration: router.asPath === href ? 'underline' : 'none',
+                  textUnderlineOffset: 3,
+                }}
               >
                 {name}
               </Link>

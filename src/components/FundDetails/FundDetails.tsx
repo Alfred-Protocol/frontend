@@ -46,10 +46,7 @@ const FundDetails = ({
                 <span className="font-bold">{tokenA}: </span>
                 {tokenAAmount}
               </p>
-              <NormalButton
-                className="md:px-4 md:py-2 font-normal bg-purple-700 hover:bg-purple-900"
-                title={'Deposit'}
-              >
+              <NormalButton className="md:px-4 md:py-2">
                 Deposit
               </NormalButton>
             </div>
@@ -58,10 +55,7 @@ const FundDetails = ({
                 <span className="font-bold">{tokenB}: </span>
                 {tokenBAmount}
               </p>
-              <NormalButton
-                className="md:px-4 md:py-2 font-normal bg-purple-700 hover:bg-purple-900"
-                title={'Deposit'}
-              >
+              <NormalButton className="md:px-4 md:py-2">
                 Deposit
               </NormalButton>
             </div>

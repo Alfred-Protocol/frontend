@@ -40,13 +40,14 @@ const FundManagePage = () => {
       <div>
         <div className="flex justify-center space-x-4 items-center pb-6">
           <NormalButton
-            title="Add Uniswap V3 Position"
             onClick={addPosition}
             className={
               'bg-purple-600 hover:bg-purple-700 text-purple-100 '
               // : 'bg-purple-600 hover:bg-purple-700'
             }
-          />
+          >
+            Add Uniswap V3 Position
+          </NormalButton>
         </div>
       </div>
       <FundTable />

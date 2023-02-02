@@ -16,7 +16,7 @@ const FundTable = () => {
         </thead>
         <tbody>
           <tr className="">
-            <td className="py-2">{new Date().toLocaleDateString()}</td>
+            <td className="py-2">3/2/2023</td>
             <td className="py-2">0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3</td>
             <td className="py-2">ETH</td>
             <td className="py-2">USDC</td>
@@ -26,7 +26,7 @@ const FundTable = () => {
             <td className="py-2 text-red-700 font-bold">2000.1</td>
           </tr>
           <tr>
-            <td className="py-2">{new Date().toLocaleDateString()}</td>
+            <td className="py-2">3/2/2023</td>
             <td className="py-2">0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3</td>
             <td className="py-2">ETH</td>
             <td className="py-2">USDC</td>

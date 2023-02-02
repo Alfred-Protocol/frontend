@@ -1,9 +1,10 @@
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import HedgeFundAssets from '@/components/HedgeFundAssets';
+import Funds from '@/components/Funds/Funds';
+import Footer from '@/components/Layout/Footer';
+import Header from '@/components/Layout/Header';
+import Layout from '@/components/Layout/Layout';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
 
 export default function ManagerPageAsset() {
@@ -30,7 +31,9 @@ export default function ManagerPageAsset() {
       </Head>
       <main>
         <Header />
-        <HedgeFundAssets />
+        <Layout>
+          <Funds />
+        </Layout>
         <Footer />
       </main>
     </>

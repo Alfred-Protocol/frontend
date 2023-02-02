@@ -2,8 +2,8 @@
 //Import libraries and components
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
-import NFTCard from './NFTCard';
-import CollectionSearch from './CollectionSearch';
+import NFTCard from '../NFTCard';
+import CollectionSearch from '../CollectionSearch';
 
 function App() {
   //State variables

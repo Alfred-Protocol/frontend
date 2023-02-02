@@ -1,9 +1,10 @@
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
+import Footer from '@/components/Layout/Footer';
+import Header from '@/components/Layout/Header';
+import HeroSection from '@/components/Homepage/HeroSection';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
+import Layout from '@/components/Layout/Layout';
 
 export default function HomePage() {
   const [isWalletConnected, setWalletConnected] = useState(false);
@@ -26,8 +27,10 @@ export default function HomePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Header isWalletConnected={isWalletConnected} />
-        <HeroSection />
+        <Header />
+        <Layout>
+          <HeroSection />
+        </Layout>
         <Footer />
       </main>
     </>

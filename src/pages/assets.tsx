@@ -1,6 +1,6 @@
 import AssetsSection from '@/components/AssetsSection';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
+import Footer from '@/components/Layout/Footer';
+import Header from '@/components/Layout/Header';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';

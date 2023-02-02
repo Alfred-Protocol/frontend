@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import Card from './Card';
 import PageTitle from './Layout/PageTitle';
 import DepositModal from './DepositModal';
+import SuccessModal from './SuccessModal';
 
 export type Fund = {
   fundName: String;
@@ -61,14 +62,18 @@ const mockData: Fund[] = [
   },
 ];
 
+type modalType = 'success' | 'deposit' | 'withdraw';
+
 const AssetsSection = () => {
   const [assets, setAssets] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [modalFund, setModalFund] = useState<Fund | undefined>(undefined);
+  const [modalType, setModalType] = useState<modalType | undefined>(undefined);
 
   const onClickDeposit = (fund: Fund) => {
+    setModalType('deposit');
     setModalFund(fund);
-    fetchCollection();
+    // fetchCollection();
     setShowModal(true);
   };
 
@@ -91,19 +96,48 @@ const AssetsSection = () => {
   };
 
   const handleDeposit = (number: string) => {
-    setShowModal(false);
+    resetModal();
+
+    setTimeout(() => {
+      setModalType('success');
+      setShowModal(true);
+    }, 400);
   };
 
-  return (
-    <>
-      <PageTitle title="Assets" />
-      {showModal && (
+  const resetModal = () => {
+    setShowModal(false);
+    setModalType(undefined);
+  };
+
+  const renderModal = () => {
+    if (!modalType) {
+      return;
+    }
+
+    if (modalType === 'deposit') {
+      return (
         <DepositModal
           fund={modalFund}
           closeModal={closeModal}
           handleDeposit={handleDeposit}
         />
-      )}
+      );
+    }
+
+    if (modalType === 'success') {
+      return <SuccessModal onClick={resetModal} />;
+    }
+
+    if (modalType === 'withdraw') {
+      return null;
+    }
+  };
+
+  return (
+    <>
+      <PageTitle title="Assets" />
+      {showModal && renderModal()}
+
       <div className="flex flex-row flex-wrap">
         {mockData.map((fund) => {
           return (

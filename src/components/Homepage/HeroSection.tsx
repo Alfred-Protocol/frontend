@@ -24,7 +24,7 @@ const HeroSection = () => {
         cursor={true}
         repeat={Infinity}
         style={{ fontSize: '2em' }}
-        className="text-[#fff] text-xl md:text-3xl"
+        className="text-white text-xl md:text-3xl"
       />
       <FancyButton className="mt-8">
         <span>

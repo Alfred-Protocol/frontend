@@ -9,6 +9,8 @@ interface Props {
   assets: { assetName: String; assetValue: number }[];
   depositEnable: boolean;
   withdrawEnable: boolean;
+  onClickDeposit: () => void;
+  onClickWithdraw: () => void;
 }
 
 const AssetCard = ({
@@ -18,6 +20,8 @@ const AssetCard = ({
   assets,
   depositEnable,
   withdrawEnable,
+  onClickDeposit,
+  onClickWithdraw,
 }: Props) => {
   return (
     <div className="bg-white w-200 py-4 px-4 rounded shadow text-left ml-10 mr-10 mb-10 w-1/4">
@@ -52,12 +56,18 @@ const AssetCard = ({
 
       <div className="mt-2">
         {depositEnable && (
-          <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mr-3">
+          <button
+            className="bg-transparent hover:bg-green-400 bg-green-500 text-white font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded mr-3"
+            onClick={onClickDeposit}
+          >
             Deposit
           </button>
         )}
         {withdrawEnable && (
-          <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+          <button
+            className="bg-transparent hover:bg-red-300 bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-red-400 hover:border-transparent rounded"
+            onClick={onClickWithdraw}
+          >
             Withdraw
           </button>
         )}

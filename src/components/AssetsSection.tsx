@@ -62,13 +62,24 @@ const mockData: [Fund] = [
 const AssetsSection = () => {
   const [assets, setAssets] = useState([]);
 
+  const onClickDeposit = (fund: Fund) => {};
+
+  const onClickWithdraw = (fund: Fund) => {};
+
   const fetchData = () => {};
+
   return (
     <>
       <PageTitle title="Assets" />
       <div className="flex flex-row flex-wrap">
         {mockData.map((fund) => {
-          return <Card {...fund} />;
+          return (
+            <Card
+              onClickDeposit={() => onClickDeposit(fund)}
+              onClickWithdraw={() => onClickWithdraw(fund)}
+              {...fund}
+            />
+          );
         })}
       </div>
     </>

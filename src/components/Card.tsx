@@ -1,4 +1,5 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/router';
 
 import { Fund } from './AssetsSection';
 
@@ -23,27 +24,32 @@ const AssetCard = ({
   onClickDeposit,
   onClickWithdraw,
 }: Props) => {
+  const router = useRouter();
   return (
-    <div className="bg-white w-200 py-4 px-4 rounded shadow text-left ml-10 mr-10 mb-10 w-1/4">
+    <div className="bg-white py-4 px-4 rounded shadow text-left ml-10 mr-10 mb-10">
       <h3 className="font-bold text-purple-900 text-xl">{fundName}</h3>
       <p>
         <span className="font-semibold">TVL: </span>
         <span>{tvl} USDC</span>
       </p>
-      <p>
-        <span className="font-semibold">Manager: </span>
+      <p className="flex">
+        <span className="font-semibold mr-2">Manager: </span>
         <span>
           {manager}
           <ArrowTopRightOnSquareIcon
             height={20}
             width={20}
             className="inline pb-1 ml-2 cursor-pointer stroke-2 hover:stroke-purple-500 transition-all"
-            onClick={() => {}}
+            onClick={() =>
+              router.push(
+                'https://polygonscan.com/address/0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'
+              )
+            }
           />
         </span>
       </p>
       <p>
-        <span className="font-semibold">Your Asset: </span>
+        <span className="font-semibold">Your Assets: </span>
       </p>
       {assets.map((asset) => {
         return (

@@ -20,7 +20,7 @@ const mockData: Fund[] = [
   {
     fundName: 'Fund A',
     tvl: 234,
-    manager: 'ox23CjdS932923SAJ',
+    manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1212 },
       { assetName: 'USDC', assetValue: 1212 },
@@ -31,7 +31,7 @@ const mockData: Fund[] = [
   {
     fundName: 'Fund B',
     tvl: 234,
-    manager: 'ox23CjdS932923SAJ',
+    manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1212 },
       { assetName: 'USDC', assetValue: 1212 },
@@ -42,7 +42,7 @@ const mockData: Fund[] = [
   {
     fundName: 'Fund C',
     tvl: 234,
-    manager: 'ox23CjdS932923SAJ',
+    manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1212 },
       { assetName: 'USDC', assetValue: 1212 },
@@ -53,7 +53,7 @@ const mockData: Fund[] = [
   {
     fundName: 'Fund D',
     tvl: 234,
-    manager: 'ox23CjdS932923SAJ',
+    manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1212 },
       { assetName: 'USDC', assetValue: 1212 },

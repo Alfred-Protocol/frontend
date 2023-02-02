@@ -1,12 +1,10 @@
 import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { TypeAnimation } from 'react-type-animation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { FetchSignerResult } from '@wagmi/core';
-import { Signer } from 'ethers';
 import Link from 'next/link';
-import { Fragment } from 'react';
 import { useRouter } from 'next/router';
+import { Fragment } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 interface Props {
   isWalletConnected: Boolean;
@@ -24,7 +22,7 @@ export default function HeaderHedgeFund({ isWalletConnected }: Props) {
       <div className="mx-auto px-6">
         <div className="flex items-center justify-between border-b-2 border-purple-900 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
-            <Link href="/manager">
+            <Link href="/">
               <span className="sr-only">Fund Asset Manager</span>
               <p className="text-purple-100">Fund Asset Manager</p>
             </Link>

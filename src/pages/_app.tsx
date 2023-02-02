@@ -1,32 +1,26 @@
 import '@/styles/globals.css';
-import { useState, useEffect } from 'react';
-import type { AppProps } from 'next/app';
-import { WagmiConfig, configureChains, createClient, useFeeData } from 'wagmi';
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  goerli,
-  polygonMumbai,
-} from 'wagmi/chains';
-import {
-  argentWallet,
-  trustWallet,
-  ledgerWallet,
-} from '@rainbow-me/rainbowkit/wallets';
 import {
   RainbowKitProvider,
-  getDefaultWallets,
   connectorsForWallets,
+  getDefaultWallets,
 } from '@rainbow-me/rainbowkit';
-import { publicProvider } from 'wagmi/providers/public';
 import '@rainbow-me/rainbowkit/styles.css';
-import { useCallback } from 'react';
-import Particles from 'react-tsparticles';
-import type { Container, Engine } from 'tsparticles-engine';
-import { loadFull } from 'tsparticles';
-import Link from 'next/link';
+import {
+  argentWallet,
+  ledgerWallet,
+  trustWallet,
+} from '@rainbow-me/rainbowkit/wallets';
+import type { AppProps } from 'next/app';
+import { WagmiConfig, configureChains, createClient } from 'wagmi';
+import {
+  arbitrum,
+  goerli,
+  mainnet,
+  optimism,
+  polygon,
+  polygonMumbai,
+} from 'wagmi/chains';
+import { publicProvider } from 'wagmi/providers/public';
 
 export const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -66,46 +60,14 @@ export const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [domLoaded, setDomLoaded] = useState(false);
-
-  useEffect(() => {
-    setDomLoaded(true);
-  }, []);
-
-  const particlesInit = useCallback(async (engine: Engine) => {
-    console.log(engine);
-
-    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine);
-  }, []);
-
-  const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {
-      await console.log(container);
-    },
-    []
-  );
-
-  if (typeof window === 'undefined' || !domLoaded) {
-    return <></>;
-  }
-
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider
         appInfo={{
-          appName: 'Fund Manager',
+          appName: 'Alfred Protocol',
         }}
         chains={chains}
       >
-        {/* <Particles
-          id="tsparticles"
-          url={require('../assets/particles.json')}
-          init={particlesInit}
-          loaded={particlesLoaded}
-        /> */}
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>

@@ -1,23 +1,16 @@
 import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { TypeAnimation } from 'react-type-animation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { FetchSignerResult } from '@wagmi/core';
-import { Signer } from 'ethers';
 import Link from 'next/link';
 import { Fragment } from 'react';
-import { useRouter } from 'next/router';
 
-interface Props {
-  isWalletConnected: Boolean;
-}
+const links = [
+  { name: 'Funds', href: '/funds' },
+  { name: 'Your Assets', href: '/assets' },
+  { name: 'Leaderboard', href: '/leaderboard' },
+];
 
-export default function Header({ isWalletConnected }: Props) {
-  const router = useRouter();
-
-  const navigateToAsset = () => {
-    router.push('assets');
-  };
+export default function Header() {
   return (
     <Popover className="relative bg-purple-900" as={'header'}>
       <div className="mx-auto px-6">
@@ -25,7 +18,7 @@ export default function Header({ isWalletConnected }: Props) {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
               <span className="sr-only">Fund Asset Manager</span>
-              <p className="text-purple-100">Fund Asset Manager</p>
+              <p className="text-purple-200 font-bold">Alfred Protocol</p>
             </Link>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
@@ -38,30 +31,15 @@ export default function Header({ isWalletConnected }: Props) {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-            <Link
-              href="/leaderboard"
-              className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
-            >
-              Leaderboard
-            </Link>
-            <Link
-              href="/funds"
-              className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
-            >
-              Funds
-            </Link>
-            {isWalletConnected && (
-              <div onClick={navigateToAsset}>
-                <TypeAnimation
-                  sequence={['Your Assets', 3000]}
-                  wrapper="div"
-                  cursor={true}
-                  repeat={Infinity}
-                  className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
-                  style={{ cursor: 'pointer' }}
-                />
-              </div>
-            )}
+            {links.map(({ name, href }) => (
+              <Link
+                key={name}
+                href={href}
+                className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
+              >
+                {name}
+              </Link>
+            ))}
           </Popover.Group>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
             <ConnectButton />

@@ -1,9 +1,9 @@
-import HedgeFundAssets from '@/components/HedgeFundAssets';
 import Footer from '@/components/Footer';
-import HeaderHedgeFund from '@/components/HeaderHedgeFund';
+import Header from '@/components/Header';
+import HedgeFundAssets from '@/components/HedgeFundAssets';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
 
 export default function ManagerPageAsset() {
@@ -29,7 +29,7 @@ export default function ManagerPageAsset() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <HeaderHedgeFund isWalletConnected={isWalletConnected} />
+        <Header />
         <HedgeFundAssets />
         <Footer />
       </main>

@@ -24,7 +24,7 @@ const FundManagePage = () => {
         <AddPositionModal
           closeModal={() => setShowModal(false)}
           fund={undefined}
-          handleDeposit={() => {}}
+          addPosition={() => {}}
         />
       )}
       <div>

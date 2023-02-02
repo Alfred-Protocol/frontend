@@ -93,7 +93,6 @@ const FundManagePage = () => {
         </div>
         <FundTable data={data} />
       </div>
-      <FundTable />
     </Layout>
   );
 };

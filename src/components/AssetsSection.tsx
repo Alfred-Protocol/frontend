@@ -5,6 +5,7 @@ import Card from './Card';
 import PageTitle from './Layout/PageTitle';
 import DepositModal from './DepositModal';
 import SuccessModal from './SuccessModal';
+import WithdrawModal from './WithdrawModal';
 
 export type Fund = {
   fundName: String;
@@ -69,6 +70,7 @@ const AssetsSection = () => {
   const [showModal, setShowModal] = useState(true);
   const [modalFund, setModalFund] = useState<Fund | undefined>(undefined);
   const [modalType, setModalType] = useState<modalType | undefined>(undefined);
+  const [sucessModalMessage, setSuccessModalMessage] = useState('');
 
   const onClickDeposit = (fund: Fund) => {
     setModalType('deposit');
@@ -77,7 +79,12 @@ const AssetsSection = () => {
     setShowModal(true);
   };
 
-  const onClickWithdraw = (fund: Fund) => {};
+  const onClickWithdraw = (fund: Fund) => {
+    setModalType('withdraw');
+    setModalFund(fund);
+    // fetchCollection();
+    setShowModal(true);
+  };
 
   const fetchCollection = async () => {
     const provider = new ethers.providers.JsonRpcProvider(
@@ -99,6 +106,17 @@ const AssetsSection = () => {
     resetModal();
 
     setTimeout(() => {
+      setSuccessModalMessage('Deposit has been successful');
+      setModalType('success');
+      setShowModal(true);
+    }, 400);
+  };
+
+  const handleWithdraw = () => {
+    resetModal();
+
+    setTimeout(() => {
+      setSuccessModalMessage('Withdraw has been successful');
       setModalType('success');
       setShowModal(true);
     }, 400);
@@ -124,12 +142,18 @@ const AssetsSection = () => {
       );
     }
 
-    if (modalType === 'success') {
-      return <SuccessModal onClick={resetModal} />;
+    if (modalType === 'withdraw') {
+      return (
+        <WithdrawModal
+          fund={modalFund}
+          closeModal={closeModal}
+          handleWithdraw={handleWithdraw}
+        />
+      );
     }
 
-    if (modalType === 'withdraw') {
-      return null;
+    if (modalType === 'success') {
+      return <SuccessModal message={sucessModalMessage} onClick={resetModal} />;
     }
   };
 

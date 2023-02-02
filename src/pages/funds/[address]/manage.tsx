@@ -31,7 +31,9 @@ const FundManagePage = () => {
             amount2,
             minPrice,
             maxPrice,
-          }) => {}}
+          }) => {
+            toast.success('Added New Position for Uniswap LP Token V3');
+          }}
         />
       )}
       <div>

@@ -36,7 +36,7 @@ export const { chains, provider, webSocketProvider } = configureChains(
 );
 
 const { wallets } = getDefaultWallets({
-  appName: 'Fund Manager',
+  appName: 'Alfred Protocol',
   chains,
 });
 

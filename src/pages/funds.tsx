@@ -1,4 +1,4 @@
-import Funds from '@/components/Funds/Funds';
+import FundsSection from '@/components/Funds/FundsSection';
 import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
 import Layout from '@/components/Layout/Layout';
@@ -12,14 +12,14 @@ export default function ManagerPageAsset() {
   const [isWalletConnected, setWalletConnected] = useState(false);
   const { data: signer } = useSigner();
 
-  useEffect(() => {
-    if (signer) {
-      setWalletConnected(true);
-    } else {
-      setWalletConnected(false);
-      router.push('/manager');
-    }
-  }, [signer]);
+  // useEffect(() => {
+  //   if (signer) {
+  //     setWalletConnected(true);
+  //   } else {
+  //     setWalletConnected(false);
+  //     router.push('/manager');
+  //   }
+  // }, [signer]);
 
   return (
     <>
@@ -32,7 +32,7 @@ export default function ManagerPageAsset() {
       <main>
         <Header />
         <Layout>
-          <Funds />
+          <FundsSection />
         </Layout>
         <Footer />
       </main>

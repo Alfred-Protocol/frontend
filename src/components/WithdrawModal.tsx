@@ -5,13 +5,23 @@ interface ModalProp {
   closeModal: () => void;
   fund?: Fund;
   handleWithdraw: (number: string) => void;
+  maxAmount: number;
+  withdrawAbleAmount: number;
 }
 
-const WithdrawModal = ({ closeModal, fund, handleWithdraw }: ModalProp) => {
+const WithdrawModal = ({
+  closeModal,
+  fund,
+  handleWithdraw,
+  maxAmount,
+  withdrawAbleAmount,
+}: ModalProp) => {
   const [number, setNumber] = useState<string>('');
   if (!fund) {
     return <div></div>;
   }
+
+  const exceedMaxAmount = parseInt(number) > maxAmount;
 
   const assets = fund.assets;
 
@@ -75,6 +85,14 @@ const WithdrawModal = ({ closeModal, fund, handleWithdraw }: ModalProp) => {
                   </p>
                 );
               })}
+              <div className="flex">
+                <p className="text-left text-base leading-relaxed text-gray-500 dark:text-gray-400 mr-2">
+                  Withdrawable amount:
+                </p>
+                <p className="text-left text-base leading-relaxed text-green-500 dark:text-gray-400">
+                  {withdrawAbleAmount} USDC
+                </p>
+              </div>
               <div className="flex items-center">
                 <input
                   value={number}
@@ -84,11 +102,20 @@ const WithdrawModal = ({ closeModal, fund, handleWithdraw }: ModalProp) => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Enter Asset"
                   required
+                  style={{
+                    borderColor: exceedMaxAmount ? 'red' : 'transparent',
+                  }}
                 />
                 <p className="text-left text-base leading-relaxed text-gray-500 dark:text-gray-400 pl-2">
                   USDC
                 </p>
               </div>
+              {exceedMaxAmount ? (
+                <p className="text-left text-sm text-red-500 dark:text-gray-400">
+                  the amount inputted is more than withdrawable amount, please
+                  change accordingly
+                </p>
+              ) : null}
             </div>
 
             {/* <!-- Modal footer --> */}
@@ -96,8 +123,12 @@ const WithdrawModal = ({ closeModal, fund, handleWithdraw }: ModalProp) => {
               <button
                 data-modal-hide="defaultModal"
                 type="button"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white disabled:bg-gray-700 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={continueDeposit}
+                disabled={exceedMaxAmount ? true : false}
+                // style={{
+                //   backgroundColor: exceedMaxAmount ? 'gray' : 'transparent',
+                // }}
               >
                 Continue Withdraw
               </button>

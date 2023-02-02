@@ -146,8 +146,10 @@ const AssetsSection = () => {
       return (
         <WithdrawModal
           fund={modalFund}
+          maxAmount={20}
           closeModal={closeModal}
           handleWithdraw={handleWithdraw}
+          withdrawAbleAmount={20}
         />
       );
     }

@@ -3,7 +3,7 @@ import DefaultHead from './DefaultHead';
 import Footer from './Footer';
 import Header from './Header';
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = ({ children }: { children?: ReactNode }) => {
   return (
     <>
       <DefaultHead />

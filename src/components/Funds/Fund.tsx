@@ -31,9 +31,9 @@ const Fund = ({
           </h3>
           <Link
             className="py-2 px-4 bg-purple-600 text-purple-100 rounded-lg hover:bg-purple-800 transition-all"
-            href={`/${fundAddress}/positions`}
+            href={`/funds/${fundAddress}`}
           >
-            Positions
+            More Details
             <ArrowRightIcon
               height={20}
               width={20}
@@ -43,20 +43,18 @@ const Fund = ({
         </div>
         <div>
           <span className="font-semibold">Total Liquidity: </span>
-          <span>10 ETH</span>
+          <span>{totalLiquidity}</span>
         </div>
         <div className="mb-2">
           <span className="font-semibold">Manager: </span>
           <span>
-            0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3
+            {manager}
             <ArrowTopRightOnSquareIcon
               height={20}
               width={20}
               className="inline pb-1 ml-2 cursor-pointer stroke-2 hover:stroke-purple-500 transition-all"
               onClick={() =>
-                router.push(
-                  'https://polygonscan.com/address/0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'
-                )
+                router.push(`https://polygonscan.com/address/${manager}`)
               }
             />
           </span>

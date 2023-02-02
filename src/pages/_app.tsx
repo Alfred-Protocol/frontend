@@ -1,17 +1,16 @@
-import '@/styles/globals.css';
 import {
-  RainbowKitProvider,
   connectorsForWallets,
   getDefaultWallets,
+  RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
-import '@rainbow-me/rainbowkit/styles.css';
 import {
   argentWallet,
   ledgerWallet,
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import type { AppProps } from 'next/app';
-import { WagmiConfig, configureChains, createClient } from 'wagmi';
+import { ToastContainer } from 'react-toastify';
+import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import {
   arbitrum,
   goerli,
@@ -21,6 +20,10 @@ import {
   polygonMumbai,
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+
+import '@/styles/globals.css';
+import '@rainbow-me/rainbowkit/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -69,6 +72,11 @@ export default function App({ Component, pageProps }: AppProps) {
         chains={chains}
       >
         <Component {...pageProps} />
+        <ToastContainer
+          pauseOnFocusLoss
+          pauseOnHover
+          position="bottom-center"
+        />
       </RainbowKitProvider>
     </WagmiConfig>
   );

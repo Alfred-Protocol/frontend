@@ -1,7 +1,7 @@
 import { Signer, providers, ethers, BigNumber } from 'ethers';
-import FundsFactory from '../abi/FundsFactory.json';
+import FundsFactory from '../abi/FundsFactory';
 
-const USDC_MUMBAI_ADDRESS = '';
+const USDC_MUMBAI_ADDRESS = '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747';
 
 const getContract = async (
   signerOrProvider: providers.Provider | Signer,

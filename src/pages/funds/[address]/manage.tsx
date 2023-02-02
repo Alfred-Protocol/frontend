@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import NormalButton from 'src/components/Layout/NormalButton';
 
-export interface tokenData {
+export interface PositionData {
   created: string;
   address: string;
   token1: string;
@@ -18,7 +18,7 @@ export interface tokenData {
   value2: number;
 }
 
-const data: tokenData[] = [
+const data: PositionData[] = [
   {
     created: '03/01/2023',
     address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
@@ -31,7 +31,7 @@ const data: tokenData[] = [
   },
   {
     created: '03/02/2023',
-    address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
+    address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA2',
     token1: 'ETH',
     token2: 'USDT',
     amount1: 500.01,
@@ -40,6 +40,7 @@ const data: tokenData[] = [
     value2: 40800.4,
   },
 ];
+
 // do not need to check bcs only can redirect to this page from Funds/xxx page, ignore hardcoding of url first
 const FundManagePage = () => {
   const { query, push } = useRouter();
@@ -82,13 +83,7 @@ const FundManagePage = () => {
       )}
       <div>
         <div className="flex justify-center space-x-4 items-center pb-6">
-          <NormalButton
-            onClick={addPosition}
-            className={
-              'bg-purple-600 hover:bg-purple-700 text-purple-100 '
-              // : 'bg-purple-600 hover:bg-purple-700'
-            }
-          >
+          <NormalButton onClick={addPosition}>
             Add Uniswap V3 Position
           </NormalButton>
         </div>

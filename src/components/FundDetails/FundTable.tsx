@@ -1,6 +1,6 @@
-import type { tokenData } from '@/pages/funds/[address]/manage';
+import type { PositionData } from '@/pages/funds/[address]/manage';
 
-const mockData: tokenData[] = [
+const mockData: PositionData[] = [
   {
     created: '03/01/2023',
     address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
@@ -13,7 +13,7 @@ const mockData: tokenData[] = [
   },
   {
     created: '03/02/2023',
-    address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
+    address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA2',
     token1: 'ETH',
     token2: 'USDT',
     amount1: 500.01,
@@ -22,7 +22,8 @@ const mockData: tokenData[] = [
     value2: 40800.4,
   },
 ];
-const FundTable = ({ data = mockData }: { data: tokenData[] }) => {
+
+const FundTable = ({ data = mockData }: { data?: PositionData[] }) => {
   return (
     <div className="mt-20 bg-slate-100 px-6 py-6 rounded-lg shadow">
       <table className="table-auto w-full">
@@ -39,24 +40,41 @@ const FundTable = ({ data = mockData }: { data: tokenData[] }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((tokenData) => {
-            return (
-              <tr key={tokenData.address}>
-                <td className="py-2">{tokenData.created}</td>
-                <td className="py-2">{tokenData.address}</td>
-                <td className="py-2">{tokenData.token1}</td>
-                <td className="py-2">{tokenData.token2}</td>
-                <td className="py-2">{tokenData.amount1}</td>
-                <td className="py-2">{tokenData.amount2}</td>
-                <td className="py-2 text-green-700 font-bold">
-                  {tokenData.amount1 + 30}
+          {data.map(
+            ({
+              address,
+              amount1,
+              amount2,
+              created,
+              token1,
+              token2,
+              value1,
+              value2,
+            }) => (
+              <tr key={address}>
+                <td className="py-2">{created}</td>
+                <td className="py-2">{address}</td>
+                <td className="py-2">{token1}</td>
+                <td className="py-2">{token2}</td>
+                <td className="py-2">{amount1}</td>
+                <td className="py-2">{amount2}</td>
+                <td
+                  className={`py-2 font-bold ${
+                    value1 > amount1 ? 'text-green-700' : 'text-red-700'
+                  }`}
+                >
+                  {value1}
                 </td>
-                <td className="py-2 text-red-700 font-bold">
-                  {tokenData.amount1 + 55000}
+                <td
+                  className={`py-2 font-bold ${
+                    value2 > amount2 ? 'text-green-700' : 'text-red-700'
+                  }`}
+                >
+                  {value2}
                 </td>
               </tr>
-            );
-          })}
+            )
+          )}
         </tbody>
       </table>
     </div>

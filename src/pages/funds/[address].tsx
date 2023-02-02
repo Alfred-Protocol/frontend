@@ -18,7 +18,7 @@ const FundDetailsPage = () => {
         push('/funds');
       }, 5000);
     }
-  }, [isValidAddress]);
+  }, [isValidAddress, push]);
 
   if (!isValidAddress) {
     return (

@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { TypeAnimation } from 'react-type-animation';
 import FancyButton from '../Layout/FancyButton';
 import PageTitle from '../Layout/PageTitle';
@@ -24,7 +25,7 @@ const HeroSection = () => {
         className="text-white text-xl md:text-3xl"
       />
       <FancyButton className="mt-8">
-        <a href="/funds">
+        <Link href="/funds">
           Get Started
           <ArrowRightIcon
             height={24}
@@ -32,7 +33,7 @@ const HeroSection = () => {
             strokeWidth={3}
             className="inline pb-1"
           />
-        </a>
+        </Link>
       </FancyButton>
     </>
   );

@@ -1,5 +1,5 @@
-import react, { useState } from 'react';
-import { Fund } from './AssetsSection';
+import { useState } from 'react';
+import type { Fund } from './AssetsSection';
 
 interface ModalProp {
   closeModal: () => void;
@@ -70,7 +70,10 @@ const DepositModal = ({ closeModal, fund, handleDeposit }: ModalProp) => {
               </p>
               {assets.map((asset) => {
                 return (
-                  <p className="text-left text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  <p
+                    key={asset.assetName}
+                    className="text-left text-base leading-relaxed text-gray-500 dark:text-gray-400"
+                  >
                     {asset.assetName}
                   </p>
                 );

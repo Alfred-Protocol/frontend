@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import { Fund } from './AssetsSection';
 
 interface Props {
-  fundName: String;
+  fundName: string;
   tvl: number;
-  manager: String;
-  assets: { assetName: String; assetValue: number }[];
+  manager: string;
+  assets: { assetName: string; assetValue: number }[];
   depositEnable: boolean;
   withdrawEnable: boolean;
   onClickDeposit: () => void;
@@ -53,7 +53,7 @@ const AssetCard = ({
       </p>
       {assets.map((asset) => {
         return (
-          <p>
+          <p key={asset.assetName}>
             <span className="font-semibold">{asset.assetName}: </span>
             <span>{asset.assetValue}</span>
           </p>
@@ -80,6 +80,6 @@ const AssetCard = ({
       </div>
     </div>
   );
-  å;
 };
+
 export default AssetCard;

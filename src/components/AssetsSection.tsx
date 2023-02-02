@@ -8,10 +8,10 @@ import SuccessModal from './SuccessModal';
 import WithdrawModal from './WithdrawModal';
 
 export type Fund = {
-  fundName: String;
+  fundName: string;
   tvl: number;
-  manager: String;
-  assets: { assetName: String; assetValue: number }[];
+  manager: string;
+  assets: { assetName: string; assetValue: number }[];
   depositEnable: boolean;
   withdrawEnable: boolean;
 };
@@ -86,16 +86,16 @@ const AssetsSection = () => {
     setShowModal(true);
   };
 
-  const fetchCollection = async () => {
-    const provider = new ethers.providers.JsonRpcProvider(
-      'https://hardworking-late-firefly.quiknode.pro/65fc8167ff913b5f6e127f71b9f6deeddd651f71/'
-    );
-    let resp = await provider.send('qn_getTokenMetadataByContractAddress', {
-      contract: '0x4d224452801ACEd8B2F0aebE155379bb5D594381',
-    });
+  // const fetchCollection = async () => {
+  //   const provider = new ethers.providers.JsonRpcProvider(
+  //     'https://hardworking-late-firefly.quiknode.pro/65fc8167ff913b5f6e127f71b9f6deeddd651f71/'
+  //   );
+  //   let resp = await provider.send('qn_getTokenMetadataByContractAddress', {
+  //     contract: '0x4d224452801ACEd8B2F0aebE155379bb5D594381',
+  //   });
 
-    console.log('resp ', resp);
-  };
+  //   console.log('resp ', resp);
+  // };
 
   const closeModal = () => {
     setShowModal(false);
@@ -168,6 +168,7 @@ const AssetsSection = () => {
         {mockData.map((fund) => {
           return (
             <Card
+              key={fund.fundName}
               onClickDeposit={() => onClickDeposit(fund)}
               onClickWithdraw={() => onClickWithdraw(fund)}
               {...fund}

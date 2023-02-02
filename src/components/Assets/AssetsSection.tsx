@@ -2,7 +2,7 @@
 import { ChangeEvent, ChangeEventHandler, useState } from 'react';
 import { ethers } from 'ethers';
 import Card from './Card';
-import PageTitle from './Layout/PageTitle';
+import PageTitle from '../Layout/PageTitle';
 import DepositModal from './DepositModal';
 import SuccessModal from './SuccessModal';
 import WithdrawModal from './WithdrawModal';

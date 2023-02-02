@@ -1,4 +1,4 @@
-import AddPositionModal from '@/components/AddPositionModal';
+import AddPositionModal from '@/components/FundManage/AddPositionModal';
 import FundTable from '@/components/FundDetails/FundTable';
 import Layout from '@/components/Layout/Layout';
 import PageTitle from '@/components/Layout/PageTitle';

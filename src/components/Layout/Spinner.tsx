@@ -1,8 +1,8 @@
-const Spinner = () => {
+const Spinner = ({ className = '' }: { className?: string }) => {
   return (
-    <div className="inline px-2">
+    <div className="inline">
       <div
-        className="animate-spin inline-block w-6 h-6 border-4 rounded-full align-[-0.125rem] border-purple-800 border-r-transparent"
+        className={`animate-spin inline-block w-6 h-6 border-4 rounded-full align-[-0.125rem] border-purple-800 border-r-transparent ${className}`}
         role="status"
       >
         <span className="hidden">Loading...</span>

@@ -1,10 +1,11 @@
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
-import { useNetwork } from 'wagmi';
+import FundLiquidityGraph from './FundLiquidityGraph';
 
-const Fund = () => {
+interface FundProps {}
+
+const Fund = ({}: FundProps) => {
   const router = useRouter();
-  const { chain } = useNetwork();
   return (
     <div className="bg-white py-4 px-4 flex-1 rounded shadow text-left">
       <h3 className="font-bold text-purple-900 text-xl">DAI / USDC</h3>
@@ -28,6 +29,9 @@ const Fund = () => {
           />
         </span>
       </p>
+      <div className="flex">
+        <FundLiquidityGraph />
+      </div>
     </div>
   );
 };

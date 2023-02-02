@@ -1,5 +1,5 @@
 import NextLink, { LinkProps } from 'next/link';
-import { DetailedHTMLProps, AnchorHTMLAttributes } from 'react';
+import type { DetailedHTMLProps, AnchorHTMLAttributes } from 'react';
 
 interface CustomLinkProps {
   nextLinkProps?: LinkProps;

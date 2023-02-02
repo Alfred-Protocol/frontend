@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-import { text } from 'stream/consumers';
+import type { ReactNode } from 'react';
 
 interface FancyButtonProps {
   className?: string;

@@ -1,23 +1,10 @@
+import HeroSection from '@/components/Homepage/HeroSection';
 import Footer from '@/components/Layout/Footer';
 import Header from '@/components/Layout/Header';
-import HeroSection from '@/components/Homepage/HeroSection';
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import { useSigner } from 'wagmi';
 import Layout from '@/components/Layout/Layout';
+import Head from 'next/head';
 
 export default function HomePage() {
-  const [isWalletConnected, setWalletConnected] = useState(false);
-  const { data: signer } = useSigner();
-
-  useEffect(() => {
-    if (signer) {
-      setWalletConnected(true);
-    } else {
-      setWalletConnected(false);
-    }
-  }, [signer]);
-
   return (
     <>
       <Head>

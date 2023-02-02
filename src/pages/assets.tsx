@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useSigner } from 'wagmi';
 
-export default function HomePage() {
+export default function AssetsPage() {
   const router = useRouter();
   const [isWalletConnected, setWalletConnected] = useState(false);
   const { data: signer } = useSigner();

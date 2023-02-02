@@ -35,7 +35,7 @@ const AssetCard = ({
       <p className="flex">
         <span className="font-semibold mr-2">Manager: </span>
         <span>
-          <div className="relative">{manager}</div>
+          {manager}
           <ArrowTopRightOnSquareIcon
             height={20}
             width={20}

@@ -17,7 +17,7 @@ const MultiRangeSlider = ({ min, max, onChange }: Props) => {
 
   // Convert to percentage
   const getPercent = useCallback(
-    (value) => Math.round(((value - min) / (max - min)) * 100),
+    (value: number) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]
   );
 
@@ -28,7 +28,9 @@ const MultiRangeSlider = ({ min, max, onChange }: Props) => {
       const maxPercent = getPercent(+maxValRef.current.value); // Preceding with '+' converts the value from type string to type number
 
       if (range.current) {
+        // @ts-ignore
         range.current.style.left = `${minPercent}%`;
+        // @ts-ignore
         range.current.style.width = `${maxPercent - minPercent}%`;
       }
     }
@@ -41,6 +43,7 @@ const MultiRangeSlider = ({ min, max, onChange }: Props) => {
       const maxPercent = getPercent(maxVal);
 
       if (range.current) {
+        // @ts-ignore
         range.current.style.width = `${maxPercent - minPercent}%`;
       }
     }

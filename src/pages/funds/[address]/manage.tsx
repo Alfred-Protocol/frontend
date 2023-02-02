@@ -4,6 +4,7 @@ import Layout from '@/components/Layout/Layout';
 import PageTitle from '@/components/Layout/PageTitle';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import NormalButton from 'src/components/Layout/NormalButton';
 
 // do not need to check bcs only can redirect to this page from Funds/xxx page, ignore hardcoding of url first

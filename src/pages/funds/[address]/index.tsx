@@ -31,12 +31,12 @@ const FundDetailsPage = () => {
   return (
     <Layout>
       <FundDetails
-        address={address.toString()}
+        fundAddress={address.toString()}
         tokenA={'ETH'}
         tokenB={'USDC'}
         tokenAAmount={'10.001'}
         tokenBAmount={'1000.0'}
-        manager={'0x7730B4Cdc1B1E7a33A309AB7205411faD009C106'}
+        manager={'0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'}
       />
       <FundTable />
     </Layout>

@@ -19,7 +19,7 @@ interface FundProps {
 const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
   const router = useRouter();
   const { data, isLoading } = useContractReads({
-    scopeKey: fundAddress,
+    scopeKey: fundAddress, // cache with individual fund page
     contracts: [
       {
         address: fundAddress,
@@ -44,8 +44,9 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
     ],
     cacheTime: 60 * 1000, // 1min
   });
+
   const { data: tokenData, isLoading: tokenIsLoading } = useToken({
-    address: data![3].toString() as Address,
+    address: (data ? data[3].toString() : '') as Address,
     enabled: data !== undefined,
   });
 

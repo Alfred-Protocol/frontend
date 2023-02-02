@@ -17,7 +17,7 @@ const NormalButton = ({
   return (
     <button
       type="button"
-      className={`rounded-lg px-6 py-2 md:px-6 md:py-2 font-semibold md:text-xl text-md text-purple-100 hover:bg-purple-700 transition-all ${className}`}
+      className={`rounded-lg px-6 py-2 md:px-6 md:py-2 font-semibold md:text-xl text-md text-purple-100 transition-all ${className}`}
       {...props}
     >
       {title}

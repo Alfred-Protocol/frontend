@@ -1,8 +1,7 @@
 import FundsFactory from '@/abi/FundsFactory';
 import { MUMBAI_FUNDS_FACTORY_ADDRESS } from '@/contracts/fundsFactory';
-import { provider } from '@/pages/_app';
 import { useEffect, useState } from 'react';
-import { Address, useContract, useProvider, useSigner } from 'wagmi';
+import { Address, useContract, useProvider } from 'wagmi';
 import NormalButton from '../Layout/NormalButton';
 import PageTitle from '../Layout/PageTitle';
 import Fund from './Fund';
@@ -53,26 +52,26 @@ const FundsSection = () => {
           }
         />
       </div>
-      <div className="flex space-x-2">
-        {funds.map((fund) => (
-          <Fund
-            key={fund}
-            fundAddress={fund}
-            manager="0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3"
-            tokenA="DAI"
-            tokenB="USDC"
-          />
-        ))}
+      <div className="pb-12">
+        {funds
+          // TODO: update once owner has been tied to fund
+          // .filter(
+          //   (fund) =>
+          //     viewState === ViewState.ALL ||
+          //     (status === 'connected' &&
+          //       fund.toLowerCase() === address.toLowerCase())
+          // )
+          .map((fund) => (
+            <div className="flex space-x-2" key={fund}>
+              <Fund
+                fundAddress={fund}
+                manager="0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3"
+                tokenA="DAI"
+                tokenB="USDC"
+              />
+            </div>
+          ))}
       </div>
-      {/* <div className="flex space-x-2 py-4">
-        <Fund
-          fundAddress="0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3"
-          manager="0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3"
-          tokenA="DAI"
-          tokenB="USDC"
-          totalLiquidity={10}
-        />
-      </div> */}
     </>
   );
 };

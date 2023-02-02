@@ -23,7 +23,7 @@ const Fund = ({
 }: FundProps) => {
   const router = useRouter();
   return (
-    <div className="bg-white py-4 px-4 flex-1 rounded shadow text-left flex">
+    <div className="bg-slate-100 py-4 px-4 flex-1 rounded-lg shadow text-left flex">
       <div>
         <div className="flex items-center space-x-4 mb-2">
           <h3 className="font-bold text-purple-900 text-xl">

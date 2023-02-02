@@ -16,9 +16,6 @@ const HeroSection = () => {
           'Investment made easy.', // Deletes 'One' and types 'Two'
           2000, // Waits 2s
           'Best in the market.', // Types 'Three' without deleting 'Two'
-          () => {
-            console.log('Done typing!'); // Place optional callbacks anywhere in the array
-          },
         ]}
         wrapper="div"
         cursor={true}
@@ -27,15 +24,15 @@ const HeroSection = () => {
         className="text-white text-xl md:text-3xl"
       />
       <FancyButton className="mt-8">
-        <span>
+        <a href="/funds">
           Get Started
           <ArrowRightIcon
             height={24}
             width={24}
             strokeWidth={3}
-            className="inline pb-[4px]"
+            className="inline pb-1"
           />
-        </span>
+        </a>
       </FancyButton>
     </>
   );

@@ -1,4 +1,5 @@
 import FundDetails from '@/components/FundDetails/FundDetails';
+import FundTable from '@/components/FundDetails/FundTable';
 import Layout from '@/components/Layout/Layout';
 import PageTitle from '@/components/Layout/PageTitle';
 import { isAddress } from 'ethers/lib/utils.js';
@@ -9,18 +10,17 @@ import { toast } from 'react-toastify';
 const FundDetailsPage = () => {
   const { query, push } = useRouter();
   const { address } = query;
-  const isValidAddress = address && isAddress(address.toString());
 
   useEffect(() => {
-    if (!isValidAddress) {
+    if (address !== undefined && !isAddress(address.toString())) {
       toast.error('Invalid address! Redirecting back to funds page...');
       setTimeout(() => {
         push('/funds');
       }, 5000);
     }
-  }, [isValidAddress, push]);
+  }, [address, push]);
 
-  if (!isValidAddress) {
+  if (!address || !isAddress(address.toString())) {
     return (
       <Layout>
         <PageTitle title="Invalid Address!" />
@@ -38,6 +38,7 @@ const FundDetailsPage = () => {
         tokenBAmount={'1000.0'}
         manager={'0x7730B4Cdc1B1E7a33A309AB7205411faD009C106'}
       />
+      <FundTable />
     </Layout>
   );
 };

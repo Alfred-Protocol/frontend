@@ -7,9 +7,8 @@ import PageTitle from '../Layout/PageTitle';
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
 const HeroSection = () => {
   return (
-    <>
-      <PageTitle title="Decentralised Fund Manager" className="pt-40" />
-
+    <div>
+      <PageTitle title="Decentralised Fund Manager" />
       <TypeAnimation
         sequence={[
           'Earn with the best in crypto.', // Types 'One'
@@ -35,7 +34,7 @@ const HeroSection = () => {
           />
         </Link>
       </FancyButton>
-    </>
+    </div>
   );
 };
 export default HeroSection;

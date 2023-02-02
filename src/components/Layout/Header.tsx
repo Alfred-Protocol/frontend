@@ -20,7 +20,7 @@ export default function Header() {
         <div className="flex items-center justify-between border-b-2 border-purple-900 py-6 lg:justify-start lg:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
-              <span className="sr-only">Fund Asset Manager</span>
+              <span className="sr-only">Alfred Protocol</span>
               <p className="text-purple-200 font-bold">Alfred Protocol</p>
             </Link>
           </div>

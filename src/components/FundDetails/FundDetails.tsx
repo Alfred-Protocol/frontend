@@ -1,4 +1,3 @@
-import FancyButton from '../Layout/FancyButton';
 import NormalButton from '../Layout/NormalButton';
 import PageTitle from '../Layout/PageTitle';
 
@@ -22,7 +21,7 @@ const FundDetails = ({
   return (
     <>
       <PageTitle title="Fund Details" />
-      <div className="bg-slate-100 text-left px-6 py-6 rounded-lg shadow">
+      <div className="bg-slate-100 text-left px-6 py-6 rounded-lg shadow max-w-4xl mx-auto">
         <div className="pb-4">
           <h2 className="text-3xl font-bold text-purple-800 pb-1">
             Fund Address:
@@ -38,7 +37,7 @@ const FundDetails = ({
                 {tokenAAmount}
               </p>
               <NormalButton
-                className="md:px-4 md:py-2 font-normal bg-purple-700 hover:bg-purple-600"
+                className="md:px-4 md:py-2 font-normal bg-purple-700 hover:bg-purple-900"
                 title={'Deposit'}
               >
                 Deposit
@@ -50,7 +49,7 @@ const FundDetails = ({
                 {tokenBAmount}
               </p>
               <NormalButton
-                className="md:px-4 md:py-2 font-normal bg-purple-700 hover:bg-purple-600"
+                className="md:px-4 md:py-2 font-normal bg-purple-700 hover:bg-purple-900"
                 title={'Deposit'}
               >
                 Deposit

@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer className="h-12 bg-purple-900 px-6 flex items-center">
       <span className="text-purple-100 md:text-md text-sm">
-        ©️ 2023 Fund Asset Manager. All rights reserved.
+        ©️ 2023 Alfred Protocol. All rights reserved.
       </span>
     </footer>
   );

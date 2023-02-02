@@ -1,27 +1,54 @@
+import Funds from '@/abi/Funds';
 import {
   ArrowRightIcon,
   ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { Address, useContractReads, useToken } from 'wagmi';
+import Spinner from '../Layout/Spinner';
 import FundLiquidityGraph from './FundLiquidityGraph';
 
 interface FundProps {
   tokenA: string;
   tokenB: string;
-  manager: string;
-  totalLiquidity: number;
-  fundAddress: string;
+  manager: string; // TODO: retrieve from smart contract
+  fundAddress: Address;
 }
 
-const Fund = ({
-  fundAddress,
-  manager,
-  tokenA,
-  tokenB,
-  totalLiquidity,
-}: FundProps) => {
+const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
   const router = useRouter();
+  const { data, isLoading } = useContractReads({
+    scopeKey: fundAddress,
+    contracts: [
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'totalValueLocked',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'startDate',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'matureDate',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'stablecoin',
+      },
+    ],
+    cacheTime: 60 * 1000, // 1min
+  });
+  const { data: tokenData, isLoading: tokenIsLoading } = useToken({
+    address: data![3].toString() as Address,
+    enabled: data !== undefined,
+  });
+
   return (
     <div className="bg-slate-100 py-4 px-4 flex-1 rounded-lg shadow text-left flex">
       <div>
@@ -42,8 +69,30 @@ const Fund = ({
           </Link>
         </div>
         <div>
-          <span className="font-semibold">Total Liquidity: </span>
-          <span>{totalLiquidity}</span>
+          <span className="font-semibold">TVL: </span>
+          {isLoading || tokenIsLoading ? (
+            <Spinner />
+          ) : (
+            <span>
+              {data![0].toString() || ''} {tokenData?.symbol}
+            </span>
+          )}
+        </div>
+        <div>
+          <span className="font-semibold">Start Date: </span>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <span>{new Date(data![1]?.toNumber()).toLocaleDateString()}</span>
+          )}
+        </div>
+        <div>
+          <span className="font-semibold">Mature Date: </span>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <span>{new Date(data![2].toNumber()).toLocaleDateString()}</span>
+          )}
         </div>
         <div className="mb-2">
           <span className="font-semibold">Manager: </span>

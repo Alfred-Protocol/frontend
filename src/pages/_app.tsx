@@ -20,6 +20,7 @@ import {
   polygonMumbai,
 } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
 
 import '@/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -35,7 +36,12 @@ export const { chains, provider, webSocketProvider } = configureChains(
       ? [polygonMumbai, goerli]
       : []),
   ],
-  [publicProvider()]
+  [
+    alchemyProvider({
+      apiKey: 'SAWT5vv937fCafeAL4HLc4Qq_U2zjdzL',
+    }),
+    publicProvider(),
+  ]
 );
 
 const { wallets } = getDefaultWallets({

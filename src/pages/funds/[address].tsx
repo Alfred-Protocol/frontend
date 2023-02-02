@@ -10,7 +10,7 @@ const FundDetailsPage = () => {
   const { address } = query;
 
   useEffect(() => {
-    if (!address || isAddress(address.toString())) {
+    if (!address || !isAddress(address.toString())) {
       toast.error('Invalid address! Redirecting back to funds page...');
       setTimeout(() => {
         push('/funds');

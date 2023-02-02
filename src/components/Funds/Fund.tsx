@@ -7,29 +7,31 @@ interface FundProps {}
 const Fund = ({}: FundProps) => {
   const router = useRouter();
   return (
-    <div className="bg-white py-4 px-4 flex-1 rounded shadow text-left">
-      <h3 className="font-bold text-purple-900 text-xl">DAI / USDC</h3>
-      <p>
-        <span className="font-semibold">Total Liquidity: </span>
-        <span>10 ETH</span>
-      </p>
-      <p>
-        <span className="font-semibold">Manager: </span>
-        <span>
-          0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3
-          <ArrowTopRightOnSquareIcon
-            height={20}
-            width={20}
-            className="inline pb-1 ml-2 cursor-pointer stroke-2 hover:stroke-purple-500 transition-all"
-            onClick={() =>
-              router.push(
-                'https://polygonscan.com/address/0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'
-              )
-            }
-          />
-        </span>
-      </p>
-      <div className="flex">
+    <div className="bg-white py-4 px-4 flex-1 rounded shadow text-left flex">
+      <div>
+        <h3 className="font-bold text-purple-900 text-xl mb-2">DAI / USDC</h3>
+        <div>
+          <span className="font-semibold">Total Liquidity: </span>
+          <span>10 ETH</span>
+        </div>
+        <div className="mb-2">
+          <span className="font-semibold">Manager: </span>
+          <span>
+            0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3
+            <ArrowTopRightOnSquareIcon
+              height={20}
+              width={20}
+              className="inline pb-1 ml-2 cursor-pointer stroke-2 hover:stroke-purple-500 transition-all"
+              onClick={() =>
+                router.push(
+                  'https://polygonscan.com/address/0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'
+                )
+              }
+            />
+          </span>
+        </div>
+      </div>
+      <div className="flex h-full w-[60%]">
         <FundLiquidityGraph />
       </div>
     </div>

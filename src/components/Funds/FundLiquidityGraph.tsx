@@ -2,36 +2,40 @@ import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import type { Axis, AxisOptions } from 'react-charts';
 
-type DailyStars = {
+type DailyData = {
   date: Date;
-  stars: number;
+  value: number;
 };
 
 type Series = {
   label: string;
-  data: DailyStars[];
+  data: DailyData[];
+};
+
+const generateData = (numberOfDays: number = 5, maxData: number = 10) => {
+  const today = new Date();
+  const dates = new Array(numberOfDays).fill(0).map((_, index) => {
+    const date = new Date();
+    date.setDate(today.getDate() + index);
+    return date;
+  });
+
+  return new Array(numberOfDays).fill(0).map((_, index) => {
+    return {
+      date: dates[index],
+      value: Math.floor(Math.random() * maxData),
+    };
+  }) as DailyData[];
 };
 
 const data: Series[] = [
   {
-    label: 'React Charts',
-    data: [
-      {
-        date: new Date(),
-        stars: 202123,
-      },
-      // ...
-    ],
+    label: 'Daily Yield (%)',
+    data: generateData(),
   },
   {
-    label: 'React Query',
-    data: [
-      {
-        date: new Date(),
-        stars: 10234230,
-      },
-      // ...
-    ],
+    label: 'Fees APR (%)',
+    data: generateData(),
   },
 ];
 
@@ -41,16 +45,19 @@ const Chart = dynamic(() => import('react-charts').then((mod) => mod.Chart), {
 
 const FundLiquidityGraph = () => {
   const primaryAxis = useMemo(
-    (): AxisOptions<DailyStars> => ({
+    (): AxisOptions<DailyData> => ({
       getValue: (datum) => datum.date,
+      scaleType: 'time',
+      show: false,
     }),
     []
   );
 
   const secondaryAxes = useMemo(
-    (): AxisOptions<DailyStars>[] => [
+    (): AxisOptions<DailyData>[] => [
       {
-        getValue: (datum) => datum.stars,
+        getValue: (datum) => datum.value,
+        show: false,
       },
     ],
     []

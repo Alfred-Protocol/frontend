@@ -28,22 +28,22 @@ const generateData = (numberOfDays: number = 5, maxData: number = 10) => {
   }) as DailyData[];
 };
 
-const data: Series[] = [
-  {
-    label: 'Daily Yield (%)',
-    data: generateData(),
-  },
-  {
-    label: 'Fees APR (%)',
-    data: generateData(),
-  },
-];
-
 const Chart = dynamic(() => import('react-charts').then((mod) => mod.Chart), {
   ssr: false,
 });
 
 const FundLiquidityGraph = () => {
+  const data: Series[] = [
+    {
+      label: 'Daily Yield (%)',
+      data: generateData(),
+    },
+    {
+      label: 'Fees APR (%)',
+      data: generateData(),
+    },
+  ];
+
   const primaryAxis = useMemo(
     (): AxisOptions<DailyData> => ({
       getValue: (datum) => datum.date,

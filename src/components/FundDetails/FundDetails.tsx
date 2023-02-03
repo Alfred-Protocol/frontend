@@ -1,4 +1,6 @@
+import { deposit } from '@/contracts/funds';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
 import FancyButton from '../Layout/FancyButton';
 import NormalButton from '../Layout/NormalButton';
@@ -22,6 +24,12 @@ const FundDetails = ({
   manager,
 }: FundDetailsProps) => {
   const { address, status } = useAccount();
+  const router = useRouter();
+
+  const deposit = () => {
+    router.push(router.asPath + '/manage');
+  };
+
   return (
     <>
       <PageTitle title="Fund Details" />
@@ -51,14 +59,24 @@ const FundDetails = ({
                 <span className="font-bold">{tokenA}: </span>
                 {tokenAAmount}
               </p>
-              <NormalButton className="md:px-4 md:py-2">Deposit</NormalButton>
+              <NormalButton
+                className="md:px-4 md:py-2"
+                onClick={() => deposit()}
+              >
+                Deposit
+              </NormalButton>
             </div>
             <div className="flex items-center space-x-4">
               <p className="text-xl">
                 <span className="font-bold">{tokenB}: </span>
                 {tokenBAmount}
               </p>
-              <NormalButton className="md:px-4 md:py-2">Deposit</NormalButton>
+              <NormalButton
+                className="md:px-4 md:py-2"
+                onClick={() => deposit()}
+              >
+                Deposit
+              </NormalButton>
             </div>
           </div>
         </div>

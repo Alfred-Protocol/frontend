@@ -22,8 +22,8 @@ const mockData: Fund[] = [
     tvl: 234,
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
-      { assetName: 'ETH', assetValue: 1212 },
-      { assetName: 'USDC', assetValue: 1212 },
+      { assetName: 'ETH', assetValue: 1 },
+      { assetName: 'USDC', assetValue: 1676.251 },
     ],
     depositEnable: true,
     withdrawEnable: true,
@@ -33,8 +33,8 @@ const mockData: Fund[] = [
     tvl: 234,
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
-      { assetName: 'ETH', assetValue: 1212 },
-      { assetName: 'USDC', assetValue: 1212 },
+      { assetName: 'ETH', assetValue: 1.1 },
+      { assetName: 'USDT', assetValue: 1556.251 },
     ],
     depositEnable: true,
     withdrawEnable: true,
@@ -45,7 +45,7 @@ const mockData: Fund[] = [
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1212 },
-      { assetName: 'USDC', assetValue: 1212 },
+      { assetName: '', assetValue: 1212 },
     ],
     depositEnable: true,
     withdrawEnable: true,
@@ -55,8 +55,8 @@ const mockData: Fund[] = [
     tvl: 234,
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
-      { assetName: 'ETH', assetValue: 1212 },
-      { assetName: 'USDC', assetValue: 1212 },
+      { assetName: 'ETH', assetValue: 1.3 },
+      { assetName: 'USDD', assetValue: 5432 },
     ],
     depositEnable: true,
     withdrawEnable: true,

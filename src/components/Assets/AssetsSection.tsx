@@ -164,7 +164,7 @@ const AssetsSection = () => {
       <PageTitle title="Assets" />
       {showModal && renderModal()}
 
-      <div className="flex flex-row flex-wrap">
+      <div className="grid grid-cols-2 gap-6">
         {mockData.map((fund) => {
           return (
             <Card

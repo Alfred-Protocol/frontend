@@ -59,9 +59,9 @@ const LeaderboardPage = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((cell) => {
+            {data.map((cell, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td className="py-2 text-blue-700 hover:text-blue-900">
                     <a
                       target={'_blank'}

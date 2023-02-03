@@ -45,7 +45,7 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
   });
 
   return (
-    <div className="bg-slate-100 py-4 px-4 flex-1 rounded-lg shadow text-left flex">
+    <div className="bg-slate-100 py-4 px-4 flex-1 rounded-lg shadow text-left flex basis-[50%]">
       <FundDetails
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}

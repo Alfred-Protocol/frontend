@@ -27,15 +27,13 @@ const FundCreate = () => {
     ],
     enabled: !!startDate && !!matureDate,
   });
-  const { data, isLoading, isSuccess, write } = useContractWrite({
-    ...config,
-  });
+  const { data, isLoading, isSuccess, write } = useContractWrite(config);
   console.log(data, startDate, matureDate);
 
   return (
     <Layout>
       <PageTitle title="Create Fund" />
-      <div className="bg-slate-100">
+      <div className="bg-slate-100 max-w-4xl mx-auto">
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-left">
           <div>
             <label

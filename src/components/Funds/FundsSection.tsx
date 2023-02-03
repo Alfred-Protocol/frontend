@@ -44,28 +44,26 @@ const FundsSection = () => {
           </NormalButton>
         </div>
       </div>
-      <div className="pb-12">
-        <div className="flex space-x-2">
-          {!isLoading &&
-            data &&
-            data
-              // TODO: update once owner has been tied to fund
-              // .filter(
-              //   (fund) =>
-              //     viewState === ViewState.ALL ||
-              //     (status === 'connected' &&
-              //       fund.toLowerCase() === address.toLowerCase())
-              // )
-              .map((fund) => (
-                <Fund
-                  key={fund}
-                  fundAddress={fund}
-                  manager="0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3"
-                  tokenA="DAI"
-                  tokenB="USDC"
-                />
-              ))}
-        </div>
+      <div className="pb-12 grid grid-cols-1 md:grid-cols-2 gap-3">
+        {!isLoading &&
+          data &&
+          data
+            // TODO: update once owner has been tied to fund
+            // .filter(
+            //   (fund) =>
+            //     viewState === ViewState.ALL ||
+            //     (status === 'connected' &&
+            //       fund.toLowerCase() === address.toLowerCase())
+            // )
+            .map((fund) => (
+              <Fund
+                key={fund}
+                fundAddress={fund}
+                manager="0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3"
+                tokenA="DAI"
+                tokenB="USDC"
+              />
+            ))}
       </div>
     </>
   );

@@ -34,6 +34,11 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
         abi: Funds,
         functionName: 'stablecoin',
       },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fundManager',
+      },
     ],
     cacheTime: 60 * 1000, // 1min
     enabled: !!fundAddress,
@@ -49,7 +54,7 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
       <FundDetails
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}
-        manager={manager}
+        manager={data ? data[3].toString() : 'No manager found'}
         tokenA={tokenA}
         tokenB={tokenB}
         tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}

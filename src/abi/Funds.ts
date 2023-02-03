@@ -26,6 +26,11 @@ export default [
         name: '_uniswapNonFungiblePositionManagerAddress',
         type: 'address',
       },
+      {
+        internalType: 'address',
+        name: '_fundManager',
+        type: 'address',
+      },
     ],
     stateMutability: 'nonpayable',
     type: 'constructor',
@@ -171,6 +176,19 @@ export default [
         internalType: 'uint256[]',
         name: '',
         type: 'uint256[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'fundManager',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
       },
     ],
     stateMutability: 'view',

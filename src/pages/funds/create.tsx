@@ -3,8 +3,14 @@ import Layout from '@/components/Layout/Layout';
 import NormalButton from '@/components/Layout/NormalButton';
 import PageTitle from '@/components/Layout/PageTitle';
 import { BigNumber } from 'ethers';
-import { useState } from 'react';
-import { Address, useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import {
+  Address,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from 'wagmi';
 
 const FundCreate = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -23,8 +29,21 @@ const FundCreate = () => {
     ],
     enabled: !!startDate && !!matureDate,
   });
-  const { data, isLoading, isSuccess, write } = useContractWrite(config);
-  console.log(data, startDate, matureDate);
+  const { data, isSuccess, write } = useContractWrite(config);
+  const { data: txReceipt, isSuccess: txIsSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+    enabled: isSuccess,
+  });
+
+  const [hasCreated, setHasCreated] = useState(false);
+  useEffect(() => {
+    if (txIsSuccess && !hasCreated) {
+      setHasCreated(true);
+      toast.success(
+        `Successfully created, transaction hash: ${txReceipt?.transactionHash}`
+      );
+    }
+  }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
 
   return (
     <Layout>

@@ -81,6 +81,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <ToastContainer
           pauseOnFocusLoss
           pauseOnHover
+          closeOnClick={false}
           position="bottom-center"
         />
       </RainbowKitProvider>

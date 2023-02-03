@@ -31,7 +31,7 @@ module.exports = {
     backgroundImage: {
       hero: 'linear-gradient(to bottom, #4A23A4, #220D6D)',
       button:
-        'linear-gradient(to right top, rgb(187, 247, 208), rgb(74, 222, 128), rgb(30 58 138))',
+        'linear-gradient(to right top, rgb(187, 247, 208), rgb(74, 222, 128), #A673EF)',
     },
   },
   plugins: [],

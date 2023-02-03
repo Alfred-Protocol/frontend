@@ -1,6 +1,7 @@
 import FundsSection from '@/components/Funds/FundsSection';
 import Layout from '@/components/Layout/Layout';
 import PageTitle from '@/components/Layout/PageTitle';
+import Spinner from '@/components/Layout/Spinner';
 import { useEffect, useState } from 'react';
 
 export default function FundsPage() {
@@ -11,7 +12,11 @@ export default function FundsPage() {
   }, []);
 
   if (!loaded) {
-    return;
+    return (
+      <Layout>
+        <Spinner />
+      </Layout>
+    );
   }
 
   return (

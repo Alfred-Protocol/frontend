@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        ...colors,
         transparent: 'transparent',
         current: 'currentColor',
         purple: {
@@ -27,11 +28,11 @@ module.exports = {
         },
       },
     },
-    colors,
     backgroundImage: {
       hero: 'linear-gradient(151.26deg, #B182FF 0%, #8310C9 51.36%, #5315D9 98.61%)',
       button:
         'linear-gradient(to right top, rgb(187, 247, 208), rgb(74, 222, 128), rgb(126, 34, 206))',
+      text: 'linear-gradient(to bottom left, rgb(187, 247, 208), rgb(74, 222, 128), rgb(126, 34, 206))',
     },
   },
   plugins: [],

@@ -25,8 +25,8 @@ const FundsSection = () => {
   return (
     <>
       <div className="flex justify-between items-center pb-6">
-        <FancyButton className="md:px-4">
-          <Link href="/funds/create">Create Fund</Link>
+        <FancyButton className="md:px-4" isLink href="/funds/create">
+          Create Fund
         </FancyButton>
         <div className="flex items-center space-x-4">
           <p className="text-white text-lg">Filter Funds: </p>

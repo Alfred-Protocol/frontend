@@ -32,8 +32,12 @@ const FundDetails = ({
               Fund Address:
             </h2>
             {status === 'connected' && address === manager && (
-              <FancyButton className="shadow-md">
-                <Link href={`/funds/${fundAddress}/manage`}>Manage</Link>
+              <FancyButton
+                className="shadow-sm"
+                isLink
+                href={`/funds/${fundAddress}/manage`}
+              >
+                Manage
               </FancyButton>
             )}
           </div>

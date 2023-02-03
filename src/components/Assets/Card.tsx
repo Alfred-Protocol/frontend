@@ -26,7 +26,7 @@ const AssetCard = ({
 }: Props) => {
   const router = useRouter();
   return (
-    <div className="bg-white py-4 px-4 rounded shadow text-left ml-10 mr-10 mb-10">
+    <div className="bg-white py-4 px-4 rounded-lg text-left">
       <h3 className="font-bold text-purple-900 text-xl">{fundName}</h3>
       <p>
         <span className="font-semibold">TVL: </span>

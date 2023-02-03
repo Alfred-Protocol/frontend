@@ -44,8 +44,8 @@ const mockData: Fund[] = [
     tvl: 234,
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
-      { assetName: 'ETH', assetValue: 1212 },
-      { assetName: '', assetValue: 1212 },
+      { assetName: 'ETH', assetValue: 2 },
+      { assetName: 'USDR', assetValue: 3212 },
     ],
     depositEnable: true,
     withdrawEnable: true,

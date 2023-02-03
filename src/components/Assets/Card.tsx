@@ -30,7 +30,10 @@ const AssetCard = ({
       <h3 className="font-bold text-purple-900 text-xl">{fundName}</h3>
       <p>
         <span className="font-semibold">TVL: </span>
-        <span>{tvl} USDC</span>
+        <span>
+          {assets[0].assetValue * assets[1].assetValue + assets[1].assetValue}{' '}
+          {assets[1].assetName}
+        </span>
       </p>
       <p className="flex">
         <span className="font-semibold mr-2">Manager: </span>

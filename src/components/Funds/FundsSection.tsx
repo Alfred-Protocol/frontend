@@ -57,7 +57,7 @@ const FundsSection = () => {
                 key={fund}
                 fundAddress={fund}
                 manager="0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3"
-                tokenA="DAI"
+                tokenA="ETH"
                 tokenB="USDC"
               />
             ))}

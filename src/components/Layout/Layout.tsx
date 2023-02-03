@@ -13,9 +13,9 @@ const Layout = ({
   return (
     <>
       <DefaultHead />
-      <main className="flex flex-col min-h-screen">
+      <main className="flex flex-col min-h-screen  bg-hero">
         <Header />
-        <div className={`px-6 pb-20 bg-purple-900 flex-1 ${className}`}>
+        <div className={`px-6 pb-20 flex-1 ${className}`}>
           <div className="text-center max-w-7xl mx-auto">{children}</div>
         </div>
         <Footer />

@@ -15,9 +15,9 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <Popover className="relative bg-purple-900" as={'header'}>
+    <Popover className="relative bg-transparent" as={'header'}>
       <div className="mx-auto px-6">
-        <div className="flex items-center justify-between border-b-2 border-purple-900 py-6 lg:justify-start lg:space-x-10">
+        <div className="flex items-center justify-between py-6 lg:justify-start lg:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
               <span className="sr-only">Alfred Protocol</span>

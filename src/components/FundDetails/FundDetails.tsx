@@ -1,5 +1,3 @@
-import { deposit } from '@/contracts/funds';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
 import FancyButton from '../Layout/FancyButton';

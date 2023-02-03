@@ -28,6 +28,84 @@ const LeaderboardPage = () => {
               <td className="py-2">20.1</td>
               <td className="py-2">7.3</td>
             </tr>
+            <tr>
+              <td className="py-2 text-blue-700 hover:text-blue-900">
+                <a
+                  target={'_blank'}
+                  href={`https://polygonscan.com/address/0x7730b4cdc1b1e7a33a309ab7205411fad009c106`}
+                  rel="noreferrer"
+                >
+                  0x7730B4Cdc1B1E7a33A309AB7205411faD009C105
+                </a>
+              </td>
+              <td className="py-2">20.1</td>
+              <td className="py-2">7.3</td>
+            </tr>
+            <tr>
+              <td className="py-2 text-blue-700 hover:text-blue-900">
+                <a
+                  target={'_blank'}
+                  href={`https://polygonscan.com/address/0x7730b4cdc1b1e7a33a309ab7205411fad009c106`}
+                  rel="noreferrer"
+                >
+                  0x7730B4Cdc1B1E7a33A309AB7205411faD009C104
+                </a>
+              </td>
+              <td className="py-2">20.1</td>
+              <td className="py-2">7.3</td>
+            </tr>
+            <tr>
+              <td className="py-2 text-blue-700 hover:text-blue-900">
+                <a
+                  target={'_blank'}
+                  href={`https://polygonscan.com/address/0x7730b4cdc1b1e7a33a309ab7205411fad009c106`}
+                  rel="noreferrer"
+                >
+                  0x7730B4Cdc1B1E7a33A309AB7205411faD009C103
+                </a>
+              </td>
+              <td className="py-2">20.1</td>
+              <td className="py-2">7.3</td>
+            </tr>
+            <tr>
+              <td className="py-2 text-blue-700 hover:text-blue-900">
+                <a
+                  target={'_blank'}
+                  href={`https://polygonscan.com/address/0x7730b4cdc1b1e7a33a309ab7205411fad009c106`}
+                  rel="noreferrer"
+                >
+                  0x7730B4Cdc1B1E7a33A309AB7205411faD009C102
+                </a>
+              </td>
+              <td className="py-2">20.1</td>
+              <td className="py-2">7.3</td>
+            </tr>
+            <tr>
+              <td className="py-2 text-blue-700 hover:text-blue-900">
+                <a
+                  target={'_blank'}
+                  href={`https://polygonscan.com/address/0x7730b4cdc1b1e7a33a309ab7205411fad009c106`}
+                  rel="noreferrer"
+                >
+                  0x7730B4Cdc1B1E7a33A309AB7205411faD009C101
+                </a>
+              </td>
+              <td className="py-2">20.1</td>
+              <td className="py-2">7.3</td>
+            </tr>
+            <tr>
+              <td className="py-2 text-blue-700 hover:text-blue-900">
+                <a
+                  target={'_blank'}
+                  href={`https://polygonscan.com/address/0x7730b4cdc1b1e7a33a309ab7205411fad009c106`}
+                  rel="noreferrer"
+                >
+                  0x7730B4Cdc1B1E7a33A309AB7205411faD009C106
+                </a>
+              </td>
+              <td className="py-2">20.1</td>
+              <td className="py-2">7.3</td>
+            </tr>
           </tbody>
         </table>
       </div>

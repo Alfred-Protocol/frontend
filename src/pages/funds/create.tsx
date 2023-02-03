@@ -2,13 +2,9 @@ import FundsFactory from '@/abi/FundsFactory';
 import Layout from '@/components/Layout/Layout';
 import NormalButton from '@/components/Layout/NormalButton';
 import PageTitle from '@/components/Layout/PageTitle';
-import {
-  MUMBAI_FUNDS_FACTORY_ADDRESS,
-  USDC_MUMBAI_ADDRESS,
-} from '@/contracts/fundsFactory';
 import { BigNumber } from 'ethers';
 import { useState } from 'react';
-import { useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { Address, useContractWrite, usePrepareContractWrite } from 'wagmi';
 
 const FundCreate = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -17,11 +13,11 @@ const FundCreate = () => {
   );
 
   const { config } = usePrepareContractWrite({
-    address: MUMBAI_FUNDS_FACTORY_ADDRESS,
+    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
     abi: FundsFactory,
     functionName: 'createNewFund',
     args: [
-      USDC_MUMBAI_ADDRESS,
+      process.env.USDC_MUMBAI_ADDRESS as Address,
       BigNumber.from(startDate.getTime()),
       BigNumber.from(matureDate.getTime()),
     ],

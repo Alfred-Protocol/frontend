@@ -1,11 +1,8 @@
 import FundsFactory from '@/abi/FundsFactory';
-import { MUMBAI_FUNDS_FACTORY_ADDRESS } from '@/contracts/fundsFactory';
-import Link from 'next/link';
 import { useState } from 'react';
-import { useContractRead } from 'wagmi';
+import { Address, useContractRead } from 'wagmi';
 import FancyButton from '../Layout/FancyButton';
 import NormalButton from '../Layout/NormalButton';
-import PageTitle from '../Layout/PageTitle';
 import Fund from './Fund';
 
 enum ViewState {
@@ -15,7 +12,7 @@ enum ViewState {
 
 const FundsSection = () => {
   const { data, isLoading } = useContractRead({
-    address: MUMBAI_FUNDS_FACTORY_ADDRESS,
+    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
     abi: FundsFactory,
     functionName: 'getAllFunds',
   });

@@ -1,5 +1,6 @@
 import FundsFactory from '@/abi/FundsFactory';
 import { MUMBAI_FUNDS_FACTORY_ADDRESS } from '@/contracts/fundsFactory';
+import Link from 'next/link';
 import { useState } from 'react';
 import { useContractRead } from 'wagmi';
 import FancyButton from '../Layout/FancyButton';
@@ -25,7 +26,7 @@ const FundsSection = () => {
     <>
       <div className="flex justify-between items-center pb-6">
         <FancyButton className="md:px-4">
-          <a href="/funds/create">Create Fund</a>
+          <Link href="/funds/create">Create Fund</Link>
         </FancyButton>
         <div className="flex items-center space-x-4">
           <p className="text-white text-lg">Filter Funds: </p>

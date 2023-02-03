@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useAccount } from 'wagmi';
 import FancyButton from '../Layout/FancyButton';
 import NormalButton from '../Layout/NormalButton';
@@ -32,7 +33,7 @@ const FundDetails = ({
             </h2>
             {status === 'connected' && address === manager && (
               <FancyButton className="shadow-md">
-                <a href={`/funds/${fundAddress}/manage`}>Manage</a>
+                <Link href={`/funds/${fundAddress}/manage`}>Manage</Link>
               </FancyButton>
             )}
           </div>
@@ -46,18 +47,14 @@ const FundDetails = ({
                 <span className="font-bold">{tokenA}: </span>
                 {tokenAAmount}
               </p>
-              <NormalButton className="md:px-4 md:py-2">
-                Deposit
-              </NormalButton>
+              <NormalButton className="md:px-4 md:py-2">Deposit</NormalButton>
             </div>
             <div className="flex items-center space-x-4">
               <p className="text-xl">
                 <span className="font-bold">{tokenB}: </span>
                 {tokenBAmount}
               </p>
-              <NormalButton className="md:px-4 md:py-2">
-                Deposit
-              </NormalButton>
+              <NormalButton className="md:px-4 md:py-2">Deposit</NormalButton>
             </div>
           </div>
         </div>

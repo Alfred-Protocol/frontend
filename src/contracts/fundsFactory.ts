@@ -1,10 +1,12 @@
 import { Signer, providers, ethers, BigNumber } from 'ethers';
+import type { Address } from 'wagmi';
 import FundsFactory from '../abi/FundsFactory';
 
 export const MUMBAI_FUNDS_FACTORY_ADDRESS =
-  '0xB445Eff7a9d62be8c44671E0238982fc4605C896';
+  '0xB445Eff7a9d62be8c44671E0238982fc4605C896' as Address;
 
-export const USDC_MUMBAI_ADDRESS = '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747';
+export const USDC_MUMBAI_ADDRESS =
+  '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747' as Address;
 
 const getContract = async (signerOrProvider: providers.Provider | Signer) => {
   if ((signerOrProvider as Signer)._isSigner) {

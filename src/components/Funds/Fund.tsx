@@ -64,7 +64,7 @@ const Fund = ({
 
   return (
     <div
-      style={{ minHeight: 500, minWidth: 460 }}
+      style={{ minHeight: 470, minWidth: 460 }}
       className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left shadow"
     >
       {/* <FundDetails

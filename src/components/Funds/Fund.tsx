@@ -8,9 +8,22 @@ interface FundProps {
   tokenB: string;
   manager: string; // TODO: retrieve from smart contract
   fundAddress: Address;
+  description: string;
+  startDate: string;
+  matureDate: string;
+  tvl: number;
 }
 
-const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
+const Fund = ({
+  fundAddress,
+  manager,
+  tokenA,
+  tokenB,
+  description,
+  startDate,
+  matureDate,
+  tvl,
+}: FundProps) => {
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [
@@ -50,8 +63,8 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
   });
 
   return (
-    <div className="bg-slate-100 py-4 px-4 flex-1 rounded-lg shadow text-left flex basis-[50%]">
-      <FundDetails
+    <div className="flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow">
+      {/* <FundDetails
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}
         manager={data ? data[3].toString() : 'No manager found'}
@@ -69,6 +82,19 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
             ? new Date(data[2]?.toNumber()).toLocaleDateString()
             : 'No date found'
         }
+      /> */}
+      {/* for mock data */}
+      <FundDetails
+        fundAddress={fundAddress}
+        isLoading={isLoading || tokenIsLoading}
+        manager={manager}
+        tokenA={tokenA}
+        tokenB={tokenB}
+        description={description}
+        tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}
+        totalValueLocked={tvl}
+        startDate={startDate}
+        matureDate={matureDate}
       />
       <div className="flex h-full flex-1">
         <FundLiquidityGraph />

@@ -16,7 +16,26 @@ interface FundDetailsProps {
   startDate: string;
   matureDate: string;
   manager: string;
+  description: string;
 }
+
+const PairValue = ({
+  field,
+  value,
+  endComponent,
+}: {
+  field: string;
+  value: string;
+  endComponent?: any;
+}) => {
+  return (
+    <div className="flex items-center space-x-2">
+      <p className="text-xl font-semibold">{field}:</p>
+      <p>{value}</p>
+      {endComponent}
+    </div>
+  );
+};
 
 const FundDetails = ({
   fundAddress,
@@ -28,60 +47,74 @@ const FundDetails = ({
   matureDate,
   startDate,
   manager,
+  description,
 }: FundDetailsProps) => {
   const router = useRouter();
   return (
-    <div>
-      <div className="flex items-center space-x-4 mb-2">
-        <h3 className="font-bold text-purple-900 text-xl">
-          {tokenA} / {tokenB}
-        </h3>
-        <Link
-          className="py-2 px-4 bg-purple-600 text-purple-100 rounded-lg hover:bg-purple-800 transition-all"
-          href={`/funds/${fundAddress}`}
-        >
-          More Details
-          <ArrowRightIcon
-            height={20}
-            width={20}
-            className="inline pb-1 ml-2 cursor-pointer stroke-2"
-          />
-        </Link>
-      </div>
+    <div className="bg-blackfill text-whiteFont">
       <div>
-        <span className="font-semibold">TVL: </span>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <span>
-            {totalValueLocked} {tvlSymbol}
-          </span>
-        )}
-      </div>
-      <div>
-        <span className="font-semibold">Start Date: </span>
-        {isLoading ? <Spinner /> : <span>{startDate}</span>}
-      </div>
-      <div>
-        <span className="font-semibold">Mature Date: </span>
-        {isLoading ? <Spinner /> : <span>{matureDate}</span>}
-      </div>
-      <div className="mb-2">
-        <span className="font-semibold">Manager: </span>
-        <span>
-          {manager}
-          <ArrowTopRightOnSquareIcon
-            height={20}
-            width={20}
-            className="inline pb-1 ml-2 cursor-pointer stroke-2 hover:stroke-purple-500 transition-all"
-            onClick={() =>
-              router.push(`https://polygonscan.com/address/${manager}`)
-            }
-          />
-        </span>
+        <p className="mb-2 text-3xl">Fund A</p>
+        <p className="mb-2 text-sm">Manager: {manager}</p>
+        <p className="mb-4 text-sm">{description}</p>
+        <PairValue
+          field="Current Value"
+          value={totalValueLocked + ' ETH'}
+          endComponent={<div></div>}
+        />
+        <PairValue field="Start Date" value={startDate} />
+        <PairValue field="Mature Date" value={matureDate} />
       </div>
     </div>
   );
 };
 
 export default FundDetails;
+
+{
+  /* <h3 className="text-xl font-bold text-purple-900">
+{tokenA} / {tokenB}
+</h3>
+<Link
+className="rounded-lg bg-purple-600 py-2 px-4 text-purple-100 transition-all hover:bg-purple-800"
+href={`/funds/${fundAddress}`}
+>
+More Details
+<ArrowRightIcon
+  height={20}
+  width={20}
+  className="ml-2 inline cursor-pointer stroke-2 pb-1"
+/>
+</Link>
+</div>
+<div>
+<span className="font-semibold">TVL: </span>
+{isLoading ? (
+<Spinner />
+) : (
+<span>
+  {totalValueLocked} {tvlSymbol}
+</span>
+)}
+</div>
+<div>
+<span className="font-semibold">Start Date: </span>
+{isLoading ? <Spinner /> : <span>{startDate}</span>}
+</div>
+<div>
+<span className="font-semibold">Mature Date: </span>
+{isLoading ? <Spinner /> : <span>{matureDate}</span>}
+</div>
+<div className="mb-2">
+<span className="font-semibold">Manager: </span>
+<span>
+{manager}
+<ArrowTopRightOnSquareIcon
+  height={20}
+  width={20}
+  className="ml-2 inline cursor-pointer stroke-2 pb-1 transition-all hover:stroke-purple-500"
+  onClick={() =>
+    router.push(`https://polygonscan.com/address/${manager}`)
+  }
+/>
+</span> */
+}

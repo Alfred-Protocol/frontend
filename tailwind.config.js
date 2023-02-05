@@ -26,6 +26,8 @@ module.exports = {
           800: '#1f2937',
           500: '#6b7280',
         },
+        blackfill: '#1E1E1E',
+        whiteFont: '#FCDDEC',
       },
     },
     backgroundImage: {

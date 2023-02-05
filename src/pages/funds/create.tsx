@@ -29,6 +29,7 @@ const FundCreate = () => {
     ],
     enabled: !!startDate && !!matureDate,
   });
+
   const { data, isSuccess, write } = useContractWrite(config);
   const { data: txReceipt, isSuccess: txIsSuccess } = useWaitForTransaction({
     hash: data?.hash,
@@ -48,38 +49,40 @@ const FundCreate = () => {
   return (
     <Layout>
       <PageTitle title="Create Fund" />
-      <div className="bg-slate-100 max-w-4xl mx-auto">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 text-left">
+      <div className="mx-auto max-w-4xl bg-slate-100">
+        <form className="mb-4 rounded bg-white px-8 pt-6 pb-8 text-left shadow-md">
           <div>
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="mb-2 block text-sm font-bold text-gray-700"
               htmlFor="password"
             >
               Start Date
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3  mb-3 leading-tight focus:outline-none focus:shadow-outline text-gray-700"
+              className="focus:shadow-outline mb-3 w-full appearance-none rounded border py-2  px-3 leading-tight text-gray-700 shadow focus:outline-none"
               type={'date'}
               onChange={(e) => setStartDate(new Date(e.target.value))}
             />
           </div>
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="mb-2 block text-sm font-bold text-gray-700"
               htmlFor="password"
             >
               Mature Date
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline mb-3 w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow focus:outline-none"
               type={'date'}
               onChange={(e) => setMatureDate(new Date(e.target.value))}
             />
           </div>
           <div className="flex items-center justify-between">
             <NormalButton
-              className="font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => write?.()}
+              className="focus:shadow-outline rounded py-2 px-4 font-bold focus:outline-none"
+              onClick={() => {
+                write?.();
+              }}
             >
               Create
             </NormalButton>

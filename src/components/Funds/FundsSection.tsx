@@ -46,6 +46,41 @@ const mockData = [
       },
     ],
   },
+  {
+    manager: '0x329231049012430902424',
+    description: `An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin). \n 
+      By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. 
+      The value of the ETF LP token is determined by the value of the underlying assets (DAI and WBTC) in the pool, which can fluctuate. This type of ETF provides investors with exposure to both the stability of the US dollar and the potential of Bitcoin.
+      `,
+    tvl: 4.23,
+    curValue: 5.45,
+    startDate: '01/01/2023',
+    matureDate: '05/07/2023',
+    positions: [
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+    ],
+  },
 ];
 
 const FundsSection = () => {

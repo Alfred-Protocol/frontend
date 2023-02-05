@@ -1,6 +1,6 @@
 {
   "background": {},
-  "fpsLimit": 300,
+  "fpsLimit": 42,
   "interactivity": {
     "events": {
       "onClick": {

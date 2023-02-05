@@ -214,7 +214,7 @@ const FundsSection = () => {
                 tokenB="USDC"
               />
             ))} */}
-        {/* {mockData.map((fund, idx) => {
+        {mockData.map((fund, idx) => {
           return (
             <Fund
               key={idx}
@@ -228,7 +228,7 @@ const FundsSection = () => {
               fundAddress={'0x'}
             />
           );
-        })} */}
+        })}
       </div>
     </>
   );

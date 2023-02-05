@@ -35,7 +35,7 @@ const PairValue = ({
 }) => {
   return (
     <div className="flex items-center space-x-2" style={style}>
-      <p className="text-xl font-semibold">{field}:</p>
+      <p className="font-semibold sm:text-xl">{field}:</p>
       <p>{value}</p>
       {endComponent}
     </div>
@@ -68,9 +68,11 @@ const FundDetails = ({
             className="absolute right-1 top-1"
             onClick={() => {}}
           />
-          <p className="mb-2 text-3xl">Fund A</p>
-          <p className="mb-2 text-sm">Manager: {manager}</p>
-          <p className="max-w-mlg mb-8 text-sm">{description}</p>
+          <p className="mb-2 text-2xl sm:text-3xl">Fund A</p>
+          <p className="text-l mb-xs mt-6 sm:text-sm">Manager: {manager}</p>
+          <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
+            {description}
+          </p>
         </div>
         <div className="">
           <PairValue

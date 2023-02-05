@@ -2,6 +2,7 @@ import Funds from '@/abi/Funds';
 import { Address, useContractReads, useToken } from 'wagmi';
 import FundDetails from './FundDetails';
 import FundLiquidityGraph from './FundLiquidityGraph';
+import useMediaQuery from 'src/components/Common/useMediaQuery';
 
 interface FundProps {
   tokenA: string;
@@ -24,6 +25,8 @@ const Fund = ({
   matureDate,
   tvl,
 }: FundProps) => {
+  const isMobile = useMediaQuery(768);
+
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [
@@ -64,8 +67,11 @@ const Fund = ({
 
   return (
     <div
-      style={{ minHeight: 470, minWidth: 460 }}
-      className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left shadow"
+      style={{
+        minHeight: isMobile ? 300 : 470,
+        minWidth: isMobile ? 100 : 460,
+      }}
+      className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow sm:py-8 sm:px-8"
     >
       {/* <FundDetails
         fundAddress={fundAddress}

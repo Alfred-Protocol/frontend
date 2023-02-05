@@ -13,10 +13,10 @@ const Layout = ({
   return (
     <>
       <DefaultHead />
-      <main className="flex flex-col min-h-screen  bg-hero">
+      <main className="flex min-h-screen flex-col bg-transparent bg-black bg-hero">
         <Header />
-        <div className={`px-6 pb-20 flex-1 ${className}`}>
-          <div className="text-center max-w-7xl mx-auto">{children}</div>
+        <div className={`flex-1 px-6 pb-20 ${className}`}>
+          <div className="mx-auto max-w-7xl text-center">{children}</div>
         </div>
         <Footer />
       </main>

@@ -29,7 +29,7 @@ module.exports = {
       },
     },
     backgroundImage: {
-      hero: 'linear-gradient(to bottom, #4A23A4, #220D6D)',
+      hero: 'linear-gradient(rgba(181, 23, 158, 0.6), rgba(72, 12, 168, 0.06))',
       button:
         'linear-gradient(to right top, rgb(187, 247, 208), rgb(74, 222, 128), rgb(30 58 138))',
     },

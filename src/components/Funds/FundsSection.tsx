@@ -21,12 +21,12 @@ const FundsSection = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center pb-6">
+      <div className="flex items-center justify-between pb-6">
         <FancyButton className="md:px-4" isLink href="/funds/create">
           Create Fund
         </FancyButton>
         <div className="flex items-center space-x-4">
-          <p className="text-white text-lg">Filter Funds: </p>
+          <p className="text-lg text-white">Filter Funds: </p>
           <NormalButton
             onClick={() => setViewState(ViewState.ALL)}
             active={viewState === ViewState.ALL}
@@ -41,7 +41,7 @@ const FundsSection = () => {
           </NormalButton>
         </div>
       </div>
-      <div className="pb-12 grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 pb-12 md:grid-cols-2">
         {!isLoading &&
           data &&
           data

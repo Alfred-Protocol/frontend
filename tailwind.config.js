@@ -28,6 +28,8 @@ module.exports = {
         },
         blackfill: '#1E1E1E',
         whiteFont: '#FCDDEC',
+        greenGrowth: '#66FF88',
+        grayDark: 'rgba(252, 221, 236, 0.6)',
       },
     },
     backgroundImage: {

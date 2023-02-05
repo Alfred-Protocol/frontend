@@ -4,7 +4,9 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import FundTable from '../FundDetails/FundTable';
 import Spinner from '../Layout/Spinner';
+import FundTableList from './FundTableList';
 
 interface FundDetailsProps {
   tokenA: string;
@@ -23,13 +25,15 @@ const PairValue = ({
   field,
   value,
   endComponent,
+  style,
 }: {
   field: string;
   value: string;
   endComponent?: any;
+  style?: any;
 }) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2" style={style}>
       <p className="text-xl font-semibold">{field}:</p>
       <p>{value}</p>
       {endComponent}
@@ -59,10 +63,15 @@ const FundDetails = ({
         <PairValue
           field="Current Value"
           value={totalValueLocked + ' ETH'}
-          endComponent={<div></div>}
+          endComponent={<div className="text-greenGrowth">(+20.0%)</div>}
         />
         <PairValue field="Start Date" value={startDate} />
-        <PairValue field="Mature Date" value={matureDate} />
+        <PairValue
+          field="Mature Date"
+          value={matureDate}
+          style={{ marginBottom: 5 }}
+        />
+        <FundTableList />
       </div>
     </div>
   );

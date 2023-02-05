@@ -58,7 +58,7 @@ const Fund = ({
   });
 
   const { data: tokenData, isLoading: tokenIsLoading } = useToken({
-    address: (data ? data[3].toString() : '') as Address,
+    address: (data[3] ? data[3].toString() : '') as Address,
     enabled: data !== undefined,
   });
 

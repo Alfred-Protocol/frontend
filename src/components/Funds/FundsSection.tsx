@@ -223,6 +223,9 @@ const FundsSection = () => {
               startDate={fund.startDate}
               matureDate={fund.matureDate}
               tvl={fund.tvl}
+              tokenA={''}
+              tokenB={''}
+              fundAddress={'0x'}
             />
           );
         })}

@@ -1,7 +1,7 @@
 import type { PositionData } from '@/pages/funds/[address]/manage';
 import PairImage from '../Common/PairImage';
 
-const mockData: PositionData[] = [
+const mockData = [
   {
     token1: 'ETH',
     token2: 'USDC',
@@ -22,7 +22,7 @@ const mockData: PositionData[] = [
   },
 ];
 
-const FundTableList = ({ data = mockData }: { data?: PositionData[] }) => {
+const FundTableList = ({ data = mockData }: { data?: any[] }) => {
   return (
     <div className="rounded-lg shadow">
       <table className="w-full table-auto text-xs">
@@ -49,14 +49,14 @@ const FundTableList = ({ data = mockData }: { data?: PositionData[] }) => {
             }) => (
               <tr key={address}>
                 <td className="flex items-center">
-                  <PairImage />
+                  <PairImage logo1={undefined} logo2={undefined} />
                   {`${token1} / ${token2}`}
                 </td>
                 <td className="">{feePercentage}%</td>
                 <td className="">{min}</td>
                 <td className="">{max}</td>
                 <td className="flex flex-wrap">
-                  <PairImage />
+                  <PairImage logo1={undefined} logo2={undefined} />
                   {`${token1} / ${token2}`}
                 </td>
               </tr>

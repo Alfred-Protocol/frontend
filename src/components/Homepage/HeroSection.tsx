@@ -32,6 +32,7 @@ const HeroSection = () => {
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
+        // @ts-expect-errorts-ignore ignore
         options={animationJSON}
       />
       <PageTitle title="Decentralised Fund Manager" />

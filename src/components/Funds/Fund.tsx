@@ -95,7 +95,7 @@ const Fund = ({
         tokenB={tokenB}
         description={description}
         tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}
-        totalValueLocked={tvl}
+        totalValueLocked={String(tvl)}
         startDate={startDate}
         matureDate={matureDate}
       />

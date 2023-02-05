@@ -1,9 +1,11 @@
 import { Popover, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
+import { AlfredLogo } from '../Common/Common';
 
 const links = [
   { name: 'Funds', href: '/funds' },
@@ -18,29 +20,31 @@ export default function Header() {
     <Popover className="relative bg-transparent" as={'header'}>
       <div className="mx-auto px-6">
         <div className="flex items-center justify-between py-6 lg:justify-start lg:space-x-10">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
+          <div className="flex justify-start space-x-2 lg:flex">
+            <AlfredLogo width={20} />
             <Link href="/">
               <span className="sr-only">Alfred Protocol</span>
-              <p className="text-purple-200 font-bold">Alfred Protocol</p>
+              <p className="font-bold text-purple-200">Alfred Protocol</p>
             </Link>
           </div>
           <div className="-my-2 -mr-2 lg:hidden">
-            <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-purple-800 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-all">
+            <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition-all hover:bg-purple-800 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
               <span className="sr-only">Open menu</span>
               <Bars3Icon
-                className="h-6 w-6 stroke-2 stroke-purple-200"
+                className="h-6 w-6 stroke-purple-200 stroke-2"
                 aria-hidden="true"
               />
             </Popover.Button>
           </div>
-          <Popover.Group as="nav" className="hidden space-x-10 lg:flex px-6">
+          <Popover.Group as="nav" className="hidden space-x-10 px-6 lg:flex">
             {links.map(({ name, href }) => (
               <Link
                 key={name}
                 href={href}
-                className="font-semibold text-lg text-purple-100 hover:text-purple-200 transition-all"
+                className="text-lg font-semibold text-purple-100 transition-all hover:text-purple-200 hover:underline"
                 style={{
-                  textDecoration: router.asPath === href ? 'underline' : 'none',
+                  textDecoration:
+                    router.asPath === href ? 'underline' : undefined,
                   textUnderlineOffset: 3,
                 }}
               >
@@ -48,7 +52,7 @@ export default function Header() {
               </Link>
             ))}
           </Popover.Group>
-          <div className="hidden items-center justify-end lg:flex lg:flex-1 lg:w-0">
+          <div className="hidden items-center justify-end lg:flex lg:w-0 lg:flex-1">
             <ConnectButton />
           </div>
         </div>
@@ -74,7 +78,7 @@ export default function Header() {
                   <p className="text-white">Logo</p>
                 </div>
                 <div className="-mr-2">
-                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-purple-700 p-2 text-purple-300  hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-all">
+                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-purple-700 p-2 text-purple-300  transition-all hover:text-purple-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
@@ -87,7 +91,7 @@ export default function Header() {
                   <Link
                     key={name}
                     href={href}
-                    className="text-base font-medium text-purple-100 hover:text-purple-300 transition-all"
+                    className="text-base font-medium text-purple-100 transition-all hover:text-purple-300"
                   >
                     {name}
                   </Link>

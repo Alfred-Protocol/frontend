@@ -63,7 +63,10 @@ const Fund = ({
   });
 
   return (
-    <div className="flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow">
+    <div
+      style={{ minHeight: 560, minWidth: 460 }}
+      className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left shadow"
+    >
       {/* <FundDetails
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}

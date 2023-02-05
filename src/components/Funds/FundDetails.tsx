@@ -57,31 +57,33 @@ const FundDetails = ({
   const router = useRouter();
   return (
     <div
-      className="bg-blackfill text-whiteFont"
+      className="min-h-40 bg-blackfill text-whiteFont"
       style={{ position: 'relative' }}
     >
-      <div>
+      <div className="">
         <CustomButton
-          title="View"
+          title="Deposit"
           type="solidPurple"
           className="absolute right-1 top-1"
           onClick={() => {}}
         />
         <p className="mb-2 text-3xl">Fund A</p>
         <p className="mb-2 text-sm">Manager: {manager}</p>
-        <p className="max-w-mlg text-sm">{description}</p>
-        <PairValue
-          field="Current Value"
-          value={totalValueLocked + ' ETH'}
-          endComponent={<div className="text-greenGrowth">(+20.0%)</div>}
-        />
-        <PairValue field="Start Date" value={startDate} />
-        <PairValue
-          field="Mature Date"
-          value={matureDate}
-          style={{ marginBottom: 5 }}
-        />
-        <FundTableList />
+        <p className="max-w-mlg mb-8 text-sm">{description}</p>
+        <div className="b-20 absolute">
+          <PairValue
+            field="Current Value"
+            value={totalValueLocked + ' ETH'}
+            endComponent={<div className="text-greenGrowth">(+20.0%)</div>}
+          />
+          <PairValue field="Start Date" value={startDate} />
+          <PairValue
+            field="Mature Date"
+            value={matureDate}
+            style={{ marginBottom: 5 }}
+          />
+          <FundTableList />
+        </div>
       </div>
     </div>
   );

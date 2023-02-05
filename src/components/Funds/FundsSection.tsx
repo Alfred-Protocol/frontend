@@ -52,7 +52,7 @@ const mockData = [
     manager: '0x329231049012430902424',
     description: `An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin). \n 
       By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. 
-      The value of the ETF LP token is determined by the value of the underlying assets (DAI and WBTC) in the pool, which can fluctuate. This type of ETF provides investors with exposure to both the stability of the US dollar and the potential of Bitcoin.
+  
       `,
     tvl: 4.23,
     curValue: 5.45,
@@ -87,7 +87,7 @@ const mockData = [
     manager: '0x329231049012430902424',
     description: `An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin). \n 
       By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. 
-      The value of the ETF LP token is determined by the value of the underlying assets (DAI and WBTC) in the pool, which can fluctuate. This type of ETF provides investors with exposure to both the stability of the US dollar and the potential of Bitcoin.
+     
       `,
     tvl: 4.23,
     curValue: 5.45,
@@ -194,7 +194,7 @@ const FundsSection = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-3 pb-12 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-y-10 gap-x-7 pb-12 xl:grid-cols-2 2xl:grid-cols-3">
         {/* {!isLoading &&
           data &&
           data

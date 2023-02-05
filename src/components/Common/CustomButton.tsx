@@ -12,11 +12,11 @@ interface Props {
 
 const typeMap: { [x in string]: string } = {
   solidPurple:
-    'px-7 py-2.5 text-white rounded-md bg-solidPurpleDark hover:bg-solidPurple',
+    'font-semibold px-7 py-2.5 text-white rounded-md bg-solidPurpleDark hover:bg-solidPurple',
   solidBlue:
-    'px-7 py-2.5 text-white rounded-md bg-solidBlueDark hover:bg-solidBlue',
+    'font-semibold px-7 py-2.5 text-white rounded-md bg-solidBlueDark hover:bg-solidBlue',
   transparentPurple:
-    'px-5 py-2.5 text-white hover:bg-pupleLight bg-transparent border-pupleLight border-2 rounded-md',
+    'font-semibold px-5 py-2.5 text-white hover:bg-pupleLight bg-transparent border-pupleLight border-2 rounded-md',
 };
 
 const CustomButton = ({

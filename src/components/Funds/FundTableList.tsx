@@ -25,9 +25,9 @@ const mockData: PositionData[] = [
 const FundTableList = ({ data = mockData }: { data?: PositionData[] }) => {
   return (
     <div className="rounded-lg shadow">
-      <table className="w-full table-auto">
+      <table className="w-full table-auto text-xs">
         <thead>
-          <tr className="translate-y-0 text-sm text-grayDark">
+          <tr className="translate-y-0 text-grayDark">
             <th className="pb-0">PAIR</th>
             <th className="pb-0">FEE</th>
             <th className="pb-0">MIN</th>
@@ -55,7 +55,7 @@ const FundTableList = ({ data = mockData }: { data?: PositionData[] }) => {
                 <td className="">{feePercentage}%</td>
                 <td className="">{min}</td>
                 <td className="">{max}</td>
-                <td className="flex">
+                <td className="flex flex-wrap">
                   <PairImage />
                   {`${token1} / ${token2}`}
                 </td>

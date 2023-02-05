@@ -60,17 +60,19 @@ const FundDetails = ({
       className="min-h-40 bg-blackfill text-whiteFont"
       style={{ position: 'relative' }}
     >
-      <div className="">
-        <CustomButton
-          title="Deposit"
-          type="solidPurple"
-          className="absolute right-1 top-1"
-          onClick={() => {}}
-        />
-        <p className="mb-2 text-3xl">Fund A</p>
-        <p className="mb-2 text-sm">Manager: {manager}</p>
-        <p className="max-w-mlg mb-8 text-sm">{description}</p>
-        <div className="b-20 absolute">
+      <div className="flex h-full flex-col justify-between">
+        <div>
+          <CustomButton
+            title="Deposit"
+            type="solidPurple"
+            className="absolute right-1 top-1"
+            onClick={() => {}}
+          />
+          <p className="mb-2 text-3xl">Fund A</p>
+          <p className="mb-2 text-sm">Manager: {manager}</p>
+          <p className="max-w-mlg mb-8 text-sm">{description}</p>
+        </div>
+        <div className="">
           <PairValue
             field="Current Value"
             value={totalValueLocked + ' ETH'}

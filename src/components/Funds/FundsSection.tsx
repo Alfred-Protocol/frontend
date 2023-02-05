@@ -125,26 +125,6 @@ const FundsSection = () => {
           />
         </div>
       </div>
-      {/* <div className="flex items-center justify-between pb-6">
-        <FancyButton className="md:px-4" isLink href="/funds/create">
-          Create Fund
-        </FancyButton>
-        <div className="flex items-center space-x-4">
-          <p className="text-lg text-white">Filter Funds: </p>
-          <NormalButton
-            onClick={() => setViewState(ViewState.ALL)}
-            active={viewState === ViewState.ALL}
-          >
-            All
-          </NormalButton>
-          <NormalButton
-            onClick={() => setViewState(ViewState.MANAGED_BY_USER)}
-            active={viewState === ViewState.MANAGED_BY_USER}
-          >
-            Managed by you
-          </NormalButton>
-        </div>
-      </div> */}
       <div className="grid grid-cols-1 gap-3 pb-12 md:grid-cols-2">
         {/* {!isLoading &&
           data &&

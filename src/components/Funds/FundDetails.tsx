@@ -62,7 +62,6 @@ const FundDetails = ({
     >
       <div>
         <CustomButton
-          // style={{ right: 5, top: 5, position: 'absolute' }}
           title="View"
           type="solidPurple"
           className="absolute right-1 top-1"
@@ -70,7 +69,7 @@ const FundDetails = ({
         />
         <p className="mb-2 text-3xl">Fund A</p>
         <p className="mb-2 text-sm">Manager: {manager}</p>
-        <p className="mb-4 text-sm">{description}</p>
+        <p className="max-w-mlg text-sm">{description}</p>
         <PairValue
           field="Current Value"
           value={totalValueLocked + ' ETH'}

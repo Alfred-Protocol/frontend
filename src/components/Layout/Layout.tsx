@@ -16,7 +16,7 @@ const Layout = ({
       <main className="flex min-h-screen flex-col bg-transparent bg-black bg-hero">
         <Header />
         <div className={`flex-1 px-6 pb-20 ${className}`}>
-          <div className="mx-auto max-w-7xl text-center">{children}</div>
+          <div className="mx-auto text-center">{children}</div>
         </div>
         <Footer />
       </main>

@@ -96,9 +96,6 @@ const Fund = ({
         startDate={startDate}
         matureDate={matureDate}
       />
-      <div className="flex h-full flex-1">
-        <FundLiquidityGraph />
-      </div>
     </div>
   );
 };

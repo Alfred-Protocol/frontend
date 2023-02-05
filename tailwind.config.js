@@ -32,6 +32,9 @@ module.exports = {
         grayDark: 'rgba(252, 221, 236, 0.6)',
         solidPurple: 'rgba(65, 58, 184, 0.7)',
         solidPurpleDark: 'rgba(65, 58, 184, 1)',
+        solidBlue: 'rgba(63, 55, 201, 0.7)',
+        solidBlueDark: 'rgba(63, 55, 201, 1)',
+        pupleLight: '#EF5DA8',
       },
     },
     backgroundImage: {

@@ -21,7 +21,7 @@ export default function FundsPage() {
 
   return (
     <Layout>
-      <PageTitle title="Funds" />
+      {/* <PageTitle title="Funds" /> */}
       <FundsSection />
     </Layout>
   );

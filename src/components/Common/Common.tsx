@@ -15,4 +15,61 @@ const AlfredLogo = ({ width }: { width: number }) => {
   );
 };
 
-export { AlfredLogo };
+const CalendarIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="#fffff"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      className="h-7 w-7"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+      />
+    </svg>
+  );
+};
+
+const ArrowDown = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      className="h-5 w-5"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
+      />
+    </svg>
+  );
+};
+
+const ArrowUp = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      className="h-5 w-5"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"
+      />
+    </svg>
+  );
+};
+
+export { AlfredLogo, CalendarIcon, ArrowDown, ArrowUp };

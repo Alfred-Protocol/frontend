@@ -30,6 +30,8 @@ module.exports = {
         whiteFont: '#FCDDEC',
         greenGrowth: '#66FF88',
         grayDark: 'rgba(252, 221, 236, 0.6)',
+        solidPurple: 'rgba(65, 58, 184, 0.7)',
+        solidPurpleDark: 'rgba(65, 58, 184, 1)',
       },
     },
     backgroundImage: {

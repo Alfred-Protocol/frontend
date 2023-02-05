@@ -8,8 +8,8 @@ const PairImage = ({
   logo2 = ETH,
 }: {
   style?: CSSProperties;
-  logo1: string;
-  logo2: string;
+  logo1: any;
+  logo2: any;
 }) => {
   return (
     <div className="flex" style={style}>

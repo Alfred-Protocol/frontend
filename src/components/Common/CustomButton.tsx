@@ -12,11 +12,11 @@ interface Props {
 
 const typeMap: { [x in string]: string } = {
   solidPurple:
-    'font-semibold px-7 py-2.5 text-white rounded-md bg-solidPurpleDark hover:bg-solidPurple',
+    'font-semibold sm:px-7 sm:py-2.5 px-2 py-3 text-white rounded-md bg-solidPurpleDark hover:bg-solidPurple',
   solidBlue:
-    'font-semibold px-7 py-2.5 text-white rounded-md bg-solidBlueDark hover:bg-solidBlue',
+    'font-semibold sm:px-7 sm:py-2.5 px-2 py-3 text-white rounded-md bg-solidBlueDark hover:bg-solidBlue',
   transparentPurple:
-    'font-semibold px-5 py-2.5 text-white hover:bg-pupleLight bg-transparent border-pupleLight border-2 rounded-md',
+    'font-semibold sm:px-5 sm:py-2.5 px-2 py-3 text-white hover:bg-pupleLight bg-transparent border-pupleLight border-2 rounded-md',
 };
 
 const CustomButton = ({
@@ -31,7 +31,9 @@ const CustomButton = ({
   return (
     <div
       style={{ ...style, cursor: 'pointer' }}
-      className={typeMap[type] + ' ' + className + 'flex items-center'}
+      className={
+        typeMap[type] + ' ' + className + 'flex items-center justify-center'
+      }
       onClick={onClick}
     >
       {frontIcon && <div className="mr-2 w-6">{frontIcon}</div>}

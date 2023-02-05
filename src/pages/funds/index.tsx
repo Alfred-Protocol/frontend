@@ -20,7 +20,7 @@ export default function FundsPage() {
   }
 
   return (
-    <Layout className="mx-20">
+    <Layout className="sm:mx-20">
       {/* <PageTitle title="Funds" /> */}
       <FundsSection />
     </Layout>

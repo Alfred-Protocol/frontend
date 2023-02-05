@@ -167,8 +167,8 @@ const FundsSection = () => {
 
   return (
     <>
-      <div className="mt-16 mb-10 flex justify-between">
-        <div className="flex-5 flex space-x-12">
+      <div className="mt-16 mb-10 sm:flex sm:justify-between">
+        <div className="sm:flex-5 flex-col space-y-4 sm:flex sm:flex-row sm:space-y-0 sm:space-x-12">
           <CustomButton title="Refresh" type="solidBlue" onClick={() => {}} />
           <CustomButton
             title="Choose Start Date"
@@ -183,7 +183,7 @@ const FundsSection = () => {
             frontIcon={<CalendarIcon />}
           />
         </div>
-        <div className="flex-3">
+        <div className="sm:flex-3 mt-4 sm:mt-0">
           <CustomButton
             title={sortByNewestFund ? 'Newest Fund' : 'Oldest Fund'}
             type="transparentPurple"
@@ -214,7 +214,7 @@ const FundsSection = () => {
                 tokenB="USDC"
               />
             ))} */}
-        {mockData.map((fund, idx) => {
+        {/* {mockData.map((fund, idx) => {
           return (
             <Fund
               key={idx}
@@ -228,7 +228,7 @@ const FundsSection = () => {
               fundAddress={'0x'}
             />
           );
-        })}
+        })} */}
       </div>
     </>
   );

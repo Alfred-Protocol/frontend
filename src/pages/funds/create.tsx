@@ -12,7 +12,7 @@ import {
   useWaitForTransaction,
 } from 'wagmi';
 
-const FundCreate = () => {
+const FundCreate = ({ close }: { close: () => void }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [matureDate, setMatureDate] = useState(
     new Date(startDate.getTime() + 1000 * 60 * 60 * 24)
@@ -80,6 +80,7 @@ const FundCreate = () => {
             className="focus:shadow-outline rounded py-2 px-4 font-bold focus:outline-none"
             onClick={() => {
               write?.();
+              close();
             }}
           >
             Create

@@ -167,16 +167,16 @@ const FundsSection = () => {
 
   const [viewState, setViewState] = useState(ViewState.ALL);
 
+  const [showCreateFundModal, setShowCreateFundModal] = useState(false);
+
   return (
     <>
-      <FundCreate />
-
       <div className="mt-16 mb-10 sm:flex sm:justify-between">
         <div className="sm:flex-5 flex-col space-y-4 sm:flex sm:flex-row sm:space-y-0 sm:space-x-12">
           <CustomButton
             title="Create Fund"
             type="solidBlue"
-            onClick={() => {}}
+            onClick={() => setShowCreateFundModal(true)}
           />
           <CustomButton title="Refresh" type="solidBlue" onClick={() => {}} />
           <CustomButton
@@ -239,6 +239,16 @@ const FundsSection = () => {
             />
           );
         })}
+
+        {showCreateFundModal && (
+          <div className="absolute w-full">
+            <FundCreate
+              close={() => {
+                setShowCreateFundModal(false);
+              }}
+            />
+          </div>
+        )}
       </div>
     </>
   );

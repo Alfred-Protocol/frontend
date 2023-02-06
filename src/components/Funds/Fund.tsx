@@ -104,6 +104,7 @@ const Fund = ({
         totalValueLocked={String(tvl)}
         startDate={startDate}
         matureDate={matureDate}
+        yieldPercentage={20.5}
       />
     </div>
   );

@@ -20,6 +20,7 @@ interface FundDetailsProps {
   matureDate: string;
   manager: string;
   description: string;
+  yieldPercentage: number;
 }
 
 const PairValue = ({
@@ -53,6 +54,7 @@ const FundDetails = ({
   startDate,
   manager,
   description,
+  yieldPercentage = 20.4,
 }: FundDetailsProps) => {
   const router = useRouter();
   return (
@@ -78,7 +80,7 @@ const FundDetails = ({
           <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
           <div className="flex items-center space-x-2">
             <p className="font-semibold sm:text-xl">Yield:</p>
-            <p className="text-greenGrowth">20.0%</p>
+            <p className="text-greenGrowth">{yieldPercentage}%</p>
           </div>
           <PairValue field="Start Date" value={startDate} />
           <PairValue

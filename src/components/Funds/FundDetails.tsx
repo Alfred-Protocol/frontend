@@ -75,11 +75,11 @@ const FundDetails = ({
           </p>
         </div>
         <div className="">
-          <PairValue
-            field="Current Value"
-            value={totalValueLocked + ' ETH'}
-            endComponent={<div className="text-greenGrowth">(+20.0%)</div>}
-          />
+          <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
+          <div className="flex items-center space-x-2">
+            <p className="font-semibold sm:text-xl">Yield:</p>
+            <p className="text-greenGrowth">20.0%</p>
+          </div>
           <PairValue field="Start Date" value={startDate} />
           <PairValue
             field="Mature Date"

@@ -6,6 +6,8 @@ import PageTitle from '../Layout/PageTitle';
 import DepositModal from './DepositModal';
 import SuccessModal from './SuccessModal';
 import WithdrawModal from './WithdrawModal';
+import AssetsHeader from './AssetsHeader';
+import AssetsList from './AssetsList';
 
 export type Fund = {
   fundName: string;
@@ -160,23 +162,12 @@ const AssetsSection = () => {
   };
 
   return (
-    <>
-      <PageTitle title="Assets" />
-      {showModal && renderModal()}
-
-      <div className="grid grid-cols-2 gap-6">
-        {mockData.map((fund) => {
-          return (
-            <Card
-              key={fund.fundName}
-              onClickDeposit={() => onClickDeposit(fund)}
-              onClickWithdraw={() => onClickWithdraw(fund)}
-              {...fund}
-            />
-          );
-        })}
+    <div>
+      <div className="flex flex-col items-center justify-center">
+        <AssetsHeader />
+        <AssetsList />
       </div>
-    </>
+    </div>
   );
 };
 export default AssetsSection;

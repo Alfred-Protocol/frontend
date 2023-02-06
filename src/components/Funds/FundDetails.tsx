@@ -5,6 +5,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import CustomButton from '../Common/CustomButton';
+import PairValue from '../Common/PairValues';
 import FundTable from '../FundDetails/FundTable';
 import Spinner from '../Layout/Spinner';
 import FundTableList from './FundTableList';
@@ -22,26 +23,6 @@ interface FundDetailsProps {
   description: string;
   yieldPercentage: number;
 }
-
-const PairValue = ({
-  field,
-  value,
-  endComponent,
-  style,
-}: {
-  field: string;
-  value: string;
-  endComponent?: any;
-  style?: any;
-}) => {
-  return (
-    <div className="flex items-center space-x-2" style={style}>
-      <p className="font-semibold sm:text-xl">{field}:</p>
-      <p>{value}</p>
-      {endComponent}
-    </div>
-  );
-};
 
 const FundDetails = ({
   fundAddress,

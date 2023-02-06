@@ -37,17 +37,20 @@ const FundTableList = ({ data = mockData }: { data?: any[] }) => {
         </thead>
         <tbody>
           {data.map(
-            ({
-              token1,
-              token2,
-              address,
-              min,
-              max,
-              feePercentage,
-              amount1,
-              amount2,
-            }) => (
-              <tr key={address}>
+            (
+              {
+                token1,
+                token2,
+                address,
+                min,
+                max,
+                feePercentage,
+                amount1,
+                amount2,
+              },
+              index
+            ) => (
+              <tr key={index}>
                 <td className="flex-wrap items-center sm:flex">
                   <PairImage logo1={undefined} logo2={undefined} />
                   {`${token1} / ${token2}`}

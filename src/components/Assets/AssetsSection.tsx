@@ -274,9 +274,10 @@ const AssetsSection = () => {
           netValue={3223.43}
         />
         <div className="flex w-full flex-col items-center space-y-10">
-          {mockData.map((data) => {
+          {mockData.map((data, idx) => {
             return (
               <AssetsDetail
+                key={idx}
                 lpPositions={data.positions}
                 amount0={data.amount0}
                 amount1={data.amount1}

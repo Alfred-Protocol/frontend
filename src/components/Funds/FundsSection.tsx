@@ -93,6 +93,7 @@ const FundsSection = () => {
               tvl={fund.tvl}
               tokenA={''}
               tokenB={''}
+              // @ts-ignore
               fundAddress={fund.fundAddress}
               lpPositions={fund.positions}
               fundName={fund.fundName}

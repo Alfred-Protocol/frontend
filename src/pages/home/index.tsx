@@ -1,5 +1,6 @@
-import AssetsSection from '@/components/Assets/AssetsSection';
+import FundsSection from '@/components/Funds/FundsSection';
 import Layout from '@/components/Layout/Layout';
+import PageTitle from '@/components/Layout/PageTitle';
 import Spinner from '@/components/Layout/Spinner';
 import { useEffect, useState } from 'react';
 
@@ -19,9 +20,8 @@ export default function FundsPage() {
   }
 
   return (
-    <Layout>
-      {/* <PageTitle title="Funds" /> */}
-      <AssetsSection />
+    <Layout className="sm:mx-20">
+      <FundsSection />
     </Layout>
   );
 }

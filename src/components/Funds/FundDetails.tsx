@@ -25,9 +25,11 @@ export interface FundDetailsProps {
   description: string;
   yieldPercentage: number;
   lpPositions: LPPosition[];
+  fundName: string;
 }
 
 const FundDetails = ({
+  fundName,
   fundAddress,
   isLoading,
   tokenA,
@@ -59,7 +61,7 @@ const FundDetails = ({
             className="absolute right-1 top-1"
             onClick={redirect}
           />
-          <p className="mb-2 text-2xl sm:text-3xl">Fund A</p>
+          <p className="mb-2 text-2xl sm:text-3xl">{fundName}</p>
           <p className="text-l mb-xs mt-6 sm:text-sm">Manager: {manager}</p>
           <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
             {description}

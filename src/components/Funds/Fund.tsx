@@ -15,6 +15,7 @@ interface FundProps {
   matureDate: string;
   tvl: number;
   lpPositions: LPPosition[];
+  fundName: string;
 }
 
 const Fund = ({
@@ -27,6 +28,7 @@ const Fund = ({
   matureDate,
   tvl,
   lpPositions,
+  fundName,
 }: FundProps) => {
   const isMobile = useMediaQuery(768);
 
@@ -97,6 +99,7 @@ const Fund = ({
       /> */}
       {/* for mock data */}
       <FundDetails
+        fundName={fundName}
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}
         manager={manager}

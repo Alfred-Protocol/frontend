@@ -26,6 +26,7 @@ const mockData = [
     startDate: '05/02/2023',
     matureDate: '12/02/2023',
     fundAddress: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
+    fundName: 'Fund A',
     positions: [
       {
         token0: 'WETH',
@@ -62,7 +63,7 @@ const mockData = [
     startDate: '01/01/2023',
     matureDate: '05/07/2023',
     fundAddress: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
-
+    fundName: 'Fund A',
     positions: [
       {
         token0: 'DAI',
@@ -99,7 +100,7 @@ const mockData = [
     startDate: '01/01/2023',
     matureDate: '05/07/2023',
     fundAddress: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
-
+    fundName: 'Fund A',
     positions: [
       {
         token0: 'DAI',
@@ -136,7 +137,7 @@ const mockData = [
     startDate: '01/01/2023',
     matureDate: '05/07/2023',
     fundAddress: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
-
+    fundName: 'Fund A',
     positions: [
       {
         token0: 'DAI',
@@ -243,6 +244,7 @@ const FundsSection = () => {
               tokenB={''}
               fundAddress={fund.fundAddress}
               lpPositions={fund.positions}
+              fundName={fund.fundName}
             />
           );
         })}

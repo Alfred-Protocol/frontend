@@ -29,7 +29,7 @@ const mockData = [
       {
         token0: 'WETH',
         token1: 'USDC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
         fee: 0.01,
         min: 1295.2,
@@ -40,7 +40,7 @@ const mockData = [
       {
         token0: 'WETH',
         token1: 'USDC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bcd',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
         fee: 0.01,
         min: 1295.2,
@@ -64,7 +64,7 @@ const mockData = [
       {
         token0: 'DAI',
         token1: 'WBTC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
         fee: 0.02,
         min: 1500,
@@ -75,7 +75,7 @@ const mockData = [
       {
         token0: 'DAI',
         token1: 'WBTC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
         fee: 0.02,
         min: 1500,
@@ -99,7 +99,7 @@ const mockData = [
       {
         token0: 'DAI',
         token1: 'WBTC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
         fee: 0.02,
         min: 1500,
@@ -110,7 +110,7 @@ const mockData = [
       {
         token0: 'DAI',
         token1: 'WBTC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
         fee: 0.02,
         min: 1500,
@@ -134,7 +134,7 @@ const mockData = [
       {
         token0: 'DAI',
         token1: 'WBTC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
         fee: 0.02,
         min: 1500,
@@ -145,7 +145,7 @@ const mockData = [
       {
         token0: 'DAI',
         token1: 'WBTC',
-        address: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
         address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
         fee: 0.02,
         min: 1500,

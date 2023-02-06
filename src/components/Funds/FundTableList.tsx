@@ -1,28 +1,33 @@
 import type { PositionData } from '@/pages/funds/[address]/manage';
+import type { LPPosition } from '@/types/type';
 import PairImage from '../Common/PairImage';
 
 const mockData = [
   {
-    token1: 'ETH',
-    token2: 'USDC',
-    feePercentage: 0.01,
-    min: 1543,
-    max: 1672,
-    amount1: 1,
-    amount2: 1843,
+    token0: 'DAI',
+    token1: 'WBTC',
+    address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+    address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+    fee: 0.02,
+    min: 1500,
+    max: 2500,
+    amount0: 2,
+    amount1: 2000,
   },
   {
-    token1: 'ETH',
-    token2: 'USDC',
-    feePercentage: 0.01,
-    min: 1543,
-    max: 1672,
-    amount1: 1,
-    amount2: 1843,
+    token0: 'DAI',
+    token1: 'WBTC',
+    address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+    address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+    fee: 0.02,
+    min: 1500,
+    max: 2500,
+    amount0: 2,
+    amount1: 2000,
   },
 ];
 
-const FundTableList = ({ data = mockData }: { data?: any[] }) => {
+const FundTableList = ({ data = mockData }: { data?: LPPosition[] }) => {
   return (
     <div className="rounded-lg shadow">
       <table className="w-full table-auto border-separate -translate-x-3 text-xs [border-spacing:0.75rem]">
@@ -37,27 +42,31 @@ const FundTableList = ({ data = mockData }: { data?: any[] }) => {
         </thead>
         <tbody>
           {data.map(
-            ({
-              token1,
-              token2,
-              address,
-              min,
-              max,
-              feePercentage,
-              amount1,
-              amount2,
-            }) => (
-              <tr key={address}>
+            (
+              {
+                token0,
+                token1,
+                address0,
+                address1,
+                fee,
+                min,
+                max,
+                amount0,
+                amount1,
+              },
+              idx
+            ) => (
+              <tr key={idx}>
                 <td className="flex-wrap items-center sm:flex">
                   <PairImage logo1={undefined} logo2={undefined} />
-                  {`${token1} / ${token2}`}
+                  {`${token0} / ${token1}`}
                 </td>
-                <td className="">{feePercentage}%</td>
+                <td className="">{fee}%</td>
                 <td className="">{min}</td>
                 <td className="">{max}</td>
                 <td className="flex-wrap items-center sm:flex">
                   <PairImage logo1={undefined} logo2={undefined} />
-                  {`${token1} / ${token2}`}
+                  {`${amount0} / ${amount1}`}
                 </td>
               </tr>
             )

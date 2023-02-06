@@ -7,32 +7,39 @@ import ETH from 'src/assets/ETH.png';
 
 import Image from 'next/image';
 import CustomButton from '../Common/CustomButton';
+import type { LPPosition } from '@/types/type';
 
-const AssetsList = ({
-  fundAddress,
-  isLoading,
-  tokenA,
-  tokenB,
-  tvlSymbol,
-  totalValueLocked = '32',
+interface AssetsDetailProps {
+  totalValueLocked: number;
+  matureDate: string;
+  startDate: string;
+  yieldPercentage: number;
+  logo1: any;
+  logo2: any;
+  fundName: string;
+  lpPositions: LPPosition[];
+}
+
+const AssetsDetail = ({
+  totalValueLocked = 32,
   matureDate = '05/03/2023',
   startDate = '01/02/2023',
-  manager,
-  description,
   yieldPercentage = 20.4,
   logo1 = ETH,
   logo2 = USDT,
-}: FundDetailsProps) => {
+  fundName = 'Fund A',
+  lpPositions = [],
+}: AssetsDetailProps) => {
   return (
     <div className="relative flex w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
       <CustomButton
         title="Add Position"
         type="solidPurple"
-        className="absolute right-5 top-0"
+        className="absolute right-5 top-5"
         onClick={() => {}}
       />
       <div className="mr-12 text-left">
-        <p className="mb-2 text-2xl sm:text-3xl">Fund A</p>
+        <p className="mb-2 text-2xl sm:text-3xl">{fundName}</p>
         <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
         <div className="flex items-center space-x-2">
           <p className="font-semibold sm:text-xl">Yield:</p>
@@ -67,11 +74,11 @@ const AssetsList = ({
           </div>
         </div>
         <div className="flex-1">
-          <FundTableList />
+          <FundTableList data={lpPositions} />
         </div>
       </div>
     </div>
   );
 };
 
-export default AssetsList;
+export default AssetsDetail;

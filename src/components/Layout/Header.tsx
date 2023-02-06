@@ -17,7 +17,7 @@ const links = [
 
 export default function Header() {
   const router = useRouter();
-
+  console.log('test ', router.asPath.split('/'));
   return (
     <Popover className="relative bg-transparent" as={'header'}>
       <div className="mx-auto px-6">
@@ -46,7 +46,9 @@ export default function Header() {
                 className="text-lg font-semibold text-purple-100 transition-all hover:text-purple-200 hover:underline"
                 style={{
                   textDecoration:
-                    router.asPath === href ? 'underline' : undefined,
+                    router.asPath.split('/')[1] === href.replace('/', '')
+                      ? 'underline'
+                      : undefined,
                   textUnderlineOffset: 3,
                 }}
               >

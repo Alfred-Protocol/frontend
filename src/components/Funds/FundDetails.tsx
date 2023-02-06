@@ -42,6 +42,10 @@ const FundDetails = ({
   lpPositions = [],
 }: FundDetailsProps) => {
   const router = useRouter();
+
+  const redirect = () => {
+    router.push(`funds/${fundAddress}`);
+  };
   return (
     <div
       className="min-h-40 bg-blackfill text-whiteFont"
@@ -53,7 +57,7 @@ const FundDetails = ({
             title="Deposit"
             type="solidPurple"
             className="absolute right-1 top-1"
-            onClick={() => {}}
+            onClick={redirect}
           />
           <p className="mb-2 text-2xl sm:text-3xl">Fund A</p>
           <p className="text-l mb-xs mt-6 sm:text-sm">Manager: {manager}</p>

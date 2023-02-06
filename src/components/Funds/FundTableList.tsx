@@ -25,7 +25,7 @@ const mockData = [
 const FundTableList = ({ data = mockData }: { data?: any[] }) => {
   return (
     <div className="rounded-lg shadow">
-      <table className="w-full table-auto border-separate text-xs [border-spacing:0.75rem]">
+      <table className="w-full table-auto border-separate -translate-x-3 text-xs [border-spacing:0.75rem]">
         <thead>
           <tr className="text-grayDar translate-y-0">
             <th className="pb-0">PAIR</th>

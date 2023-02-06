@@ -32,7 +32,7 @@ const FundTableList = ({ data = mockData }: { data?: LPPosition[] }) => {
     <div className="rounded-lg shadow">
       <table className="w-full table-auto border-separate -translate-x-3 text-xs [border-spacing:0.75rem]">
         <thead>
-          <tr className="text-grayDar translate-y-0">
+          <tr className="translate-y-0 text-grayDark">
             <th className="pb-0">PAIR</th>
             <th className="pb-0">FEE</th>
             <th className="pb-0">MIN</th>

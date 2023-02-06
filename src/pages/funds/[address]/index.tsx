@@ -38,7 +38,6 @@ const FundDetailsPage = () => {
         tokenBAmount={'1000.0'}
         manager={'0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'}
       />
-      <FundTable />
     </Layout>
   );
 };

@@ -10,7 +10,7 @@ import FundTable from '../FundDetails/FundTable';
 import Spinner from '../Layout/Spinner';
 import FundTableList from './FundTableList';
 
-interface FundDetailsProps {
+export interface FundDetailsProps {
   tokenA: string;
   tokenB: string;
   isLoading: boolean;

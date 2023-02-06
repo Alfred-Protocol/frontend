@@ -25,9 +25,9 @@ const mockData = [
 const FundTableList = ({ data = mockData }: { data?: any[] }) => {
   return (
     <div className="rounded-lg shadow">
-      <table className="w-full table-auto text-xs">
+      <table className="w-full table-auto border-separate text-xs [border-spacing:0.75rem]">
         <thead>
-          <tr className="translate-y-0 text-grayDark">
+          <tr className="text-grayDar translate-y-0">
             <th className="pb-0">PAIR</th>
             <th className="pb-0">FEE</th>
             <th className="pb-0">MIN</th>
@@ -55,7 +55,7 @@ const FundTableList = ({ data = mockData }: { data?: any[] }) => {
                 <td className="">{feePercentage}%</td>
                 <td className="">{min}</td>
                 <td className="">{max}</td>
-                <td className="flex-wrap sm:flex">
+                <td className="flex-wrap items-center sm:flex">
                   <PairImage logo1={undefined} logo2={undefined} />
                   {`${token1} / ${token2}`}
                 </td>

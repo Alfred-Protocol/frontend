@@ -235,6 +235,7 @@ const FundsSection = () => {
               tokenA={''}
               tokenB={''}
               fundAddress={'0x'}
+              lpPositions={fund.positions}
             />
           );
         })}

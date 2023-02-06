@@ -3,6 +3,7 @@ import { Address, useContractReads, useToken } from 'wagmi';
 import FundDetails from './FundDetails';
 import FundLiquidityGraph from './FundLiquidityGraph';
 import useMediaQuery from 'src/components/Common/useMediaQuery';
+import type { LPPosition } from '@/types/type';
 
 interface FundProps {
   tokenA: string;
@@ -13,6 +14,7 @@ interface FundProps {
   startDate: string;
   matureDate: string;
   tvl: number;
+  lpPositions: LPPosition[];
 }
 
 const Fund = ({
@@ -24,6 +26,7 @@ const Fund = ({
   startDate,
   matureDate,
   tvl,
+  lpPositions,
 }: FundProps) => {
   const isMobile = useMediaQuery(768);
 
@@ -105,6 +108,7 @@ const Fund = ({
         startDate={startDate}
         matureDate={matureDate}
         yieldPercentage={20.5}
+        lpPositions={lpPositions}
       />
     </div>
   );

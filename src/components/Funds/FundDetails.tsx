@@ -1,4 +1,5 @@
 import FundCreate from '@/pages/funds/create';
+import type { LPPosition } from '@/types/type';
 import {
   ArrowRightIcon,
   ArrowTopRightOnSquareIcon,
@@ -23,6 +24,7 @@ export interface FundDetailsProps {
   manager: string;
   description: string;
   yieldPercentage: number;
+  lpPositions: LPPosition[];
 }
 
 const FundDetails = ({
@@ -37,6 +39,7 @@ const FundDetails = ({
   manager,
   description,
   yieldPercentage = 20.4,
+  lpPositions = [],
 }: FundDetailsProps) => {
   const router = useRouter();
   return (
@@ -70,7 +73,7 @@ const FundDetails = ({
             value={matureDate}
             style={{ marginBottom: 5 }}
           />
-          <FundTableList />
+          <FundTableList data={lpPositions} />
         </div>
       </div>
     </div>

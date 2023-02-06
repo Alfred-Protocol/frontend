@@ -6,6 +6,7 @@ import USDT from 'src/assets/USDT.jpg';
 import ETH from 'src/assets/ETH.png';
 
 import Image from 'next/image';
+import CustomButton from '../Common/CustomButton';
 
 const AssetsList = ({
   fundAddress,
@@ -23,7 +24,13 @@ const AssetsList = ({
   logo2 = USDT,
 }: FundDetailsProps) => {
   return (
-    <div className="flex w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left text-white">
+    <div className="relative flex w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
+      <CustomButton
+        title="Add Position"
+        type="solidPurple"
+        className="absolute right-5 top-0"
+        onClick={() => {}}
+      />
       <div className="mr-12 text-left">
         <p className="mb-2 text-2xl sm:text-3xl">Fund A</p>
         <PairValue field="TVL" value={totalValueLocked + ' ETH'} />

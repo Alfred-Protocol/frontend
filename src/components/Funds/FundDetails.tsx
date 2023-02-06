@@ -1,3 +1,4 @@
+import FundCreate from '@/pages/funds/create';
 import {
   ArrowRightIcon,
   ArrowTopRightOnSquareIcon,

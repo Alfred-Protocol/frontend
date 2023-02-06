@@ -1,9 +1,11 @@
 import FundsFactory from '@/abi/FundsFactory';
+import FundCreate from '@/pages/funds/create';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { Address, useContractRead } from 'wagmi';
 import { ArrowDown, ArrowUp } from '../Common/Common';
 import CustomButton from '../Common/CustomButton';
+import FundTable from '../FundDetails/FundTable';
 import FancyButton from '../Layout/FancyButton';
 import NormalButton from '../Layout/NormalButton';
 import Fund from './Fund';
@@ -167,8 +169,15 @@ const FundsSection = () => {
 
   return (
     <>
+      <FundCreate />
+
       <div className="mt-16 mb-10 sm:flex sm:justify-between">
         <div className="sm:flex-5 flex-col space-y-4 sm:flex sm:flex-row sm:space-y-0 sm:space-x-12">
+          <CustomButton
+            title="Create Fund"
+            type="solidBlue"
+            onClick={() => {}}
+          />
           <CustomButton title="Refresh" type="solidBlue" onClick={() => {}} />
           <CustomButton
             title="Choose Start Date"

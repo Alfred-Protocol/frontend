@@ -42,10 +42,10 @@ const FundDetails = ({
         />
         <div className="flex w-full space-x-6">
           <FundDetailAssets
-            freeAmount0={3232}
-            freeAmount1={2132}
-            lockedAmount0={3242}
-            lockedAmount1={2323}
+            freeAmount0={3232.3}
+            freeAmount1={2132.3}
+            lockedAmount0={3242.2}
+            lockedAmount1={2323.4}
             logo0={undefined}
             logo1={undefined}
           />

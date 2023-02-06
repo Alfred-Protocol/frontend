@@ -268,10 +268,27 @@ const AssetsSection = () => {
   return (
     <div>
       <div className="flex flex-col items-center justify-center">
-        <AssetsHeader />
+        <AssetsHeader
+          managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
+          netDeposit={3232.3}
+          netValue={3223.43}
+        />
         <div className="flex w-full flex-col items-center space-y-10">
           {mockData.map((data) => {
-            return <AssetsDetail lpPositions={data.positions} />;
+            return (
+              <AssetsDetail
+                lpPositions={data.positions}
+                amount0={data.amount0}
+                amount1={data.amount1}
+                totalValueLocked={36}
+                startDate="02/05/2023"
+                matureDate="02/07/2023"
+                fundName={data.fundName}
+                logo1={undefined}
+                logo2={undefined}
+                yieldPercentage={30.2}
+              />
+            );
           })}
         </div>
       </div>

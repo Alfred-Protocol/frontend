@@ -18,6 +18,8 @@ interface AssetsDetailProps {
   logo2: any;
   fundName: string;
   lpPositions: LPPosition[];
+  amount0: number;
+  amount1: number;
 }
 
 const AssetsDetail = ({
@@ -29,6 +31,8 @@ const AssetsDetail = ({
   logo2 = USDT,
   fundName = 'Fund A',
   lpPositions = [],
+  amount0,
+  amount1,
 }: AssetsDetailProps) => {
   return (
     <div className="relative flex w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
@@ -61,7 +65,7 @@ const AssetsDetail = ({
               alt={''}
               style={{ borderRadius: 100 }}
             />
-            <p className="text-2xl">2.00</p>
+            <p className="text-2xl">{amount0.toLocaleString()}</p>
           </div>
           <div className="flex items-center justify-center space-x-2">
             <Image
@@ -70,7 +74,7 @@ const AssetsDetail = ({
               alt={''}
               style={{ borderRadius: 100 }}
             />
-            <p className="text-2xl">2,000.10</p>
+            <p className="text-2xl">{amount1.toLocaleString()}</p>
           </div>
         </div>
         <div className="flex-1">

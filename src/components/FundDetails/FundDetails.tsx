@@ -1,3 +1,4 @@
+import { LPPositionsMock } from '@/mockData/mockData';
 import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
 import AssetsDetail from '../Assets/AssetsDetail';
@@ -50,7 +51,7 @@ const FundDetails = ({
           />
           <FundDetailGraph />
         </div>
-        <Positions />
+        <Positions lpPositions={LPPositionsMock} />
       </div>
     </div>
   );

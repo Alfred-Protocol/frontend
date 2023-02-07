@@ -32,11 +32,6 @@ export default [
         name: '_matureDate',
         type: 'uint256',
       },
-      {
-        internalType: 'string',
-        name: '_fundName',
-        type: 'string',
-      },
     ],
     name: 'createNewFund',
     outputs: [],

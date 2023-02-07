@@ -1,4 +1,4 @@
-import FundCreate from '@/pages/funds/create';
+import FundCreateModal from '@/components/Funds/FundCreateModal';
 import type { LPPosition } from '@/types/type';
 import truncateString from '@/utils/truncateString';
 import {
@@ -66,7 +66,8 @@ const FundDetails = ({
         </div>
         <div>
           <p className="text-l mb-xs sm:text-md">
-            Manager: <span className='slashed-zero'>{truncateString(manager)}</span>
+            Manager:{' '}
+            <span className="slashed-zero">{truncateString(manager)}</span>
           </p>
           <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
             {description}

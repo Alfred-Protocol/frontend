@@ -37,7 +37,7 @@ const FundTableList = ({ data = mockData }: { data?: LPPosition[] }) => {
             <th className="pb-0">FEE</th>
             <th className="pb-0">MIN</th>
             <th className="pb-0">MAX</th>
-            <th className="pb-0">AMOUNTs</th>
+            <th className="pb-0">AMOUNTS</th>
           </tr>
         </thead>
         <tbody>

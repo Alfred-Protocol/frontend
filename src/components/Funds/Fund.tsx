@@ -2,15 +2,36 @@ import Funds from '@/abi/Funds';
 import { Address, useContractReads, useToken } from 'wagmi';
 import FundDetails from './FundDetails';
 import FundLiquidityGraph from './FundLiquidityGraph';
+import useMediaQuery from 'src/components/Common/useMediaQuery';
+import type { LPPosition } from '@/types/type';
 
 interface FundProps {
   tokenA: string;
   tokenB: string;
   manager: string; // TODO: retrieve from smart contract
   fundAddress: Address;
+  description: string;
+  startDate: string;
+  matureDate: string;
+  tvl: number;
+  lpPositions: LPPosition[];
+  fundName: string;
 }
 
-const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
+const Fund = ({
+  fundAddress,
+  manager,
+  tokenA,
+  tokenB,
+  description,
+  startDate,
+  matureDate,
+  tvl,
+  lpPositions,
+  fundName,
+}: FundProps) => {
+  const isMobile = useMediaQuery(768);
+
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [
@@ -45,13 +66,19 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
   });
 
   const { data: tokenData, isLoading: tokenIsLoading } = useToken({
-    address: (data ? data[3].toString() : '') as Address,
+    address: (data && data[3] ? data[3].toString() : '') as Address,
     enabled: data !== undefined,
   });
 
   return (
-    <div className="bg-slate-100 py-4 px-4 flex-1 rounded-lg shadow text-left flex basis-[50%]">
-      <FundDetails
+    <div
+      style={{
+        minHeight: isMobile ? 300 : 470,
+        minWidth: isMobile ? 100 : 460,
+      }}
+      className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow sm:py-8 sm:px-8"
+    >
+      {/* <FundDetails
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}
         manager={data ? data[3].toString() : 'No manager found'}
@@ -69,10 +96,23 @@ const Fund = ({ fundAddress, manager, tokenA, tokenB }: FundProps) => {
             ? new Date(data[2]?.toNumber()).toLocaleDateString()
             : 'No date found'
         }
+      /> */}
+      {/* for mock data */}
+      <FundDetails
+        fundName={fundName}
+        fundAddress={fundAddress}
+        isLoading={isLoading || tokenIsLoading}
+        manager={manager}
+        tokenA={tokenA}
+        tokenB={tokenB}
+        description={description}
+        tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}
+        totalValueLocked={String(tvl)}
+        startDate={startDate}
+        matureDate={matureDate}
+        yieldPercentage={20.5}
+        lpPositions={lpPositions}
       />
-      <div className="flex h-full flex-1">
-        <FundLiquidityGraph />
-      </div>
     </div>
   );
 };

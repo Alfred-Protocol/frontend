@@ -6,6 +6,8 @@ import PageTitle from '../Layout/PageTitle';
 import DepositModal from './DepositModal';
 import SuccessModal from './SuccessModal';
 import WithdrawModal from './WithdrawModal';
+import AssetsHeader from './AssetsHeader';
+import AssetsDetail from './AssetsDetail';
 
 export type Fund = {
   fundName: string;
@@ -16,7 +18,7 @@ export type Fund = {
   withdrawEnable: boolean;
 };
 
-const mockData: Fund[] = [
+const mockData = [
   {
     fundName: 'Fund A',
     tvl: 234,
@@ -27,6 +29,32 @@ const mockData: Fund[] = [
     ],
     depositEnable: true,
     withdrawEnable: true,
+    amount0: 400,
+    amount1: 500,
+    positions: [
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+      {
+        token0: 'DAIZ',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+    ],
   },
   {
     fundName: 'Fund B',
@@ -38,6 +66,32 @@ const mockData: Fund[] = [
     ],
     depositEnable: true,
     withdrawEnable: true,
+    amount0: 400,
+    amount1: 500,
+    positions: [
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+    ],
   },
   {
     fundName: 'Fund C',
@@ -49,6 +103,32 @@ const mockData: Fund[] = [
     ],
     depositEnable: true,
     withdrawEnable: true,
+    amount0: 400,
+    amount1: 500,
+    positions: [
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+    ],
   },
   {
     fundName: 'Fund D',
@@ -60,6 +140,32 @@ const mockData: Fund[] = [
     ],
     depositEnable: true,
     withdrawEnable: true,
+    amount0: 400,
+    amount1: 500,
+    positions: [
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+      {
+        token0: 'DAI',
+        token1: 'WBTC',
+        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
+        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
+        fee: 0.02,
+        min: 1500,
+        max: 2500,
+        amount0: 2,
+        amount1: 2000,
+      },
+    ],
   },
 ];
 
@@ -160,23 +266,34 @@ const AssetsSection = () => {
   };
 
   return (
-    <>
-      <PageTitle title="Assets" />
-      {showModal && renderModal()}
-
-      <div className="grid grid-cols-2 gap-6">
-        {mockData.map((fund) => {
-          return (
-            <Card
-              key={fund.fundName}
-              onClickDeposit={() => onClickDeposit(fund)}
-              onClickWithdraw={() => onClickWithdraw(fund)}
-              {...fund}
-            />
-          );
-        })}
+    <div>
+      <div className="flex flex-col items-center justify-center">
+        <AssetsHeader
+          managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
+          netDeposit={3232.3}
+          netValue={3223.43}
+        />
+        <div className="flex w-full flex-col items-center space-y-10">
+          {mockData.map((data, idx) => {
+            return (
+              <AssetsDetail
+                key={idx}
+                lpPositions={data.positions}
+                amount0={data.amount0}
+                amount1={data.amount1}
+                totalValueLocked={36}
+                startDate="02/05/2023"
+                matureDate="02/07/2023"
+                fundName={data.fundName}
+                logo1={undefined}
+                logo2={undefined}
+                yieldPercentage={30.2}
+              />
+            );
+          })}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 export default AssetsSection;

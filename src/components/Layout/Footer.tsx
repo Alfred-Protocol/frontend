@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <footer className="h-12 bg-purple-900 px-6 flex items-center">
-      <span className="text-purple-100 md:text-md text-sm">
+    <footer className="flex h-12 items-center  px-6">
+      <span className="md:text-md text-sm text-purple-100">
         ©️ 2023 Alfred Protocol. All rights reserved.
       </span>
     </footer>

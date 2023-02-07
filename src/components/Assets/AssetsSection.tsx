@@ -8,6 +8,7 @@ import SuccessModal from './SuccessModal';
 import WithdrawModal from './WithdrawModal';
 import AssetsHeader from './AssetsHeader';
 import AssetsDetail from './AssetsDetail';
+import { LPPositionsMock } from '../../mockData/mockData';
 
 export type Fund = {
   fundName: string;
@@ -31,30 +32,7 @@ const mockData = [
     withdrawEnable: true,
     amount0: 400,
     amount1: 500,
-    positions: [
-      {
-        token0: 'DAI',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-      {
-        token0: 'DAIZ',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-    ],
+    positions: LPPositionsMock,
   },
   {
     fundName: 'Fund B',
@@ -68,30 +46,7 @@ const mockData = [
     withdrawEnable: true,
     amount0: 400,
     amount1: 500,
-    positions: [
-      {
-        token0: 'DAI',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-      {
-        token0: 'DAI',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-    ],
+    positions: LPPositionsMock,
   },
   {
     fundName: 'Fund C',
@@ -105,30 +60,7 @@ const mockData = [
     withdrawEnable: true,
     amount0: 400,
     amount1: 500,
-    positions: [
-      {
-        token0: 'DAI',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-      {
-        token0: 'DAI',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-    ],
+    positions: LPPositionsMock,
   },
   {
     fundName: 'Fund D',
@@ -142,30 +74,7 @@ const mockData = [
     withdrawEnable: true,
     amount0: 400,
     amount1: 500,
-    positions: [
-      {
-        token0: 'DAI',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-      {
-        token0: 'DAI',
-        token1: 'WBTC',
-        address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-        address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-        fee: 0.02,
-        min: 1500,
-        max: 2500,
-        amount0: 2,
-        amount1: 2000,
-      },
-    ],
+    positions: LPPositionsMock,
   },
 ];
 

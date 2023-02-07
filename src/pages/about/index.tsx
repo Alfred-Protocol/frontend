@@ -13,21 +13,11 @@ const AboutPage = () => {
   return (
     <Layout>
       <div className="flex w-full justify-center">
-        <div className="mt-10  flex w-3/5 flex-col space-y-10">
-          <div className="flex items-center space-x-10">
-            <div className="flex-1">
-              <SelectPairModal />
-            </div>
-            <div className="flex-1">
-              <LiquidityPositionChart />
-            </div>
-          </div>
-          <div>
-            <EstimatedFees />
-          </div>
-          <div>
-            <Setting />
-          </div>
+        <div className="mt-10 flex w-4/5 flex-col space-y-10">
+          <SelectPairModal />
+          <LiquidityPositionChart />
+          <EstimatedFees />
+          <Setting />
           <CreatePosition />
         </div>
       </div>

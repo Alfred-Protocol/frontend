@@ -58,17 +58,15 @@ const ModalStyle = {
     background: 'rgb(22, 22, 22)',
   },
 };
-const Container = styled.div`
-  max-width: 370px;
-  padding: 15px;
+// const Container = styled.div`
+//   display: flex;
+//   padding: 15px;
 
-  @media only screen and (max-width: 400px) {
-    padding: 10px;
-  }
-`;
-const SelectNetworkContainer = styled.div`
-  margin-bottom: 15px;
-`;
+//   @media only screen and (max-width: 400px) {
+//     padding: 10px;
+//   }
+// `;
+const SelectNetworkContainer = styled.div``;
 const SelectPairContainer = styled.div`
   display: grid;
   grid-gap: 10px;
@@ -108,6 +106,7 @@ const Tier = styled.div`
   padding: 6px;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 120px;
 
   & h4 {
     color: #fff;
@@ -292,18 +291,22 @@ const SelectPairModal = () => {
       return;
     }
 
-    const network = getQueryParam('network');
-    if (network) {
-      const selectedNetwork = NETWORKS.find((n) => n.id === network);
-      if (selectedNetwork) {
-        setSelectedNetwork(selectedNetwork);
-        setCurrentNetwork(selectedNetwork);
-      }
-    } else {
-      setSelectedNetwork(NETWORKS[0]);
-      setQueryParam('network', NETWORKS[0].id);
-      setCurrentNetwork(NETWORKS[0]);
-    }
+    // const network = getQueryParam('network');
+    // if (network) {
+    //   const selectedNetwork = NETWORKS.find((n) => n.id === network);
+    //   if (selectedNetwork) {
+    //     setSelectedNetwork(selectedNetwork);
+    //     setCurrentNetwork(selectedNetwork);
+    //   }
+    // } else {
+    //   setSelectedNetwork(NETWORKS[0]);
+    //   setQueryParam('network', NETWORKS[0].id);
+    //   setCurrentNetwork(NETWORKS[0]);
+    // }
+
+    setSelectedNetwork(NETWORKS[0]);
+    // setQueryParam('network', NETWORKS[0].id);
+    setCurrentNetwork(NETWORKS[0]);
 
     const token0 = getQueryParam('token0');
     const token1 = getQueryParam('token1');
@@ -367,6 +370,8 @@ const SelectPairModal = () => {
     ) {
       return;
     }
+
+    setShowSelectTokenPage(false);
     setIsSubmitLoading(true);
 
     const [token0, token1] = sortTokens(selectedTokens[0], selectedTokens[1]);
@@ -426,7 +431,7 @@ const SelectPairModal = () => {
     if (maxLiquidity !== 0) {
       setSelectedPool((pool) => {
         const newPool = pool || maxPool;
-        setQueryParam('feeTier', newPool.feeTier);
+        // setQueryParam('feeTier', newPool.feeTier);
         return newPool;
       });
     }
@@ -477,18 +482,19 @@ const SelectPairModal = () => {
     setSelectedTokenIndex(null);
     setShowSelectTokenPage(false);
 
-    setQueryParam(`token${selectedTokenIndex}`, token.id);
+    // setQueryParam(`token${selectedTokenIndex}`, token.id);
   };
 
+  console.log('showSelectTokenPage ', showSelectTokenPage);
   return (
     <>
-      {/* <Modal
+      <Modal
         style={ModalStyle}
-        isOpen={modalContext.state.isSelectPairModalOpen}
+        isOpen={showSelectNetworkPage}
+        onRequestClose={() => setShowSelectNetworkPage(false)}
         contentLabel="Example Modal"
         ariaHideApp={false}
-      > */}
-      {showSelectNetworkPage && (
+      >
         <>
           <GoBack>
             <div
@@ -522,7 +528,7 @@ const SelectPairModal = () => {
                     setShowSelectNetworkPage(false);
                     setPools([]);
 
-                    setQueryParam('network', network.id);
+                    // setQueryParam('network', network.id);
                     deleteQueryParam('token0');
                     deleteQueryParam('token1');
                     deleteQueryParam('feeTier');
@@ -541,8 +547,15 @@ const SelectPairModal = () => {
             );
           })}
         </>
-      )}
-      {showSelectTokenPage && (
+      </Modal>
+
+      <Modal
+        style={ModalStyle}
+        isOpen={showSelectTokenPage}
+        onRequestClose={() => setShowSelectTokenPage(false)}
+        contentLabel="Example Modal"
+        ariaHideApp={false}
+      >
         <>
           <GoBack>
             <div
@@ -563,39 +576,42 @@ const SelectPairModal = () => {
             tokens={appContext.state.tokenList}
           />
         </>
-      )}
-      {!showSelectTokenPage && !showSelectNetworkPage && (
-        <div className="relative flex rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
-          <Container>
-            <Heading>Select Network</Heading>
-            <SelectNetworkContainer>
-              <TokenSelect
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    setShowSelectNetworkPage(true);
-                  }
-                }}
-              >
-                {!selectedNetwork && <span>Select a network</span>}
-                {selectedNetwork !== null && (
-                  <span>
-                    <img
-                      src={selectedNetwork.logoURI}
-                      alt={selectedNetwork.name}
-                    />
-                    {selectedNetwork.name}
-                  </span>
-                )}
-                <span>
-                  <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                </span>
-              </TokenSelect>
-            </SelectNetworkContainer>
+      </Modal>
 
+      <div className="relative flex justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
+        <div className="flex items-center space-x-10">
+          <div className="text-center">
+            <Heading>Select Network</Heading>
+            <div
+              onClick={() => {
+                if (!isSubmitLoading) {
+                  setShowSelectNetworkPage(true);
+                }
+              }}
+            >
+              {!selectedNetwork && <span>Select a network</span>}
+              {selectedNetwork !== null && (
+                <div className="align-center flex w-36 cursor-pointer justify-center space-x-2 rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight">
+                  <img
+                    src={selectedNetwork.logoURI}
+                    alt={selectedNetwork.name}
+                    width={26}
+                    height={26}
+                    className="rounded-3xl"
+                  />
+                  <p>{selectedNetwork.name}</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="text-center">
             <Heading>Select Pair</Heading>
-            <SelectPairContainer>
-              <TokenSelect
+            <div className="flex space-x-3">
+              <div
+                className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight"
                 onClick={() => {
+                  console.log(' isSubmitLoading ', isSubmitLoading);
                   if (!isSubmitLoading) {
                     setSelectedPool(null);
                     deleteQueryParam('feeTier');
@@ -604,21 +620,25 @@ const SelectPairModal = () => {
                   }
                 }}
               >
-                {!selectedTokens[0] && <span>Select a token</span>}
+                {!selectedTokens[0] && <div>Select token 1</div>}
                 {selectedTokens[0] && (
-                  <span>
+                  <div className="flex space-x-2">
                     <img
                       src={selectedTokens[0].logoURI}
                       alt={selectedTokens[0].name}
+                      width={26}
+                      height={26}
+                      className="rounded-3xl"
                     />
-                    {selectedTokens[0].symbol}
-                  </span>
+                    <div>{selectedTokens[0].symbol}</div>
+                  </div>
                 )}
                 <span>
                   <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                 </span>
-              </TokenSelect>
-              <TokenSelect
+              </div>
+              <div
+                className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight py-2 hover:bg-purpleLight"
                 onClick={() => {
                   if (!isSubmitLoading) {
                     setSelectedPool(null);
@@ -628,24 +648,29 @@ const SelectPairModal = () => {
                   }
                 }}
               >
-                {!selectedTokens[1] && <span>Select a token</span>}
+                {!selectedTokens[1] && <p>Select token 2</p>}
                 {selectedTokens[1] && (
-                  <span>
+                  <div className="flex space-x-2">
                     <img
                       src={selectedTokens[1].logoURI}
                       alt={selectedTokens[1].name}
+                      width={26}
+                      height={26}
+                      className="rounded-3xl"
                     />
-                    {selectedTokens[1].symbol}
-                  </span>
+                    <div> {selectedTokens[1].symbol}</div>
+                  </div>
                 )}
                 <span>
                   <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                 </span>
-              </TokenSelect>
-            </SelectPairContainer>
+              </div>
+            </div>
+          </div>
 
+          <div className="text-center">
             <Heading>Select Fee Tier</Heading>
-            <FeeTiersContainer>
+            <div className="flex space-x-2">
               <Tier
                 style={getFeeTierStyle('100')}
                 onClick={() => {
@@ -653,7 +678,7 @@ const SelectPairModal = () => {
                     const tier = getFeeTier('100');
                     if (tier) {
                       setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+                      // setQueryParam('feeTier', tier.feeTier);
                     }
                   }
                 }}
@@ -671,7 +696,7 @@ const SelectPairModal = () => {
                     const tier = getFeeTier('500');
                     if (tier) {
                       setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+                      // setQueryParam('feeTier', tier.feeTier);
                     }
                   }
                 }}
@@ -689,7 +714,7 @@ const SelectPairModal = () => {
                     const tier = getFeeTier('3000');
                     if (tier) {
                       setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+                      // setQueryParam('feeTier', tier.feeTier);
                     }
                   }
                 }}
@@ -707,7 +732,7 @@ const SelectPairModal = () => {
                     const tier = getFeeTier('10000');
                     if (tier) {
                       setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+                      // setQueryParam('feeTier', tier.feeTier);
                     }
                   }
                 }}
@@ -718,33 +743,33 @@ const SelectPairModal = () => {
                 <span>Best for exotic pairs.</span>
                 <div>{getFeeTierPercentage('10000')}</div>
               </Tier>
-            </FeeTiersContainer>
-
-            <PrimaryBlockButton
-              onClick={handleSubmit}
-              disabled={isFormDisabled}
-              style={
-                isFormDisabled
-                  ? {
-                      background: 'rgba(255, 255, 255, 0.1)',
-                      cursor: 'not-allowed',
-                    }
-                  : {}
-              }
-            >
-              {isSubmitLoading && (
-                <ReactLoading
-                  type="spin"
-                  color="rgba(34, 114, 229, 1)"
-                  height={18}
-                  width={18}
-                />
-              )}
-              {!isSubmitLoading && <span>Calculate</span>}
-            </PrimaryBlockButton>
-          </Container>
+            </div>
+          </div>
+          <PrimaryBlockButton
+            onClick={handleSubmit}
+            disabled={isFormDisabled}
+            style={
+              isFormDisabled
+                ? {
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    cursor: 'not-allowed',
+                  }
+                : {}
+            }
+          >
+            {isSubmitLoading && (
+              <ReactLoading
+                type="spin"
+                color="rgba(34, 114, 229, 1)"
+                height={18}
+                width={18}
+              />
+            )}
+            {!isSubmitLoading && <span>Calculate</span>}
+          </PrimaryBlockButton>
         </div>
-      )}
+      </div>
+
       {/* </Modal> */}
     </>
   );

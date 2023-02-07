@@ -1,5 +1,5 @@
-import styled, { keyframes } from "styled-components";
-import { ScreenWidth } from "../../utils/styled";
+import styled, { keyframes } from 'styled-components';
+import { ScreenWidth } from '../../utils/styled';
 
 // Section: Button
 const ButtonStyle = styled.button`
@@ -94,7 +94,6 @@ export const PrimaryButton = styled(ButtonStyle)`
 `;
 export const PrimaryBlockButton = styled(PrimaryButton)`
   color: white;
-  width: 100%;
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -121,7 +120,7 @@ export const Br = styled.div`
   height: 20px;
 `;
 export const Dollar = styled.span`
-  font-family: "Gowun Batang", serif !important;
+  font-family: 'Gowun Batang', serif !important;
 `;
 
 // Section: Table

@@ -32,6 +32,11 @@ export default [
         name: '_matureDate',
         type: 'uint256',
       },
+      {
+        internalType: 'string',
+        name: '_fundName',
+        type: 'string',
+      },
     ],
     name: 'createNewFund',
     outputs: [],
@@ -100,9 +105,9 @@ export default [
     name: 'getFundsByManager',
     outputs: [
       {
-        internalType: 'contract Funds',
+        internalType: 'contract Funds[]',
         name: '',
-        type: 'address',
+        type: 'address[]',
       },
     ],
     stateMutability: 'view',
@@ -115,8 +120,13 @@ export default [
         name: '',
         type: 'address',
       },
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
     ],
-    name: 'managerToFundsAddress',
+    name: 'managerToFundsAddresses',
     outputs: [
       {
         internalType: 'contract Funds',

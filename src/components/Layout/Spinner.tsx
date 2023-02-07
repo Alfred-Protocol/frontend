@@ -1,8 +1,15 @@
+import { twMerge } from 'tailwind-merge';
+
 const Spinner = ({ className = '' }: { className?: string }) => {
   return (
     <div className="inline">
       <div
-        className={`animate-spin inline-block w-6 h-6 border-4 rounded-full align-[-0.125rem] border-purple-800 border-r-transparent ${className}`}
+        className={
+          (twMerge(
+            `inline-block h-6 w-6 animate-spin rounded-full border-4 border-purple-800 border-r-transparent align-[-0.125rem]`
+          ),
+          className)
+        }
         role="status"
       >
         <span className="hidden">Loading...</span>

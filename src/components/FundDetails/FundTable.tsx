@@ -1,4 +1,5 @@
 import type { PositionData } from '@/pages/funds/[address]/manage';
+import { twMerge } from 'tailwind-merge';
 
 const mockData: PositionData[] = [
   {
@@ -25,8 +26,8 @@ const mockData: PositionData[] = [
 
 const FundTable = ({ data = mockData }: { data?: PositionData[] }) => {
   return (
-    <div className="mt-20 bg-slate-100 px-6 py-6 rounded-lg shadow">
-      <table className="table-auto w-full">
+    <div className="mt-20 rounded-lg bg-slate-100 px-6 py-6 shadow">
+      <table className="w-full table-auto">
         <thead>
           <tr className="border-b-2 border-purple-200">
             <th className="pb-2">Created</th>
@@ -59,16 +60,18 @@ const FundTable = ({ data = mockData }: { data?: PositionData[] }) => {
                 <td className="py-2">{amount1}</td>
                 <td className="py-2">{amount2}</td>
                 <td
-                  className={`py-2 font-bold ${
+                  className={twMerge(
+                    `py-2 font-bold`,
                     value1 > amount1 ? 'text-green-700' : 'text-red-700'
-                  }`}
+                  )}
                 >
                   {value1}
                 </td>
                 <td
-                  className={`py-2 font-bold ${
-                    value2 > amount2 ? 'text-green-700' : 'text-red-700'
-                  }`}
+                  className={twMerge(
+                    `py-2 font-bold`,
+                    value1 > amount1 ? 'text-green-700' : 'text-red-700'
+                  )}
                 >
                   {value2}
                 </td>

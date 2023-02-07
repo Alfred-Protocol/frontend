@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface NormalButtonProps
   extends DetailedHTMLProps<
@@ -18,11 +19,13 @@ const NormalButton = ({
   return (
     <button
       type="button"
-      className={`rounded-lg px-6 py-2 md:px-6 md:py-2 font-semibold md:text-xl text-md text-purple-100 transition-all ${
+      className={twMerge(
+        `text-md rounded-lg px-6 py-2 font-semibold text-purple-100 transition-all md:px-6 md:py-2 md:text-xl`,
         active
-          ? 'bg-purple-700 text-purple-100 hover:bg-purple-800 underline'
-          : 'bg-purple-600 hover:bg-purple-700'
-      } ${className}`}
+          ? 'bg-purple-700 text-purple-100 underline hover:bg-purple-800'
+          : 'bg-purple-600 hover:bg-purple-700',
+        className
+      )}
       {...props}
     >
       {children}

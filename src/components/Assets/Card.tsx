@@ -26,8 +26,8 @@ const AssetCard = ({
 }: Props) => {
   const router = useRouter();
   return (
-    <div className="bg-white py-4 px-4 rounded-lg text-left">
-      <h3 className="font-bold text-purple-900 text-xl">{fundName}</h3>
+    <div className="rounded-lg bg-white py-4 px-4 text-left">
+      <h3 className="text-xl font-bold text-purple-900">{fundName}</h3>
       <p>
         <span className="font-semibold">TVL: </span>
         <span>
@@ -36,13 +36,13 @@ const AssetCard = ({
         </span>
       </p>
       <p className="flex">
-        <span className="font-semibold mr-2">Manager: </span>
+        <span className="mr-2 font-semibold">Manager: </span>
         <span>
           {manager}
           <ArrowTopRightOnSquareIcon
             height={20}
             width={20}
-            className="inline pb-1 ml-2 cursor-pointer stroke-2 hover:stroke-purple-500 transition-all"
+            className="ml-2 inline cursor-pointer stroke-2 pb-1 transition-all hover:stroke-purple-500"
             onClick={() =>
               router.push(
                 'https://polygonscan.com/address/0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'
@@ -66,7 +66,7 @@ const AssetCard = ({
       <div className="mt-2">
         {depositEnable && (
           <button
-            className="bg-transparent hover:bg-green-400 bg-green-500 text-white font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded mr-3"
+            className="mr-3 rounded border border-green-500 bg-transparent bg-green-500 py-2 px-4 font-semibold text-white hover:border-transparent hover:bg-green-400 hover:text-white"
             onClick={onClickDeposit}
           >
             Deposit
@@ -74,7 +74,7 @@ const AssetCard = ({
         )}
         {withdrawEnable && (
           <button
-            className="bg-transparent hover:bg-red-300 bg-red-500 text-white font-semibold hover:text-white py-2 px-4 border border-red-400 hover:border-transparent rounded"
+            className="rounded border border-red-400 bg-transparent bg-red-500 py-2 px-4 font-semibold text-white hover:border-transparent hover:bg-red-300 hover:text-white"
             onClick={onClickWithdraw}
           >
             Withdraw

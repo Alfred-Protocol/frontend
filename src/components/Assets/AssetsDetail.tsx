@@ -38,7 +38,7 @@ const AssetsDetail = ({
     <div className="relative flex w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
       <CustomButton
         title="Add Position"
-        type="solidPurple"
+        theme="solidPurple"
         className="absolute right-5 top-5"
         onClick={() => {}}
       />

@@ -40,23 +40,23 @@ const WithdrawModal = ({
         className="absolute left-1/2 -translate-x-1/2 -translate-y-8"
         style={{ minWidth: 600 }}
       >
-        <div className="relative w-full h-full max-w-2xl md:h-auto">
+        <div className="relative h-full w-full max-w-2xl md:h-auto">
           {/* <!-- Modal content --> */}
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div className="relative rounded-lg bg-white shadow dark:bg-gray-700">
             {/* <!-- Modal header --> */}
-            <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+            <div className="flex items-start justify-between rounded-t border-b p-4 dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Withdraw
               </h3>
               <button
                 type="button"
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-hide="defaultModal"
                 onClick={closeModal}
               >
                 <svg
                   aria-hidden="true"
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const WithdrawModal = ({
               </button>
             </div>
             {/* <!-- Modal body --> */}
-            <div className="p-6 space-y-6">
+            <div className="space-y-6 p-6">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Fund Name: {fund.fundName}
               </h3>
@@ -89,7 +89,7 @@ const WithdrawModal = ({
                 );
               })}
               <div className="flex">
-                <p className="text-left text-base leading-relaxed text-gray-500 dark:text-gray-400 mr-2">
+                <p className="mr-2 text-left text-base leading-relaxed text-gray-500 dark:text-gray-400">
                   Withdrawable amount:
                 </p>
                 <p className="text-left text-base leading-relaxed text-green-500 dark:text-gray-400">
@@ -102,14 +102,14 @@ const WithdrawModal = ({
                   type="text"
                   id="first_name"
                   onChange={onChangeText}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   placeholder="Enter Asset"
                   required
                   style={{
                     borderColor: exceedMaxAmount ? 'red' : 'transparent',
                   }}
                 />
-                <p className="text-left text-base leading-relaxed text-gray-500 dark:text-gray-400 pl-2">
+                <p className="pl-2 text-left text-base leading-relaxed text-gray-500 dark:text-gray-400">
                   USDC
                 </p>
               </div>
@@ -122,11 +122,11 @@ const WithdrawModal = ({
             </div>
 
             {/* <!-- Modal footer --> */}
-            <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <div className="flex items-center space-x-2 rounded-b border-t border-gray-200 p-6 dark:border-gray-600">
               <button
                 data-modal-hide="defaultModal"
                 type="button"
-                className="text-white disabled:bg-gray-700 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:bg-gray-700 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={continueDeposit}
                 disabled={exceedMaxAmount ? true : false}
                 // style={{
@@ -138,7 +138,7 @@ const WithdrawModal = ({
               <button
                 data-modal-hide="defaultModal"
                 type="button"
-                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-600"
                 onClick={closeModal}
               >
                 Cancel

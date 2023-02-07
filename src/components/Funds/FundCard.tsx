@@ -6,30 +6,10 @@ import useMediaQuery from 'src/components/Common/useMediaQuery';
 import type { LPPosition } from '@/types/type';
 
 interface FundProps {
-  tokenA: string;
-  tokenB: string;
-  manager: string; // TODO: retrieve from smart contract
   fundAddress: Address;
-  description: string;
-  startDate: string;
-  matureDate: string;
-  tvl: number;
-  lpPositions: LPPosition[];
-  fundName: string;
 }
 
-const Fund = ({
-  fundAddress,
-  manager,
-  tokenA,
-  tokenB,
-  description,
-  startDate,
-  matureDate,
-  tvl,
-  lpPositions,
-  fundName,
-}: FundProps) => {
+const FundCard = ({ fundAddress }: FundProps) => {
   const isMobile = useMediaQuery(768);
 
   const { data, isLoading } = useContractReads({
@@ -60,15 +40,22 @@ const Fund = ({
         abi: Funds,
         functionName: 'fundManager',
       },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fundName',
+      },
     ],
     cacheTime: 60 * 1000, // 1min
     enabled: !!fundAddress,
   });
 
   const { data: tokenData, isLoading: tokenIsLoading } = useToken({
-    address: (data && data[3] ? data[3].toString() : '') as Address,
-    enabled: data !== undefined,
+    address: data?.length && data[3] && (data[3].toString() as Address),
+    enabled: !!(data?.length && data[3]),
   });
+
+  console.log(data, tokenData);
 
   return (
     <div
@@ -78,27 +65,37 @@ const Fund = ({
       }}
       className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow sm:py-8 sm:px-8"
     >
-      {/* <FundDetails
+      <FundDetails
         fundAddress={fundAddress}
+        description={''}
+        fundName={
+          data?.length && data[5] ? data[5].toString() : 'No fund found'
+        }
+        lpPositions={[]}
+        yieldPercentage={1}
         isLoading={isLoading || tokenIsLoading}
-        manager={data ? data[3].toString() : 'No manager found'}
-        tokenA={tokenA}
-        tokenB={tokenB}
+        manager={
+          data?.length && data[3] ? data[3].toString() : 'No manager found'
+        }
+        tokenA={'tokenA'}
+        tokenB={'tokenB'}
         tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}
-        totalValueLocked={data ? data[0].toString() : 'No TVL Found'}
+        totalValueLocked={
+          data?.length && data[0] ? data[0].toString() : 'No TVL Found'
+        }
         startDate={
-          data
+          data?.length && data[1]
             ? new Date(data[1]?.toNumber()).toLocaleDateString()
             : 'No date found'
         }
         matureDate={
-          data
+          data?.length && data[2]
             ? new Date(data[2]?.toNumber()).toLocaleDateString()
             : 'No date found'
         }
-      /> */}
+      />
       {/* for mock data */}
-      <FundDetails
+      {/* <FundDetails
         fundName={fundName}
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}
@@ -112,9 +109,9 @@ const Fund = ({
         matureDate={matureDate}
         yieldPercentage={20.5}
         lpPositions={lpPositions}
-      />
+      /> */}
     </div>
   );
 };
 
-export default Fund;
+export default FundCard;

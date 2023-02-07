@@ -1,44 +1,45 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface Props {
   title: string;
   onClick: () => void;
-  type: 'solidPurple' | 'solidBlue' | 'transparentPurple';
+  theme: 'solidPurple' | 'solidBlue' | 'transparentPurple';
   style?: CSSProperties;
   className?: string;
-  frontIcon?: any;
-  backIcon?: any;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
-const typeMap: { [x in string]: string } = {
-  solidPurple:
-    'font-semibold sm:px-7 sm:py-2.5 px-2 py-3 text-white rounded-md bg-solidPurpleDark hover:bg-solidPurple',
-  solidBlue:
-    'font-semibold sm:px-7 sm:py-2.5 px-2 py-3 text-white rounded-md bg-solidBlueDark hover:bg-solidBlue',
+const themeMap: Record<string, string> = {
+  solidPurple: 'bg-solidPurpleDark hover:bg-solidPurple',
+  solidBlue: 'bg-solidBlueDark hover:bg-solidBlue',
   transparentPurple:
-    'font-semibold sm:px-5 sm:py-2.5 px-2 py-3 text-white hover:bg-pupleLight bg-transparent border-pupleLight border-2 rounded-md',
+    'text-white hover:bg-purpleLight border-2 bg-transparent border-purpleLight',
 };
 
 const CustomButton = ({
   title,
   onClick,
-  type = 'solidBlue',
+  theme = 'solidBlue',
   style,
   className = '',
-  frontIcon,
-  backIcon,
+  leftIcon,
+  rightIcon,
 }: Props) => {
   return (
     <div
       style={{ ...style, cursor: 'pointer' }}
-      className={
-        typeMap[type] + ' ' + className + 'flex items-center justify-center'
-      }
+      className={twMerge(
+        `flex items-center justify-center space-x-2 rounded-md border-2 border-transparent px-2 py-3 font-semibold text-fuchsia-50 transition-all sm:px-7 sm:py-2.5`,
+        themeMap[theme],
+        className
+      )}
       onClick={onClick}
     >
-      {frontIcon && <div className="mr-2 w-6">{frontIcon}</div>}
-      <div>{title}</div>
-      {backIcon && <div className="ml-2 w-6">{backIcon}</div>}
+      {leftIcon}
+      <span>{title}</span>
+      {rightIcon}
     </div>
   );
 };

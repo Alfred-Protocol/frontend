@@ -31,9 +31,25 @@ export default [
         name: '_fundManager',
         type: 'address',
       },
+      {
+        internalType: 'string',
+        name: '_fundName',
+        type: 'string',
+      },
     ],
     stateMutability: 'nonpayable',
     type: 'constructor',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'fundManager',
+        type: 'address',
+      },
+    ],
+    name: 'CallerIsNotFundManager',
+    type: 'error',
   },
   {
     inputs: [
@@ -83,17 +99,25 @@ export default [
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_underlyingAssetAddress',
-        type: 'address',
-      },
-      {
         internalType: 'uint256',
-        name: '_amount',
+        name: 'tokenId',
         type: 'uint256',
       },
     ],
-    name: 'borrowFromAave',
+    name: 'closeLpPosition',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    name: 'collectFees',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -130,8 +154,31 @@ export default [
         name: 'upperTick',
         type: 'int24',
       },
+      {
+        internalType: 'uint24',
+        name: 'poolFee',
+        type: 'uint24',
+      },
     ],
     name: 'createLpPosition',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint128',
+        name: 'liquidityToRemove',
+        type: 'uint128',
+      },
+    ],
+    name: 'decreasePositionLiquidity',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -153,7 +200,7 @@ export default [
     inputs: [
       {
         internalType: 'address',
-        name: '',
+        name: '_depositor',
         type: 'address',
       },
     ],
@@ -171,6 +218,61 @@ export default [
   {
     inputs: [],
     name: 'fetchAllLpPositions',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'fundManager',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'tokenId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint128',
+            name: 'liquidity',
+            type: 'uint128',
+          },
+          {
+            internalType: 'address',
+            name: 'token0',
+            type: 'address',
+          },
+          {
+            internalType: 'address',
+            name: 'token1',
+            type: 'address',
+          },
+          {
+            internalType: 'int24',
+            name: 'tickLower',
+            type: 'int24',
+          },
+          {
+            internalType: 'int24',
+            name: 'tickUpper',
+            type: 'int24',
+          },
+          {
+            internalType: 'uint24',
+            name: 'poolFee',
+            type: 'uint24',
+          },
+        ],
+        internalType: 'struct SharedStructs.LPPosition[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'fetchLpTokenIds',
     outputs: [
       {
         internalType: 'uint256[]',
@@ -195,22 +297,39 @@ export default [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_address',
-        type: 'address',
-      },
-    ],
-    name: 'getPortfolioByAddress',
+    inputs: [],
+    name: 'fundName',
     outputs: [
       {
-        internalType: 'uint256',
+        internalType: 'string',
         name: '',
-        type: 'uint256',
+        type: 'string',
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount0ToAdd',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amount1ToAdd',
+        type: 'uint256',
+      },
+    ],
+    name: 'increasePositionLiquidity',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -229,37 +348,6 @@ export default [
   {
     inputs: [],
     name: 'redeemAllLpPositions',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'redeemLpPosition',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_underlyingAssetAddress',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'repayToAave',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -288,24 +376,6 @@ export default [
       },
     ],
     stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_underlyingAssetAddress',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'supplyToAave',
-    outputs: [],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -359,32 +429,7 @@ export default [
   },
   {
     inputs: [],
-    name: 'unwindAllPositions',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'withdraw',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_underlyingAssetAddress',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'withdrawFromAave',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',

@@ -1,11 +1,13 @@
 import FundCreate from '@/pages/funds/create';
 import type { LPPosition } from '@/types/type';
+import truncateString from '@/utils/truncateString';
 import {
   ArrowRightIcon,
   ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import type { Address } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
 import FundTable from '../FundDetails/FundTable';
@@ -16,7 +18,7 @@ export interface FundDetailsProps {
   tokenA: string;
   tokenB: string;
   isLoading: boolean;
-  fundAddress: string;
+  fundAddress: Address;
   tvlSymbol: string;
   totalValueLocked: string;
   startDate: string;
@@ -50,19 +52,22 @@ const FundDetails = ({
   };
   return (
     <div
-      className="min-h-40 bg-blackfill text-whiteFont"
+      className="min-h-40 w-full bg-blackfill text-whiteFont"
       style={{ position: 'relative' }}
     >
-      <div className="flex h-full flex-col justify-between">
-        <div>
+      <div className="flex flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <h3 className="text-2xl font-bold sm:text-3xl">{fundName}</h3>
           <CustomButton
             title="Deposit"
-            type="solidPurple"
-            className="absolute right-1 top-1"
+            theme="solidPurple"
             onClick={redirect}
           />
-          <p className="mb-2 text-2xl sm:text-3xl">{fundName}</p>
-          <p className="text-l mb-xs mt-6 sm:text-sm">Manager: {manager}</p>
+        </div>
+        <div>
+          <p className="text-l mb-xs sm:text-md">
+            Manager: <span className='slashed-zero'>{truncateString(manager)}</span>
+          </p>
           <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
             {description}
           </p>

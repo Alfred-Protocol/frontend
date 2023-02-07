@@ -1,8 +1,9 @@
 const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{js,ts,jsx,tsx}', './node_modules/flowbite/**/*.js'],
   theme: {
     extend: {
       colors: {
@@ -34,14 +35,21 @@ module.exports = {
         solidPurpleDark: 'rgba(65, 58, 184, 1)',
         solidBlue: 'rgba(63, 55, 201, 0.7)',
         solidBlueDark: 'rgba(63, 55, 201, 1)',
-        pupleLight: '#EF5DA8',
+        purpleLight: '#EF5DA8',
+      },
+      fontFamily: {
+        sans: [
+          'Inter var',
+          // { fontFeatureSettings: '"cv11", "ss01"' },
+          ...defaultTheme.fontFamily.sans,
+        ],
+      },
+      backgroundImage: {
+        hero: 'linear-gradient(rgba(181, 23, 158, 0.6), rgba(72, 12, 168, 0.06))',
+        button:
+          'linear-gradient(to right top, rgb(187, 247, 208), rgb(74, 222, 128), #A673EF)',
       },
     },
-    backgroundImage: {
-      hero: 'linear-gradient(rgba(181, 23, 158, 0.6), rgba(72, 12, 168, 0.06))',
-      button:
-        'linear-gradient(to right top, rgb(187, 247, 208), rgb(74, 222, 128), #A673EF)',
-    },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

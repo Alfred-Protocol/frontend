@@ -1,4 +1,4 @@
-import FundsSection from '@/components/Funds/FundsSection';
+import FundCards from '@/components/Funds/FundCards';
 import Layout from '@/components/Layout/Layout';
 import PageTitle from '@/components/Layout/PageTitle';
 import Spinner from '@/components/Layout/Spinner';
@@ -21,7 +21,7 @@ export default function FundsPage() {
 
   return (
     <Layout className="sm:mx-20">
-      <FundsSection />
+      <FundCards />
     </Layout>
   );
 }

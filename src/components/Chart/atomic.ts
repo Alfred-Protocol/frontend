@@ -109,7 +109,7 @@ export const PrimaryBlockButton = styled(PrimaryButton)`
 `;
 
 // Section: Basic HTML tag
-export const Heading = styled.h3`
+export const Heading = styled.p`
   color: white;
   margin: 0;
   font-size: 1rem;

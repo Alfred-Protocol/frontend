@@ -128,15 +128,15 @@ const EstimatedFees = () => {
     P >= Pl && P <= Pu ? estimateFee(deltaL, L, volume24H, feeTier) : 0;
 
   return (
-    <SettingContainer>
+    <div className="relative flex items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
       <div className="padding">
         <Heading>
-          Estimated Fees <Tag>(24h)</Tag>
+          Projected Fees <Tag>(24h)</Tag>
         </Heading>
-        <Fee>
+        <div className="text-center text-3xl">
           <Dollar>$</Dollar>
           {estimatedFee.toFixed(2)}
-        </Fee>
+        </div>
         <Table>
           <div>MONTHLY</div>
           <div>${(estimatedFee * 30).toFixed(2)}</div>
@@ -152,27 +152,7 @@ const EstimatedFees = () => {
           </div>
         </Table>
       </div>
-
-      <ILButton
-        onClick={() => {
-          const props = {
-            featureId: 'Impermanent Loss Calculator',
-          };
-          // if (typeof window.plausible !== 'undefined') {
-          //   window.plausible('FeatureUsage', {
-          //     props,
-          //   });
-          // }
-
-          modalContext.dispatch({
-            type: ModalActionType.SET_IMPERMANENT_LOSS_MODAL_STATE,
-            payload: true,
-          });
-        }}
-      >
-        Calculate Impermanent Loss
-      </ILButton>
-    </SettingContainer>
+    </div>
   );
 };
 

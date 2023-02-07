@@ -257,7 +257,11 @@ const FEE_TIER_STYLES = {
   },
 };
 
-const SelectPairModal = () => {
+interface Props {
+  submitEnded: () => void;
+}
+
+const SelectPairModal = ({ submitEnded }: Props) => {
   const appContext = useAppContext();
   const modalContext = useModalContext();
 
@@ -404,6 +408,8 @@ const SelectPairModal = () => {
       type: ModalActionType.SET_SELECT_PAIR_MODAL_STATE,
       payload: false,
     });
+
+    submitEnded();
   };
 
   const fetchPools = async () => {
@@ -633,9 +639,6 @@ const SelectPairModal = () => {
                     <div>{selectedTokens[0].symbol}</div>
                   </div>
                 )}
-                <span>
-                  <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                </span>
               </div>
               <div
                 className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight py-2 hover:bg-purpleLight"
@@ -661,9 +664,6 @@ const SelectPairModal = () => {
                     <div> {selectedTokens[1].symbol}</div>
                   </div>
                 )}
-                <span>
-                  <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                </span>
               </div>
             </div>
           </div>

@@ -283,15 +283,17 @@ const LiquidityPositionChart = () => {
 
   console.log('d3Chart', d3Chart);
   return (
-    <Container>
-      <Padding>
-        <WrappedHeader>
-          <Heading>Liquidity Position</Heading>
-        </WrappedHeader>
-      </Padding>
+    <div className="relative flex rounded-xl border-2 bg-blackfill text-left text-white">
+      <Container>
+        <Padding>
+          <WrappedHeader>
+            <Heading>Liquidity Position</Heading>
+          </WrappedHeader>
+        </Padding>
 
-      <div ref={refElement} />
-    </Container>
+        <div ref={refElement} />
+      </Container>
+    </div>
   );
 };
 

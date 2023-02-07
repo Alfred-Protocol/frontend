@@ -565,7 +565,7 @@ const SelectPairModal = () => {
         </>
       )}
       {!showSelectTokenPage && !showSelectNetworkPage && (
-        <>
+        <div className="relative flex rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
           <Container>
             <Heading>Select Network</Heading>
             <SelectNetworkContainer>
@@ -743,7 +743,7 @@ const SelectPairModal = () => {
               {!isSubmitLoading && <span>Calculate</span>}
             </PrimaryBlockButton>
           </Container>
-        </>
+        </div>
       )}
       {/* </Modal> */}
     </>

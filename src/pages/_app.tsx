@@ -25,6 +25,7 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import '@/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
+import ContextProvider from '@/context/ContextProvider';
 
 export const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -77,13 +78,15 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
         chains={chains}
       >
-        <Component {...pageProps} />
-        <ToastContainer
-          pauseOnFocusLoss
-          pauseOnHover
-          closeOnClick={false}
-          position="bottom-center"
-        />
+        <ContextProvider>
+          <Component {...pageProps} />
+          <ToastContainer
+            pauseOnFocusLoss
+            pauseOnHover
+            closeOnClick={false}
+            position="bottom-center"
+          />
+        </ContextProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );

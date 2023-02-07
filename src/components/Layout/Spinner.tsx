@@ -6,7 +6,7 @@ const Spinner = ({ className = '' }: { className?: string }) => {
       <div
         className={
           (twMerge(
-            `inline-block h-6 w-6 animate-spin rounded-full border-4 border-purple-800 border-r-transparent align-[-0.125rem]`
+            `inline-block h-6 w-6 animate-spin rounded-full border-4 border-white border-r-transparent align-[-0.125rem]`
           ),
           className)
         }

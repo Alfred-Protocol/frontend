@@ -1,3 +1,6 @@
+import type { BigNumber } from 'ethers';
+import type { Address } from 'wagmi';
+
 // token0: 'DAI',
 // token1: 'WBTC',
 // address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
@@ -9,15 +12,14 @@
 // amount1: 2000,
 
 type LPPosition = {
-  token0: string;
-  token1: string;
-  address0: string;
-  address1: string;
-  fee: number;
-  min: number;
-  max: number;
-  amount0: number;
-  amount1: number;
+  fundManager: Address;
+  tokenId: BigNumber;
+  liquidity: BigNumber;
+  token0: Address;
+  token1: Address;
+  tickLower: BigNumber;
+  tickUpper: BigNumber;
+  poolFee: BigNumber;
 };
 
 export interface Network {

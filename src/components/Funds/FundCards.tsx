@@ -3,7 +3,7 @@ import FundCreateModal from '@/components/Funds/FundCreateModal';
 import { ArrowPathIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import { Button } from 'flowbite-react';
 import { useState } from 'react';
-import { Address, useContractRead } from 'wagmi';
+import { Address, useAccount, useContractRead } from 'wagmi';
 import { ArrowDown, ArrowUp } from '../Common/Common';
 import CustomButton from '../Common/CustomButton';
 import CustomIconButton from '../Common/CustomIconButton';
@@ -15,15 +15,15 @@ enum ViewState {
 }
 
 const FundCards = () => {
-  const { data, isLoading } = useContractRead({
+  const { data: fundAddresses, isLoading } = useContractRead({
     address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
     abi: FundsFactory,
     functionName: 'getAllFunds',
     cacheOnBlock: true,
   });
+  const { status } = useAccount();
 
   const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
-
   const [showCreateFundModal, setShowCreateFundModal] = useState(false);
 
   return (
@@ -33,6 +33,7 @@ const FundCards = () => {
           <CustomButton
             title="Create Fund"
             theme="solidBlue"
+            disabled={status !== 'connected'}
             onClick={() => setShowCreateFundModal(true)}
           />
         </div>
@@ -81,8 +82,8 @@ const FundCards = () => {
       </div>
       <div className="grid grid-cols-1 gap-y-10 gap-x-7 pb-12 xl:grid-cols-2 2xl:grid-cols-3">
         {!isLoading &&
-          data !== undefined &&
-          data
+          fundAddresses != null &&
+          fundAddresses
             // TODO: update once owner has been tied to fund
             // .filter(
             //   (fund) =>

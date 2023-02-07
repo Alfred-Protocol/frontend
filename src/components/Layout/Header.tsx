@@ -9,7 +9,7 @@ import { AlfredLogo } from '../Common/Common';
 
 const links = [
   { name: 'Home', href: '/home' },
-  { name: 'My Funds', href: '/funds' },
+  { name: 'Manage Funds', href: '/funds' },
   { name: 'My Assets', href: '/assets' },
   { name: 'Leaderboard', href: '/leaderboard' },
   { name: 'About', href: '/about' },
@@ -17,7 +17,6 @@ const links = [
 
 export default function Header() {
   const router = useRouter();
-  console.log('test ', router.asPath.split('/'));
   return (
     <Popover className="relative bg-transparent" as={'header'}>
       <div className="mx-auto px-6">

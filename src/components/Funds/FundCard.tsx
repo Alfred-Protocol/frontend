@@ -3,6 +3,7 @@ import { Address, useContractReads, useToken } from 'wagmi';
 import FundDetails from './FundDetails';
 import FundLiquidityGraph from './FundLiquidityGraph';
 import useMediaQuery from 'src/components/Common/useMediaQuery';
+import { tickToPrice } from '@uniswap/v3-sdk';
 
 interface FundProps {
   fundAddress: Address;
@@ -15,6 +16,7 @@ const matureDateIndex = 2;
 const stableCoinIndex = 3;
 const fundManagerIndex = 4;
 const fundNameIndex = 5;
+const lpPositionsIndex = 6;
 
 const FundCard = ({ fundAddress }: FundProps) => {
   const isMobile = useMediaQuery(768);
@@ -52,6 +54,11 @@ const FundCard = ({ fundAddress }: FundProps) => {
         abi: Funds,
         functionName: 'fundName',
       },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fetchAllLpPositions',
+      },
     ],
     // @marcuspang -> Does it force a re-fetch every 1min?
     cacheTime: 60 * 1000, // 1min
@@ -84,7 +91,10 @@ const FundCard = ({ fundAddress }: FundProps) => {
             ? data[fundNameIndex].toString()
             : 'No fund found'
         }
-        lpPositions={[]}
+        //@ts-ignore
+        lpPositions={
+          data?.length && data[lpPositionsIndex] ? data[lpPositionsIndex] : []
+        }
         yieldPercentage={1}
         isLoading={isLoading || tokenIsLoading}
         manager={
@@ -92,8 +102,6 @@ const FundCard = ({ fundAddress }: FundProps) => {
             ? data[fundManagerIndex].toString()
             : 'No manager found'
         }
-        tokenA={'tokenA'}
-        tokenB={'tokenB'}
         tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}
         totalValueLocked={
           data?.length && data[tvlIndex]

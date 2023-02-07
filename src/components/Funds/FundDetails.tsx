@@ -15,8 +15,6 @@ import Spinner from '../Layout/Spinner';
 import FundTableList from './FundTableList';
 
 export interface FundDetailsProps {
-  tokenA: string;
-  tokenB: string;
   isLoading: boolean;
   fundAddress: Address;
   tvlSymbol: string;
@@ -34,8 +32,6 @@ const FundDetails = ({
   fundName,
   fundAddress,
   isLoading,
-  tokenA,
-  tokenB,
   tvlSymbol,
   totalValueLocked,
   matureDate,
@@ -43,7 +39,7 @@ const FundDetails = ({
   manager,
   description,
   yieldPercentage = 20.4,
-  lpPositions = [],
+  lpPositions,
 }: FundDetailsProps) => {
   const router = useRouter();
 
@@ -66,7 +62,8 @@ const FundDetails = ({
         </div>
         <div>
           <p className="text-l mb-xs sm:text-md">
-            Manager: <span className='slashed-zero'>{truncateString(manager)}</span>
+            Manager:{' '}
+            <span className="slashed-zero">{truncateString(manager)}</span>
           </p>
           <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
             {description}
@@ -84,7 +81,7 @@ const FundDetails = ({
             value={matureDate}
             style={{ marginBottom: 5 }}
           />
-          <FundTableList data={lpPositions} />
+          <FundTableList />
         </div>
       </div>
     </div>

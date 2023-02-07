@@ -17,7 +17,7 @@ const links = [
 
 export default function Header() {
   const router = useRouter();
-  console.log('test ', router.asPath.split('/'));
+
   return (
     <Popover className="relative bg-transparent" as={'header'}>
       <div className="mx-auto px-6">

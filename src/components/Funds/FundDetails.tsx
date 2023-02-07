@@ -1,4 +1,4 @@
-import FundCreate from '@/pages/funds/create';
+import FundCreateModal from '@/components/Funds/FundCreateModal';
 import type { LPPosition } from '@/types/type';
 import truncateString from '@/utils/truncateString';
 import {

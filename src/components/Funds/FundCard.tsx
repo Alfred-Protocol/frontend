@@ -1,9 +1,8 @@
 import Funds from '@/abi/Funds';
-import { Address, useContractReads, useToken } from 'wagmi';
-import FundDetails from './FundDetails';
-import FundLiquidityGraph from './FundLiquidityGraph';
 import useMediaQuery from 'src/components/Common/useMediaQuery';
 import { tickToPrice } from '@uniswap/v3-sdk';
+import { Address, useContractReads, useQuery, useToken } from 'wagmi';
+import FundDetails from './FundDetails';
 
 interface FundProps {
   fundAddress: Address;
@@ -64,7 +63,6 @@ const FundCard = ({ fundAddress }: FundProps) => {
     cacheTime: 60 * 1000, // 1min
     enabled: !!fundAddress,
   });
-
   const { data: tokenData, isLoading: tokenIsLoading } = useToken({
     address:
       data?.length &&
@@ -72,8 +70,6 @@ const FundCard = ({ fundAddress }: FundProps) => {
       (data[stableCoinIndex].toString() as Address),
     enabled: !!(data?.length && data[stableCoinIndex]),
   });
-
-  console.log(data, tokenData);
 
   return (
     <div

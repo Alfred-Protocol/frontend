@@ -1,8 +1,9 @@
 import FundsFactory from '@/abi/FundsFactory';
-import FundCreate from '@/pages/funds/create';
+import FundCreateModal from '@/components/Funds/FundCreateModal';
 import { ArrowPathIcon, CalendarIcon } from '@heroicons/react/24/outline';
+import { Button } from 'flowbite-react';
 import { useState } from 'react';
-import { Address, useContractRead } from 'wagmi';
+import { Address, useAccount, useContractRead } from 'wagmi';
 import { ArrowDown, ArrowUp } from '../Common/Common';
 import CustomButton from '../Common/CustomButton';
 import CustomIconButton from '../Common/CustomIconButton';
@@ -18,10 +19,11 @@ const FundCards = () => {
     address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
     abi: FundsFactory,
     functionName: 'getAllFunds',
+    cacheOnBlock: true,
   });
+  const { status } = useAccount();
 
   const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
-
   const [showCreateFundModal, setShowCreateFundModal] = useState(false);
 
   return (
@@ -31,6 +33,7 @@ const FundCards = () => {
           <CustomButton
             title="Create Fund"
             theme="solidBlue"
+            disabled={status !== 'connected'}
             onClick={() => setShowCreateFundModal(true)}
           />
         </div>
@@ -89,17 +92,13 @@ const FundCards = () => {
             //       fund.toLowerCase() === address.toLowerCase())
             // )
             .map((fund) => <FundCard key={fund} fundAddress={fund} />)}
-
-        {showCreateFundModal && (
-          <div className="absolute w-full">
-            <FundCreate
-              close={() => {
-                setShowCreateFundModal(false);
-              }}
-            />
-          </div>
-        )}
       </div>
+      <FundCreateModal
+        show={showCreateFundModal}
+        onClose={() => {
+          setShowCreateFundModal(false);
+        }}
+      />
     </>
   );
 };

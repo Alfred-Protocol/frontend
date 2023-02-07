@@ -15,6 +15,7 @@ const styles = {
     animationName: Radium.keyframes(fadeIn, 'fadeIn'),
   },
 };
+import CreatePosition from '../../components/FundDetails/CreatePosition';
 
 const AboutPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,7 @@ const AboutPage = () => {
             <LiquidityPositionChart />
           </div>
         </div>
+        <CreatePosition />
       </Layout>
     </StyleRoot>
   );

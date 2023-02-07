@@ -1,29 +1,33 @@
 import type { PositionData } from '@/pages/funds/[address]/manage';
 import type { LPPosition } from '@/types/type';
+import { BigNumber } from 'ethers';
 import PairImage from '../Common/PairImage';
+import { tickToPrice } from '@uniswap/v3-sdk';
+import { Token } from '@uniswap/sdk-core';
+import type { Address } from 'wagmi';
+import { useMemo } from 'react';
+import LPPair from './LPPair';
 
-const mockData = [
+const mockData: Array<LPPosition> = [
   {
-    token0: 'DAI',
-    token1: 'WBTC',
-    address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-    address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-    fee: 0.02,
-    min: 1500,
-    max: 2500,
-    amount0: 2,
-    amount1: 2000,
+    token0: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
+    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+    poolFee: BigNumber.from(3000),
+    tickLower: BigNumber.from(192200),
+    tickUpper: BigNumber.from(198000),
+    liquidity: BigNumber.from(10).pow(18),
+    fundManager: '0xE1FAE6E277F8302d5BedD1C15e6480C9A75Fb3Bb',
+    tokenId: BigNumber.from(100),
   },
   {
-    token0: 'DAI',
-    token1: 'WBTC',
-    address0: '0xBA47cF08bDFbA09E7732c0e48E12a11Cd1536bce',
-    address1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c746',
-    fee: 0.02,
-    min: 1500,
-    max: 2500,
-    amount0: 2,
-    amount1: 2000,
+    token0: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
+    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+    poolFee: BigNumber.from(3000),
+    tickLower: BigNumber.from(193600),
+    tickUpper: BigNumber.from(198400),
+    liquidity: BigNumber.from(10).pow(18),
+    fundManager: '0xE1FAE6E277F8302d5BedD1C15e6480C9A75Fb3Bb',
+    tokenId: BigNumber.from(150),
   },
 ];
 
@@ -41,36 +45,9 @@ const FundTableList = ({ data = mockData }: { data?: LPPosition[] }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map(
-            (
-              {
-                token0,
-                token1,
-                address0,
-                address1,
-                fee,
-                min,
-                max,
-                amount0,
-                amount1,
-              },
-              idx
-            ) => (
-              <tr key={idx}>
-                <td className="flex-wrap items-center sm:flex">
-                  <PairImage logo1={undefined} logo2={undefined} />
-                  {`${token0} / ${token1}`}
-                </td>
-                <td className="">{fee}%</td>
-                <td className="">{min}</td>
-                <td className="">{max}</td>
-                <td className="flex-wrap items-center sm:flex">
-                  <PairImage logo1={undefined} logo2={undefined} />
-                  {`${amount0} / ${amount1}`}
-                </td>
-              </tr>
-            )
-          )}
+          {data.map((lpPair) => (
+            <LPPair key={lpPair.tokenId.toString()} {...lpPair} />
+          ))}
         </tbody>
       </table>
     </div>

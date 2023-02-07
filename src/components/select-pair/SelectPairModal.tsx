@@ -58,17 +58,15 @@ const ModalStyle = {
     background: 'rgb(22, 22, 22)',
   },
 };
-const Container = styled.div`
-  max-width: 370px;
-  padding: 15px;
+// const Container = styled.div`
+//   display: flex;
+//   padding: 15px;
 
-  @media only screen and (max-width: 400px) {
-    padding: 10px;
-  }
-`;
-const SelectNetworkContainer = styled.div`
-  margin-bottom: 15px;
-`;
+//   @media only screen and (max-width: 400px) {
+//     padding: 10px;
+//   }
+// `;
+const SelectNetworkContainer = styled.div``;
 const SelectPairContainer = styled.div`
   display: grid;
   grid-gap: 10px;
@@ -108,6 +106,7 @@ const Tier = styled.div`
   padding: 6px;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 120px;
 
   & h4 {
     color: #fff;
@@ -482,12 +481,6 @@ const SelectPairModal = () => {
 
   return (
     <>
-      {/* <Modal
-        style={ModalStyle}
-        isOpen={modalContext.state.isSelectPairModalOpen}
-        contentLabel="Example Modal"
-        ariaHideApp={false}
-      > */}
       {showSelectNetworkPage && (
         <>
           <GoBack>
@@ -565,11 +558,11 @@ const SelectPairModal = () => {
         </>
       )}
       {!showSelectTokenPage && !showSelectNetworkPage && (
-        <div className="relative flex rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
-          <Container>
-            <Heading>Select Network</Heading>
-            <SelectNetworkContainer>
-              <TokenSelect
+        <div className="relative flex justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
+          <div className="flex items-center space-x-10">
+            <div className="text-center">
+              <Heading>Select Network</Heading>
+              <div
                 onClick={() => {
                   if (!isSubmitLoading) {
                     setShowSelectNetworkPage(true);
@@ -578,148 +571,151 @@ const SelectPairModal = () => {
               >
                 {!selectedNetwork && <span>Select a network</span>}
                 {selectedNetwork !== null && (
-                  <span>
+                  <div className="align-center flex w-36 justify-center space-x-2 rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight">
                     <img
                       src={selectedNetwork.logoURI}
                       alt={selectedNetwork.name}
+                      width={26}
+                      height={26}
+                      className="block rounded-3xl"
                     />
-                    {selectedNetwork.name}
-                  </span>
+                    <p>{selectedNetwork.name}</p>
+                  </div>
                 )}
-                <span>
-                  <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                </span>
-              </TokenSelect>
-            </SelectNetworkContainer>
+              </div>
+            </div>
 
-            <Heading>Select Pair</Heading>
-            <SelectPairContainer>
-              <TokenSelect
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    setSelectedPool(null);
-                    deleteQueryParam('feeTier');
-                    setShowSelectTokenPage(true);
-                    setSelectedTokenIndex(0);
-                  }
-                }}
-              >
-                {!selectedTokens[0] && <span>Select a token</span>}
-                {selectedTokens[0] && (
+            <div className="text-center">
+              <Heading>Select Pair</Heading>
+              <div className="flex space-x-3">
+                <TokenSelect
+                  onClick={() => {
+                    if (!isSubmitLoading) {
+                      setSelectedPool(null);
+                      deleteQueryParam('feeTier');
+                      setShowSelectTokenPage(true);
+                      setSelectedTokenIndex(0);
+                    }
+                  }}
+                >
+                  {!selectedTokens[0] && <span>Select a token</span>}
+                  {selectedTokens[0] && (
+                    <span>
+                      <img
+                        src={selectedTokens[0].logoURI}
+                        alt={selectedTokens[0].name}
+                      />
+                      {selectedTokens[0].symbol}
+                    </span>
+                  )}
                   <span>
-                    <img
-                      src={selectedTokens[0].logoURI}
-                      alt={selectedTokens[0].name}
-                    />
-                    {selectedTokens[0].symbol}
+                    <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                   </span>
-                )}
-                <span>
-                  <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                </span>
-              </TokenSelect>
-              <TokenSelect
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    setSelectedPool(null);
-                    deleteQueryParam('feeTier');
-                    setShowSelectTokenPage(true);
-                    setSelectedTokenIndex(1);
-                  }
-                }}
-              >
-                {!selectedTokens[1] && <span>Select a token</span>}
-                {selectedTokens[1] && (
+                </TokenSelect>
+                <TokenSelect
+                  onClick={() => {
+                    if (!isSubmitLoading) {
+                      setSelectedPool(null);
+                      deleteQueryParam('feeTier');
+                      setShowSelectTokenPage(true);
+                      setSelectedTokenIndex(1);
+                    }
+                  }}
+                >
+                  {!selectedTokens[1] && <span>Select a token</span>}
+                  {selectedTokens[1] && (
+                    <span>
+                      <img
+                        src={selectedTokens[1].logoURI}
+                        alt={selectedTokens[1].name}
+                      />
+                      {selectedTokens[1].symbol}
+                    </span>
+                  )}
                   <span>
-                    <img
-                      src={selectedTokens[1].logoURI}
-                      alt={selectedTokens[1].name}
-                    />
-                    {selectedTokens[1].symbol}
+                    <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                   </span>
-                )}
-                <span>
-                  <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                </span>
-              </TokenSelect>
-            </SelectPairContainer>
+                </TokenSelect>
+              </div>
+            </div>
 
-            <Heading>Select Fee Tier</Heading>
-            <FeeTiersContainer>
-              <Tier
-                style={getFeeTierStyle('100')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('100');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+            <div className="text-center">
+              <Heading>Select Fee Tier</Heading>
+              <div className="flex space-x-2">
+                <Tier
+                  style={getFeeTierStyle('100')}
+                  onClick={() => {
+                    if (!isSubmitLoading) {
+                      const tier = getFeeTier('100');
+                      if (tier) {
+                        setSelectedPool(tier);
+                        setQueryParam('feeTier', tier.feeTier);
+                      }
                     }
-                  }
-                }}
-              >
-                <h4 style={!getFeeTier('100') ? { color: '#999' } : {}}>
-                  0.01%
-                </h4>
-                <span>Best for very stable pairs.</span>
-                <div>{getFeeTierPercentage('100')}</div>
-              </Tier>
-              <Tier
-                style={getFeeTierStyle('500')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('500');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+                  }}
+                >
+                  <h4 style={!getFeeTier('100') ? { color: '#999' } : {}}>
+                    0.01%
+                  </h4>
+                  <span>Best for very stable pairs.</span>
+                  <div>{getFeeTierPercentage('100')}</div>
+                </Tier>
+                <Tier
+                  style={getFeeTierStyle('500')}
+                  onClick={() => {
+                    if (!isSubmitLoading) {
+                      const tier = getFeeTier('500');
+                      if (tier) {
+                        setSelectedPool(tier);
+                        setQueryParam('feeTier', tier.feeTier);
+                      }
                     }
-                  }
-                }}
-              >
-                <h4 style={!getFeeTier('500') ? { color: '#999' } : {}}>
-                  0.05%
-                </h4>
-                <span>Best for stable pairs.</span>
-                <div>{getFeeTierPercentage('500')}</div>
-              </Tier>
-              <Tier
-                style={getFeeTierStyle('3000')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('3000');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+                  }}
+                >
+                  <h4 style={!getFeeTier('500') ? { color: '#999' } : {}}>
+                    0.05%
+                  </h4>
+                  <span>Best for stable pairs.</span>
+                  <div>{getFeeTierPercentage('500')}</div>
+                </Tier>
+                <Tier
+                  style={getFeeTierStyle('3000')}
+                  onClick={() => {
+                    if (!isSubmitLoading) {
+                      const tier = getFeeTier('3000');
+                      if (tier) {
+                        setSelectedPool(tier);
+                        setQueryParam('feeTier', tier.feeTier);
+                      }
                     }
-                  }
-                }}
-              >
-                <h4 style={!getFeeTier('3000') ? { color: '#999' } : {}}>
-                  0.3%
-                </h4>
-                <span>Best for most pairs.</span>
-                <div>{getFeeTierPercentage('3000')}</div>
-              </Tier>
-              <Tier
-                style={getFeeTierStyle('10000')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('10000');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      setQueryParam('feeTier', tier.feeTier);
+                  }}
+                >
+                  <h4 style={!getFeeTier('3000') ? { color: '#999' } : {}}>
+                    0.3%
+                  </h4>
+                  <span>Best for most pairs.</span>
+                  <div>{getFeeTierPercentage('3000')}</div>
+                </Tier>
+                <Tier
+                  style={getFeeTierStyle('10000')}
+                  onClick={() => {
+                    if (!isSubmitLoading) {
+                      const tier = getFeeTier('10000');
+                      if (tier) {
+                        setSelectedPool(tier);
+                        setQueryParam('feeTier', tier.feeTier);
+                      }
                     }
-                  }
-                }}
-              >
-                <h4 style={!getFeeTier('10000') ? { color: '#999' } : {}}>
-                  1%
-                </h4>
-                <span>Best for exotic pairs.</span>
-                <div>{getFeeTierPercentage('10000')}</div>
-              </Tier>
-            </FeeTiersContainer>
-
+                  }}
+                >
+                  <h4 style={!getFeeTier('10000') ? { color: '#999' } : {}}>
+                    1%
+                  </h4>
+                  <span>Best for exotic pairs.</span>
+                  <div>{getFeeTierPercentage('10000')}</div>
+                </Tier>
+              </div>
+            </div>
             <PrimaryBlockButton
               onClick={handleSubmit}
               disabled={isFormDisabled}
@@ -742,7 +738,7 @@ const SelectPairModal = () => {
               )}
               {!isSubmitLoading && <span>Calculate</span>}
             </PrimaryBlockButton>
-          </Container>
+          </div>
         </div>
       )}
       {/* </Modal> */}

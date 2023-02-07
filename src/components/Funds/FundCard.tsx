@@ -1,11 +1,21 @@
 import Funds from '@/abi/Funds';
 import useMediaQuery from 'src/components/Common/useMediaQuery';
+import { tickToPrice } from '@uniswap/v3-sdk';
 import { Address, useContractReads, useQuery, useToken } from 'wagmi';
 import FundDetails from './FundDetails';
 
 interface FundProps {
   fundAddress: Address;
 }
+
+// Convert to ENUM
+const tvlIndex = 0;
+const startDateIndex = 1;
+const matureDateIndex = 2;
+const stableCoinIndex = 3;
+const fundManagerIndex = 4;
+const fundNameIndex = 5;
+const lpPositionsIndex = 6;
 
 const FundCard = ({ fundAddress }: FundProps) => {
   const isMobile = useMediaQuery(768);
@@ -38,13 +48,27 @@ const FundCard = ({ fundAddress }: FundProps) => {
         abi: Funds,
         functionName: 'fundManager',
       },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fundName',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fetchAllLpPositions',
+      },
     ],
+    // @marcuspang -> Does it force a re-fetch every 1min?
     cacheTime: 60 * 1000, // 1min
     enabled: !!fundAddress,
   });
   const { data: tokenData, isLoading: tokenIsLoading } = useToken({
-    address: data?.length && data[3] && (data[3].toString() as Address),
-    enabled: !!(data?.length && data[3]),
+    address:
+      data?.length &&
+      data[stableCoinIndex] &&
+      (data[stableCoinIndex].toString() as Address),
+    enabled: !!(data?.length && data[stableCoinIndex]),
   });
 
   return (
@@ -59,22 +83,24 @@ const FundCard = ({ fundAddress }: FundProps) => {
         fundAddress={fundAddress}
         isLoading={isLoading || tokenIsLoading}
         manager={
-          data?.length && data[3] ? data[3].toString() : 'No manager found'
+          data?.length && data[fundManagerIndex]
+            ? data[fundManagerIndex].toString()
+            : 'No manager found'
         }
-        tokenA={'tokenA'}
-        tokenB={'tokenB'}
         tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}
         totalValueLocked={
-          data?.length && data[0] ? data[0].toString() : 'No TVL Found'
+          data?.length && data[tvlIndex]
+            ? data[tvlIndex].toString()
+            : 'No TVL Found'
         }
         startDate={
-          data?.length && data[1]
-            ? new Date(data[1]?.toNumber()).toLocaleDateString()
+          data?.length && data[startDateIndex]
+            ? new Date(data[startDateIndex]?.toNumber()).toLocaleDateString()
             : 'No date found'
         }
         matureDate={
-          data?.length && data[2]
-            ? new Date(data[2]?.toNumber()).toLocaleDateString()
+          data?.length && data[matureDateIndex]
+            ? new Date(data[matureDateIndex]?.toNumber()).toLocaleDateString()
             : 'No date found'
         }
       />

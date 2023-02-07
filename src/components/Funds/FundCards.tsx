@@ -15,7 +15,7 @@ enum ViewState {
 }
 
 const FundCards = () => {
-  const { data, isLoading } = useContractRead({
+  const { data: fundAddresses, isLoading } = useContractRead({
     address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
     abi: FundsFactory,
     functionName: 'getAllFunds',
@@ -82,8 +82,8 @@ const FundCards = () => {
       </div>
       <div className="grid grid-cols-1 gap-y-10 gap-x-7 pb-12 xl:grid-cols-2 2xl:grid-cols-3">
         {!isLoading &&
-          data !== undefined &&
-          data
+          fundAddresses != null &&
+          fundAddresses
             // TODO: update once owner has been tied to fund
             // .filter(
             //   (fund) =>

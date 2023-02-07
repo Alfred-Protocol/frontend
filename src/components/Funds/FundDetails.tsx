@@ -16,8 +16,6 @@ import Spinner from '../Layout/Spinner';
 import FundTableList from './FundTableList';
 
 export interface FundDetailsProps {
-  tokenA: string;
-  tokenB: string;
   isLoading: boolean;
   fundAddress: Address;
   tvlSymbol: string;
@@ -35,8 +33,6 @@ const FundDetails = ({
   // fundName,
   fundAddress,
   isLoading,
-  tokenA,
-  tokenB,
   tvlSymbol,
   totalValueLocked,
   matureDate,
@@ -90,7 +86,7 @@ FundDetailsProps) => {
             value={matureDate}
             style={{ marginBottom: 5 }}
           />
-          <FundTableList data={[]} />
+          <FundTableList />
         </div>
       </div>
     </div>

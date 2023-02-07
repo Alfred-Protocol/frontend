@@ -491,6 +491,7 @@ const SelectPairModal = () => {
       <Modal
         style={ModalStyle}
         isOpen={showSelectNetworkPage}
+        onRequestClose={() => setShowSelectNetworkPage(false)}
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
@@ -551,6 +552,7 @@ const SelectPairModal = () => {
       <Modal
         style={ModalStyle}
         isOpen={showSelectTokenPage}
+        onRequestClose={() => setShowSelectTokenPage(false)}
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
@@ -589,13 +591,13 @@ const SelectPairModal = () => {
             >
               {!selectedNetwork && <span>Select a network</span>}
               {selectedNetwork !== null && (
-                <div className="align-center flex w-36 justify-center space-x-2 rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight">
+                <div className="align-center flex w-36 cursor-pointer justify-center space-x-2 rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight">
                   <img
                     src={selectedNetwork.logoURI}
                     alt={selectedNetwork.name}
                     width={26}
                     height={26}
-                    className="block rounded-3xl"
+                    className="rounded-3xl"
                   />
                   <p>{selectedNetwork.name}</p>
                 </div>
@@ -606,7 +608,8 @@ const SelectPairModal = () => {
           <div className="text-center">
             <Heading>Select Pair</Heading>
             <div className="flex space-x-3">
-              <TokenSelect
+              <div
+                className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight"
                 onClick={() => {
                   console.log(' isSubmitLoading ', isSubmitLoading);
                   if (!isSubmitLoading) {
@@ -617,21 +620,25 @@ const SelectPairModal = () => {
                   }
                 }}
               >
-                {!selectedTokens[0] && <span>Select a token</span>}
+                {!selectedTokens[0] && <div>Select token 1</div>}
                 {selectedTokens[0] && (
-                  <span>
+                  <div className="flex space-x-2">
                     <img
                       src={selectedTokens[0].logoURI}
                       alt={selectedTokens[0].name}
+                      width={26}
+                      height={26}
+                      className="rounded-3xl"
                     />
-                    {selectedTokens[0].symbol}
-                  </span>
+                    <div>{selectedTokens[0].symbol}</div>
+                  </div>
                 )}
                 <span>
                   <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                 </span>
-              </TokenSelect>
-              <TokenSelect
+              </div>
+              <div
+                className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight py-2 hover:bg-purpleLight"
                 onClick={() => {
                   if (!isSubmitLoading) {
                     setSelectedPool(null);
@@ -641,20 +648,23 @@ const SelectPairModal = () => {
                   }
                 }}
               >
-                {!selectedTokens[1] && <span>Select a token</span>}
+                {!selectedTokens[1] && <p>Select token 2</p>}
                 {selectedTokens[1] && (
-                  <span>
+                  <div className="flex space-x-2">
                     <img
                       src={selectedTokens[1].logoURI}
                       alt={selectedTokens[1].name}
+                      width={26}
+                      height={26}
+                      className="rounded-3xl"
                     />
-                    {selectedTokens[1].symbol}
-                  </span>
+                    <div> {selectedTokens[1].symbol}</div>
+                  </div>
                 )}
                 <span>
                   <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                 </span>
-              </TokenSelect>
+              </div>
             </div>
           </div>
 

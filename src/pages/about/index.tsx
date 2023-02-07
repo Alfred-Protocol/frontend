@@ -5,6 +5,7 @@ import Layout from '@/components/Layout/Layout';
 import SelectPairModal from '@/components/select-pair/SelectPairModal';
 import { useAppContext } from '@/context/app/appContext';
 import ContextProvider from '@/context/ContextProvider';
+import CreatePosition from '../../components/FundDetails/CreatePosition';
 
 const AboutPage = () => {
   const { state } = useAppContext();
@@ -27,6 +28,7 @@ const AboutPage = () => {
           <div>
             <Setting />
           </div>
+          <CreatePosition />
         </div>
       </div>
     </Layout>

@@ -9,7 +9,7 @@ import { AlfredLogo } from '../Common/Common';
 
 const links = [
   { name: 'Home', href: '/home' },
-  { name: 'My Funds', href: '/funds' },
+  { name: 'Manage Funds', href: '/funds' },
   { name: 'My Assets', href: '/assets' },
   { name: 'Leaderboard', href: '/leaderboard' },
   { name: 'About', href: '/about' },

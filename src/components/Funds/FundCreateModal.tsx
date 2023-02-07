@@ -1,18 +1,17 @@
 import FundsFactory from '@/abi/FundsFactory';
-import useDebounce from '@/hooks/useDebounce';
-import type { Prisma } from '@prisma/client';
-import { BigNumber } from 'ethers';
+import useCreateFund from '@/hooks/useCreateFund';
+import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
-import { FormEventHandler, useEffect, useRef, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   Address,
   useAccount,
   useContractWrite,
-  useMutation,
   usePrepareContractWrite,
   useWaitForTransaction,
 } from 'wagmi';
+import Web3 from 'web3';
 import CustomButton from '../Common/CustomButton';
 
 interface FundCreateModalProps {
@@ -20,12 +19,25 @@ interface FundCreateModalProps {
   show: boolean;
 }
 
-const createFund = async (fundData: Prisma.FundCreateArgs['data']) => {
-  const res = await fetch('/api/fund', {
-    method: 'POST',
-    body: JSON.stringify(fundData),
+const getFundAddressFromReceipt = (
+  receipt: ethers.providers.TransactionReceipt
+) => {
+  const web3 = new Web3();
+  let fundAddress: string = '';
+  receipt.logs.forEach((log) => {
+    if (log.topics.length === 1) {
+      const data = web3.eth.abi.decodeParameters(
+        [
+          { type: 'address', name: 'fund' },
+          { type: 'address', name: 'manager' },
+        ],
+        log.data
+      );
+      fundAddress = data.fund;
+      return;
+    }
   });
-  return (await res.json()).data;
+  return fundAddress;
 };
 
 const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
@@ -56,7 +68,7 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
     enabled: isSuccess,
   });
   const { address } = useAccount();
-  const { data: createFundData, mutate } = useMutation(createFund);
+  const { mutate } = useCreateFund();
 
   // toasts
   const [hasCreated, setHasCreated] = useState(false);
@@ -66,23 +78,25 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
       // upload to database
       mutate({
         name: fundName,
-        address: txReceipt!.contractAddress,
+        address: getFundAddressFromReceipt(txReceipt!),
         manager: address!,
         description: fundDescription,
         startDate: new Date(startDate!),
         matureDate: new Date(matureDate!),
       });
       console.log(
-        `Successfully created, transaction hash: ${txReceipt?.transactionHash}`
+        `Successfully created, transaction hash: ${JSON.stringify(txReceipt)}`
       );
       toast.success(
         `Successfully created, transaction hash: ${txReceipt?.transactionHash}`
       );
+      onClose();
     }
   }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    setHasCreated(false);
     if (fundName === '' || fundDescription === '') {
       console.error('Invalid fund name/description');
       return;
@@ -92,7 +106,6 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
       return;
     }
     write?.();
-    onClose();
   };
 
   return (
@@ -151,7 +164,6 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
               title="Create"
               theme="solidBlue"
               isLoading={txIsLoading}
-              disabled={txIsLoading}
             />
             <CustomButton
               className="focus:shadow-outline rounded py-2 px-4"

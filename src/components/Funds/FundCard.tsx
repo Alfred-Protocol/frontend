@@ -7,7 +7,6 @@ interface FundProps {
   fundAddress: Address;
 }
 
-
 const FundCard = ({ fundAddress }: FundProps) => {
   const isMobile = useMediaQuery(768);
 
@@ -58,10 +57,6 @@ const FundCard = ({ fundAddress }: FundProps) => {
     >
       <FundDetails
         fundAddress={fundAddress}
-        description={''}
-        fundName={'No fund found'}
-        lpPositions={[]}
-        yieldPercentage={1}
         isLoading={isLoading || tokenIsLoading}
         manager={
           data?.length && data[3] ? data[3].toString() : 'No manager found'

@@ -46,7 +46,7 @@ const FundTableList = ({ data = mockData }: { data?: LPPosition[] }) => {
         </thead>
         <tbody>
           {data.map((lpPair) => (
-            <LPPair key={lpPair.tokenId.toString()} {...lpPair} />
+            <LPPair key={lpPair?.tokenId?.toString()} {...lpPair} />
           ))}
         </tbody>
       </table>

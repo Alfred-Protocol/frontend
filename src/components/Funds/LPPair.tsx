@@ -53,10 +53,10 @@ const LPPair = ({
         <PairImage logo1={undefined} logo2={undefined} />
         {`${token0Symbol} / ${token1Symbol}`}
       </td>
-      <td className="">{poolFee.toNumber() / 10000}%</td>
+      <td className="">{poolFee?.toNumber() / 10000}%</td>
       <td className="">
         {convertTickToPrice(
-          tickLower.toNumber(),
+          tickLower?.toNumber(),
           token0,
           token0Decimals ?? 18,
           token1,
@@ -65,7 +65,7 @@ const LPPair = ({
       </td>
       <td className="">
         {convertTickToPrice(
-          tickUpper.toNumber(),
+          tickUpper?.toNumber(),
           token0,
           token0Decimals ?? 18,
           token1,

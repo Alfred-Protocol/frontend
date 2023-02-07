@@ -1,6 +1,6 @@
-import bn from "bignumber.js";
-import { Tick } from "../../common/interfaces/uniswap.interface";
-import { getFeeTierPercentage } from "./helper";
+import bn from 'bignumber.js';
+import type { Tick } from '../../common/interfaces/uniswap.interface';
+import { getFeeTierPercentage } from './helper';
 
 bn.config({ EXPONENTIAL_AT: 999999, DECIMAL_PLACES: 40 });
 
@@ -46,6 +46,24 @@ interface TokensAmount {
   amount0: number;
   amount1: number;
 }
+
+// Calculations derived from UniswapV3 whitepaper: https://uniswap.org/whitepaper-v3.pdf
+export const getTokensAmountFromToken0Amount = (
+  amount0: number,
+  P: number,
+  // Price lower
+  Pl: number,
+  // Price upper
+  Pu: number
+): number => {
+  const liquidity0 =
+    amount0 * ((Math.sqrt(P) * Math.sqrt(Pu)) / (Math.sqrt(Pu) - Math.sqrt(P)));
+
+  const amount1 = liquidity0 * (Math.sqrt(P) - Math.sqrt(Pl));
+
+  return amount1;
+};
+
 export const getTokensAmountFromDepositAmountUSD = (
   P: number,
   Pl: number,
@@ -54,6 +72,11 @@ export const getTokensAmountFromDepositAmountUSD = (
   priceUSDY: number,
   depositAmountUSD: number
 ): TokensAmount => {
+  // deltaL in absolute USD value
+  // deltaLx = deltaX / (1 / Math.sqrt(P) - 1 / Math.sqrt(Pu))
+  // deltaLy = deltaY / (Math.sqrt(P) - Math.sqrt(Pl))
+  // "deltaL" (liquidity) can be substituted with "deltaLx" or "deltaLy"
+
   const deltaL =
     depositAmountUSD /
     ((Math.sqrt(P) - Math.sqrt(Pl)) * priceUSDY +

@@ -10,6 +10,7 @@ import { nearestUsableTick, priceToClosestTick } from '@uniswap/v3-sdk';
 import { Price } from '@uniswap/sdk-core';
 import { getTokensAmountFromDepositAmountUSD } from '../../utils/uniswapv3/math';
 import { useGetTokensAmount } from '../../hooks/useGetTokensAmount';
+import { useGetPairTokenAmount } from '../../hooks/useGetPairTokenAmount';
 
 type Props = {
   onClose: () => void;
@@ -25,7 +26,6 @@ const CreatePosition = () => {
   const [token1, setToken1] = useState<Address>('0x');
 
   const [amount0, setAmount0] = useState<string>('0');
-  const [amount1, setAmount1] = useState<string>('0');
 
   const [minPrice, maxPrice] = state.priceRangeValue;
   const feeTier = state.pool?.feeTier;
@@ -53,24 +53,24 @@ const CreatePosition = () => {
     state.token1?.decimals,
   ]);
 
-  const [amount0Calc, amount1Calc] = useGetTokensAmount(state);
+  const amount1Calc = useGetPairTokenAmount(Number(amount0));
 
   // Convert "minPrice" and "maxPrice" to ticks
 
-  const { config } = usePrepareContractWrite({
-    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
-    abi: Funds,
-    functionName: 'createLpPosition',
-    args: [
-      token0!,
-      token1!,
-      BigNumber.from(amount0),
-      BigNumber.from(amount1),
-      BigNumber.from(lowerTick).toNumber(),
-      BigNumber.from(upperTick).toNumber(),
-      3000,
-    ],
-  });
+  // const { config } = usePrepareContractWrite({
+  //   address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
+  //   abi: Funds,
+  //   functionName: 'createLpPosition',
+  //   args: [
+  //     token0!,
+  //     token1!,
+  //     BigNumber.from(amount0),
+  //     BigNumber.from(amount1Calc),
+  //     minTick,
+  //     maxTick,
+  //     Number(feeTier),
+  //   ],
+  // });
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -111,9 +111,8 @@ const CreatePosition = () => {
           <TextInput
             id="token1Amount"
             type={'text'}
-            onChange={(e) => setAmount1(e.target.value.trim())}
             required
-            placeholder="Enter amount of token1"
+            value={amount1Calc}
           />
         </div>
         <CustomButton

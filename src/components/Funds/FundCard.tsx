@@ -1,13 +1,12 @@
 import Funds from '@/abi/Funds';
-import { Address, useContractReads, useToken } from 'wagmi';
-import FundDetails from './FundDetails';
-import FundLiquidityGraph from './FundLiquidityGraph';
 import useMediaQuery from 'src/components/Common/useMediaQuery';
-import type { LPPosition } from '@/types/type';
+import { Address, useContractReads, useQuery, useToken } from 'wagmi';
+import FundDetails from './FundDetails';
 
 interface FundProps {
   fundAddress: Address;
 }
+
 
 const FundCard = ({ fundAddress }: FundProps) => {
   const isMobile = useMediaQuery(768);
@@ -40,22 +39,14 @@ const FundCard = ({ fundAddress }: FundProps) => {
         abi: Funds,
         functionName: 'fundManager',
       },
-      {
-        address: fundAddress,
-        abi: Funds,
-        functionName: 'fundName',
-      },
     ],
     cacheTime: 60 * 1000, // 1min
     enabled: !!fundAddress,
   });
-
   const { data: tokenData, isLoading: tokenIsLoading } = useToken({
     address: data?.length && data[3] && (data[3].toString() as Address),
     enabled: !!(data?.length && data[3]),
   });
-
-  console.log(data, tokenData);
 
   return (
     <div
@@ -68,9 +59,7 @@ const FundCard = ({ fundAddress }: FundProps) => {
       <FundDetails
         fundAddress={fundAddress}
         description={''}
-        fundName={
-          data?.length && data[5] ? data[5].toString() : 'No fund found'
-        }
+        fundName={'No fund found'}
         lpPositions={[]}
         yieldPercentage={1}
         isLoading={isLoading || tokenIsLoading}

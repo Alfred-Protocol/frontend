@@ -1,4 +1,5 @@
-import type { CSSProperties, ReactNode } from 'react';
+import { Spinner } from 'flowbite-react';
+import type { ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface Props
@@ -9,6 +10,7 @@ interface Props
   title: string;
   theme: 'solidPurple' | 'solidBlue' | 'transparentPurple';
   className?: string;
+  isLoading?: boolean;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
 }
@@ -24,6 +26,7 @@ const CustomButton = ({
   title,
   theme = 'solidBlue',
   className = '',
+  isLoading,
   leftIcon,
   rightIcon,
   ...props
@@ -39,7 +42,11 @@ const CustomButton = ({
       {...props}
     >
       {leftIcon}
-      <span>{title}</span>
+      {isLoading ? (
+        <Spinner className="fill-white text-transparent" />
+      ) : (
+        <span>{title}</span>
+      )}
       {rightIcon}
     </button>
   );

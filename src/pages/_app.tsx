@@ -9,6 +9,9 @@ import {
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import type { AppProps } from 'next/app';
+import { QueryClient } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import {
@@ -19,8 +22,8 @@ import {
   polygon,
   polygonMumbai,
 } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
 
 import '@/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -61,7 +64,7 @@ const connectors = connectorsForWallets([
   },
 ]);
 
-export const wagmiClient = createClient({
+const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,

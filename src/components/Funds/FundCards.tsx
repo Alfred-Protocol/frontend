@@ -3,7 +3,7 @@ import FundCreateModal from '@/components/Funds/FundCreateModal';
 import { ArrowPathIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import { Button } from 'flowbite-react';
 import { useState } from 'react';
-import { Address, useContractRead } from 'wagmi';
+import { Address, useAccount, useContractRead } from 'wagmi';
 import { ArrowDown, ArrowUp } from '../Common/Common';
 import CustomButton from '../Common/CustomButton';
 import CustomIconButton from '../Common/CustomIconButton';
@@ -21,9 +21,9 @@ const FundCards = () => {
     functionName: 'getAllFunds',
     cacheOnBlock: true,
   });
+  const { status } = useAccount();
 
   const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
-
   const [showCreateFundModal, setShowCreateFundModal] = useState(false);
 
   return (
@@ -33,6 +33,7 @@ const FundCards = () => {
           <CustomButton
             title="Create Fund"
             theme="solidBlue"
+            disabled={status !== 'connected'}
             onClick={() => setShowCreateFundModal(true)}
           />
         </div>

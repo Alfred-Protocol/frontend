@@ -13,34 +13,29 @@ import SwapTokensModal from './SwapTokens';
 export interface FundDetailsProps {
   isLoading: boolean;
   fundAddress: Address;
-  tvlSymbol: string;
   totalValueLocked: string;
   startDate: string;
   matureDate: string;
   manager: string;
   stableCoinAddress: string;
-  // description: string;
-  // yieldPercentage: number;
-  // lpPositions: LPPosition[];
-  // fundName: string;
+  description?: string;
+  yieldPercentage?: number;
+  fundName: string;
 }
 
 const FundDetails = ({
-  // fundName,
+  fundName,
   fundAddress,
   isLoading,
-  tvlSymbol,
+  description,
   totalValueLocked,
   matureDate,
   startDate,
   manager,
   stableCoinAddress,
-}: // description,
-// yieldPercentage = 20.4,
-// lpPositions = [],
-FundDetailsProps) => {
+  yieldPercentage = 20.4,
+}: FundDetailsProps) => {
   const router = useRouter();
-  const { data } = useFund(fundAddress);
   const account = useAccount();
 
   const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
@@ -64,10 +59,6 @@ FundDetailsProps) => {
 
   const [stableCoinDecimals, stableCoinSymbol] = stableCoin ?? [18, 'ETH'];
 
-  const redirect = () => {
-    router.push(`funds/${fundAddress}`);
-  };
-
   return (
     <div
       className="min-h-40 w-full bg-blackfill text-whiteFont"
@@ -75,21 +66,21 @@ FundDetailsProps) => {
     >
       <div className="flex flex-col justify-between">
         <div className="flex items-center justify-between">
-          <h3 className="text-2xl font-bold sm:text-3xl">
-            {data?.name || 'No name found'}
-          </h3>
-          <CustomButton
-            title="Deposit"
-            theme="solidPurple"
-            onClick={() => setDepositFundModal(true)}
-          />
-          {manager.toLowerCase() === account?.address?.toLowerCase() && (
+          <h3 className="text-2xl font-bold sm:text-3xl">{fundName}</h3>
+          <div className="flex">
             <CustomButton
-              title="Manage"
+              title="Deposit"
               theme="solidPurple"
-              onClick={() => setSwapTokensModal(true)}
+              onClick={() => setDepositFundModal(true)}
             />
-          )}
+            {manager.toLowerCase() === account?.address?.toLowerCase() && (
+              <CustomButton
+                title="Manage"
+                theme="solidPurple"
+                onClick={() => setSwapTokensModal(true)}
+              />
+            )}
+          </div>
         </div>
         <div>
           <p className="text-l mb-xs sm:text-md">
@@ -101,7 +92,7 @@ FundDetailsProps) => {
             <span className="slashed-zero">{truncateString(fundAddress)}</span>
           </p>
           <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
-            {data?.description || 'No description found'}
+            {description || 'No description found.'}
           </p>
         </div>
         <div className="">
@@ -115,8 +106,7 @@ FundDetailsProps) => {
           />
           <div className="flex items-center space-x-2">
             <p className="font-semibold sm:text-xl">Yield:</p>
-            {/* <p className="text-greenGrowth">{yieldPercentage}%</p> */}
-            <p className="text-greenGrowth">{0}%</p>
+            <p className="text-greenGrowth">{yieldPercentage}%</p>
           </div>
           <PairValue field="Start Date" value={startDate} />
           <PairValue

@@ -5,7 +5,7 @@ import { THEME_MAP } from './CustomButton';
 interface CustomIconButtonProps {
   icon: ReactNode;
   iconDescription: string;
-  theme: 'solidPurple' | 'solidBlue' | 'transparentPurple';
+  theme?: 'solidPurple' | 'solidBlue' | 'transparentPurple';
   className?: string;
 }
 

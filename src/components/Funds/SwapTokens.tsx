@@ -82,8 +82,6 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     enabled: isAddressApproved,
   });
 
-  // ???
-
   // wagmi hooks
   const { config } = usePrepareContractWrite({
     address: fundAddress as Address,
@@ -109,12 +107,6 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     hash: data?.hash,
     enabled: isSuccess,
   });
-
-  console.log(
-    'fundWmaticBalance',
-    fundWmaticBalance.toString(),
-    wmaticAllowance.toString()
-  );
 
   // toasts
   const [hasCreated, setHasCreated] = useState(false);

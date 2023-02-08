@@ -1,5 +1,6 @@
 import FundsFactory from '@/abi/FundsFactory';
 import useCreateFund from '@/hooks/useCreateFund';
+import useFunds from '@/hooks/useFunds';
 import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
 import { FormEventHandler, useEffect, useState } from 'react';
@@ -72,7 +73,8 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
     enabled: isSuccess,
   });
   const { address } = useAccount();
-  const { mutate } = useCreateFund();
+  const { mutateAsync } = useCreateFund();
+  const { refetch } = useFunds();
 
   // toasts
   const [hasCreated, setHasCreated] = useState(false);
@@ -80,21 +82,23 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
     if (txIsSuccess && !hasCreated) {
       setHasCreated(true);
       // upload to database
-      mutate({
+      mutateAsync({
         name: fundName,
         address: getFundAddressFromReceipt(txReceipt!),
         manager: address!,
         description: fundDescription,
         startDate: new Date(startDate!),
         matureDate: new Date(matureDate!),
+      }).then(() => {
+        refetch();
+        console.log(
+          `Successfully created, transaction hash: ${JSON.stringify(txReceipt)}`
+        );
+        toast.success(
+          `Successfully created, transaction hash: ${txReceipt?.transactionHash}`
+        );
+        onClose();
       });
-      console.log(
-        `Successfully created, transaction hash: ${JSON.stringify(txReceipt)}`
-      );
-      toast.success(
-        `Successfully created, transaction hash: ${txReceipt?.transactionHash}`
-      );
-      onClose();
     }
   }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
 

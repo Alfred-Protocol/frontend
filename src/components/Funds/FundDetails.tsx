@@ -6,13 +6,16 @@ import {
   ArrowRightIcon,
   ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline';
+import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import type { Address } from 'wagmi';
+import { useState } from 'react';
+import { Address, erc20ABI, useContractRead, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
 import FundTable from '../FundDetails/FundTable';
 import Spinner from '../Layout/Spinner';
+import DepositFundModal from './DepositFundModal';
 import FundTableList from './FundTableList';
 
 export interface FundDetailsProps {
@@ -23,6 +26,7 @@ export interface FundDetailsProps {
   startDate: string;
   matureDate: string;
   manager: string;
+  stableCoinAddress: string;
   // description: string;
   // yieldPercentage: number;
   // lpPositions: LPPosition[];
@@ -38,12 +42,33 @@ const FundDetails = ({
   matureDate,
   startDate,
   manager,
+  stableCoinAddress,
 }: // description,
 // yieldPercentage = 20.4,
 // lpPositions = [],
 FundDetailsProps) => {
   const router = useRouter();
   const { data } = useFund(fundAddress);
+
+  const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
+
+  const { data: stableCoin } = useContractReads({
+    contracts: [
+      {
+        address: stableCoinAddress as Address,
+        abi: erc20ABI,
+        functionName: 'decimals',
+      },
+      {
+        address: stableCoinAddress as Address,
+        abi: erc20ABI,
+        functionName: 'symbol',
+      },
+    ],
+    enabled: stableCoinAddress != ethers.constants.AddressZero,
+  });
+
+  const [stableCoinDecimals, stableCoinSymbol] = stableCoin ?? [18, 'ETH'];
 
   const redirect = () => {
     router.push(`funds/${fundAddress}`);
@@ -61,7 +86,7 @@ FundDetailsProps) => {
           <CustomButton
             title="Deposit"
             theme="solidPurple"
-            onClick={redirect}
+            onClick={() => setDepositFundModal(true)}
           />
         </div>
         <div>
@@ -74,7 +99,14 @@ FundDetailsProps) => {
           </p>
         </div>
         <div className="">
-          <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
+          <PairValue
+            field="TVL"
+            value={
+              ethers.utils.formatUnits(totalValueLocked, stableCoinDecimals) +
+              ' ' +
+              stableCoinSymbol
+            }
+          />
           <div className="flex items-center space-x-2">
             <p className="font-semibold sm:text-xl">Yield:</p>
             {/* <p className="text-greenGrowth">{yieldPercentage}%</p> */}
@@ -89,6 +121,11 @@ FundDetailsProps) => {
           <FundTableList />
         </div>
       </div>
+      <DepositFundModal
+        fundAddress={fundAddress}
+        show={showDepositFundModal}
+        onClose={() => setDepositFundModal(false)}
+      />
     </div>
   );
 };

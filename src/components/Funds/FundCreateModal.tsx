@@ -40,6 +40,10 @@ const getFundAddressFromReceipt = (
   return fundAddress;
 };
 
+const WMATIC_MUMBAI_ADDRESS =
+  process.env.WMATIC_MUMBAI_ADDRESS ??
+  '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
+
 const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
   const [fundName, setFundName] = useState('');
   const [fundDescription, setFundDescription] = useState('');
@@ -52,7 +56,7 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
     abi: FundsFactory,
     functionName: 'createNewFund',
     args: [
-      process.env.USDC_MUMBAI_ADDRESS as Address,
+      WMATIC_MUMBAI_ADDRESS as Address,
       BigNumber.from(startDate),
       BigNumber.from(matureDate),
     ],

@@ -3,6 +3,9 @@ import useMediaQuery from 'src/components/Common/useMediaQuery';
 import { tickToPrice } from '@uniswap/v3-sdk';
 import { Address, useContractReads, useQuery, useToken } from 'wagmi';
 import FundDetails from './FundDetails';
+import { useState } from 'react';
+import DepositFundModal from './DepositFundModal';
+import { ethers } from 'ethers';
 
 interface FundProps {
   fundAddress: Address;
@@ -16,6 +19,7 @@ const stableCoinIndex = 3;
 const fundManagerIndex = 4;
 const fundNameIndex = 5;
 const lpPositionsIndex = 6;
+const stableCoinAddressIndex = 7;
 
 const FundCard = ({ fundAddress }: FundProps) => {
   const isMobile = useMediaQuery(768);
@@ -57,6 +61,11 @@ const FundCard = ({ fundAddress }: FundProps) => {
         address: fundAddress,
         abi: Funds,
         functionName: 'fetchAllLpPositions',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'stablecoin',
       },
     ],
     // @marcuspang -> Does it force a re-fetch every 1min?
@@ -102,6 +111,11 @@ const FundCard = ({ fundAddress }: FundProps) => {
           data?.length && data[matureDateIndex]
             ? new Date(data[matureDateIndex]?.toNumber()).toLocaleDateString()
             : 'No date found'
+        }
+        stableCoinAddress={
+          data?.length && data[stableCoinAddressIndex]
+            ? data[stableCoinAddressIndex].toString()
+            : ethers.constants.AddressZero
         }
       />
       {/* for mock data */}

@@ -7,6 +7,8 @@ import {
 const useGetPairTokenAmount = (amount0: number) => {
   const { state } = useAppContext();
 
+  if (isNaN(amount0) || amount0 == 0) return 0;
+
   const P = state.priceAssumptionValue;
   let Pl = state.priceRangeValue[0];
   let Pu = state.priceRangeValue[1];

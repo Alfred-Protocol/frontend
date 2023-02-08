@@ -12,9 +12,13 @@ import { getTokensAmountFromDepositAmountUSD } from '../../utils/uniswapv3/math'
 import { useGetTokensAmount } from '../../hooks/useGetTokensAmount';
 import { useGetPairTokenAmount } from '../../hooks/useGetPairTokenAmount';
 
-type Props = {};
+type Props = {
+  fundAddress?: string;
+};
 
-const CreatePosition = ({}: Props) => {
+const CreatePosition = ({
+  fundAddress = '0x654ee4dc5ee1edf02dd27d3052c4df238a70c558',
+}: Props) => {
   const { state } = useAppContext();
 
   const [amount1, setAmount1] = useState<string>('0');
@@ -47,25 +51,36 @@ const CreatePosition = ({}: Props) => {
 
   // Price is "token1/token0"
   const amount0Calc = useGetPairTokenAmount(Number(amount1));
+  // const amount1Calc = useGetPairTokenAmount(Number(amount0));
+
   const token0Details = state.token0;
   const token1Details = state.token1;
 
   // Convert "minPrice" and "maxPrice" to ticks
+  const token0Decimals = isNaN(Number(token0Details?.decimals))
+    ? 18
+    : Number(token0Details?.decimals);
+  const token1Decimals = isNaN(Number(token1Details?.decimals))
+    ? 18
+    : Number(token1Details?.decimals);
+
+  console.log('amount0Calc', amount0Calc);
 
   const amount0CalcInWei = ethers.utils.parseUnits(
     `${Math.floor(amount0Calc)}`,
-    token0Details?.decimals
+    token0Decimals
   );
 
   const amount1InWei = ethers.utils.parseUnits(
     `${Math.floor(Number(amount1))}`,
-    token1Details?.decimals
+    token1Decimals
   );
 
   const { config } = usePrepareContractWrite({
-    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
+    address: fundAddress as Address,
     abi: Funds,
     functionName: 'createLpPosition',
+    chainId: 80001,
     args: [
       token0Details?.id as `0x${string}`,
       token1Details?.id as `0x${string}`,
@@ -75,6 +90,7 @@ const CreatePosition = ({}: Props) => {
       maxTick,
       Number(feeTier),
     ],
+    enabled: true,
   });
 
   const { data, isLoading, write } = useContractWrite(config);
@@ -90,6 +106,11 @@ const CreatePosition = ({}: Props) => {
   // 2. Convert "deposit amount" to number of token0 and token1
   // 3. Create LP position
 
+  // Before user chooses tokens, don't render anything
+  if (!state.token0 || !state.token1) {
+    return null;
+  }
+
   return (
     <div className="mt-12">
       <form className="space-y-4 rounded" onSubmit={onSubmit}>
@@ -99,6 +120,7 @@ const CreatePosition = ({}: Props) => {
             id="token1Amount"
             type={'text'}
             onChange={(e) => setAmount1(e.target.value.trim())}
+            // value={amount1Calc}
             required
             placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
           />
@@ -109,15 +131,18 @@ const CreatePosition = ({}: Props) => {
             id="token0Amount"
             type={'text'}
             required
+            readOnly
             value={amount0Calc}
           />
         </div>
-        <CustomButton
-          className="focus:shadow-outline rounded py-2 px-4"
-          type="submit"
-          title="Create"
-          theme="solidBlue"
-        />
+        {write && (
+          <CustomButton
+            className="focus:shadow-outline rounded py-2 px-4"
+            type="submit"
+            title="Create"
+            theme="solidBlue"
+          />
+        )}
       </form>
     </div>
   );

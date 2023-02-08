@@ -63,7 +63,7 @@ const AboutPage = () => {
             {!showPairModal && <LiquidityPositionChart />}
           </div>
         </div>
-        {/* <CreatePosition /> */}
+        <CreatePosition />
       </Layout>
     </StyleRoot>
   );

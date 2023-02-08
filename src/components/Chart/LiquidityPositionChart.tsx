@@ -51,7 +51,7 @@ const WrappedHeader = styled.div`
 let d3Chart: D3LiquidityHistogram | null = null;
 const LiquidityPositionChart = () => {
   const { state, dispatch } = useAppContext();
-  console.log('state ', state);
+
   const refElement = useRef<HTMLDivElement>(null);
 
   const processData = (
@@ -103,7 +103,6 @@ const LiquidityPositionChart = () => {
   };
 
   useEffect(() => {
-    console.log('state testign', state);
     if (!state.poolTicks || !state.pool || !state.token0 || !state.token1)
       return;
 
@@ -112,7 +111,6 @@ const LiquidityPositionChart = () => {
     if (refElement.current) {
       width = refElement.current.offsetWidth;
     }
-    console.log('d3Chart testign', d3Chart);
 
     if (d3Chart) d3Chart.destroy();
 
@@ -281,7 +279,6 @@ const LiquidityPositionChart = () => {
     // eslint-disable-next-line
   }, [state.priceRangeValue, state.token0, state.token1, state.isFullRange]);
 
-  console.log('d3Chart', d3Chart);
   return (
     <div className="relative flex rounded-xl border-2 bg-blackfill text-left text-white">
       <Container>

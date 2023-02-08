@@ -491,7 +491,6 @@ const SelectPairModal = ({ submitEnded }: Props) => {
     // setQueryParam(`token${selectedTokenIndex}`, token.id);
   };
 
-  console.log('showSelectTokenPage ', showSelectTokenPage);
   return (
     <>
       <Modal
@@ -617,7 +616,6 @@ const SelectPairModal = ({ submitEnded }: Props) => {
               <div
                 className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight"
                 onClick={() => {
-                  console.log(' isSubmitLoading ', isSubmitLoading);
                   if (!isSubmitLoading) {
                     setSelectedPool(null);
                     deleteQueryParam('feeTier');

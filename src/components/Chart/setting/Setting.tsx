@@ -30,7 +30,7 @@ const Setting = ({ isLoading }: Props) => {
   if (isLoading) {
     return (
       <div role="status" className="h-72 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        <div className="dark:blackfill mb-4 h-full w-full rounded-xl bg-blackfillLess"></div>
       </div>
     );
   }

@@ -134,7 +134,7 @@ const EstimatedFees = ({ isLoading }: Props) => {
   if (isLoading) {
     return (
       <div role="status" className="w-full max-w-sm animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        <div className="dark:blackfill mb-4 h-full w-full rounded-xl bg-blackfillLess"></div>
       </div>
     );
   }

@@ -1,9 +1,7 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
 import FundsFactory from '@/abi/FundsFactory';
 import { useState } from 'react';
-import {
-  Address, useAccount, useContractRead, useSigner
-} from 'wagmi';
+import { Address, useAccount, useContractRead, useSigner } from 'wagmi';
 import { LPPositionsMock } from '../../mockData/mockData';
 import AssetsDetail from './AssetsDetail';
 import AssetsHeader from './AssetsHeader';
@@ -146,6 +144,46 @@ const AssetsSection = () => {
     setModalType(undefined);
   };
 
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <>
+          <div role="status" className="h-60 w-3/5 animate-pulse">
+            <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+          </div>
+          <div role="status" className="h-60 w-3/5 animate-pulse">
+            <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+          </div>
+          <div role="status" className="h-60 w-3/5 animate-pulse">
+            <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+          </div>
+        </>
+      );
+    }
+
+    return addresses?.map((address) => {
+      return (
+        <AssetsDetail
+          key={address}
+          fundAddress={address}
+          curUserAddress={curUserAddress}
+          // address={data.address}
+          // key={idx}
+          // lpPositions={data.positions}
+          // amount0={data.amount0}
+          // amount1={data.amount1}
+          // totalValueLocked={36}
+          // startDate="02/05/2023"
+          // matureDate="02/07/2023"
+          // fundName={data.fundName}
+          // logo1={undefined}
+          // logo2={undefined}
+          // yieldPercentage={30.2}
+        />
+      );
+    });
+  };
+
   return (
     <div>
       <div className="flex flex-col items-center justify-center">
@@ -155,27 +193,7 @@ const AssetsSection = () => {
           netValue={3223.43}
         />
         <div className="flex w-full flex-col items-center space-y-10">
-          {addresses?.map((address) => {
-            return (
-              <AssetsDetail
-                key={address}
-                fundAddress={address}
-                curUserAddress={curUserAddress}
-                // address={data.address}
-                // key={idx}
-                // lpPositions={data.positions}
-                // amount0={data.amount0}
-                // amount1={data.amount1}
-                // totalValueLocked={36}
-                // startDate="02/05/2023"
-                // matureDate="02/07/2023"
-                // fundName={data.fundName}
-                // logo1={undefined}
-                // logo2={undefined}
-                // yieldPercentage={30.2}
-              />
-            );
-          })}
+          {renderContent()}
         </div>
       </div>
     </div>

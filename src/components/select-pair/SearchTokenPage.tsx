@@ -70,7 +70,6 @@ const TokenItem = styled.div`
   color: white;
   display: flex;
   align-items: center;
-  transition: 0.3s;
   padding: 5px 15px;
 
   @media only screen and (max-width: 400px) {
@@ -79,6 +78,9 @@ const TokenItem = styled.div`
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
+    border-color: #ef5da8;
+    border-width: thin;
+    border-radius: 5px;
   }
 
   & > img {
@@ -223,7 +225,7 @@ const SearchTokenPage = ({
       <Container>
         <SearchInput
           onChange={(e) => handleSearch(e.target.value)}
-          placeholder="Search name or paste address"
+          placeholder="Search name"
         />
       </Container>
       <Divider />

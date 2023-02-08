@@ -1,6 +1,7 @@
 import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
-import React, { FormEventHandler, useState } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import {
   Address,
   usePrepareContractWrite,
@@ -26,10 +27,9 @@ const WETH_MUMBAI_ADDRESS = (process.env.WETH_MUMBAI_ADDRESS ??
   '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa') as Address;
 
 const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
-  const [amountToDeposit, setAmountToDeposit] = useState(0);
+  const [swapAmount, setSwapAmount] = useState(0);
 
   const account = useAccount();
-
   const { data: wmatic } = useContractReads({
     contracts: [
       {
@@ -62,26 +62,6 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   const [wmaticDecimals, wmaticBalance, wmaticAllowance, fundWmaticBalance] =
     wmatic ?? [18, 0, 0, 0];
 
-  // const { config: approveErc20Config } = usePrepareContractWrite({
-  //   scopeKey: 'approveErc20',
-  //   address: WMATIC_MUMBAI_ADDRESS as Address,
-  //   abi: erc20ABI,
-  //   functionName: 'approve',
-  //   args: [fundAddress as Address, ethers.constants.MaxUint256],
-  //   enabled: false,
-  // });
-
-  // const {
-  //   data: approveErc20Data,
-  //   writeAsync: approveErc20Write,
-  //   isSuccess: isAddressApproved,
-  // } = useContractWrite(approveErc20Config);
-
-  // const { isSuccess: approveErc20IsSuccess } = useWaitForTransaction({
-  //   hash: approveErc20Data?.hash,
-  //   enabled: isAddressApproved,
-  // });
-
   // wagmi hooks
   const { config } = usePrepareContractWrite({
     address: fundAddress as Address,
@@ -90,14 +70,11 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     args: [
       WMATIC_MUMBAI_ADDRESS,
       WETH_MUMBAI_ADDRESS,
-      BigNumber.from(amountToDeposit).mul(
-        BigNumber.from(10).pow(wmaticDecimals)
-      ),
+      ethers.utils.parseUnits(`${swapAmount}`, wmaticDecimals),
     ],
     enabled:
-      amountToDeposit > 0 &&
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) <=
-        wmaticBalance,
+      swapAmount > 0 &&
+      ethers.utils.parseUnits(`${swapAmount}`, wmaticDecimals) <= wmaticBalance,
   });
   const { data, isSuccess, write } = useContractWrite({
     mode: 'prepared',
@@ -114,25 +91,33 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   // toasts
   const [hasCreated, setHasCreated] = useState(false);
 
+  useEffect(() => {
+    if (txIsSuccess && !hasCreated) {
+      setHasCreated(true);
+      console.log(
+        `Successfully swapped, transaction hash: ${JSON.stringify(txReceipt)}`
+      );
+      toast.success(
+        `Successfully swapped, transaction hash: ${txReceipt?.transactionHash}`
+      );
+      onClose();
+    }
+  }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
+
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setHasCreated(false);
-    console.log(
-      WMATIC_MUMBAI_ADDRESS,
-      WETH_MUMBAI_ADDRESS,
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals)
-    );
-    console.log('write', write);
 
     if (
-      // !approveErc20IsSuccess &&
-      wmaticAllowance <
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
+      ethers.utils.parseUnits(`${swapAmount}`, wmaticDecimals) > wmaticBalance
     ) {
-      // await approveErc20Write?.();
-    } else {
-      write?.();
+      toast.error(
+        `Insufficient balance, currently you have ${ethers.utils.formatEther(
+          wmaticBalance
+        )} WMATIC`
+      );
     }
+    write?.();
   };
 
   return (
@@ -141,20 +126,24 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
       <Modal.Body className="bg-gray-800">
         <form className="space-y-4 rounded" onSubmit={onSubmit}>
           <div className="space-y-2">
-            <Label htmlFor="fundName">WMATIC amount</Label>
+            <Label htmlFor="amountToSwap">WMATIC amount</Label>
             <TextInput
-              id="amountToDeposit"
+              id="amountToSwap"
               type="text"
-              onChange={(e) => setAmountToDeposit(+e.target.value)}
+              onChange={(e) => {
+                if (!isNaN(Number(e.target.value))) {
+                  setSwapAmount(Number(e.target.value));
+                }
+              }}
               required
-              placeholder="Enter your deposit amount"
+              placeholder="Enter your swap amount"
             />
           </div>
           <div className="flex space-x-4">
             <CustomButton
               className="focus:shadow-outline rounded py-2 px-4"
               type="submit"
-              title="Approve"
+              title="Swap"
               theme="solidBlue"
               isLoading={txIsLoading}
             />

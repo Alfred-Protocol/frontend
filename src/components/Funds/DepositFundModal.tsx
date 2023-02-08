@@ -3,8 +3,13 @@ import { Label, Modal, TextInput } from 'flowbite-react';
 import { FormEventHandler, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
-  Address, erc20ABI, useAccount,
-  useContractReads, useContractWrite, usePrepareContractWrite, useWaitForTransaction
+  Address,
+  erc20ABI,
+  useAccount,
+  useContractReads,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
 } from 'wagmi';
 import Funds from '../../abi/Funds';
 import CustomButton from '../Common/CustomButton';
@@ -108,7 +113,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
       <Modal.Body className="bg-gray-800">
         <form className="space-y-4 rounded" onSubmit={onSubmit}>
           <div className="space-y-2">
-            <Label htmlFor="fundName">WMATIC amount</Label>
+            <Label htmlFor="amountToDeposit">WMATIC amount</Label>
             <TextInput
               id="amountToDeposit"
               type="text"

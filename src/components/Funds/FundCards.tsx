@@ -26,6 +26,52 @@ const FundCards = () => {
   const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
   const [showCreateFundModal, setShowCreateFundModal] = useState(false);
 
+  const renderSkeleton = () => {
+    const arr = [1, 2, 3, 4, 5, 6];
+
+    return (
+      <>
+        <div role="status" className="w-50 h-96 animate-pulse">
+          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+        <div role="status" className="w-50 h-96 animate-pulse">
+          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+        <div role="status" className="w-50 h-96 animate-pulse">
+          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+        <div role="status" className="w-50 h-96 animate-pulse">
+          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+        <div role="status" className="w-50 h-96 animate-pulse">
+          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+        <div role="status" className="w-50 h-96 animate-pulse">
+          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        </div>
+      </>
+    );
+  };
+
+  const renderContent = () => {
+    if (isLoading) {
+      return renderSkeleton();
+    } else {
+      return (
+        fundAddresses != null &&
+        fundAddresses
+          // TODO: update once owner has been tied to fund
+          // .filter(
+          //   (fund) =>
+          //     viewState === ViewState.ALL ||
+          //     (status === 'connected' &&
+          //       fund.toLowerCase() === address.toLowerCase())
+          // )
+          .map((fund) => <FundCard key={fund} fundAddress={fund} />)
+      );
+    }
+  };
+
   return (
     <>
       <div className="mt-16 mb-10 sm:flex sm:justify-between">
@@ -81,17 +127,7 @@ const FundCards = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-y-10 gap-x-7 pb-12 xl:grid-cols-2 2xl:grid-cols-3">
-        {!isLoading &&
-          fundAddresses != null &&
-          fundAddresses
-            // TODO: update once owner has been tied to fund
-            // .filter(
-            //   (fund) =>
-            //     viewState === ViewState.ALL ||
-            //     (status === 'connected' &&
-            //       fund.toLowerCase() === address.toLowerCase())
-            // )
-            .map((fund) => <FundCard key={fund} fundAddress={fund} />)}
+        {renderContent()}
       </div>
       <FundCreateModal
         show={showCreateFundModal}

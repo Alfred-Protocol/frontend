@@ -9,9 +9,9 @@ import {
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import type { AppProps } from 'next/app';
-import { QueryClient } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { QueryClientProvider } from 'react-query';
+// import { QueryClient } from 'react-query';
+// import { ReactQueryDevtools } from 'react-query/devtools';
+// import { QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import {

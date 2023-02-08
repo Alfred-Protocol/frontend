@@ -8,6 +8,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { getCurrentNetwork } from '../Assets/network';
 import type { Token } from '@/types/type';
+import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 // import { Token } from '../../common/interfaces/uniswap.interface';
 // import { getCurrentNetwork } from '../../common/network';
 
@@ -271,7 +272,7 @@ const SearchTokenPage = ({
                     navigator.clipboard.writeText(token.id);
                   }}
                 >
-                  <FontAwesomeIcon icon={faCopy} />
+                  <FontAwesomeIcon icon={faCopy as IconProp} />
                 </button>
               </TokenItemWrapper>
             );

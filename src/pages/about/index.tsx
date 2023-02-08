@@ -7,7 +7,7 @@ import { useAppContext } from '@/context/app/appContext';
 import ContextProvider from '@/context/ContextProvider';
 import { useEffect, useState } from 'react';
 import { fadeIn, bounce } from 'react-animations';
-import Radium, { StyleRoot } from 'radium';
+import Radium from 'radium';
 
 const styles = {
   fadeIn: {
@@ -35,12 +35,12 @@ const AboutPage = () => {
   }
 
   return (
-    <StyleRoot>
+    <Radium.StyleRoot>
       <Layout>
         <div className="flex w-full justify-center">
           <div className="mt-10 flex w-4/5 flex-col space-y-10">
             {showPairModal ? (
-              <div style={styles.fadeIn}>
+              <div style={styles.fadeIn as any}>
                 <SelectPairModal submitEnded={() => setShowPairModal(false)} />
               </div>
             ) : (
@@ -50,7 +50,7 @@ const AboutPage = () => {
                   theme="solidPurple"
                   className="w-1/5"
                   onClick={() => setShowPairModal(true)}
-                  style={styles.bounce}
+                  style={styles.bounce as any}
                 />
               </div>
             )}
@@ -65,7 +65,7 @@ const AboutPage = () => {
         </div>
         {/* <CreatePosition /> */}
       </Layout>
-    </StyleRoot>
+    </Radium.StyleRoot>
   );
 };
 export default AboutPage;

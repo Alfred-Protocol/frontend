@@ -39,6 +39,7 @@ import {
 import type { Network, Pool, Token } from '@/types/type';
 import { getPriceChart } from '@/repos/coingecko';
 import { Heading, PrimaryBlockButton } from '../Chart/atomic';
+import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ModalStyle = {
   overlay: {
@@ -507,13 +508,14 @@ const SelectPairModal = ({ submitEnded }: Props) => {
                 setShowSelectNetworkPage(false);
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} />
+              <FontAwesomeIcon icon={faArrowLeft as IconProp} />
             </div>
             <span>Select Network</span>
           </GoBack>
           {NETWORKS.map((network, i) => {
             return (
               <NetworkItem
+                key={i}
                 style={
                   network.disabled
                     ? {
@@ -569,7 +571,7 @@ const SelectPairModal = ({ submitEnded }: Props) => {
                 setSelectedTokenIndex(null);
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} />
+              <FontAwesomeIcon icon={faArrowLeft as IconProp} />
             </div>
             <span>Select Token</span>
           </GoBack>

@@ -8,32 +8,131 @@ import ETH from 'src/assets/ETH.png';
 import Image from 'next/image';
 import CustomButton from '../Common/CustomButton';
 import type { LPPosition } from '@/types/type';
+import { Address, useContractReads } from 'wagmi';
+import Funds from '@/abi/Funds';
+import { ethers } from 'ethers';
+import { LPPositionsMock } from '@/mockData/mockData';
 
 interface AssetsDetailProps {
-  totalValueLocked: number;
-  matureDate: string;
-  startDate: string;
-  yieldPercentage: number;
-  logo1: any;
-  logo2: any;
-  fundName: string;
-  lpPositions: LPPosition[];
-  amount0: number;
-  amount1: number;
+  // totalValueLocked: number;
+  // matureDate: string;
+  // startDate: string;
+  // yieldPercentage: number;
+  // logo1: any;
+  // logo2: any;
+  // fundName: string;
+  // lpPositions: LPPosition[];
+  // amount0: number;
+  // amount1: number;
+  fundAddress?: Address;
+  curUserAddress?: Address;
 }
 
+// Convert to ENUM
+const tvlIndex = 0;
+const startDateIndex = 1;
+const matureDateIndex = 2;
+const stableCoinIndex = 3;
+const fundManagerIndex = 4;
+const fundNameIndex = 5;
+const lpPositionsIndex = 6;
+const stableCoinAddressIndex = 7;
+
 const AssetsDetail = ({
-  totalValueLocked = 32,
-  matureDate = '05/03/2023',
-  startDate = '01/02/2023',
-  yieldPercentage = 20.4,
-  logo1 = ETH,
-  logo2 = USDT,
-  fundName = 'Fund A',
-  lpPositions = [],
-  amount0,
-  amount1,
-}: AssetsDetailProps) => {
+  fundAddress = undefined,
+  curUserAddress = '',
+}: // totalValueLocked = 32,
+// matureDate = '05/03/2023',
+// startDate = '01/02/2023',
+// yieldPercentage = 20.4,
+// logo1 = ETH,
+// logo2 = USDT,
+// fundName = 'Fund A',
+// lpPositions = [],
+// amount0,
+// amount1,
+AssetsDetailProps) => {
+  if (!fundAddress) {
+    return null;
+  }
+  const { data, isLoading } = useContractReads({
+    scopeKey: fundAddress, // cache with individual fund page
+    contracts: [
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'totalValueLocked',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'startDate',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'matureDate',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'stablecoin',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fundManager',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fundName',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'fetchAllLpPositions',
+      },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'stablecoin',
+      },
+    ],
+    // @marcuspang -> Does it force a re-fetch every 1min?
+    cacheTime: 60 * 1000, // 1min
+    enabled: !!fundAddress,
+  });
+
+  console.log('data ', data);
+  if (!data) {
+    return null;
+  }
+
+  const fundName = data[fundNameIndex];
+  const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);
+  const yieldPercentage = 12.2;
+  const startDate = new Date(
+    data[startDateIndex]?.toNumber()
+  ).toLocaleDateString();
+  const matureDate = new Date(
+    data[matureDateIndex]?.toNumber()
+  ).toLocaleDateString();
+  const logo1 = ETH;
+  const logo2 = USDT;
+  const lpPositions = data[lpPositionsIndex] || LPPositionsMock;
+  const amount0 = 0;
+  const amount1 = 1;
+  const fundManagerAddress = data[fundManagerIndex];
+  console.log('fundManagerAddress', fundManagerAddress);
+  console.log('curUserAddress', curUserAddress);
+
+  if (fundManagerAddress.toString() != curUserAddress.toString()) {
+    return;
+  }
+
+  console.log('rendering count 1');
+
   return (
     <div className="relative flex w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
       <CustomButton

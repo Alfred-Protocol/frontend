@@ -1,6 +1,6 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
 import { ChangeEvent, ChangeEventHandler, useState } from 'react';
-import { ethers } from 'ethers';
+import { ethers, Signer } from 'ethers';
 import Card from './Card';
 import PageTitle from '../Layout/PageTitle';
 import DepositModal from './DepositModal';
@@ -9,6 +9,17 @@ import WithdrawModal from './WithdrawModal';
 import AssetsHeader from './AssetsHeader';
 import AssetsDetail from './AssetsDetail';
 import { LPPositionsMock } from '../../mockData/mockData';
+import {
+  Address,
+  useContractRead,
+  useContractReads,
+  useSigner,
+  useAccount,
+} from 'wagmi';
+import FundsFactory from '@/abi/FundsFactory';
+import { useEffect } from 'react';
+import Funds from '@/abi/Funds';
+import { sign } from 'crypto';
 
 export type Fund = {
   fundName: string;
@@ -23,7 +34,7 @@ const mockData = [
   {
     fundName: 'Fund A',
     tvl: 234,
-    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
+    address: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1 },
@@ -38,7 +49,7 @@ const mockData = [
   {
     fundName: 'Fund B',
     tvl: 234,
-    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
+    address: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1.1 },
@@ -53,7 +64,7 @@ const mockData = [
   {
     fundName: 'Fund C',
     tvl: 234,
-    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
+    address: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 2 },
@@ -68,7 +79,7 @@ const mockData = [
   {
     fundName: 'Fund D',
     tvl: 234,
-    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
+    address: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1.3 },
@@ -90,6 +101,21 @@ const AssetsSection = () => {
   const [modalFund, setModalFund] = useState<Fund | undefined>(undefined);
   const [modalType, setModalType] = useState<modalType | undefined>(undefined);
   const [sucessModalMessage, setSuccessModalMessage] = useState('');
+
+  const { data: signer } = useSigner();
+  const { data: addresses, isLoading } = useContractRead({
+    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
+    abi: FundsFactory,
+    functionName: 'getAllFunds',
+    cacheOnBlock: true,
+  });
+
+  const { status, address: curUserAddress } = useAccount();
+
+  console.log('status ', status);
+
+  // const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
+  // const [showCreateFundModal, setShowCreateFundModal] = useState(false);
 
   const onClickDeposit = (fund: Fund) => {
     setModalType('deposit');
@@ -187,21 +213,23 @@ const AssetsSection = () => {
           netValue={3223.43}
         />
         <div className="flex w-full flex-col items-center space-y-10">
-          {mockData.map((data, idx) => {
+          {addresses?.map((address, idx) => {
             return (
               <AssetsDetail
-                fundAddress={data.fundAddress}
-                key={idx}
-                lpPositions={data.positions}
-                amount0={data.amount0}
-                amount1={data.amount1}
-                totalValueLocked={36}
-                startDate="02/05/2023"
-                matureDate="02/07/2023"
-                fundName={data.fundName}
-                logo1={undefined}
-                logo2={undefined}
-                yieldPercentage={30.2}
+                fundAddress={address}
+                curUserAddress={curUserAddress}
+                // address={data.address}
+                // key={idx}
+                // lpPositions={data.positions}
+                // amount0={data.amount0}
+                // amount1={data.amount1}
+                // totalValueLocked={36}
+                // startDate="02/05/2023"
+                // matureDate="02/07/2023"
+                // fundName={data.fundName}
+                // logo1={undefined}
+                // logo2={undefined}
+                // yieldPercentage={30.2}
               />
             );
           })}

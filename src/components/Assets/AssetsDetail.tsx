@@ -155,9 +155,10 @@ AssetsDetailProps) => {
       onClick={() => router.push('funds/' + fundAddress)}
     >
       <CustomButton
-        title="Add Position"
+        title="Withdraw"
         theme="solidPurple"
         className="absolute right-5 top-5"
+        onClick={() => {}}
       />
       <div className="mr-12 text-left">
         <p className="mb-2 text-2xl sm:text-3xl">{fundName}</p>

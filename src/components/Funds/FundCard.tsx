@@ -98,9 +98,7 @@ const FundCard = ({ fundAddress }: FundProps) => {
         }
         tvlSymbol={tokenData ? tokenData.symbol : 'No symbol found'}
         totalValueLocked={
-          data?.length && data[tvlIndex]
-            ? data[tvlIndex].toString()
-            : 'No TVL Found'
+          data?.length && data[tvlIndex] ? data[tvlIndex].toString() : '0'
         }
         startDate={
           data?.length && data[startDateIndex]

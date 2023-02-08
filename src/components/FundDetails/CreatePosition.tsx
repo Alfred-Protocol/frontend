@@ -112,8 +112,9 @@ const CreatePosition = ({
   }
 
   return (
-    <div className="mt-12">
-      <form className="space-y-4 rounded" onSubmit={onSubmit}>
+    <div className="relative w-2/5 justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 pb-10 text-left text-center text-white">
+      <p className="mb-5 text-3xl">Trade Execution</p>
+      <form className="flex flex-col space-y-6 rounded" onSubmit={onSubmit}>
         <div className="space-y-2">
           <span className="text-white">{state.token1?.symbol} amount</span>
           <TextInput
@@ -135,7 +136,7 @@ const CreatePosition = ({
             value={amount0Calc}
           />
         </div>
-        {write && (
+        {true && (
           <CustomButton
             className="focus:shadow-outline rounded py-2 px-4"
             type="submit"

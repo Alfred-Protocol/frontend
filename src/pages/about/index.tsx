@@ -61,9 +61,13 @@ const AboutPage = () => {
               </div>
             )}
             {!showPairModal && <LiquidityPositionChart />}
+            {!showPairModal && (
+              <div className="flex justify-center">
+                <CreatePosition />
+              </div>
+            )}
           </div>
         </div>
-        <CreatePosition />
       </Layout>
     </Radium.StyleRoot>
   );

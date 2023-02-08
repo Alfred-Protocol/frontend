@@ -59,6 +59,7 @@
     "react-type-animation": "^2.1.2",
     "styled-components": "^5.3.6",
     "tailwind-merge": "^1.9.1",
+    "truncate-eth-address": "^1.0.2",
     "tsparticles": "^2.8.0",
     "wagmi": "^0.11.3",
     "web3": "^1.8.2"

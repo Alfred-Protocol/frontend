@@ -15,7 +15,11 @@ enum ViewState {
 }
 
 const FundCards = () => {
-  const { data: fundAddresses, isLoading } = useContractRead({
+  const {
+    data: fundAddresses,
+    isLoading,
+    refetch,
+  } = useContractRead({
     address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
     abi: FundsFactory,
     functionName: 'getAllFunds',
@@ -130,6 +134,7 @@ const FundCards = () => {
       <FundCreateModal
         show={showCreateFundModal}
         onClose={() => {
+          refetch();
           setShowCreateFundModal(false);
         }}
       />

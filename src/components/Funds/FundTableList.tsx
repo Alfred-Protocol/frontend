@@ -1,11 +1,5 @@
-import type { PositionData } from '@/pages/funds/[address]/manage';
 import type { LPPosition } from '@/types/type';
 import { BigNumber } from 'ethers';
-import PairImage from '../Common/PairImage';
-import { tickToPrice } from '@uniswap/v3-sdk';
-import { Token } from '@uniswap/sdk-core';
-import type { Address } from 'wagmi';
-import { useMemo } from 'react';
 import LPPair from './LPPair';
 
 const mockData: Array<LPPosition> = [

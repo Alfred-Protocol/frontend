@@ -1,45 +1,34 @@
-import React, { useEffect } from 'react';
-import Modal from 'react-modal';
+import { useEffect } from 'react';
 import ReactLoading from 'react-loading';
+import Modal from 'react-modal';
 import { useModalContext } from '../../context/modal/modalContext';
 // import { Heading } from '../../common/components/atomic';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faArrowLeft,
-  faChevronDown,
-  faTimes,
-} from '@fortawesome/free-solid-svg-icons';
 // import { PrimaryBlockButton } from '../../common/components/atomic';
 import { useState } from 'react';
-import {
-  getPoolFromPair,
-  getPoolTicks,
-  getTopTokenList,
-  getAvgTradingVolume,
-  getToken,
-} from '../../repos/uniswap';
-import SearchTokenPage from './SearchTokenPage';
 import { useAppContext } from '../../context/app/appContext';
 import { AppActionType } from '../../context/app/appReducer';
+import {
+  getAvgTradingVolume,
+  getPoolFromPair,
+  getPoolTicks,
+  getToken,
+  getTopTokenList,
+} from '../../repos/uniswap';
+import SearchTokenPage from './SearchTokenPage';
 // import { getPriceChart } from '../../repos/coingecko';
-import { ModalActionType } from '../../context/modal/modalReducer';
 import { NETWORKS, setCurrentNetwork } from 'src/components/Assets/network';
+import { ModalActionType } from '../../context/modal/modalReducer';
 import { sortTokens } from '../../utils/uniswapv3/helper';
 // import {
 //   Network,
 //   Pool,
 //   Token,
 // } from '../../common/interfaces/uniswap.interface';
-import {
-  deleteQueryParam,
-  getQueryParam,
-  setQueryParam,
-} from '../../utils/querystring';
-import type { Network, Pool, Token } from '@/types/type';
 import { getPriceChart } from '@/repos/coingecko';
+import type { Network, Pool, Token } from '@/types/type';
+import { deleteQueryParam, getQueryParam } from '../../utils/querystring';
 import { Heading, PrimaryBlockButton } from '../Chart/atomic';
-import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ModalStyle = {
   overlay: {
@@ -516,9 +505,8 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
           </GoBack> */}
           {NETWORKS.map((network, i) => {
             return (
-              <div>
+              <div key={i}>
                 <NetworkItem
-                  key={i}
                   style={
                     network.disabled
                       ? {

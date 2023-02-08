@@ -51,33 +51,31 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     enabled: !!account?.address,
   });
 
-  const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [];
+  const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [18, 0, 0];
 
-  console.log('wmatic', wmaticAllowance?.toString());
+  const { config: approveErc20Config } = usePrepareContractWrite({
+    scopeKey: 'approveErc20',
+    address: WMATIC_MUMBAI_ADDRESS as Address,
+    abi: erc20ABI,
+    functionName: 'approve',
+    args: [fundAddress as Address, ethers.constants.MaxUint256],
+    enabled: false,
+  });
 
-  // const { config: approveErc20Config } = usePrepareContractWrite({
-  //   address: WMATIC_MUMBAI_ADDRESS,
-  //   abi: erc20ABI,
-  //   functionName: 'approve',
-  //   args: [fundAddress as Address, ethers.constants.MaxUint256],
-  // });
-
-  // const { write: approveErc20Write } = useContractWrite(approveErc20Config);
+  const { write: approveErc20Write, isSuccess: isAddressApproved } =
+    useContractWrite(approveErc20Config);
 
   // wagmi hooks
   const { config } = usePrepareContractWrite({
     address: fundAddress as Address,
     abi: Funds,
     functionName: 'deposit',
-    args: [
-      ethers.utils.parseUnits(amountToDeposit.toString(), wmaticDecimals ?? 18),
-    ],
+    args: [ethers.utils.parseUnits(amountToDeposit.toString(), wmaticDecimals)],
     enabled:
       amountToDeposit > 0 &&
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18) <=
-        wmaticBalance! &&
-      wmaticAllowance! >=
-        ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18),
+      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) <=
+        wmaticBalance &&
+      !isNaN(amountToDeposit),
   });
   const { data, isSuccess, write } = useContractWrite(config);
   const {
@@ -97,20 +95,15 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     setHasCreated(false);
     console.log('write', write);
 
-    write?.();
-
-    // if (wmaticAllowance != null) {
-    //   if (
-    //     wmaticAllowance <
-    //     ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
-    //   ) {
-    //     approveErc20Write?.();
-    //   } else {
-    //     write?.();
-    //   }
-    // } else {
-    //   approveErc20Write?.();
-    // }
+    if (
+      !isAddressApproved &&
+      wmaticAllowance <
+        ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
+    ) {
+      approveErc20Write?.();
+    } else {
+      write?.();
+    }
   };
 
   return (
@@ -129,29 +122,25 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
             />
           </div>
           <div className="flex space-x-4">
-            {wmaticAllowance != null ? (
-              wmaticAllowance <
-              ethers.utils.parseUnits(
-                `${amountToDeposit}`,
-                wmaticDecimals ?? 18
-              ) ? (
-                <CustomButton
-                  className="focus:shadow-outline rounded py-2 px-4"
-                  type="submit"
-                  title="Approve"
-                  theme="solidBlue"
-                  isLoading={txIsLoading}
-                />
-              ) : (
-                <CustomButton
-                  className="focus:shadow-outline rounded py-2 px-4"
-                  type="submit"
-                  title="Create"
-                  theme="solidBlue"
-                  isLoading={txIsLoading}
-                />
-              )
-            ) : null}
+            {!isAddressApproved &&
+            wmaticAllowance <
+              ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) ? (
+              <CustomButton
+                className="focus:shadow-outline rounded py-2 px-4"
+                type="submit"
+                title="Approve"
+                theme="solidBlue"
+                isLoading={txIsLoading}
+              />
+            ) : (
+              <CustomButton
+                className="focus:shadow-outline rounded py-2 px-4"
+                type="submit"
+                title="Create"
+                theme="solidBlue"
+                isLoading={txIsLoading}
+              />
+            )}
             <CustomButton
               className="focus:shadow-outline rounded py-2 px-4"
               title="Cancel"

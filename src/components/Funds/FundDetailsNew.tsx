@@ -39,7 +39,7 @@ const fundNameIndex = 5;
 const lpPositionsIndex = 6;
 const stableCoinAddressIndex = 7;
 
-const AssetsDetail = ({
+const FundsDetailsNew = ({
   fundAddress = undefined,
   curUserAddress = '0x',
 }: // totalValueLocked = 32,
@@ -126,8 +126,7 @@ AssetsDetailProps) => {
   const amount0 = 0;
   const amount1 = 1;
   const fundManagerAddress = data[fundManagerIndex];
-  console.log('fundManagerAddress', fundManagerAddress);
-  console.log('curUserAddress', curUserAddress);
+
   if (fundManagerAddress.toString() != curUserAddress.toString()) {
     return;
   }
@@ -185,4 +184,4 @@ AssetsDetailProps) => {
   );
 };
 
-export default AssetsDetail;
+export default FundsDetailsNew;

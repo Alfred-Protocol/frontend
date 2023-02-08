@@ -38,6 +38,7 @@ const fundManagerIndex = 4;
 const fundNameIndex = 5;
 const lpPositionsIndex = 6;
 const stableCoinAddressIndex = 7;
+const depositedAmountIndex = 8;
 
 const AssetsDetail = ({
   fundAddress = undefined,
@@ -97,6 +98,12 @@ AssetsDetailProps) => {
         abi: Funds,
         functionName: 'stablecoin',
       },
+      {
+        address: fundAddress,
+        abi: Funds,
+        functionName: 'depositedAmount',
+        args: [curUserAddress],
+      },
     ],
     // @marcuspang -> Does it force a re-fetch every 1min?
     cacheTime: 60 * 1000, // 1min
@@ -124,7 +131,7 @@ AssetsDetailProps) => {
   const logo1 = ETH;
   const logo2 = USDT;
   const lpPositions =
-    data[lpPositionsIndex].map((position) => ({
+    data[lpPositionsIndex]?.map((position) => ({
       ...position,
       tickLower: BigNumber.from(position.tickLower),
       tickUpper: BigNumber.from(position.tickUpper),
@@ -133,9 +140,12 @@ AssetsDetailProps) => {
   const amount0 = 0;
   const amount1 = 1;
   const fundManagerAddress = data[fundManagerIndex];
-  console.log('fundManagerAddress', fundManagerAddress);
-  console.log('curUserAddress', curUserAddress);
-  if (fundManagerAddress.toString() != curUserAddress.toString()) {
+  const depositedAmount = ethers.utils.formatUnits(
+    data[depositedAmountIndex],
+    18
+  );
+
+  if (parseFloat(depositedAmount) <= 0) {
     return <></>;
   }
 

@@ -1,25 +1,15 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
-import { ChangeEvent, ChangeEventHandler, useState } from 'react';
-import { ethers, Signer } from 'ethers';
-import Card from './Card';
-import PageTitle from '../Layout/PageTitle';
+import FundsFactory from '@/abi/FundsFactory';
+import { useState } from 'react';
+import {
+  Address, useAccount, useContractRead, useSigner
+} from 'wagmi';
+import { LPPositionsMock } from '../../mockData/mockData';
+import AssetsDetail from './AssetsDetail';
+import AssetsHeader from './AssetsHeader';
 import DepositModal from './DepositModal';
 import SuccessModal from './SuccessModal';
 import WithdrawModal from './WithdrawModal';
-import AssetsHeader from './AssetsHeader';
-import AssetsDetail from './AssetsDetail';
-import { LPPositionsMock } from '../../mockData/mockData';
-import {
-  Address,
-  useContractRead,
-  useContractReads,
-  useSigner,
-  useAccount,
-} from 'wagmi';
-import FundsFactory from '@/abi/FundsFactory';
-import { useEffect } from 'react';
-import Funds from '@/abi/Funds';
-import { sign } from 'crypto';
 
 export type Fund = {
   fundName: string;
@@ -213,9 +203,10 @@ const AssetsSection = () => {
           netValue={3223.43}
         />
         <div className="flex w-full flex-col items-center space-y-10">
-          {addresses?.map((address, idx) => {
+          {addresses?.map((address) => {
             return (
               <AssetsDetail
+                key={address}
                 fundAddress={address}
                 curUserAddress={curUserAddress}
                 // address={data.address}

@@ -1,5 +1,16 @@
-import type { PositionData } from '@/pages/funds/[address]/manage';
 import { twMerge } from 'tailwind-merge';
+import type { Address } from 'wagmi';
+
+interface PositionData {
+  created: string;
+  address: Address;
+  token1: string;
+  token2: string;
+  amount1: number;
+  amount2: number;
+  value1: number;
+  value2: number;
+}
 
 const mockData: PositionData[] = [
   {

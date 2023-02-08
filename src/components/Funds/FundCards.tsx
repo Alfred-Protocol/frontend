@@ -27,8 +27,6 @@ const FundCards = () => {
   const [showCreateFundModal, setShowCreateFundModal] = useState(false);
 
   const renderSkeleton = () => {
-    const arr = [1, 2, 3, 4, 5, 6];
-
     return (
       <>
         <div role="status" className="w-50 h-96 animate-pulse">

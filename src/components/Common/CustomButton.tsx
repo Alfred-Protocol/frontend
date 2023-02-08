@@ -35,7 +35,7 @@ const CustomButton = ({
     <button
       type="button"
       className={twMerge(
-        `flex cursor-pointer items-center justify-center space-x-2 rounded-lg border-2 border-transparent px-2 py-3 font-semibold text-fuchsia-50 transition-all sm:px-7 sm:py-2.5`,
+        `flex cursor-pointer items-center justify-center space-x-2 rounded-lg border-2 border-transparent px-2 py-3 font-semibold text-fuchsia-50 transition-all focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800 sm:px-7 sm:py-2.5`,
         isLoading ? 'cursor-not-allowed opacity-70' : '',
         themeMap[theme],
         className

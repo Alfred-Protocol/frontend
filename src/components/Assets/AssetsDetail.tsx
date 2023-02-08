@@ -10,7 +10,7 @@ import CustomButton from '../Common/CustomButton';
 import type { LPPosition } from '@/types/type';
 import { Address, useContractReads } from 'wagmi';
 import Funds from '@/abi/Funds';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { LPPositionsMock } from '@/mockData/mockData';
 import { useRouter } from 'next/router';
 
@@ -41,7 +41,7 @@ const stableCoinAddressIndex = 7;
 
 const AssetsDetail = ({
   fundAddress = undefined,
-  curUserAddress = '',
+  curUserAddress = '' as Address,
 }: // totalValueLocked = 32,
 // matureDate = '05/03/2023',
 // startDate = '01/02/2023',
@@ -53,10 +53,6 @@ const AssetsDetail = ({
 // amount0,
 // amount1,
 AssetsDetailProps) => {
-  if (!fundAddress) {
-    return null;
-  }
-
   const router = useRouter();
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
@@ -107,9 +103,13 @@ AssetsDetailProps) => {
     enabled: !!fundAddress,
   });
 
+  if (!fundAddress) {
+    return <></>;
+  }
+
   console.log('data ', data);
   if (!data) {
-    return null;
+    return <></>;
   }
 
   const fundName = data[fundNameIndex];
@@ -123,14 +123,20 @@ AssetsDetailProps) => {
   ).toLocaleDateString();
   const logo1 = ETH;
   const logo2 = USDT;
-  const lpPositions = data[lpPositionsIndex] || LPPositionsMock;
+  const lpPositions =
+    data[lpPositionsIndex].map((position) => ({
+      ...position,
+      tickLower: BigNumber.from(position.tickLower),
+      tickUpper: BigNumber.from(position.tickUpper),
+      poolFee: BigNumber.from(position.poolFee),
+    })) || LPPositionsMock;
   const amount0 = 0;
   const amount1 = 1;
   const fundManagerAddress = data[fundManagerIndex];
   console.log('fundManagerAddress', fundManagerAddress);
   console.log('curUserAddress', curUserAddress);
   if (fundManagerAddress.toString() != curUserAddress.toString()) {
-    return;
+    return <></>;
   }
 
   return (

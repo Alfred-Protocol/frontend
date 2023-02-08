@@ -1840,6 +1840,10 @@
       "id": "battle-esports-coin",
       "name": "battle esports coin"
     },
+    "0xb870679a7fa65b924026f496de7f27c1dd0e5c5f": {
+      "id": "battle-pets",
+      "name": "Hello Pets"
+    },
     "0xea47b64e1bfccb773a0420247c0aa0a3c1d2e5c5": {
       "id": "bayc-vault-nftx",
       "name": "BAYC Vault (NFTX)"
@@ -4147,10 +4151,6 @@
     "0xc6e145421fd494b26dcf2bfeb1b02b7c5721978f": {
       "id": "crypto-perx",
       "name": "Crypto Perx"
-    },
-    "0x8689d850cdf3b74a1f6a5eb60302c785b71c2fc7": {
-      "id": "crypto-phoenix",
-      "name": "Crypto Phoenix"
     },
     "0x2b67d1a87a8d8b280a23e97bc55095215ee0ec53": {
       "id": "crypto-price-index",
@@ -6760,6 +6760,10 @@
       "id": "ftx-token",
       "name": "FTX"
     },
+    "0x62a116b9ffe7338bee13c87e69552de9cc67627d": {
+      "id": "fuc",
+      "name": "FUBT Token"
+    },
     "0xaa9d866666c2a3748d6b23ff69e63e52f08d9ab4": {
       "id": "fundamenta",
       "name": "Fundamenta"
@@ -7795,6 +7799,10 @@
     "0xb1f136a74e18e4e2921febbf25820d1bb65b5647": {
       "id": "hipunks",
       "name": "hiPunks"
+    },
+    "0x1de852cd18323bc5ebda842b8eef46c6e551aa47": {
+      "id": "hirenga",
+      "name": "hiRENGA"
     },
     "0x12aef5c60c2c86c8ecd3079f22f285f326371340": {
       "id": "hisand33",
@@ -9183,6 +9191,10 @@
     "0x2223bf1d7c19ef7c06dab88938ec7b85952ccd89": {
       "id": "kryxivia-game",
       "name": "Kryxivia Game"
+    },
+    "0x93ad9b819c88d98b4c9641470a96e24769ae7922": {
+      "id": "kryza-exchange",
+      "name": "KRYZA Exchange"
     },
     "0xbc17729fdf562723f0267f79ff25ade441056d87": {
       "id": "ksm-starter",
@@ -12111,10 +12123,6 @@
     "0x68037790a0229e9ce6eaa8a99ea92964106c4703": {
       "id": "par-stablecoin",
       "name": "Parallel"
-    },
-    "0x8037b1b69d6fa63a9cc053c25f7e168e6e6d857a": {
-      "id": "parts-of-four-coin",
-      "name": "Parts of Four Coin"
     },
     "0xc775c0c30840cb9f51e21061b054ebf1a00acc29": {
       "id": "pastel",
@@ -16204,6 +16212,10 @@
       "id": "trade-win",
       "name": "Trade.win"
     },
+    "0x8954d907520532c1f0d89d42569232fd0f995fdf": {
+      "id": "tradix",
+      "name": "Tradix"
+    },
     "0x0aee8703d34dd9ae107386d3eff22ae75dd616d1": {
       "id": "tranche-finance",
       "name": "Tranche Finance"
@@ -19258,7 +19270,7 @@
       "id": "datamine",
       "name": "Datamine"
     },
-    "0x8b4b8581d0fa0e4b7ff840531ec914f1b9498b41": {
+    "0xec38621e72d86775a89c7422746de1f52bba5320": {
       "id": "davos-protocol",
       "name": "Davos Protocol"
     },
@@ -25230,10 +25242,6 @@
       "id": "circuits-of-value",
       "name": "Circuits of Value"
     },
-    "0x814c66594a22404e101fecfecac1012d8d75c156": {
-      "id": "clqdr",
-      "name": "cLiquidDriver"
-    },
     "0xf77864fcffec4598813e3378681c9330b771ca88": {
       "id": "code-7",
       "name": "Code 7"
@@ -26834,6 +26842,10 @@
       "id": "aidi-finance",
       "name": "Aidi Finance"
     },
+    "0xf709e948daed701a6a018e6f6090ca1930055966": {
+      "id": "ai-dogemini",
+      "name": "AI DogeMini"
+    },
     "0xced1492ea4d59f4e83409f26752a784c3f8709ca": {
       "id": "aimedis-2",
       "name": "Aimedis"
@@ -26877,6 +26889,10 @@
     "0x50f72b83a5ad59ad71c28e2e4b58c73740e2168c": {
       "id": "akil-coin",
       "name": "Akil Coin"
+    },
+    "0x353d0d1b4feb416faaabd5b314d99ef148d56dff": {
+      "id": "alcazar",
+      "name": "Alcazar"
     },
     "0xbc7d6b50616989655afd682fb42743507003056d": {
       "id": "alchemy-pay",
@@ -28045,10 +28061,6 @@
     "0xf339e8c294046e6e7ef6ad4f6fa9e202b59b556b": {
       "id": "battle-of-guardians-share",
       "name": "Battle of Guardians Share"
-    },
-    "0x4d4e595d643dc61ea7fcbf12e4b1aaa39f9975b8": {
-      "id": "battle-pets",
-      "name": "Battle Pets"
     },
     "0x708955db0d4c52ffbf9aa34af7f3ca8bf07390a8": {
       "id": "battle-saga",
@@ -30514,10 +30526,6 @@
       "id": "crypto-makers-foundation",
       "name": "Crypto Makers Foundation"
     },
-    "0xec4956111924e6d18099fa19802748e222a15000": {
-      "id": "crypto-media-network-2",
-      "name": "Crypto Media Network"
-    },
     "0xd44fd09d74cd13838f137b590497595d6b3feea4": {
       "id": "cryptomines-eternal",
       "name": "CryptoMines Eternal"
@@ -32294,10 +32302,6 @@
       "id": "eternal-spire-v2",
       "name": "Eternal Spire V2"
     },
-    "0xc04edac87f7ed7b282cd0411672d65452fd10125": {
-      "id": "eternal-world",
-      "name": "Eternal World"
-    },
     "0x854f7cd3677737241e3eed0dc3d7f33dfaf72bc4": {
       "id": "ethax",
       "name": "ETHAX"
@@ -33153,10 +33157,6 @@
     "0xa179248e50ce5afb507fd8c54e08a66fbac7b6ff": {
       "id": "freedom-jobs-business",
       "name": "Freedom. Jobs. Business"
-    },
-    "0x880bce9321c79cac1d290de6d31dde722c606165": {
-      "id": "freedom-protocol",
-      "name": "Freedom Protocol"
     },
     "0xbea7086c99a85d4b5e6a0494c18b037fdd8ee932": {
       "id": "freedom-reserve",
@@ -35129,6 +35129,10 @@
     "0x1ec58fe5e681e35e490b5d4cbecdf42b29c1b063": {
       "id": "jk-coin",
       "name": "JK Coin"
+    },
+    "0x371c7ec6d8039ff7933a2aa28eb827ffe1f52f07": {
+      "id": "joe",
+      "name": "JOE"
     },
     "0x13b8abb1cfd7bbe1f5764fe967ed049d488d9d1d": {
       "id": "joe-yo-coin",
@@ -39822,6 +39826,10 @@
       "id": "projectx-d78dc2ae-9c8a-45ed-bd6a-22291d9d0812",
       "name": "ProjectX"
     },
+    "0x510975eda48a97e0ca228dd04d1217292487bea6": {
+      "id": "project-xeno",
+      "name": "PROJECT XENO"
+    },
     "0xaf53d56ff99f1322515e54fdde93ff8b3b7dafd5": {
       "id": "prometeus",
       "name": "Prom"
@@ -40057,10 +40065,6 @@
     "0x8f5a25bfa6ce7bcf1517148724beb3649ac49d64": {
       "id": "quontral",
       "name": "Quontral"
-    },
-    "0xb025bc1675f6be04ec528574712f268d99db494d": {
-      "id": "quoth",
-      "name": "Quoth"
     },
     "0x7791d80425cb542937fa499afe835d26ee7284fb": {
       "id": "rabbit2023",

@@ -1,26 +1,11 @@
-import FundCreateModal from '@/components/Funds/FundCreateModal';
 import useFund from '@/hooks/useFund';
-import type { LPPosition } from '@/types/type';
 import truncateString from '@/utils/truncateString';
-import {
-  ArrowRightIcon,
-  ArrowTopRightOnSquareIcon,
-} from '@heroicons/react/24/outline';
 import { ethers } from 'ethers';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import {
-  Address,
-  erc20ABI,
-  useAccount,
-  useContractRead,
-  useContractReads,
-} from 'wagmi';
+import { Address, erc20ABI, useAccount, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
-import FundTable from '../FundDetails/FundTable';
-import Spinner from '../Layout/Spinner';
 import DepositFundModal from './DepositFundModal';
 import FundTableList from './FundTableList';
 import SwapTokensModal from './SwapTokens';

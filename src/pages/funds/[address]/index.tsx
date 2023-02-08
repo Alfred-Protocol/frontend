@@ -1,5 +1,4 @@
 import FundDetails from '@/components/FundDetails/FundDetails';
-import FundTable from '@/components/FundDetails/FundTable';
 import Layout from '@/components/Layout/Layout';
 import PageTitle from '@/components/Layout/PageTitle';
 import { isAddress } from 'ethers/lib/utils.js';

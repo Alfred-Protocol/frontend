@@ -17,6 +17,7 @@ import Funds from '@/abi/Funds';
 import { sign } from 'crypto';
 import AssetsHeader from '../Assets/AssetsHeader';
 import AssetsDetail from '../Assets/AssetsDetail';
+import FundsDetailsNew from './FundDetailsNew';
 
 export type Fund = {
   fundName: string;
@@ -180,7 +181,7 @@ const FundsSection = () => {
         <div className="flex w-full flex-col items-center space-y-10">
           {addresses?.map((address, idx) => {
             return (
-              <AssetsDetail
+              <FundsDetailsNew
                 fundAddress={address}
                 curUserAddress={curUserAddress}
                 // address={data.address}

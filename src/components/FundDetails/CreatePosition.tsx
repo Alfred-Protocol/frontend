@@ -1,7 +1,7 @@
-import { BigNumber } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, TextInput } from 'flowbite-react';
 import React, { FormEventHandler, useMemo, useState } from 'react';
-import { Address, usePrepareContractWrite } from 'wagmi';
+import { Address, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Funds from '../../abi/Funds';
 import FundsFactory from '../../abi/FundsFactory';
 import { useAppContext } from '../../context/app/appContext';
@@ -12,20 +12,12 @@ import { getTokensAmountFromDepositAmountUSD } from '../../utils/uniswapv3/math'
 import { useGetTokensAmount } from '../../hooks/useGetTokensAmount';
 import { useGetPairTokenAmount } from '../../hooks/useGetPairTokenAmount';
 
-type Props = {
-  onClose: () => void;
-};
+type Props = {};
 
-const CreatePosition = () => {
+const CreatePosition = ({}: Props) => {
   const { state } = useAppContext();
 
-  const [lowerTick, setLowerTick] = useState<string>('0');
-  const [upperTick, setUpperTick] = useState<string>('0');
-
-  const [token0, setToken0] = useState<Address>('0x');
-  const [token1, setToken1] = useState<Address>('0x');
-
-  const [amount0, setAmount0] = useState<string>('0');
+  const [amount1, setAmount1] = useState<string>('0');
 
   const [minPrice, maxPrice] = state.priceRangeValue;
   const feeTier = state.pool?.feeTier;
@@ -53,37 +45,44 @@ const CreatePosition = () => {
     state.token1?.decimals,
   ]);
 
-  const amount1Calc = useGetPairTokenAmount(Number(amount0));
+  // Price is "token1/token0"
+  const amount0Calc = useGetPairTokenAmount(Number(amount1));
+  const token0Details = state.token0;
+  const token1Details = state.token1;
 
   // Convert "minPrice" and "maxPrice" to ticks
 
-  // const { config } = usePrepareContractWrite({
-  //   address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
-  //   abi: Funds,
-  //   functionName: 'createLpPosition',
-  //   args: [
-  //     token0!,
-  //     token1!,
-  //     BigNumber.from(amount0),
-  //     BigNumber.from(amount1Calc),
-  //     minTick,
-  //     maxTick,
-  //     Number(feeTier),
-  //   ],
-  // });
+  const amount0CalcInWei = ethers.utils.parseUnits(
+    `${Math.floor(amount0Calc)}`,
+    token0Details?.decimals
+  );
+
+  const amount1InWei = ethers.utils.parseUnits(
+    `${Math.floor(Number(amount1))}`,
+    token1Details?.decimals
+  );
+
+  const { config } = usePrepareContractWrite({
+    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
+    abi: Funds,
+    functionName: 'createLpPosition',
+    args: [
+      token0Details?.id as `0x${string}`,
+      token1Details?.id as `0x${string}`,
+      amount0CalcInWei,
+      amount1InWei,
+      minTick,
+      maxTick,
+      Number(feeTier),
+    ],
+  });
+
+  const { data, isLoading, write } = useContractWrite(config);
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (lowerTick != null || upperTick != null) {
-      alert('Please enter min and max price');
-      return;
-    }
-
-    if (token0 != null || token1 != null) {
-      alert('Please enter token0 and token1');
-      return;
-    }
+    write?.();
   };
 
   // TODO:
@@ -92,27 +91,25 @@ const CreatePosition = () => {
   // 3. Create LP position
 
   return (
-    <div>
+    <div className="mt-12">
       <form className="space-y-4 rounded" onSubmit={onSubmit}>
         <div className="space-y-2">
-          <Label htmlFor="fundName" className="text-white">
-            Token 0 amount
-          </Label>
-          <TextInput
-            id="token0Amount"
-            type={'text'}
-            onChange={(e) => setAmount0(e.target.value.trim())}
-            required
-            placeholder="Enter amounts of token0"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="fundName">Token 1 amount</Label>
+          <span className="text-white">{state.token1?.symbol} amount</span>
           <TextInput
             id="token1Amount"
             type={'text'}
+            onChange={(e) => setAmount1(e.target.value.trim())}
             required
-            value={amount1Calc}
+            placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
+          />
+        </div>
+        <div className="space-y-2">
+          <span className="text-white">{state.token0?.symbol} amount</span>
+          <TextInput
+            id="token0Amount"
+            type={'text'}
+            required
+            value={amount0Calc}
           />
         </div>
         <CustomButton
@@ -137,6 +134,13 @@ const convertPriceToTick = (
   const tokenDiffDecimals = token1Decimals - token0Decimals;
   const priceInWei = Math.pow(10, tokenDiffDecimals) * inversePrice;
   const tickVal = Math.log(priceInWei) / Math.log(1.0001);
+
+  if (tickVal < -887272) {
+    return -887272;
+  }
+  if (tickVal > 887272) {
+    return 887272;
+  }
 
   return nearestUsableTick(Math.floor(tickVal), poolFee / 50);
 };

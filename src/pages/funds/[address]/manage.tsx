@@ -73,7 +73,7 @@ const ManageFundPage = () => {
 
             {showComponent && (
               <div className="flex flex-col space-y-10">
-                <div className="flex w-full space-x-5 ">
+                <div className="flex w-full space-x-5">
                   <EstimatedFees isLoading={isLoading} />
                   <Setting isLoading={isLoading} />
                 </div>

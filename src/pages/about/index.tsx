@@ -54,11 +54,13 @@ const AboutPage = () => {
                 />
               </div>
             )}
-            <div className="flex space-x-5">
-              <EstimatedFees />
-              <Setting />
-            </div>
-            <LiquidityPositionChart />
+            {!showPairModal && (
+              <div className="flex space-x-5">
+                <EstimatedFees />
+                <Setting />
+              </div>
+            )}
+            {!showPairModal && <LiquidityPositionChart />}
           </div>
         </div>
         {/* <CreatePosition /> */}

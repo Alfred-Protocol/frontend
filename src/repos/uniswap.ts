@@ -39,7 +39,9 @@ const _getPoolTicksByPage = async (
     }
   }`);
 
-  return res.ticks;
+  console.log('res ', res);
+
+  return res?.ticks;
 };
 export const getPoolTicks = async (poolAddress: string): Promise<Tick[]> => {
   const PAGE_SIZE = 3;

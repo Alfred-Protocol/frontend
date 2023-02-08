@@ -260,9 +260,10 @@ const FEE_TIER_STYLES = {
 
 interface Props {
   submitEnded: () => void;
+  submitStart: () => void;
 }
 
-const SelectPairModal = ({ submitEnded }: Props) => {
+const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
   const appContext = useAppContext();
   const modalContext = useModalContext();
 
@@ -376,6 +377,7 @@ const SelectPairModal = ({ submitEnded }: Props) => {
       return;
     }
 
+    submitStart();
     setShowSelectTokenPage(false);
     setIsSubmitLoading(true);
 

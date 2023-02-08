@@ -26,6 +26,9 @@ const AboutPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const { state } = useAppContext();
   const [showPairModal, setShowPairModal] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showComponent, setShowComponent] = useState(false);
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -41,31 +44,51 @@ const AboutPage = () => {
           <div className="mt-10 flex w-4/5 flex-col space-y-10">
             {showPairModal ? (
               <div style={styles.fadeIn as any}>
-                <SelectPairModal submitEnded={() => setShowPairModal(false)} />
+                <SelectPairModal
+                  submitStart={() => {
+                    setIsLoading(true);
+                    setShowComponent(true);
+                  }}
+                  submitEnded={() => {
+                    setIsLoading(false);
+                    setShowPairModal(false);
+                  }}
+                />
               </div>
             ) : (
               <div className="flex justify-center">
                 <CustomButton
                   title="Change Settings"
-                  theme="solidPurple"
+                  theme="transparentPurple"
                   className="w-1/5"
-                  onClick={() => setShowPairModal(true)}
+                  onClick={() => {
+                    setShowPairModal(true);
+                    setShowComponent(false);
+                  }}
                   style={styles.bounce as any}
                 />
               </div>
             )}
-            {!showPairModal && (
-              <div className="flex space-x-5">
-                <EstimatedFees />
-                <Setting />
+
+            {showComponent && (
+              <div className="flex flex-col space-y-10">
+                <div className="flex w-full space-x-5 ">
+                  <EstimatedFees isLoading={isLoading} />
+                  <Setting isLoading={isLoading} />
+                </div>
+                <LiquidityPositionChart isLoading={isLoading} />
+                <div className="flex justify-center">
+                  <CreatePosition />
+                </div>
               </div>
             )}
-            {!showPairModal && <LiquidityPositionChart />}
+
+            {/* {!showPairModal && <LiquidityPositionChart />}
             {!showPairModal && (
               <div className="flex justify-center">
                 <CreatePosition />
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </Layout>

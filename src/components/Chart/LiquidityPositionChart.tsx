@@ -49,7 +49,11 @@ const WrappedHeader = styled.div`
 `;
 
 let d3Chart: D3LiquidityHistogram | null = null;
-const LiquidityPositionChart = () => {
+
+interface Props {
+  isLoading: boolean;
+}
+const LiquidityPositionChart = ({ isLoading }: Props) => {
   const { state, dispatch } = useAppContext();
 
   const refElement = useRef<HTMLDivElement>(null);
@@ -278,6 +282,14 @@ const LiquidityPositionChart = () => {
     d3Chart.updateMinMaxTickRange(minTick, maxTick, state.isFullRange);
     // eslint-disable-next-line
   }, [state.priceRangeValue, state.token0, state.token1, state.isFullRange]);
+
+  if (isLoading) {
+    return (
+      <div role="status" className="h-80 w-full animate-pulse">
+        <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex rounded-xl border-2 bg-blackfill text-left text-white">

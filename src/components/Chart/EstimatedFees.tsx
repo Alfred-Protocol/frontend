@@ -72,7 +72,11 @@ const ILButton = styled.button`
   }
 `;
 
-const EstimatedFees = () => {
+interface Props {
+  isLoading: boolean;
+}
+
+const EstimatedFees = ({ isLoading }: Props) => {
   const { state } = useAppContext();
   const modalContext = useModalContext();
 
@@ -126,6 +130,14 @@ const EstimatedFees = () => {
 
   const estimatedFee =
     P >= Pl && P <= Pu ? estimateFee(deltaL, L, volume24H, feeTier) : 0;
+
+  if (isLoading) {
+    return (
+      <div role="status" className="w-full max-w-sm animate-pulse">
+        <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">

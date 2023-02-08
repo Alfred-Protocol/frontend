@@ -22,7 +22,19 @@ const SettingContainer = styled.div`
   }
 `;
 
-const Setting = () => {
+interface Props {
+  isLoading: boolean;
+}
+
+const Setting = ({ isLoading }: Props) => {
+  if (isLoading) {
+    return (
+      <div role="status" className="h-72 w-full animate-pulse">
+        <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative flex items-center justify-center space-x-5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
       <DepositAmount />

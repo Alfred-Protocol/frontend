@@ -5,19 +5,19 @@ import Spinner from '@/components/Layout/Spinner';
 import { useEffect, useState } from 'react';
 
 export default function FundsPage() {
-  // const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   setLoaded(true);
-  // }, []);
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
-  // if (!loaded) {
-  //   return (
-  //     <Layout>
-  //       <Spinner />
-  //     </Layout>
-  //   );
-  // }
+  if (!loaded) {
+    return (
+      <Layout>
+        <Spinner />
+      </Layout>
+    );
+  }
 
   return (
     <Layout className="sm:mx-20">

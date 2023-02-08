@@ -23,6 +23,7 @@ const mockData = [
   {
     fundName: 'Fund A',
     tvl: 234,
+    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1 },
@@ -37,6 +38,7 @@ const mockData = [
   {
     fundName: 'Fund B',
     tvl: 234,
+    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1.1 },
@@ -51,6 +53,7 @@ const mockData = [
   {
     fundName: 'Fund C',
     tvl: 234,
+    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 2 },
@@ -65,6 +68,7 @@ const mockData = [
   {
     fundName: 'Fund D',
     tvl: 234,
+    fundAddress: '0x7730b4cdc1b1e7a33a309ab7205411fad009c106',
     manager: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
     assets: [
       { assetName: 'ETH', assetValue: 1.3 },
@@ -186,6 +190,7 @@ const AssetsSection = () => {
           {mockData.map((data, idx) => {
             return (
               <AssetsDetail
+                fundAddress={data.fundAddress}
                 key={idx}
                 lpPositions={data.positions}
                 amount0={data.amount0}

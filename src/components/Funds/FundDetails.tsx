@@ -8,7 +8,7 @@ import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
 import DepositFundModal from './DepositFundModal';
 import FundTableList from './FundTableList';
-import SwapTokensModal from './SwapTokens';
+import SwapTokensModal from './SwapTokensModal';
 
 export interface FundDetailsProps {
   isLoading: boolean;
@@ -66,8 +66,8 @@ const FundDetails = ({
     >
       <div className="flex flex-col justify-between">
         <div className="flex items-center justify-between">
-          <h3 className="text-2xl font-bold sm:text-3xl">{fundName}</h3>
-          <div className="flex">
+          <h3 className="text-2xl font-bold sm:text-4xl">{fundName}</h3>
+          <div className="flex space-x-2">
             <CustomButton
               title="Deposit"
               theme="solidPurple"

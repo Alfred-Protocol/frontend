@@ -14,8 +14,8 @@ interface FundProps {
 
 // Convert to ENUM
 const tvlIndex = 0;
-const lpPositionsIndex = 1;
-const stableCoinAddressIndex = 2;
+const stableCoinAddressIndex = 1;
+const lpPositionsIndex = 2;
 
 const FundCard = ({
   fund: { address, description, manager, matureDate, startDate, name },
@@ -30,7 +30,7 @@ const FundCard = ({
     scopeKey: address, // cache with individual fund page
     contracts: [
       { ...config, functionName: 'totalValueLocked' },
-      { ...config, functionName: 'fetchAllLpPositions' },
+      // { ...config, functionName: 'fetchAllLpPositions' },
       { ...config, functionName: 'stablecoin' },
     ],
     cacheTime: 60 * 1000, // 1min

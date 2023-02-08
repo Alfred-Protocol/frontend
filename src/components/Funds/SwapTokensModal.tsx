@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
 import React, { FormEventHandler, useState } from 'react';
 import {
@@ -62,25 +62,25 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   const [wmaticDecimals, wmaticBalance, wmaticAllowance, fundWmaticBalance] =
     wmatic ?? [18, 0, 0, 0];
 
-  const { config: approveErc20Config } = usePrepareContractWrite({
-    scopeKey: 'approveErc20',
-    address: WMATIC_MUMBAI_ADDRESS as Address,
-    abi: erc20ABI,
-    functionName: 'approve',
-    args: [fundAddress as Address, ethers.constants.MaxUint256],
-    enabled: false,
-  });
+  // const { config: approveErc20Config } = usePrepareContractWrite({
+  //   scopeKey: 'approveErc20',
+  //   address: WMATIC_MUMBAI_ADDRESS as Address,
+  //   abi: erc20ABI,
+  //   functionName: 'approve',
+  //   args: [fundAddress as Address, ethers.constants.MaxUint256],
+  //   enabled: false,
+  // });
 
-  const {
-    data: approveErc20Data,
-    writeAsync: approveErc20Write,
-    isSuccess: isAddressApproved,
-  } = useContractWrite(approveErc20Config);
+  // const {
+  //   data: approveErc20Data,
+  //   writeAsync: approveErc20Write,
+  //   isSuccess: isAddressApproved,
+  // } = useContractWrite(approveErc20Config);
 
-  const { isSuccess: approveErc20IsSuccess } = useWaitForTransaction({
-    hash: approveErc20Data?.hash,
-    enabled: isAddressApproved,
-  });
+  // const { isSuccess: approveErc20IsSuccess } = useWaitForTransaction({
+  //   hash: approveErc20Data?.hash,
+  //   enabled: isAddressApproved,
+  // });
 
   // wagmi hooks
   const { config } = usePrepareContractWrite({
@@ -90,15 +90,18 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     args: [
       WMATIC_MUMBAI_ADDRESS,
       WETH_MUMBAI_ADDRESS,
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals),
+      BigNumber.from(amountToDeposit).mul(
+        BigNumber.from(10).pow(wmaticDecimals)
+      ),
     ],
     enabled:
       amountToDeposit > 0 &&
       ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) <=
-        wmaticBalance &&
-      !isNaN(amountToDeposit),
+        wmaticBalance,
   });
-  const { data, isSuccess, write } = useContractWrite(config);
+  const { data, isSuccess, write } = useContractWrite({
+    mode: 'prepared',
+  });
   const {
     data: txReceipt,
     isSuccess: txIsSuccess,
@@ -114,14 +117,19 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setHasCreated(false);
+    console.log(
+      WMATIC_MUMBAI_ADDRESS,
+      WETH_MUMBAI_ADDRESS,
+      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals)
+    );
     console.log('write', write);
 
     if (
-      !approveErc20IsSuccess &&
+      // !approveErc20IsSuccess &&
       wmaticAllowance <
-        ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
+      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
     ) {
-      await approveErc20Write?.();
+      // await approveErc20Write?.();
     } else {
       write?.();
     }
@@ -137,31 +145,19 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
             <TextInput
               id="amountToDeposit"
               type="text"
-              onChange={(e) => setAmountToDeposit(Number(e.target.value))}
+              onChange={(e) => setAmountToDeposit(+e.target.value)}
               required
               placeholder="Enter your deposit amount"
             />
           </div>
           <div className="flex space-x-4">
-            {!approveErc20IsSuccess &&
-            wmaticAllowance <
-              ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) ? (
-              <CustomButton
-                className="focus:shadow-outline rounded py-2 px-4"
-                type="submit"
-                title="Approve"
-                theme="solidBlue"
-                isLoading={txIsLoading}
-              />
-            ) : (
-              <CustomButton
-                className="focus:shadow-outline rounded py-2 px-4"
-                type="submit"
-                title="Create"
-                theme="solidBlue"
-                isLoading={txIsLoading}
-              />
-            )}
+            <CustomButton
+              className="focus:shadow-outline rounded py-2 px-4"
+              type="submit"
+              title="Approve"
+              theme="solidBlue"
+              isLoading={txIsLoading}
+            />
             <CustomButton
               className="focus:shadow-outline rounded py-2 px-4"
               title="Cancel"

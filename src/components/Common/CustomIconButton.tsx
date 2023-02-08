@@ -1,8 +1,12 @@
-import type { ReactNode } from 'react';
+import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { THEME_MAP } from './CustomButton';
 
-interface CustomIconButtonProps {
+interface CustomIconButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   icon: ReactNode;
   iconDescription: string;
   theme?: 'solidPurple' | 'solidBlue' | 'transparentPurple';
@@ -14,6 +18,7 @@ const CustomIconButton = ({
   iconDescription,
   theme = 'solidBlue',
   className = '',
+  ...props
 }: CustomIconButtonProps) => {
   return (
     <button
@@ -23,6 +28,7 @@ const CustomIconButton = ({
         THEME_MAP[theme],
         className
       )}
+      {...props}
     >
       {icon}
       <span className="sr-only">{iconDescription}</span>

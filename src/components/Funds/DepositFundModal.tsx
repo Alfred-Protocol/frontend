@@ -62,8 +62,16 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     enabled: false,
   });
 
-  const { write: approveErc20Write, isSuccess: isAddressApproved } =
-    useContractWrite(approveErc20Config);
+  const {
+    data: approveErc20Data,
+    writeAsync: approveErc20Write,
+    isSuccess: isAddressApproved,
+  } = useContractWrite(approveErc20Config);
+
+  const { isSuccess: approveErc20IsSuccess } = useWaitForTransaction({
+    hash: approveErc20Data?.hash,
+    enabled: isAddressApproved,
+  });
 
   // wagmi hooks
   const { config } = usePrepareContractWrite({
@@ -90,17 +98,17 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   // toasts
   const [hasCreated, setHasCreated] = useState(false);
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setHasCreated(false);
     console.log('write', write);
 
     if (
-      !isAddressApproved &&
+      !approveErc20IsSuccess &&
       wmaticAllowance <
         ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
     ) {
-      approveErc20Write?.();
+      await approveErc20Write?.();
     } else {
       write?.();
     }
@@ -122,7 +130,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
             />
           </div>
           <div className="flex space-x-4">
-            {!isAddressApproved &&
+            {!approveErc20IsSuccess &&
             wmaticAllowance <
               ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) ? (
               <CustomButton

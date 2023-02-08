@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-token-image-uri-mapping": "node ./scripts/generateTokenImageURI.js",
+    "generate-contract-address-mapping": "node ./scripts/generateTokenAddressMaping.js",
+    "generate": "yarn generate-token-image-uri-mapping && yarn generate-contract-address-mapping"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

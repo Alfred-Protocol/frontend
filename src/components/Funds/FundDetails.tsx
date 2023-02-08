@@ -10,13 +10,20 @@ import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Address, erc20ABI, useContractRead, useContractReads } from 'wagmi';
+import {
+  Address,
+  erc20ABI,
+  useAccount,
+  useContractRead,
+  useContractReads,
+} from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
 import FundTable from '../FundDetails/FundTable';
 import Spinner from '../Layout/Spinner';
 import DepositFundModal from './DepositFundModal';
 import FundTableList from './FundTableList';
+import SwapTokensModal from './SwapTokens';
 
 export interface FundDetailsProps {
   isLoading: boolean;
@@ -49,8 +56,10 @@ const FundDetails = ({
 FundDetailsProps) => {
   const router = useRouter();
   const { data } = useFund(fundAddress);
+  const account = useAccount();
 
   const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
+  const [showSwapTokensModal, setSwapTokensModal] = useState<boolean>(false);
 
   const { data: stableCoin } = useContractReads({
     contracts: [
@@ -73,6 +82,7 @@ FundDetailsProps) => {
   const redirect = () => {
     router.push(`funds/${fundAddress}`);
   };
+
   return (
     <div
       className="min-h-40 w-full bg-blackfill text-whiteFont"
@@ -88,11 +98,22 @@ FundDetailsProps) => {
             theme="solidPurple"
             onClick={() => setDepositFundModal(true)}
           />
+          {manager.toLowerCase() === account?.address?.toLowerCase() && (
+            <CustomButton
+              title="Manage"
+              theme="solidPurple"
+              onClick={() => setSwapTokensModal(true)}
+            />
+          )}
         </div>
         <div>
           <p className="text-l mb-xs sm:text-md">
             Manager:{' '}
             <span className="slashed-zero">{truncateString(manager)}</span>
+          </p>
+          <p className="text-l mb-xs sm:text-md">
+            Fund Address:{' '}
+            <span className="slashed-zero">{truncateString(fundAddress)}</span>
           </p>
           <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
             {data?.description || 'No description found'}
@@ -125,6 +146,11 @@ FundDetailsProps) => {
         fundAddress={fundAddress}
         show={showDepositFundModal}
         onClose={() => setDepositFundModal(false)}
+      />
+      <SwapTokensModal
+        fundAddress={fundAddress}
+        show={showSwapTokensModal}
+        onClose={() => setSwapTokensModal(false)}
       />
     </div>
   );

@@ -98,7 +98,7 @@ const PriceRange = () => {
           }}
         >
           <span>Price Range</span>
-          <FullRangeContainer>
+          {/* <FullRangeContainer>
             <span style={isFullRange ? { color: 'white' } : {}}>
               Full Range:{' '}
             </span>
@@ -120,7 +120,7 @@ const PriceRange = () => {
                 })
               }
             />
-          </FullRangeContainer>
+          </FullRangeContainer> */}
         </div>
       </Heading>
       <Group>

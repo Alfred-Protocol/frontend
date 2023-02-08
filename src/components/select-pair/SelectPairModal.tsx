@@ -168,7 +168,7 @@ const NetworkItem = styled.div`
   transition: 0.3s;
   width: calc(370px - 10px * 2);
   margin: 10px;
-  border: 1px solid #333;
+  border: 1px solid #ef5da8;
   border-radius: 15px;
   padding: 10px 15px;
   position: relative;
@@ -504,7 +504,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         ariaHideApp={false}
       >
         <>
-          <GoBack>
+          {/* <GoBack>
             <div
               onClick={() => {
                 setShowSelectNetworkPage(false);
@@ -513,46 +513,48 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
               <FontAwesomeIcon icon={faArrowLeft as IconProp} />
             </div>
             <span>Select Network</span>
-          </GoBack>
+          </GoBack> */}
           {NETWORKS.map((network, i) => {
             return (
-              <NetworkItem
-                key={i}
-                style={
-                  network.disabled
-                    ? {
-                        cursor: 'not-allowed',
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        opacity: '0.4',
-                      }
-                    : {}
-                }
-                onClick={() => {
-                  if (!network.disabled) {
-                    setCurrentNetwork(network);
-                    fetchTokens();
-
-                    setSelectedNetwork(network);
-                    setSelectedTokens([null, null]);
-                    setShowSelectNetworkPage(false);
-                    setPools([]);
-
-                    // setQueryParam('network', network.id);
-                    deleteQueryParam('token0');
-                    deleteQueryParam('token1');
-                    deleteQueryParam('feeTier');
+              <div>
+                <NetworkItem
+                  key={i}
+                  style={
+                    network.disabled
+                      ? {
+                          cursor: 'not-allowed',
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          opacity: '0.4',
+                        }
+                      : {}
                   }
-                }}
-                id={`${network.name}_${i}`}
-              >
-                <img src={network.logoURI} alt={network.name} />
-                <div>
-                  <h5>
-                    {network.name} {network.isNew && <span>NEW</span>}
-                  </h5>
-                  <span>{network.desc}</span>
-                </div>
-              </NetworkItem>
+                  onClick={() => {
+                    if (!network.disabled) {
+                      setCurrentNetwork(network);
+                      fetchTokens();
+
+                      setSelectedNetwork(network);
+                      setSelectedTokens([null, null]);
+                      setShowSelectNetworkPage(false);
+                      setPools([]);
+
+                      // setQueryParam('network', network.id);
+                      deleteQueryParam('token0');
+                      deleteQueryParam('token1');
+                      deleteQueryParam('feeTier');
+                    }
+                  }}
+                  id={`${network.name}_${i}`}
+                >
+                  <img src={network.logoURI} alt={network.name} />
+                  <div>
+                    <h5>
+                      {network.name} {network.isNew && <span>NEW</span>}
+                    </h5>
+                    <span>{network.desc}</span>
+                  </div>
+                </NetworkItem>
+              </div>
             );
           })}
         </>
@@ -566,7 +568,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         ariaHideApp={false}
       >
         <>
-          <GoBack>
+          {/* <GoBack>
             <div
               onClick={() => {
                 setShowSelectTokenPage(false);
@@ -576,7 +578,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
               <FontAwesomeIcon icon={faArrowLeft as IconProp} />
             </div>
             <span>Select Token</span>
-          </GoBack>
+          </GoBack> */}
           <SearchTokenPage
             refetchTokens={() => {
               fetchTokens();

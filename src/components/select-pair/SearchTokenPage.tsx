@@ -55,6 +55,9 @@ const Divider = styled.div`
 const Scrollable = styled.div`
   height: 300px;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
 `;
 const LoadingContainer = styled.div`
   height: 300px;
@@ -266,14 +269,14 @@ const SearchTokenPage = ({
                     </span>
                   </div>
                 </TokenItem>
-                <button
+                {/* <button
                   data-tip="Copy token address"
                   onClick={() => {
                     navigator.clipboard.writeText(token.id);
                   }}
                 >
                   <FontAwesomeIcon icon={faCopy as IconProp} />
-                </button>
+                </button> */}
               </TokenItemWrapper>
             );
           })}

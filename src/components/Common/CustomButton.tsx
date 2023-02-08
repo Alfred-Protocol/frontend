@@ -9,6 +9,10 @@ interface Props
   > {
   title: string;
   theme: 'solidPurple' | 'solidBlue' | 'transparentPurple';
+  titleProps?: React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLSpanElement>,
+    HTMLSpanElement
+  >;
   className?: string;
   isLoading?: boolean;
   leftIcon?: ReactNode;
@@ -29,13 +33,14 @@ const CustomButton = ({
   isLoading,
   leftIcon,
   rightIcon,
+  titleProps,
   ...props
 }: Props) => {
   return (
     <button
       type="button"
       className={twMerge(
-        `flex cursor-pointer items-center justify-center space-x-2 rounded-lg border-2 border-transparent px-2 py-3 font-semibold text-fuchsia-50 transition-all focus:outline-none focus:ring-2 sm:px-7 sm:py-2.5`,
+        `flex cursor-pointer items-center justify-center space-x-2 rounded-lg border-2 border-transparent px-2 py-3 text-lg font-semibold text-fuchsia-50 transition-all focus:outline-none focus:ring-2 sm:px-4 sm:py-2`,
         isLoading ? 'cursor-not-allowed opacity-70' : '',
         THEME_MAP[theme],
         className
@@ -46,7 +51,7 @@ const CustomButton = ({
       {isLoading ? (
         <Spinner className="fill-white text-transparent" />
       ) : (
-        <span>{title}</span>
+        <span {...titleProps}>{title}</span>
       )}
       {rightIcon}
     </button>

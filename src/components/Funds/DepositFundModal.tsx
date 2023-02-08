@@ -1,15 +1,10 @@
 import { ethers } from 'ethers';
-import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
-import React, { FormEventHandler, useState } from 'react';
+import { Label, Modal, TextInput } from 'flowbite-react';
+import { FormEventHandler, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import {
-  Address,
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
-  useAccount,
-  useContractReads,
-  erc20ABI,
-  useSigner,
+  Address, erc20ABI, useAccount,
+  useContractReads, useContractWrite, usePrepareContractWrite, useWaitForTransaction
 } from 'wagmi';
 import Funds from '../../abi/Funds';
 import CustomButton from '../Common/CustomButton';
@@ -54,52 +49,16 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
 
   const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [18, 0, 0];
 
-  // const { config: approveErc20Config } = usePrepareContractWrite({
-  //   scopeKey: 'approveErc20',
-  //   address: WMATIC_MUMBAI_ADDRESS as Address,
-  //   abi: erc20ABI,
-  //   functionName: 'approve',
-  //   args: [fundAddress as Address, ethers.constants.MaxUint256],
-  //   enabled: false,
-  // });
-
-  // const {
-  //   data: approveErc20Data,
-  //   writeAsync: approveErc20Write,
-  //   isSuccess: isAddressApproved,
-  // } = useContractWrite(approveErc20Config);
-
-  // const { isSuccess: approveErc20IsSuccess } = useWaitForTransaction({
-  //   hash: approveErc20Data?.hash,
-  //   enabled: isAddressApproved,
-  // });
-
-  const { data: signer } = useSigner();
-
-  const approveToken = async () => {
-    if (!signer) return;
-    const tokenContract = new ethers.Contract(
-      WMATIC_MUMBAI_ADDRESS,
-      erc20ABI,
-      signer
-    );
-
-    const tx = await tokenContract.functions.approve(
-      fundAddress as Address,
-      ethers.constants.MaxUint256
-    );
-
-    await tx.wait();
-    alert('Token approved');
-  };
-
   // wagmi hooks
   const { config } = usePrepareContractWrite({
     address: fundAddress as Address,
     abi: Funds,
     functionName: 'deposit',
     args: [ethers.utils.parseUnits(amountToDeposit.toString(), wmaticDecimals)],
-    enabled: true,
+    enabled:
+      amountToDeposit > 0 &&
+      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) <
+        wmaticBalance,
   });
   const { data, isSuccess, write } = useContractWrite(config);
   const {
@@ -114,19 +73,34 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   // toasts
   const [hasCreated, setHasCreated] = useState(false);
 
+  useEffect(() => {
+    if (txIsSuccess && !hasCreated) {
+      setHasCreated(true);
+      console.log(
+        `Successfully deposited, transaction hash: ${JSON.stringify(txReceipt)}`
+      );
+      toast.success(
+        `Successfully deposited, transaction hash: ${txReceipt?.transactionHash}`
+      );
+      onClose();
+    }
+  }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
+
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setHasCreated(false);
-    console.log('writes', write);
-
     if (
-      wmaticAllowance <
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
+      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) >
+      wmaticBalance
     ) {
-      await approveToken();
-    } else {
-      write?.();
+      toast.error(
+        `Insufficient balance, currently you have ${ethers.utils.formatEther(
+          wmaticBalance
+        )} WMATIC`
+      );
     }
+
+    write?.();
   };
 
   return (
@@ -139,30 +113,28 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
             <TextInput
               id="amountToDeposit"
               type="text"
-              onChange={(e) => setAmountToDeposit(Number(e.target.value))}
+              onChange={(e) => {
+                if (!isNaN(Number(e.target.value))) {
+                  setAmountToDeposit(Number(e.target.value));
+                }
+              }}
               required
               placeholder="Enter your deposit amount"
             />
           </div>
           <div className="flex space-x-4">
-            {wmaticAllowance <
-            ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) ? (
-              <CustomButton
-                className="focus:shadow-outline rounded py-2 px-4"
-                type="submit"
-                title="Approve"
-                theme="solidBlue"
-                isLoading={txIsLoading}
-              />
-            ) : (
-              <CustomButton
-                className="focus:shadow-outline rounded py-2 px-4"
-                type="submit"
-                title="Create"
-                theme="solidBlue"
-                isLoading={txIsLoading}
-              />
-            )}
+            <CustomButton
+              className="focus:shadow-outline rounded py-2 px-4"
+              type="submit"
+              title={
+                wmaticAllowance <
+                ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals)
+                  ? 'Approve'
+                  : 'Deposit'
+              }
+              theme="solidBlue"
+              isLoading={txIsLoading}
+            />
             <CustomButton
               className="focus:shadow-outline rounded py-2 px-4"
               title="Cancel"

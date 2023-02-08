@@ -53,10 +53,6 @@ const FundsDetailsNew = ({
 // amount0,
 // amount1,
 AssetsDetailProps) => {
-  if (!fundAddress) {
-    return null;
-  }
-
   const router = useRouter();
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
@@ -107,6 +103,9 @@ AssetsDetailProps) => {
     enabled: !!fundAddress,
   });
 
+  if (!fundAddress) {
+    return null;
+  }
   if (!data) {
     return null;
   }

@@ -14,7 +14,7 @@ enum ViewState {
 }
 
 const FundCards = () => {
-  const { data, isLoading } = useFunds();
+  const { data, isLoading, refetch } = useFunds();
   const { status } = useAccount();
 
   const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
@@ -61,6 +61,7 @@ const FundCards = () => {
             icon={<ArrowPathIcon width={20} height={20} />}
             className={'px-4'}
             iconDescription={'Refresh'}
+            onClick={() => refetch()}
           />
           <CustomButton
             title="Choose Start Date"

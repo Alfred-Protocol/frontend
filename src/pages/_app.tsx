@@ -100,6 +100,7 @@ export default function App({ Component, pageProps }: AppProps) {
             pauseOnHover
             closeOnClick={false}
             position="bottom-center"
+            theme="dark"
           />
         </ContextProvider>
       </RainbowKitProvider>

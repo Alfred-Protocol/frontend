@@ -9,6 +9,7 @@ import {
   useAccount,
   useContractReads,
   erc20ABI,
+  useSigner,
 } from 'wagmi';
 import Funds from '../../abi/Funds';
 import CustomButton from '../Common/CustomButton';
@@ -53,25 +54,44 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
 
   const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [18, 0, 0];
 
-  const { config: approveErc20Config } = usePrepareContractWrite({
-    scopeKey: 'approveErc20',
-    address: WMATIC_MUMBAI_ADDRESS as Address,
-    abi: erc20ABI,
-    functionName: 'approve',
-    args: [fundAddress as Address, ethers.constants.MaxUint256],
-    enabled: false,
-  });
+  // const { config: approveErc20Config } = usePrepareContractWrite({
+  //   scopeKey: 'approveErc20',
+  //   address: WMATIC_MUMBAI_ADDRESS as Address,
+  //   abi: erc20ABI,
+  //   functionName: 'approve',
+  //   args: [fundAddress as Address, ethers.constants.MaxUint256],
+  //   enabled: false,
+  // });
 
-  const {
-    data: approveErc20Data,
-    writeAsync: approveErc20Write,
-    isSuccess: isAddressApproved,
-  } = useContractWrite(approveErc20Config);
+  // const {
+  //   data: approveErc20Data,
+  //   writeAsync: approveErc20Write,
+  //   isSuccess: isAddressApproved,
+  // } = useContractWrite(approveErc20Config);
 
-  const { isSuccess: approveErc20IsSuccess } = useWaitForTransaction({
-    hash: approveErc20Data?.hash,
-    enabled: isAddressApproved,
-  });
+  // const { isSuccess: approveErc20IsSuccess } = useWaitForTransaction({
+  //   hash: approveErc20Data?.hash,
+  //   enabled: isAddressApproved,
+  // });
+
+  const { data: signer } = useSigner();
+
+  const approveToken = async () => {
+    if (!signer) return;
+    const tokenContract = new ethers.Contract(
+      WMATIC_MUMBAI_ADDRESS,
+      erc20ABI,
+      signer
+    );
+
+    const tx = await tokenContract.functions.approve(
+      fundAddress as Address,
+      ethers.constants.MaxUint256
+    );
+
+    await tx.wait();
+    alert('Token approved');
+  };
 
   // wagmi hooks
   const { config } = usePrepareContractWrite({
@@ -79,11 +99,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     abi: Funds,
     functionName: 'deposit',
     args: [ethers.utils.parseUnits(amountToDeposit.toString(), wmaticDecimals)],
-    enabled:
-      amountToDeposit > 0 &&
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) <=
-        wmaticBalance &&
-      !isNaN(amountToDeposit),
+    enabled: true,
   });
   const { data, isSuccess, write } = useContractWrite(config);
   const {
@@ -101,14 +117,13 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setHasCreated(false);
-    console.log('write', write);
+    console.log('writes', write);
 
     if (
-      !approveErc20IsSuccess &&
       wmaticAllowance <
-        ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
+      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals ?? 18)
     ) {
-      await approveErc20Write?.();
+      await approveToken();
     } else {
       write?.();
     }
@@ -130,9 +145,8 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
             />
           </div>
           <div className="flex space-x-4">
-            {!approveErc20IsSuccess &&
-            wmaticAllowance <
-              ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) ? (
+            {wmaticAllowance <
+            ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) ? (
               <CustomButton
                 className="focus:shadow-outline rounded py-2 px-4"
                 type="submit"

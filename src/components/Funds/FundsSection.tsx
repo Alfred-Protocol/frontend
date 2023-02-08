@@ -1,15 +1,22 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
-import FundsFactory from '@/abi/FundsFactory';
-import { useState } from 'react';
-import {
-  Address, useAccount, useContractRead, useSigner
-} from 'wagmi';
+import { ChangeEvent, ChangeEventHandler, useState } from 'react';
+import { ethers, Signer } from 'ethers';
+import PageTitle from '../Layout/PageTitle';
+
 import { LPPositionsMock } from '../../mockData/mockData';
-import AssetsDetail from './AssetsDetail';
-import AssetsHeader from './AssetsHeader';
-import DepositModal from './DepositModal';
-import SuccessModal from './SuccessModal';
-import WithdrawModal from './WithdrawModal';
+import {
+  Address,
+  useContractRead,
+  useContractReads,
+  useSigner,
+  useAccount,
+} from 'wagmi';
+import FundsFactory from '@/abi/FundsFactory';
+import { useEffect } from 'react';
+import Funds from '@/abi/Funds';
+import { sign } from 'crypto';
+import AssetsHeader from '../Assets/AssetsHeader';
+import AssetsDetail from '../Assets/AssetsDetail';
 
 export type Fund = {
   fundName: string;
@@ -85,7 +92,7 @@ const mockData = [
 
 type modalType = 'success' | 'deposit' | 'withdraw';
 
-const AssetsSection = () => {
+const FundsSection = () => {
   const [assets, setAssets] = useState([]);
   const [showModal, setShowModal] = useState(true);
   const [modalFund, setModalFund] = useState<Fund | undefined>(undefined);
@@ -102,6 +109,11 @@ const AssetsSection = () => {
 
   const { status, address: curUserAddress } = useAccount();
 
+  console.log('status ', status);
+
+  // const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
+  // const [showCreateFundModal, setShowCreateFundModal] = useState(false);
+
   const onClickDeposit = (fund: Fund) => {
     setModalType('deposit');
     setModalFund(fund);
@@ -115,6 +127,17 @@ const AssetsSection = () => {
     // fetchCollection();
     setShowModal(true);
   };
+
+  // const fetchCollection = async () => {
+  //   const provider = new ethers.providers.JsonRpcProvider(
+  //     'https://hardworking-late-firefly.quiknode.pro/65fc8167ff913b5f6e127f71b9f6deeddd651f71/'
+  //   );
+  //   let resp = await provider.send('qn_getTokenMetadataByContractAddress', {
+  //     contract: '0x4d224452801ACEd8B2F0aebE155379bb5D594381',
+  //   });
+
+  //   console.log('resp ', resp);
+  // };
 
   const closeModal = () => {
     setShowModal(false);
@@ -155,10 +178,9 @@ const AssetsSection = () => {
           netValue={3223.43}
         />
         <div className="flex w-full flex-col items-center space-y-10">
-          {addresses?.map((address) => {
+          {addresses?.map((address, idx) => {
             return (
               <AssetsDetail
-                key={address}
                 fundAddress={address}
                 curUserAddress={curUserAddress}
                 // address={data.address}
@@ -181,4 +203,4 @@ const AssetsSection = () => {
     </div>
   );
 };
-export default AssetsSection;
+export default FundsSection;

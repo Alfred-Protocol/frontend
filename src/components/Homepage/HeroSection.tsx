@@ -27,7 +27,7 @@ const HeroSection = () => {
     []
   );
   return (
-    <div>
+    <div className="space-y-4">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -50,8 +50,8 @@ const HeroSection = () => {
         style={{ fontSize: '2em' }}
         className="text-xl text-white md:text-3xl"
       />
-      <FancyButton className="mt-8">
-        <Link href="/funds">
+      <div className='pt-6'>
+        <FancyButton isLink href="/home">
           Get Started
           <ArrowRightIcon
             height={24}
@@ -59,8 +59,8 @@ const HeroSection = () => {
             strokeWidth={3}
             className="inline pb-1"
           />
-        </Link>
-      </FancyButton>
+        </FancyButton>
+      </div>
     </div>
   );
 };

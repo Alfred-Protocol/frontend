@@ -12,6 +12,7 @@ import { Address, useContractReads } from 'wagmi';
 import Funds from '@/abi/Funds';
 import { ethers } from 'ethers';
 import { LPPositionsMock } from '@/mockData/mockData';
+import { useRouter } from 'next/router';
 
 interface AssetsDetailProps {
   // totalValueLocked: number;
@@ -55,6 +56,8 @@ AssetsDetailProps) => {
   if (!fundAddress) {
     return null;
   }
+
+  const router = useRouter();
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [
@@ -126,20 +129,19 @@ AssetsDetailProps) => {
   const fundManagerAddress = data[fundManagerIndex];
   console.log('fundManagerAddress', fundManagerAddress);
   console.log('curUserAddress', curUserAddress);
-
   if (fundManagerAddress.toString() != curUserAddress.toString()) {
     return;
   }
 
-  console.log('rendering count 1');
-
   return (
-    <div className="relative flex w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
+    <div
+      className="relative flex w-3/5 cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white"
+      onClick={() => router.push('funds/' + fundAddress)}
+    >
       <CustomButton
         title="Add Position"
         theme="solidPurple"
         className="absolute right-5 top-5"
-        onClick={() => {}}
       />
       <div className="mr-12 text-left">
         <p className="mb-2 text-2xl sm:text-3xl">{fundName}</p>

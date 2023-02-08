@@ -1,96 +1,99 @@
-import AddPositionModal from '@/components/FundManage/AddPositionModal';
-import FundTable from '@/components/FundDetails/FundTable';
+import EstimatedFees from '@/components/Chart/EstimatedFees';
+import LiquidityPositionChart from '@/components/Chart/LiquidityPositionChart';
+import Setting from '@/components/Chart/setting/Setting';
 import Layout from '@/components/Layout/Layout';
-import PageTitle from '@/components/Layout/PageTitle';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import NormalButton from 'src/components/Layout/NormalButton';
+import SelectPairModal from '@/components/select-pair/SelectPairModal';
+import { useAppContext } from '@/context/app/appContext';
+import ContextProvider from '@/context/ContextProvider';
+import { useEffect, useState } from 'react';
+import { fadeIn, bounce } from 'react-animations';
+import Radium from 'radium';
 
-export interface PositionData {
-  created: string;
-  address: string;
-  token1: string;
-  token2: string;
-  amount1: number;
-  amount2: number;
-  value1: number;
-  value2: number;
-}
-
-const data: PositionData[] = [
-  {
-    created: '03/01/2023',
-    address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
-    token1: 'ETH',
-    token2: 'USDC',
-    amount1: 100.01,
-    amount2: 20000.03,
-    value1: 120.5,
-    value2: 20400.4,
+const styles = {
+  fadeIn: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(fadeIn, 'fadeIn'),
   },
-  {
-    created: '03/02/2023',
-    address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA2',
-    token1: 'ETH',
-    token2: 'USDT',
-    amount1: 500.01,
-    amount2: 40000.03,
-    value1: 800.5,
-    value2: 40800.4,
+  bounce: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(bounce, 'bounce'),
   },
-];
+};
+// import CreatePosition from '../../components/FundDetails/CreatePosition';
+import CustomButton from '@/components/Common/CustomButton';
+import CreatePosition from '@/components/FundDetails/CreatePosition';
 
-// do not need to check bcs only can redirect to this page from Funds/xxx page, ignore hardcoding of url first
-const FundManagePage = () => {
-  const { query, push } = useRouter();
-  const { address } = query;
+const ManageFundPage = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { state } = useAppContext();
+  const [showPairModal, setShowPairModal] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showComponent, setShowComponent] = useState(false);
 
-  const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
-  const addPosition = () => {
-    setShowModal(true);
-  };
+  if (!isLoaded) {
+    return;
+  }
 
   return (
-    <Layout>
-      <PageTitle title="Manage Fund Positions" />
-      {showModal && (
-        <AddPositionModal
-          closeModal={() => setShowModal(false)}
-          fund={undefined}
-          addPosition={({
-            token1,
-            token2,
-            amount1,
-            amount2,
-            minPrice,
-            maxPrice,
-          }) => {
-            toast.success('Added New Position for Uniswap LP Token V3');
-            data.push({
-              created: '03/02/2023',
-              address: '0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3',
-              token1: token1,
-              token2: token2,
-              amount1: amount1,
-              amount2: amount2,
-              value1: amount1 + 40,
-              value2: amount2 + 60,
-            });
-          }}
-        />
-      )}
-      <div>
-        <div className="flex justify-center space-x-4 items-center pb-6">
-          <NormalButton onClick={addPosition}>
-            Add Uniswap V3 Position
-          </NormalButton>
+    <Radium.StyleRoot>
+      <Layout>
+        <div className="flex w-full justify-center">
+          <div className="mt-10 flex w-4/5 flex-col space-y-10">
+            {showPairModal ? (
+              <div style={styles.fadeIn as any}>
+                <SelectPairModal
+                  submitStart={() => {
+                    setIsLoading(true);
+                    setShowComponent(true);
+                  }}
+                  submitEnded={() => {
+                    setIsLoading(false);
+                    setShowPairModal(false);
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <CustomButton
+                  title="Change Settings"
+                  theme="transparentPurple"
+                  className="w-1/5"
+                  onClick={() => {
+                    setShowPairModal(true);
+                    setShowComponent(false);
+                  }}
+                  style={styles.bounce as any}
+                />
+              </div>
+            )}
+
+            {showComponent && (
+              <div className="flex flex-col space-y-10">
+                <div className="flex w-full space-x-5 ">
+                  <EstimatedFees isLoading={isLoading} />
+                  <Setting isLoading={isLoading} />
+                </div>
+                <LiquidityPositionChart isLoading={isLoading} />
+                <div className="flex justify-center">
+                  <CreatePosition />
+                </div>
+              </div>
+            )}
+
+            {/* {!showPairModal && <LiquidityPositionChart />}
+            {!showPairModal && (
+              <div className="flex justify-center">
+                <CreatePosition />
+              </div>
+            )} */}
+          </div>
         </div>
-        <FundTable data={data} />
-      </div>
-    </Layout>
+      </Layout>
+    </Radium.StyleRoot>
   );
 };
-
-export default FundManagePage;
+export default ManageFundPage;

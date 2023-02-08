@@ -112,11 +112,6 @@ const AssetsSection = () => {
 
   const { status, address: curUserAddress } = useAccount();
 
-  console.log('status ', status);
-
-  // const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);
-  // const [showCreateFundModal, setShowCreateFundModal] = useState(false);
-
   const onClickDeposit = (fund: Fund) => {
     setModalType('deposit');
     setModalFund(fund);
@@ -130,17 +125,6 @@ const AssetsSection = () => {
     // fetchCollection();
     setShowModal(true);
   };
-
-  // const fetchCollection = async () => {
-  //   const provider = new ethers.providers.JsonRpcProvider(
-  //     'https://hardworking-late-firefly.quiknode.pro/65fc8167ff913b5f6e127f71b9f6deeddd651f71/'
-  //   );
-  //   let resp = await provider.send('qn_getTokenMetadataByContractAddress', {
-  //     contract: '0x4d224452801ACEd8B2F0aebE155379bb5D594381',
-  //   });
-
-  //   console.log('resp ', resp);
-  // };
 
   const closeModal = () => {
     setShowModal(false);
@@ -170,38 +154,6 @@ const AssetsSection = () => {
   const resetModal = () => {
     setShowModal(false);
     setModalType(undefined);
-  };
-
-  const renderModal = () => {
-    if (!modalType) {
-      return;
-    }
-
-    if (modalType === 'deposit') {
-      return (
-        <DepositModal
-          fund={modalFund}
-          closeModal={closeModal}
-          handleDeposit={handleDeposit}
-        />
-      );
-    }
-
-    if (modalType === 'withdraw') {
-      return (
-        <WithdrawModal
-          fund={modalFund}
-          maxAmount={20}
-          closeModal={closeModal}
-          handleWithdraw={handleWithdraw}
-          withdrawAbleAmount={20}
-        />
-      );
-    }
-
-    if (modalType === 'success') {
-      return <SuccessModal message={sucessModalMessage} onClick={resetModal} />;
-    }
   };
 
   return (

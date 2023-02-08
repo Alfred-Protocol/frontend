@@ -1,18 +1,25 @@
+import type { CSSProperties, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
+
+interface PairValueProps {
+  field: string;
+  value: string;
+  valueClassName?: string;
+  endComponent?: ReactNode;
+  style?: CSSProperties;
+}
+
 const PairValue = ({
   field,
   value,
   endComponent,
   style,
-}: {
-  field: string;
-  value: string;
-  endComponent?: any;
-  style?: any;
-}) => {
+  valueClassName,
+}: PairValueProps) => {
   return (
-    <div className="flex items-center space-x-2" style={style}>
-      <p className="font-semibold sm:text-xl">{field}:</p>
-      <p>{value}</p>
+    <div className="flex items-center sm:text-xl" style={style}>
+      <p className="pr-2 font-bold">{field}:</p>
+      <p className={twMerge('slashed-zero', valueClassName)}>{value}</p>
       {endComponent}
     </div>
   );

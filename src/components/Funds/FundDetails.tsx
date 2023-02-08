@@ -1,6 +1,8 @@
 import useFund from '@/hooks/useFund';
 import truncateString from '@/utils/truncateString';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { ethers } from 'ethers';
+import { Tooltip } from 'flowbite-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Address, erc20ABI, useAccount, useContractReads } from 'wagmi';
@@ -83,15 +85,15 @@ const FundDetails = ({
           </div>
         </div>
         <div>
-          <p className="text-l mb-xs sm:text-md">
+          <p className="mb-xs sm:text-md">
             Manager:{' '}
             <span className="slashed-zero">{truncateString(manager)}</span>
           </p>
-          <p className="text-l mb-xs sm:text-md">
+          <p className="mb-xs sm:text-md">
             Fund Address:{' '}
             <span className="slashed-zero">{truncateString(fundAddress)}</span>
           </p>
-          <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
+          <p className="max-w-mlg mt-4 mb-8 text-lg">
             {description || 'No description found.'}
           </p>
         </div>
@@ -103,16 +105,52 @@ const FundDetails = ({
               ' ' +
               stableCoinSymbol
             }
+            endComponent={
+              <Tooltip
+                content="Total Value Locked"
+                className="px-2 text-center"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1"
+                />
+              </Tooltip>
+            }
           />
-          <div className="flex items-center space-x-2">
-            <p className="font-semibold sm:text-xl">Yield:</p>
-            <p className="text-greenGrowth">{yieldPercentage}%</p>
-          </div>
+          <PairValue
+            field="Yield"
+            value={`${yieldPercentage}%`}
+            valueClassName="text-green-500"
+            endComponent={
+              <Tooltip
+                content="Lifetime Yield earned"
+                className="px-2 text-center"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1"
+                />
+              </Tooltip>
+            }
+          />
           <PairValue field="Start Date" value={startDate} />
           <PairValue
             field="Mature Date"
             value={matureDate}
-            style={{ marginBottom: 5 }}
+            endComponent={
+              <Tooltip
+                content="The date at which the fund will be disabled, and withdrawals will be enabled"
+                className="px-2 text-center"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1"
+                />
+              </Tooltip>
+            }
           />
           <FundTableList />
         </div>

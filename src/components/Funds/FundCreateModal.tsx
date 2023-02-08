@@ -10,7 +10,7 @@ import {
   useAccount,
   useContractWrite,
   usePrepareContractWrite,
-  useWaitForTransaction,
+  useWaitForTransaction
 } from 'wagmi';
 import Web3 from 'web3';
 import CustomButton from '../Common/CustomButton';

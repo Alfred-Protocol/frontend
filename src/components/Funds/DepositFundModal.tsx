@@ -23,7 +23,6 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   const [amountToDeposit, setAmountToDeposit] = useState(0);
 
   const account = useAccount();
-
   const { data: wmatic } = useContractReads({
     contracts: [
       {

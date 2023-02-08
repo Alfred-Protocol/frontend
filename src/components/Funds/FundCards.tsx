@@ -34,22 +34,22 @@ const FundCards = () => {
     return (
       <>
         <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
         <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
         <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
         <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
         <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
         <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
       </>
     );

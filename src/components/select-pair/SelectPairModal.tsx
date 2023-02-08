@@ -741,21 +741,17 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
             onClick={handleSubmit}
             disabled={isFormDisabled}
             style={
-              isFormDisabled
+              isSubmitLoading
                 ? {
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    cursor: 'not-allowed',
+                    background: '#EF5DA8',
+                    // background: '#EF5DA8',
+                    // cursor: 'not-allowed',
                   }
                 : {}
             }
           >
             {isSubmitLoading && (
-              <ReactLoading
-                type="spin"
-                color="rgba(34, 114, 229, 1)"
-                height={18}
-                width={18}
-              />
+              <ReactLoading type="spin" color="white" height={18} width={18} />
             )}
             {!isSubmitLoading && <span>Calculate</span>}
           </PrimaryBlockButton>

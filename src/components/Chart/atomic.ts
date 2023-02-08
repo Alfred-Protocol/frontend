@@ -3,7 +3,7 @@ import { ScreenWidth } from '../../utils/styled';
 
 // Section: Button
 const ButtonStyle = styled.button`
-  border: 0;
+  // border: 0;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 12px;
@@ -102,9 +102,13 @@ export const PrimaryBlockButton = styled(PrimaryButton)`
     transform: scale(1.5);
   }
 
-  background: #1470f1;
+  background: transparent;
+  border-color: #ef5da8;
+  border-width: thin;
+  border-radius: 10px;
+
   &:hover {
-    background: #2a77fd;
+    background: #ef5da8;
   }
 `;
 

@@ -151,8 +151,8 @@ AssetsDetailProps) => {
 
   return (
     <div
-      className="relative flex w-3/5 cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white"
-      onClick={() => router.push('funds/' + fundAddress)}
+      className="relative flex w-3/5 cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white hover:scale-105"
+      onClick={() => {}}
     >
       <CustomButton
         title="Withdraw"

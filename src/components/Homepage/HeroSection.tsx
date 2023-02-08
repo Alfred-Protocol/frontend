@@ -8,9 +8,13 @@ import Particles from 'react-tsparticles';
 import type { Container, Engine } from 'tsparticles-engine';
 import { loadFull } from 'tsparticles';
 import animationJSON from 'src/assets/particles.json';
+import CustomButton from '../Common/CustomButton';
+
+import { useRouter } from 'next/router';
 
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
 const HeroSection = () => {
+  const router = useRouter();
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
 
@@ -50,16 +54,13 @@ const HeroSection = () => {
         style={{ fontSize: '2em' }}
         className="text-xl text-white md:text-3xl"
       />
-      <div className='pt-6'>
-        <FancyButton isLink href="/home">
-          Get Started
-          <ArrowRightIcon
-            height={24}
-            width={24}
-            strokeWidth={3}
-            className="inline pb-1"
-          />
-        </FancyButton>
+      <div className="flex justify-center pt-6">
+        <CustomButton
+          title="Get Started"
+          theme="transparentPurple"
+          className=""
+          onClick={() => router.push('/home')}
+        />
       </div>
     </div>
   );

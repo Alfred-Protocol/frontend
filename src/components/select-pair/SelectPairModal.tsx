@@ -39,6 +39,7 @@ import {
 import type { Network, Pool, Token } from '@/types/type';
 import { getPriceChart } from '@/repos/coingecko';
 import { Heading, PrimaryBlockButton } from '../Chart/atomic';
+import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ModalStyle = {
   overlay: {
@@ -491,7 +492,6 @@ const SelectPairModal = ({ submitEnded }: Props) => {
     // setQueryParam(`token${selectedTokenIndex}`, token.id);
   };
 
-  console.log('showSelectTokenPage ', showSelectTokenPage);
   return (
     <>
       <Modal
@@ -508,13 +508,14 @@ const SelectPairModal = ({ submitEnded }: Props) => {
                 setShowSelectNetworkPage(false);
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} />
+              <FontAwesomeIcon icon={faArrowLeft as IconProp} />
             </div>
             <span>Select Network</span>
           </GoBack>
           {NETWORKS.map((network, i) => {
             return (
               <NetworkItem
+                key={i}
                 style={
                   network.disabled
                     ? {
@@ -570,7 +571,7 @@ const SelectPairModal = ({ submitEnded }: Props) => {
                 setSelectedTokenIndex(null);
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} />
+              <FontAwesomeIcon icon={faArrowLeft as IconProp} />
             </div>
             <span>Select Token</span>
           </GoBack>
@@ -617,7 +618,6 @@ const SelectPairModal = ({ submitEnded }: Props) => {
               <div
                 className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight"
                 onClick={() => {
-                  console.log(' isSubmitLoading ', isSubmitLoading);
                   if (!isSubmitLoading) {
                     setSelectedPool(null);
                     deleteQueryParam('feeTier');

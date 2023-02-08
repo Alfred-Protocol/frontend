@@ -1,5 +1,6 @@
+import type { Tick } from '@/types/type';
 import bn from 'bignumber.js';
-import type { Tick } from '../../common/interfaces/uniswap.interface';
+// import type { Tick } from '../../common/interfaces/uniswap.interface';
 import { getFeeTierPercentage } from './helper';
 
 bn.config({ EXPONENTIAL_AT: 999999, DECIMAL_PLACES: 40 });

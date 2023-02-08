@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn generate && next build",
     "start": "next start",
     "lint": "next lint",
     "generate-token-image-uri-mapping": "node ./scripts/generateTokenImageURI.js",
@@ -22,7 +22,7 @@
     "@headlessui/react": "^1.7.8",
     "@heroicons/react": "^2.0.14",
     "@next/font": "13.1.6",
-    "@prisma/client": "^4.9.0",
+    "@prisma/client": "^4.10.0",
     "@rainbow-me/rainbowkit": "^0.8.1",
     "@types/d3": "^7.4.0",
     "@types/node": "^18.11.19",
@@ -68,6 +68,7 @@
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
     "prettier": "^2.8.3",
+    "prisma": "^4.10.0",
     "tailwindcss": "^3.2.4",
     "ts-node": "^10.9.1",
     "typescript": "4.9.4"

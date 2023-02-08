@@ -15,11 +15,11 @@ interface Props
   rightIcon?: ReactNode;
 }
 
-const themeMap: Record<string, string> = {
-  solidPurple: 'bg-solidPurpleDark hover:bg-solidPurple',
-  solidBlue: 'bg-solidBlueDark hover:bg-solidBlue',
+export const THEME_MAP: Record<string, string> = {
+  solidPurple: 'bg-solidPurpleDark hover:bg-solidPurple focus:ring-blue-400',
+  solidBlue: 'bg-solidBlueDark hover:bg-solidBlue focus:ring-blue-400',
   transparentPurple:
-    'text-white hover:bg-purpleLight bg-transparent border-purpleLight',
+    'hover:bg-purpleLight bg-transparent border-purpleLight focus:ring-blue-400',
 };
 
 const CustomButton = ({
@@ -35,9 +35,9 @@ const CustomButton = ({
     <button
       type="button"
       className={twMerge(
-        `flex cursor-pointer items-center justify-center space-x-2 rounded-lg border-2 border-transparent px-2 py-3 font-semibold text-fuchsia-50 transition-all focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800 sm:px-7 sm:py-2.5`,
+        `flex cursor-pointer items-center justify-center space-x-2 rounded-lg border-2 border-transparent px-2 py-3 font-semibold text-fuchsia-50 transition-all focus:outline-none focus:ring-2 sm:px-7 sm:py-2.5`,
         isLoading ? 'cursor-not-allowed opacity-70' : '',
-        themeMap[theme],
+        THEME_MAP[theme],
         className
       )}
       {...props}

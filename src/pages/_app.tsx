@@ -29,6 +29,7 @@ import '@/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import ContextProvider from '@/context/ContextProvider';
+import { useEffect } from 'react';
 
 export const { chains, provider, webSocketProvider } = configureChains(
   [
@@ -73,6 +74,17 @@ const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider

@@ -141,7 +141,7 @@ const AddPositionModal = ({ closeModal, fund, addPosition }: ModalProp) => {
     <div>
       <div
         id="defaultModal"
-        className="absolute left-1/2 -translate-x-1/2 "
+        className="absolute left-1/2 -translate-x-1/2"
         style={{ minWidth: 600 }}
       >
         <div className="relative h-full w-full max-w-2xl md:h-auto">

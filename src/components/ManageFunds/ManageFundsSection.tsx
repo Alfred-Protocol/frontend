@@ -20,7 +20,7 @@ const MaangeFundsSection = () => {
 
   return (
     <div>
-      <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
+      <div className="mx-auto flex max-w-4xl flex-col items-center justify-center">
         <AssetsHeader
           managerAddress={address || ''}
           netDeposit={totalFund}

@@ -69,14 +69,14 @@ const ManageFundCard = ({
 
   return (
     <div
-      className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white transition-all hover:bg-gray-800"
+      className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-6 px-8 text-left text-white transition-all hover:bg-gray-800"
       onClick={() => router.push(`/funds/${address}`)}
     >
-      <div className="mb-4 flex items-center justify-between">
+      <div className="relative mb-4 flex items-center">
         <h3 className="text-2xl font-bold text-fuchsia-100 sm:text-4xl">
           {name}
         </h3>
-        <div className="flex justify-center space-x-6">
+        <div className="ml-36 flex justify-center space-x-6">
           <div className="flex items-center space-x-2">
             <Image
               src={logo1}
@@ -100,7 +100,9 @@ const ManageFundCard = ({
             <p className="text-2xl">{amount1.toLocaleString()}</p>
           </div>
         </div>
-        <CustomButton title="Add Position" theme="solidPurple" className="" />
+        <div className="absolute right-0">
+          <CustomButton title="Add Position" theme="solidPurple" className="" />
+        </div>
       </div>
       <div className="flex">
         <div className="mr-12">
@@ -125,13 +127,13 @@ const ManageFundCard = ({
           <PairValue
             field="Start Date"
             value={new Date(
-              data ? data[startDateIndex].toString() : startDate
+              startDate ? startDate.toString() : startDate
             ).toLocaleDateString()}
           />
           <PairValue
             field="Mature Date"
             value={new Date(
-              data ? data[matureDateIndex].toString() : matureDate
+              matureDate ? matureDate.toString() : matureDate
             ).toLocaleDateString()}
           />
         </div>

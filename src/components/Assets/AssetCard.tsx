@@ -93,59 +93,66 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
   }
 
   return (
-    <div className="relative w-full">
-      <div
-        className="cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-all hover:bg-gray-800"
-        onClick={() => {
-          router.push(`/funds/${fundAddress}`);
-        }}
-      >
-        <div className="mb-4 flex items-start justify-between">
-          <div className="flex space-x-8">
-            <h3 className="mb-4 text-2xl font-bold sm:text-4xl">
-              {fund?.name || 'No fund name found'}
-            </h3>
-            <div className="flex flex-col justify-center">
-              <PairValue
-                field="TVL"
-                containerClassName="sm:text-md"
-                value={ethers.utils.formatUnits(tvl, 18) + ' WMATIC'}
-                endComponent={
-                  <Tooltip
-                    content="Total Value Locked"
-                    className="px-2 text-center"
-                  >
-                    <InformationCircleIcon
-                      height={16}
-                      width={16}
-                      className="ml-1 transition-colors hover:stroke-fuchsia-300"
-                    />
-                  </Tooltip>
-                }
-              />
-              <PairValue
-                field="Mature Date"
-                containerClassName="sm:text-md"
-                value={
-                  fund
-                    ? new Date(fund.matureDate).toLocaleDateString()
-                    : 'No mature date found'
-                }
-                endComponent={
-                  <Tooltip
-                    content="The date at which the fund will be disabled, and withdrawals will be enabled"
-                    className="px-2 text-center"
-                  >
-                    <InformationCircleIcon
-                      height={16}
-                      width={16}
-                      className="ml-1 transition-colors hover:stroke-fuchsia-300"
-                    />
-                  </Tooltip>
-                }
-              />
-            </div>
+    <div
+      className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-all hover:bg-gray-800"
+      onClick={() => {
+        router.push(`/funds/${fundAddress}`);
+      }}
+    >
+      <div className="mb-4 flex items-start justify-between">
+        <div className="flex space-x-8">
+          <h3 className="mb-4 text-2xl font-bold sm:text-4xl">
+            {fund?.name || 'No fund name found'}
+          </h3>
+          <div className="flex flex-col justify-center">
+            <PairValue
+              field="TVL"
+              containerClassName="sm:text-md"
+              value={ethers.utils.formatUnits(tvl, 18) + ' WMATIC'}
+              endComponent={
+                <Tooltip
+                  content="Total Value Locked"
+                  className="px-2 text-center"
+                >
+                  <InformationCircleIcon
+                    height={16}
+                    width={16}
+                    className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                  />
+                </Tooltip>
+              }
+            />
+            <PairValue
+              field="Mature Date"
+              containerClassName="sm:text-md"
+              value={
+                fund
+                  ? new Date(fund.matureDate).toLocaleDateString()
+                  : 'No mature date found'
+              }
+              endComponent={
+                <Tooltip
+                  content="The date at which the fund will be disabled, and withdrawals will be enabled"
+                  className="px-2 text-center"
+                >
+                  <InformationCircleIcon
+                    height={16}
+                    width={16}
+                    className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                  />
+                </Tooltip>
+              }
+            />
           </div>
+        </div>
+        <div>
+          <CustomButton
+            title="Withdraw"
+            theme="solidPurple"
+            isLoading={txIsLoading}
+            onClick={write}
+            disabled={write === undefined}
+          />
         </div>
         <div className="flex space-x-8">
           <div>

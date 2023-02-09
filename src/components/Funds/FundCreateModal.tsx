@@ -10,7 +10,7 @@ import {
   useAccount,
   useContractWrite,
   usePrepareContractWrite,
-  useWaitForTransaction
+  useWaitForTransaction,
 } from 'wagmi';
 import Web3 from 'web3';
 import CustomButton from '../Common/CustomButton';
@@ -118,8 +118,8 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
 
   return (
     <Modal show={show} dismissible onClose={onClose} className="h-full">
-      <Modal.Header className="bg-gray-800">Create Fund</Modal.Header>
-      <Modal.Body className="bg-gray-800">
+      <Modal.Header className="">Create Fund</Modal.Header>
+      <Modal.Body className="">
         <form className="space-y-4 rounded" onSubmit={onSubmit}>
           <div className="space-y-2">
             <Label htmlFor="fundName">Fund Name</Label>

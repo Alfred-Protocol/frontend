@@ -26,7 +26,7 @@ const FundCard = ({
     matureDate,
     startDate,
     name,
-    yield: fundYield,
+    fundYield,
   },
   showLpPositions = true,
 }: FundProps) => {

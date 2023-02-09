@@ -38,8 +38,7 @@ export default async function handler(
         description,
         startDate,
         matureDate,
-        // @ts-ignore
-        yield: fundYield.toString(),
+        fundYield: fundYield.toString(),
       },
     });
     return res.status(200).json({

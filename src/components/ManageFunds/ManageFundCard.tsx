@@ -26,7 +26,7 @@ const matureDateIndex = 3;
 // const stableCoinAddressIndex = 2;
 
 const ManageFundCard = ({
-  fund: { address, name, manager, startDate, matureDate, yield: fundYield },
+  fund: { address, name, manager, startDate, matureDate, fundYield },
   onGetTVL,
   showLpPositions = true,
 }: AssetsDetailProps) => {

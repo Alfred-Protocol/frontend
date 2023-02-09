@@ -84,6 +84,16 @@ const AssetsSection = () => {
   const { address } = useAccount();
   const { data, isLoading, refetch } = useDatabaseFunds();
   const [totalFundETH, setTotalFundETH] = useState(0);
+  const [isDomLoaded, setIsDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsDomLoaded(true);
+  }, []);
+
+  // Necessary due to some hydration error
+  if (!isDomLoaded) {
+    return null;
+  }
 
   return (
     <div>
@@ -95,7 +105,12 @@ const AssetsSection = () => {
           netValue={totalFundETH * 1.22 * 1.1}
         />
         <div className="flex w-full flex-col items-center space-y-4">
-          {data?.length &&
+          {isLoading ? (
+            <div role="status" className="h-48 w-full animate-pulse">
+              <div className="h-full w-full rounded-xl border-[1px] border-[#EF5DA8] bg-blackfillLess dark:bg-blackfill"></div>
+            </div>
+          ) : (
+            data?.length &&
             data.map((fund) => (
               <AssetCard
                 key={fund.address}
@@ -103,7 +118,8 @@ const AssetsSection = () => {
                 fund={fund}
                 // deposits={deposits[address as Address]}
               />
-            ))}
+            ))
+          )}
         </div>
       </div>
     </div>

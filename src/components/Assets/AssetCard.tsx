@@ -6,15 +6,24 @@ import USDT from 'src/assets/USDT.jpg';
 import Funds from '@/abi/Funds';
 import type { Deposit } from '@/hooks/useDeposits';
 import useDatabaseFund from '@/hooks/useDatabaseFund';
-import { ethers } from 'ethers';
+import { ethers, BigNumber } from 'ethers';
 import Image from 'next/image';
-import { Address, useAccount, useContractReads } from 'wagmi';
+import {
+  Address,
+  useAccount,
+  useContractReads,
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import { useRouter } from 'next/router';
+import type { Fund } from '@prisma/client';
 
 interface AssetsDetailProps {
   fundAddress: Address;
   deposits?: Deposit[];
+  fund: Fund;
 }
 
 // Convert to ENUM
@@ -23,10 +32,10 @@ const stableCoinAddressIndex = 1;
 const lpPositionsIndex = 2;
 const depositedAmountIndex = 3;
 
-const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
-  const router = useRouter();
+const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
   const { address } = useAccount();
-  const { data: fund } = useDatabaseFund(fundAddress);
+  const router = useRouter();
+
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [
@@ -57,6 +66,27 @@ const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
     enabled: !!fundAddress && !!address,
   });
 
+  const [tvl, stablecoin, allLpPositions, depositedAmount] =
+    data !== undefined
+      ? data
+      : [BigNumber.from(0), BigNumber.from(0), [], BigNumber.from(0)];
+
+  const { config } = usePrepareContractWrite({
+    address: fundAddress as Address,
+    abi: Funds,
+    functionName: 'withdraw',
+    enabled: depositedAmount?.gt(0),
+  });
+  const { data: withdrawAmount, isSuccess, write } = useContractWrite(config);
+  const {
+    data: txReceipt,
+    isSuccess: txIsSuccess,
+    isLoading: txIsLoading,
+  } = useWaitForTransaction({
+    hash: withdrawAmount?.hash,
+    enabled: isSuccess,
+  });
+
   if (!fundAddress || !data) {
     return null;
   }
@@ -74,12 +104,8 @@ const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
   //   })) || LPPositionsMock;
   const amount0 = 0;
   const amount1 = 1;
-  const depositedAmount = ethers.utils.formatUnits(
-    data[depositedAmountIndex],
-    18
-  );
 
-  if (parseFloat(depositedAmount) <= 0) {
+  if (depositedAmount.lte(0)) {
     return null;
   }
 
@@ -116,11 +142,16 @@ const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
             <p className="text-2xl">{amount1.toLocaleString()}</p>
           </div>
         </div>
-        <CustomButton title="Withdraw" theme="solidPurple" className="" />
+        <CustomButton
+          title="Withdraw"
+          theme="solidPurple"
+          isLoading={txIsLoading}
+          onClick={write}
+        />
       </div>
       <div className="mr-12 text-left">
         <p className="mb-2 text-2xl sm:text-3xl">{}</p>
-        <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
+        <PairValue field="TVL" value={totalValueLocked + ' WMATIC'} />
         <PairValue
           field="Start Date"
           value={

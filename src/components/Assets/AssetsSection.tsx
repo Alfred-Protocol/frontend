@@ -1,6 +1,8 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
+import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import useDeposits from '@/hooks/useDeposits';
-import type { Address } from 'wagmi';
+import { useEffect, useState } from 'react';
+import { Address, useAccount } from 'wagmi';
 import { LPPositionsMock } from '../../mockData/mockData';
 import AssetCard from './AssetCard';
 import AssetsHeader from './AssetsHeader';
@@ -78,13 +80,14 @@ const mockData = [
 ];
 
 const AssetsSection = () => {
-  const { deposits, isLoading } = useDeposits();
+  const { address } = useAccount();
+  const { data, isLoading, refetch } = useDatabaseFunds();
 
   return (
     <div>
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
         <AssetsHeader
-          managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
+          managerAddress={address ?? ''}
           netDeposit={3232.3}
           netValue={3223.43}
         />
@@ -94,12 +97,13 @@ const AssetsSection = () => {
               <div className="mb-4 h-full w-full rounded-xl border-[1px] border-[#EF5DA8] bg-blackfillLess dark:bg-blackfill"></div>
             </div>
           ) : (
-            deposits &&
-            Object.keys(deposits).map((address) => (
+            data &&
+            data.map((fund) => (
               <AssetCard
-                key={address}
-                fundAddress={address as Address}
-                deposits={deposits[address as Address]}
+                key={fund.address}
+                fundAddress={fund.address as Address}
+                fund={fund}
+                // deposits={deposits[address as Address]}
               />
             ))
           )}

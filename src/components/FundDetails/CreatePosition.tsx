@@ -1,6 +1,6 @@
 import { nearestUsableTick } from '@uniswap/v3-sdk';
 import { ethers } from 'ethers';
-import { TextInput } from 'flowbite-react';
+import { Label, Modal, TextInput } from 'flowbite-react';
 import { FormEventHandler, useMemo, useState } from 'react';
 import { Address, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Funds from '../../abi/Funds';

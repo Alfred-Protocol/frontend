@@ -114,7 +114,6 @@ const AssetCard = ({
 
   useEffect(() => {
     if (totalValueLocked && parseFloat(totalValueLocked) > 0) {
-      console.log('totalValueLocked ', totalValueLocked);
       onGetTVL(parseFloat(totalValueLocked));
     }
   }, [totalValueLocked]);
@@ -126,9 +125,9 @@ const AssetCard = ({
   return (
     <div
       className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white transition-all hover:bg-gray-800"
-      onClick={() => {
-        router.push(`/funds/${fundAddress}`);
-      }}
+      // onClick={() => {
+      //   router.push(`/funds/${fundAddress}`);
+      // }}
     >
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-2xl font-bold text-fuchsia-100 sm:text-4xl">

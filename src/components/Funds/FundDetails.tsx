@@ -49,6 +49,7 @@ const FundDetails = ({
     useState<boolean>(false);
 
   const { data: stableCoin } = useContractReads({
+    scopeKey: stableCoinAddress,
     contracts: [
       {
         address: stableCoinAddress as Address,
@@ -72,14 +73,13 @@ const FundDetails = ({
   });
 
   const [stableCoinDecimals, stableCoinSymbol, userDepositedAmount] =
-    stableCoin ?? [18, 'ETH', BigNumber.from(0)];
+    stableCoin !== undefined && stableCoin.every(Boolean)
+      ? stableCoin
+      : [18, 'ETH', BigNumber.from(0)];
 
   return (
-    <div
-      className="min-h-40 w-full text-whiteFont"
-      style={{ position: 'relative' }}
-    >
-      <div className="flex flex-col justify-between">
+    <div className="min-h-40 w-full text-whiteFont"> 
+      <div className="flex h-full flex-col justify-between">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-2xl font-bold sm:text-4xl">{fundName}</h3>
           <div className="flex space-x-2">
@@ -134,62 +134,65 @@ const FundDetails = ({
           <p className="max-w-mlg mt-4 mb-8 text-lg">
             {description || 'No description found.'}
           </p>
+
+          <div>
+            <PairValue
+              field="TVL"
+              value={
+                ethers.utils.formatUnits(totalValueLocked, stableCoinDecimals) +
+                ' ' +
+                stableCoinSymbol
+              }
+              endComponent={
+                <Tooltip
+                  content="Total Value Locked"
+                  className="px-2 text-center"
+                >
+                  <InformationCircleIcon
+                    height={16}
+                    width={16}
+                    className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                  />
+                </Tooltip>
+              }
+            />
+            <PairValue
+              field="Yield"
+              value={`${yieldPercentage}%`}
+              valueClassName="text-green-500"
+              endComponent={
+                <Tooltip
+                  content="Lifetime yield earned"
+                  className="px-2 text-center"
+                >
+                  <InformationCircleIcon
+                    height={16}
+                    width={16}
+                    className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                  />
+                </Tooltip>
+              }
+            />
+            <PairValue field="Start Date" value={startDate} />
+            <PairValue
+              field="Mature Date"
+              value={matureDate}
+              endComponent={
+                <Tooltip
+                  content="The date at which the fund will be disabled, and withdrawals will be enabled"
+                  className="px-2 text-center"
+                >
+                  <InformationCircleIcon
+                    height={16}
+                    width={16}
+                    className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                  />
+                </Tooltip>
+              }
+            />
+          </div>
         </div>
-        <div className="">
-          <PairValue
-            field="TVL"
-            value={
-              ethers.utils.formatUnits(totalValueLocked, stableCoinDecimals) +
-              ' ' +
-              stableCoinSymbol
-            }
-            endComponent={
-              <Tooltip
-                content="Total Value Locked"
-                className="px-2 text-center"
-              >
-                <InformationCircleIcon
-                  height={16}
-                  width={16}
-                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
-                />
-              </Tooltip>
-            }
-          />
-          <PairValue
-            field="Yield"
-            value={`${yieldPercentage}%`}
-            valueClassName="text-green-500"
-            endComponent={
-              <Tooltip
-                content="Lifetime yield earned"
-                className="px-2 text-center"
-              >
-                <InformationCircleIcon
-                  height={16}
-                  width={16}
-                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
-                />
-              </Tooltip>
-            }
-          />
-          <PairValue field="Start Date" value={startDate} />
-          <PairValue
-            field="Mature Date"
-            value={matureDate}
-            endComponent={
-              <Tooltip
-                content="The date at which the fund will be disabled, and withdrawals will be enabled"
-                className="px-2 text-center"
-              >
-                <InformationCircleIcon
-                  height={16}
-                  width={16}
-                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
-                />
-              </Tooltip>
-            }
-          />
+        <div>
           <FundTableList />
         </div>
       </div>

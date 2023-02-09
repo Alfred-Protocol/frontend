@@ -5,7 +5,7 @@ import USDT from 'src/assets/USDT.jpg';
 
 import Funds from '@/abi/Funds';
 import type { Deposit } from '@/hooks/useDeposits';
-import useFund from '@/hooks/useFund';
+import useDatabaseFund from '@/hooks/useDatabaseFund';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { Address, useAccount, useContractReads } from 'wagmi';

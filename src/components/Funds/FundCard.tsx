@@ -44,7 +44,7 @@ const FundCard = ({
         minHeight: isMobile ? 300 : 470,
         minWidth: isMobile ? 100 : 460,
       }}
-      className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow transition-all sm:py-8 sm:px-8"
+      className="h-4600 flex rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow transition-all sm:py-8 sm:px-8"
     >
       <FundDetails
         fundAddress={address as Address}

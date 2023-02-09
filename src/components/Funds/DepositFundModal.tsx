@@ -30,6 +30,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
 
   const account = useAccount();
   const { data: wmatic } = useContractReads({
+    scopeKey: WMATIC_MUMBAI_ADDRESS,
     contracts: [
       {
         address: WMATIC_MUMBAI_ADDRESS as Address,
@@ -52,11 +53,10 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     enabled: !!account?.address,
   });
 
-  const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [
-    18,
-    BigNumber.from(0),
-    BigNumber.from(0),
-  ];
+  const [wmaticDecimals, wmaticBalance, wmaticAllowance] =
+    wmatic !== undefined && wmatic.every(Boolean)
+      ? wmatic
+      : [18, BigNumber.from(0), BigNumber.from(0)];
 
   const { data: signer } = useSigner();
 

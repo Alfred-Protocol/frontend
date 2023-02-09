@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, TextInput } from 'flowbite-react';
 import { FormEventHandler, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -31,6 +31,7 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
 
   const account = useAccount();
   const { data: wmatic } = useContractReads({
+    scopeKey: WMATIC_MUMBAI_ADDRESS,
     contracts: [
       {
         address: WMATIC_MUMBAI_ADDRESS as Address,
@@ -60,7 +61,9 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   });
 
   const [wmaticDecimals, wmaticBalance, wmaticAllowance, fundWmaticBalance] =
-    wmatic ?? [18, 0, 0, 0];
+    wmatic !== undefined && wmatic.every(Boolean)
+      ? wmatic
+      : [18, BigNumber.from(0), BigNumber.from(0), BigNumber.from(0)];
 
   // wagmi hooks
   const { config } = usePrepareContractWrite({

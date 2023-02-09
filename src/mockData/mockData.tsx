@@ -4,7 +4,7 @@ import type { LPPosition } from '../types/type';
 const LPPositionsMock: Array<LPPosition> = [
   {
     token0: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889',
-    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+    token1: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
     poolFee: BigNumber.from(3000),
     tickLower: BigNumber.from(192200),
     tickUpper: BigNumber.from(198000),
@@ -16,7 +16,7 @@ const LPPositionsMock: Array<LPPosition> = [
   },
   {
     token0: '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889',
-    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+    token1: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
     poolFee: BigNumber.from(3000),
     tickLower: BigNumber.from(193600),
     tickUpper: BigNumber.from(198400),

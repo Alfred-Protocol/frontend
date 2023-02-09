@@ -18,11 +18,11 @@ const FundDetailHeader = ({
       <div className="flex">
         <div className="flex-1">
           <p className="mb-2 text-2xl font-bold ">Net USD Value</p>
-          <p className="mb-2 text-3xl ">{netValue.toLocaleString()}</p>
+          <p className="mb-2 text-3xl ">{netValue.toFixed(5)}</p>
         </div>
         <div className="flex-1">
           <p className="mb-2 text-2xl font-bold">Net USD Deposit</p>
-          <p className="mb-2 text-3xl">{netDeposit.toLocaleString()}</p>
+          <p className="mb-2 text-3xl">{netDeposit.toFixed(5)}</p>
         </div>
       </div>
     </div>

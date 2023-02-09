@@ -30,9 +30,9 @@ const renderSection = ({
           alt={''}
           style={{ borderRadius: 100 }}
         />
-        <p className="text-3xl">{amount0.toLocaleString()}</p>
+        <p className="text-3xl">{amount0.toFixed(5)}</p>
       </div>
-      <div className="flex items-center space-x-2">
+      {/* <div className="flex items-center space-x-2">
         <Image
           src={logo1}
           width={48}
@@ -40,8 +40,8 @@ const renderSection = ({
           alt={''}
           style={{ borderRadius: 100 }}
         />
-        <p className="mb-2 text-3xl">{amount1.toLocaleString()}</p>
-      </div>
+        <p className="mb-2 text-3xl">{amount1.toFixed(5)}</p>
+      </div> */}
     </>
   );
 };

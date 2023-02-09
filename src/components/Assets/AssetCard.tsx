@@ -5,7 +5,7 @@ import type { Fund } from '@prisma/client';
 import { BigNumber, ethers } from 'ethers';
 import { Tooltip } from 'flowbite-react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { twMerge } from 'tailwind-merge';
 import {
@@ -24,13 +24,21 @@ interface AssetsDetailProps {
   fundAddress: Address;
   deposits?: Deposit[];
   fund: Fund;
+  setTotalDeposits: Dispatch<SetStateAction<number>>;
+  setTotalNetValue: Dispatch<SetStateAction<number>>;
 }
 
-const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
+const AssetCard = ({
+  fundAddress,
+  deposits,
+  fund,
+  setTotalDeposits,
+  setTotalNetValue,
+}: AssetsDetailProps) => {
   const router = useRouter();
 
   const { address } = useAccount();
-  const { data, isLoading } = useContractReads({
+  const { data, refetch } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [
       {
@@ -75,6 +83,17 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
     enabled: isSuccess,
   });
 
+  // hacky way to update total deposit / net assets
+  const hasUpdatedRef = useRef(false);
+  useEffect(() => {
+    if (!hasUpdatedRef.current && depositedAmount.gt(0)) {
+      hasUpdatedRef.current = true;
+      const amountInEther = ethers.utils.formatEther(depositedAmount);
+      setTotalDeposits((prev) => prev + +amountInEther);
+      setTotalNetValue((prev) => prev + +amountInEther);
+    }
+  }, [depositedAmount, setTotalDeposits, setTotalNetValue]);
+
   // toasts
   const [hasCreated, setHasCreated] = useState(false);
 
@@ -85,6 +104,11 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
       toast.success(
         `Successfully withdrawn, transaction hash: ${txReceipt?.transactionHash}`
       );
+
+      const amountInEther = ethers.utils.formatEther(depositedAmount);
+      setTotalDeposits((prev) => prev - +amountInEther);
+      setTotalNetValue((prev) => prev - +amountInEther);
+      refetch();
     }
   }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
 

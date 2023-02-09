@@ -14,9 +14,11 @@ import { Address, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { Tooltip } from 'flowbite-react';
+import { useEffect } from 'react';
 
 interface AssetsDetailProps {
   fund: Fund;
+  onGetTVL: (tvl: number) => void;
 }
 
 // Convert to ENUM
@@ -28,6 +30,7 @@ const matureDateIndex = 3;
 
 const ManageFundCard = ({
   fund: { address, name, manager, startDate, matureDate },
+  onGetTVL,
 }: AssetsDetailProps) => {
   const router = useRouter();
 
@@ -69,6 +72,12 @@ const ManageFundCard = ({
   const lpPositions = data[lpPositionsIndex] || LPPositionsMock;
   const amount0 = 0;
   const amount1 = 1;
+
+  useEffect(() => {
+    if (totalValueLocked && parseFloat(totalValueLocked) > 0) {
+      onGetTVL(parseFloat(totalValueLocked));
+    }
+  }, [totalValueLocked]);
 
   return (
     <div

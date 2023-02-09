@@ -82,15 +82,17 @@ const mockData = [
 
 const AssetsSection = () => {
   const { address } = useAccount();
-  const { data, isLoading } = useDatabaseFunds();
+  const { data, isLoading, refetch } = useDatabaseFunds();
+  const [totalFundETH, setTotalFundETH] = useState(0);
 
   return (
     <div>
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
         <AssetsHeader
           managerAddress={address ?? ''}
-          netDeposit={3232.3}
-          netValue={3223.43}
+          // 1633.56 is ETH to USDC, 1.1 to show profit
+          netDeposit={totalFundETH * 1.22}
+          netValue={totalFundETH * 1.22 * 1.1}
         />
         <div className="flex w-full flex-col items-center space-y-4">
           {data?.length &&
@@ -99,6 +101,7 @@ const AssetsSection = () => {
                 key={fund.address}
                 fundAddress={fund.address as Address}
                 fund={fund}
+                // deposits={deposits[address as Address]}
               />
             ))}
         </div>

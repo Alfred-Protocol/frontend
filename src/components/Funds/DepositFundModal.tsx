@@ -52,7 +52,11 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     enabled: !!account?.address,
   });
 
-  const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [18, 0, 0];
+  const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [
+    18,
+    BigNumber.from(0),
+    BigNumber.from(0),
+  ];
 
   const { data: signer } = useSigner();
 

@@ -26,7 +26,6 @@ export interface FundDetailsProps {
   description?: string;
   yieldPercentage?: number;
   fundName: string;
-  refetch: () => Promise<void>;
 }
 
 const FundDetails = ({
@@ -40,11 +39,9 @@ const FundDetails = ({
   manager,
   stableCoinAddress,
   yieldPercentage = 20.4,
-  refetch,
 }: FundDetailsProps) => {
   const account = useAccount();
 
-  const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
   const [showSwapTokensModal, setSwapTokensModal] = useState<boolean>(false);
 
   const { data: stableCoin } = useContractReads({
@@ -74,14 +71,7 @@ const FundDetails = ({
     <div className="min-h-40 w-full text-fuchsia-100">
       <div className="flex h-full flex-col justify-between">
         <div className="mb-2 flex items-start justify-between">
-          <h3 className="text-2xl font-bold sm:text-4xl">{fundName}</h3>
-          <div className="flex space-x-2">
-            <CustomButton
-              title="Deposit"
-              theme="solidPurple"
-              onClick={() => setDepositFundModal(true)}
-            />
-          </div>
+          <h3 className="text-2xl font-bold sm:text-4xl md:w-80">{fundName}</h3>
         </div>
         <div>
           <p className="mb-xs sm:text-md flex items-center space-x-1">
@@ -174,12 +164,6 @@ const FundDetails = ({
           <FundTableList />
         </div>
       </div>
-      <DepositFundModal
-        fundAddress={fundAddress}
-        show={showDepositFundModal}
-        onClose={() => setDepositFundModal(false)}
-        refetch={refetch}
-      />
       <SwapTokensModal
         fundAddress={fundAddress}
         show={showSwapTokensModal}

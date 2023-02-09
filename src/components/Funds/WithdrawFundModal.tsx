@@ -14,6 +14,7 @@ import {
 } from 'wagmi';
 import Funds from '../../abi/Funds';
 import CustomButton from '../Common/CustomButton';
+import CustomToastWithLink from '../Common/CustomToastWithLink';
 
 type WithdrawFundProps = {
   fundAddress: string;
@@ -90,8 +91,12 @@ const WithdrawFundModal = ({
       setHasCreated(true);
       console.log(`Successfully deposited, transaction hash:`, txReceipt);
       toast.success(
-        `Successfully deposited, transaction hash: ${txReceipt?.transactionHash}`
+        CustomToastWithLink({
+          txId: txReceipt?.transactionHash as any,
+          content: 'Successfully swapped, transaction hash:',
+        })
       );
+
       onClose();
     }
   }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);

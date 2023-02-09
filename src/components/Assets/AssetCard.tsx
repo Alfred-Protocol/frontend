@@ -17,6 +17,7 @@ import {
   useWaitForTransaction,
 } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
+import CustomToastWithLink from '../Common/CustomToastWithLink';
 import PairValue from '../Common/PairValues';
 import { WMATIC_MUMBAI_ADDRESS } from '../Funds/WithdrawFundModal';
 
@@ -102,7 +103,10 @@ const AssetCard = ({
       setHasCreated(true);
       console.log(`Successfully withdrawn, transaction hash:`, txReceipt);
       toast.success(
-        `Successfully withdrawn, transaction hash: ${txReceipt?.transactionHash}`
+        CustomToastWithLink({
+          txId: txReceipt?.transactionHash as any,
+          content: 'Successfully withdrawn, transaction hash:',
+        })
       );
 
       const amountInEther = ethers.utils.formatEther(depositedAmount);

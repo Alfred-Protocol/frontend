@@ -67,8 +67,6 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
     ? 18
     : Number(token1Details?.decimals);
 
-  console.log('amount0Calc', amount0Calc);
-
   const amount0CalcInWei = ethers.utils.parseUnits(
     `${Math.floor(amount0Calc)}`,
     token0Decimals

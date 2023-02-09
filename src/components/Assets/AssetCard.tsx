@@ -10,6 +10,7 @@ import { ethers } from 'ethers';
 import Image from 'next/image';
 import { Address, useAccount, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
+import { useRouter } from 'next/router';
 
 interface AssetsDetailProps {
   fundAddress: Address;
@@ -23,7 +24,7 @@ const lpPositionsIndex = 2;
 const depositedAmountIndex = 3;
 
 const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
-  console.log(fundAddress);
+  const router = useRouter();
   const { address } = useAccount();
   const { data: fund } = useDatabaseFund(fundAddress);
   const { data, isLoading } = useContractReads({
@@ -85,7 +86,9 @@ const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
   return (
     <div
       className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white transition-all hover:bg-gray-800"
-      onClick={() => {}}
+      onClick={() => {
+        router.push(`/funds/${fundAddress}`);
+      }}
     >
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-2xl font-bold text-fuchsia-100 sm:text-4xl">

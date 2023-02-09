@@ -12,24 +12,6 @@ export type Fund = {
   withdrawEnable: boolean;
 };
 
-type modalType = 'success' | 'deposit' | 'withdraw';
-
-const FundsSectionLoading = () => {
-  return (
-    <>
-      <div role="status" className="h-60 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-      </div>
-      <div role="status" className="h-60 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-      </div>
-      <div role="status" className="h-60 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-      </div>
-    </>
-  );
-};
-
 const MaangeFundsSection = () => {
   const { address } = useAccount();
   const { data, isLoading } = useDatabaseFunds(address);
@@ -44,7 +26,12 @@ const MaangeFundsSection = () => {
         />
         <div className="flex w-full flex-col items-center space-y-4">
           {isLoading ? (
-            <FundsSectionLoading />
+            <div
+              role="status"
+              className="h-52 w-full animate-pulse border-[1px] border-[#EF5DA8]"
+            >
+              <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+            </div>
           ) : (
             data?.map((fund) => (
               <ManageFundCard key={fund.address} fund={fund} />

@@ -73,7 +73,7 @@ const FundCard = ({
               : ethers.constants.AddressZero
           }
           yieldPercentage={fundYield as string}
-          showLpPositions={showLpPositions}
+          showLpPositions={!!showLpPositions}
         />
       </div>
       <DepositFundModal

@@ -20,7 +20,6 @@ export default async function handler(
       if (manager !== undefined && !isAddress(manager)) {
         manager = undefined;
       }
-      console.log(prisma);
       const funds = await prisma.fund.findMany({
         where: {
           manager: {

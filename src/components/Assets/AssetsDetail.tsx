@@ -196,7 +196,7 @@ AssetsDetailProps) => {
           </div>
         </div>
         <div className="flex-1">
-          <FundTableList data={lpPositions} />
+          <FundTableList data={lpPositions as any} />
         </div>
       </div>
     </div>

@@ -80,6 +80,7 @@ export default function App({ Component, pageProps }: AppProps) {
           overlayBlur: 'large',
         })}
         chains={chains}
+        initialChain={polygonMumbai}
       >
         <ContextProvider>
           <Component {...pageProps} />

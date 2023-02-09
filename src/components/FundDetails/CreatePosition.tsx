@@ -14,6 +14,7 @@ import Funds from '../../abi/Funds';
 import { useAppContext } from '../../context/app/appContext';
 import { useGetPairTokenAmount } from '../../hooks/useGetPairTokenAmount';
 import CustomButton from '../Common/CustomButton';
+import CustomToastWithLink from '../Common/CustomToastWithLink';
 
 type Props = {
   fundAddress?: string;
@@ -126,7 +127,10 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
     if (txIsSuccess) {
       console.log(`Successfully deposited, transaction hash:`, txReceipt);
       toast.success(
-        `Successfully deposited, transaction hash: ${txReceipt?.transactionHash}`
+        CustomToastWithLink({
+          txId: txReceipt?.transactionHash as any,
+          content: 'Successfully deposited, transaction hash:',
+        })
       );
       onClose();
     }

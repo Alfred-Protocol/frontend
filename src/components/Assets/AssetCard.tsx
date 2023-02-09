@@ -17,6 +17,7 @@ import {
   useWaitForTransaction,
 } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
+import CustomToastWithLink from '../Common/CustomToastWithLink';
 import PairValue from '../Common/PairValues';
 import { WMATIC_MUMBAI_ADDRESS } from '../Funds/WithdrawFundModal';
 
@@ -102,7 +103,10 @@ const AssetCard = ({
       setHasCreated(true);
       console.log(`Successfully withdrawn, transaction hash:`, txReceipt);
       toast.success(
-        `Successfully withdrawn, transaction hash: ${txReceipt?.transactionHash}`
+        CustomToastWithLink({
+          txId: txReceipt?.transactionHash as any,
+          content: 'Successfully withdrawn, transaction hash:',
+        })
       );
 
       const amountInEther = ethers.utils.formatEther(depositedAmount);
@@ -119,7 +123,7 @@ const AssetCard = ({
   return (
     <div className="relative w-full">
       <div
-        className="cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-all hover:bg-gray-800"
+        className="cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-colors hover:bg-gray-800"
         onClick={() => {
           router.push(`/funds/${fundAddress}`);
         }}

@@ -1,3 +1,4 @@
+import Funds from '@/abi/Funds';
 import { LPPositionsMock } from '@/mockData/mockData';
 import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
@@ -10,6 +11,8 @@ import FundDetailHeader from './FundDetailHeader';
 import FundDetailAssets from './FundDetailsAssets';
 import FundDetailGraph from './FundDetailsGraph';
 import Positions from './Positions';
+import { Address, useContractReads } from 'wagmi';
+import { ethers } from 'ethers';
 
 interface FundDetailsProps {
   fundAddress: string;
@@ -28,6 +31,35 @@ const FundDetails = ({
   tokenBAmount,
   manager,
 }: FundDetailsProps) => {
+  const config = {
+    address: fundAddress as Address,
+    abi: Funds,
+  };
+
+  const { data, isLoading } = useContractReads({
+    scopeKey: fundAddress, // cache with individual fund page
+    contracts: [
+      { ...config, functionName: 'totalValueLocked' },
+      {
+        ...config,
+        functionName: 'fetchAllLpPositions',
+      },
+      {
+        ...config,
+        functionName: 'startDate',
+      },
+      {
+        ...config,
+        functionName: 'matureDate',
+      },
+      // { ...config, functionName: 'stablecoin' },
+    ],
+    cacheTime: 60 * 1000, // 1min
+    enabled: !!fundAddress,
+  });
+
+  const tvlLocked = parseFloat(ethers.utils.formatUnits(data ? data[0] : 0));
+
   const { address, status } = useAccount();
 
   return (
@@ -37,15 +69,15 @@ const FundDetails = ({
           fundName="Fund A"
           fundDescription="An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin). \n
       By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. "
-          netValue={2043}
-          netDeposit={3432}
+          netValue={tvlLocked * 1.1}
+          netDeposit={tvlLocked}
         />
         <div className="flex w-full space-x-6">
           <FundDetailAssets
-            freeAmount0={3232.3}
-            freeAmount1={2132.3}
-            lockedAmount0={3242.2}
-            lockedAmount1={2323.4}
+            freeAmount0={tvlLocked * 0.4}
+            freeAmount1={tvlLocked}
+            lockedAmount0={tvlLocked * 0.6}
+            lockedAmount1={tvlLocked}
             logo0={undefined}
             logo1={undefined}
           />

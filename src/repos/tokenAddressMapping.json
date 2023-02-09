@@ -3784,6 +3784,10 @@
       "id": "convex-finance",
       "name": "Convex Finance"
     },
+    "0xfeef77d3f69374f66429c91d732a244f074bdf74": {
+      "id": "convex-fxs",
+      "name": "Convex FXS"
+    },
     "0xff75ced57419bcaebe5f05254983b013b0646ef5": {
       "id": "cook",
       "name": "Cook"
@@ -4527,6 +4531,10 @@
     "0x37f74e99794853777a10ea1dc08a64c86958f06a": {
       "id": "d-community",
       "name": "D Community"
+    },
+    "0x2a304fda5a85182dca1d03741bb2f07881b9e095": {
+      "id": "dcomy",
+      "name": "DCOMY"
     },
     "0x1a3496c18d558bd9c6c8f609e1b129f67ab08163": {
       "id": "deapcoin",
@@ -10147,6 +10155,10 @@
     "0xa59e341e8047498700ed244814b01b34547fb21b": {
       "id": "medal-of-honour",
       "name": "Medal of Honour"
+    },
+    "0xfeead860ffa43e5660ca62ea5953a74f695c1d5b": {
+      "id": "medcarecoin",
+      "name": "MedCareCoin"
     },
     "0x9a257c90fa239fba07771ef7da2d554d148c2e89": {
       "id": "media-eye",
@@ -20630,6 +20642,10 @@
       "id": "monavale",
       "name": "Monavale"
     },
+    "0x18ec0a6e18e5bc3784fdd3a3634b31245ab704f6": {
+      "id": "monerium-eur-money",
+      "name": "Monerium EUR emoney"
+    },
     "0xa25610a77077390a75ad9072a084c5fbc7d43a0d": {
       "id": "monsoon-finance",
       "name": "Monsoon Finance"
@@ -28786,10 +28802,6 @@
       "id": "blueart",
       "name": "BLUEART TOKEN"
     },
-    "0x217ca5ce67166a3024527ee3a3289635603aed31": {
-      "id": "bluebenx",
-      "name": "BlueBenx [OLD]"
-    },
     "0x315be92aba5c3aaaf82b0c0c613838342c1416e7": {
       "id": "bluebenx-2",
       "name": "BlueBenx"
@@ -32762,6 +32774,10 @@
       "id": "fight-of-the-ages",
       "name": "Fight Of The Ages"
     },
+    "0x7db13e8b9eaa42fc948268b954dd4e6218cc4cb1": {
+      "id": "fight-win-ai",
+      "name": "Fight Win AI"
+    },
     "0x965b85d4674f64422c4898c8f8083187f02b32c0": {
       "id": "filecoin-standard-full-hashrate",
       "name": "Filecoin Standard Full Hashrate"
@@ -32937,6 +32953,10 @@
     "0x2fb09b8749a3a13eefa3fd4e643fc44dbdba5b39": {
       "id": "flokiswap",
       "name": "FlokiSwap"
+    },
+    "0x84e70f388aad5b4df0ee5935fda76c27c3bb63ad": {
+      "id": "floshido-inu",
+      "name": "FLOSHIDO INU"
     },
     "0x9a6fed601a11290500f8d76153c33cc254e9f6d0": {
       "id": "floshin",
@@ -33705,6 +33725,10 @@
     "0xc7baa7787bb40c5d2523252baf142413dcbbcd5b": {
       "id": "glow",
       "name": "Glow"
+    },
+    "0x606379220ab266bbe4b0fef8469e6e602f295a84": {
+      "id": "glow-token-8fba1e9e-5643-47b4-8fef-d0eef67af854",
+      "name": "Glow Token"
     },
     "0xd523f5097fe10cb8760f7011796a6edf7a268061": {
       "id": "gmcoin",
@@ -43516,7 +43540,7 @@
     },
     "0x2dbd86a424a815ad2a08a2d8dae07007fed6dc91": {
       "id": "trustworks",
-      "name": "Trustworks"
+      "name": "TrustVibes"
     },
     "0x75d107de2217ffe2cd574a1b3297c70c8fafd159": {
       "id": "tryhards",
@@ -45772,6 +45796,10 @@
       "id": "ageur",
       "name": "agEUR"
     },
+    "0xdd389517320720f09db75d20a27d8a2cfa5f8568": {
+      "id": "ai-card-render",
+      "name": "AI Card Render"
+    },
     "0xebf1f92d4384118bfb91b4496660a95931c92861": {
       "id": "aladdin-cvxcrv",
       "name": "Aladdin cvxCRV"
@@ -47623,6 +47651,10 @@
     "0xe509da178999fa04fa9de0094c274bdb53816ede": {
       "id": "endpoint-cex-fan-token",
       "name": "Endpoint Cex Fan Token"
+    },
+    "0x38507a4b3644dd80379a514a04910c32f415ca20": {
+      "id": "esporte-clube-bahia-fan-token",
+      "name": "Esporte Clube Bahia Fan Token"
     },
     "0x2cd13acf6f71435896ba906ba8521dd8aae63e00": {
       "id": "everton-fan-token",

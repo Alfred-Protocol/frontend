@@ -41,55 +41,7 @@ const AboutPage = () => {
     <Radium.StyleRoot>
       <Layout>
         <div className="flex w-full justify-center">
-          <div className="mt-10 flex w-4/5 flex-col space-y-10">
-            {showPairModal ? (
-              <div style={styles.fadeIn as any}>
-                <SelectPairModal
-                  submitStart={() => {
-                    setIsLoading(true);
-                    setShowComponent(true);
-                  }}
-                  submitEnded={() => {
-                    setIsLoading(false);
-                    setShowPairModal(false);
-                  }}
-                />
-              </div>
-            ) : (
-              <div className="flex justify-center">
-                <CustomButton
-                  title="Change Settings"
-                  theme="transparentPurple"
-                  className="w-1/5"
-                  onClick={() => {
-                    setShowPairModal(true);
-                    setShowComponent(false);
-                  }}
-                  style={styles.bounce as any}
-                />
-              </div>
-            )}
-
-            {showComponent && (
-              <div className="flex flex-col space-y-10">
-                <div className="flex w-full space-x-5 ">
-                  <EstimatedFees isLoading={isLoading} />
-                  <Setting isLoading={isLoading} />
-                </div>
-                <LiquidityPositionChart isLoading={isLoading} />
-                <div className="flex justify-center">
-                  <CreatePosition />
-                </div>
-              </div>
-            )}
-
-            {/* {!showPairModal && <LiquidityPositionChart />}
-            {!showPairModal && (
-              <div className="flex justify-center">
-                <CreatePosition />
-              </div>
-            )} */}
-          </div>
+          <div className="mt-10 flex w-4/5 flex-col space-y-10"></div>
         </div>
       </Layout>
     </Radium.StyleRoot>

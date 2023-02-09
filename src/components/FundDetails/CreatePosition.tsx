@@ -10,10 +10,14 @@ import CustomButton from '../Common/CustomButton';
 
 type Props = {
   fundAddress?: string;
+  show: boolean;
+  onClose: () => void;
 };
 
 const CreatePosition = ({
   fundAddress = '0x654ee4dc5ee1edf02dd27d3052c4df238a70c558',
+  show,
+  onClose,
 }: Props) => {
   const { state } = useAppContext();
 
@@ -108,40 +112,45 @@ const CreatePosition = ({
   }
 
   return (
-    <div className="relative w-2/5 justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 pb-10 text-left text-center text-white">
-      <p className="mb-5 text-3xl">Trade Execution</p>
-      <form className="flex flex-col space-y-6 rounded" onSubmit={onSubmit}>
-        <div className="space-y-2">
-          <span className="text-white">{state.token1?.symbol} amount</span>
-          <TextInput
-            id="token1Amount"
-            type={'text'}
-            onChange={(e) => setAmount1(e.target.value.trim())}
-            // value={amount1Calc}
-            required
-            placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
-          />
-        </div>
-        <div className="space-y-2">
-          <span className="text-white">{state.token0?.symbol} amount</span>
-          <TextInput
-            id="token0Amount"
-            type={'text'}
-            required
-            readOnly
-            value={amount0Calc}
-          />
-        </div>
-        {true && (
-          <CustomButton
-            className="focus:shadow-outline rounded py-2 px-4"
-            type="submit"
-            title="Create"
-            theme="solidBlue"
-          />
-        )}
-      </form>
-    </div>
+    <Modal show={show} dismissible onClose={onClose} className="dark h-full">
+      <Modal.Header className="bg-gray-800">Create Fund</Modal.Header>
+      <Modal.Body className="bg-gray-800">
+        <form className="flex flex-col space-y-6 rounded" onSubmit={onSubmit}>
+          <div className="space-y-2">
+            {/* <span className="text-white">{state.token1?.symbol} amount</span> */}
+            <Label>{state.token1?.symbol} amount</Label>
+            <TextInput
+              id="token1Amount"
+              type={'text'}
+              onChange={(e) => setAmount1(e.target.value.trim())}
+              // value={amount1Calc}
+              required
+              placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>{state.token0?.symbol} amount</Label>
+
+            {/* <span className="text-white">{state.token0?.symbol} amount</span> */}
+            <TextInput
+              id="token0Amount"
+              type={'text'}
+              required
+              readOnly
+              value={amount0Calc}
+            />
+          </div>
+          {true && (
+            <CustomButton
+              className="focus:shadow-outline rounded py-2 px-4"
+              type="submit"
+              title="Create"
+              theme="solidBlue"
+            />
+          )}
+        </form>
+      </Modal.Body>
+    </Modal>
   );
 };
 

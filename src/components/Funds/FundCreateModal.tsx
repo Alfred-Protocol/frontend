@@ -117,7 +117,7 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
   };
 
   return (
-    <Modal show={show} dismissible onClose={onClose} className="h-full">
+    <Modal show={show} dismissible onClose={onClose} className="dark h-full">
       <Modal.Header className="bg-gray-800">Create Fund</Modal.Header>
       <Modal.Body className="bg-gray-800">
         <form className="space-y-4 rounded" onSubmit={onSubmit}>

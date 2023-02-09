@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 import { Tooltip } from 'flowbite-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Address, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
@@ -26,9 +26,10 @@ const matureDateIndex = 3;
 
 const ManageFundCard = ({
   fund: { address, name, manager, startDate, matureDate },
+  onGetTVL,
 }: AssetsDetailProps) => {
   const router = useRouter();
-
+  const [getTVLDone, setGetTVLDone] = useState(false);
   const config = {
     address: address as Address,
     abi: Funds,
@@ -55,6 +56,18 @@ const ManageFundCard = ({
     cacheTime: 60 * 1000, // 1min
     enabled: !!address,
   });
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);
+
+    if (!getTVLDone && totalValueLocked && parseFloat(totalValueLocked)) {
+      setGetTVLDone(true);
+      onGetTVL(parseFloat(totalValueLocked));
+    }
+  }, [data]);
 
   if (!address || !data || !manager) {
     return null;

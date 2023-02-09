@@ -39,7 +39,7 @@ const MaangeFundsSection = () => {
               <ManageFundCard
                 key={fund.address}
                 fund={fund}
-                onGetTVL={(tvl) => setTotalFund(tvl)}
+                onGetTVL={(tvl) => setTotalFund(tvl + totalFund)}
               />
             ))
           )}

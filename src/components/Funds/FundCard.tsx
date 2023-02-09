@@ -70,7 +70,7 @@ const FundCard = ({
               ? data[stableCoinAddressIndex].toString()
               : ethers.constants.AddressZero
           }
-          yieldPercentage={fundYield}
+          yieldPercentage={fundYield as any}
         />
       </div>
       <DepositFundModal

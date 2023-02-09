@@ -38,6 +38,7 @@ export default async function handler(
         description,
         startDate,
         matureDate,
+        // @ts-ignore
         yield: fundYield.toString(),
       },
     });

@@ -162,7 +162,7 @@ const FundDetails = ({
             valueClassName="text-green-500"
             endComponent={
               <Tooltip
-                content="Lifetime Yield earned"
+                content="Lifetime yield earned"
                 className="px-2 text-center"
               >
                 <InformationCircleIcon

@@ -87,9 +87,7 @@ const WithdrawFundModal = ({
   useEffect(() => {
     if (txIsSuccess && !hasCreated) {
       setHasCreated(true);
-      console.log(
-        `Successfully deposited, transaction hash: ${JSON.stringify(txReceipt)}`
-      );
+      console.log(`Successfully deposited, transaction hash:`, txReceipt);
       toast.success(
         `Successfully deposited, transaction hash: ${txReceipt?.transactionHash}`
       );

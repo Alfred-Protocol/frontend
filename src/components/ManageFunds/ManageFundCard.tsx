@@ -12,6 +12,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Address, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { Tooltip } from 'flowbite-react';
 
 interface AssetsDetailProps {
   fund: Fund;
@@ -20,10 +22,12 @@ interface AssetsDetailProps {
 // Convert to ENUM
 const tvlIndex = 0;
 const lpPositionsIndex = 1;
+const startDateIndex = 2;
+const matureDateIndex = 3;
 // const stableCoinAddressIndex = 2;
 
 const ManageFundCard = ({
-  fund: { address, description, name, manager, startDate, matureDate },
+  fund: { address, name, manager, startDate, matureDate },
 }: AssetsDetailProps) => {
   const router = useRouter();
 
@@ -39,6 +43,14 @@ const ManageFundCard = ({
       {
         ...config,
         functionName: 'fetchAllLpPositions',
+      },
+      {
+        ...config,
+        functionName: 'startDate',
+      },
+      {
+        ...config,
+        functionName: 'matureDate',
       },
       // { ...config, functionName: 'stablecoin' },
     ],
@@ -94,17 +106,34 @@ const ManageFundCard = ({
       <div className="flex">
         <div className="mr-12">
           <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
-          <div className="flex items-center space-x-2">
-            <p className="font-semibold sm:text-xl">Yield:</p>
-            <p className="text-greenGrowth">{yieldPercentage}%</p>
-          </div>
+          <PairValue
+            field="Yield"
+            value={`${yieldPercentage}%`}
+            valueClassName="text-green-500"
+            endComponent={
+              <Tooltip
+                content="Lifetime yield earned"
+                className="px-2 text-center"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                />
+              </Tooltip>
+            }
+          />
           <PairValue
             field="Start Date"
-            value={new Date(startDate).toLocaleDateString()}
+            value={new Date(
+              data ? data[startDateIndex].toString() : startDate
+            ).toLocaleDateString()}
           />
           <PairValue
             field="Mature Date"
-            value={new Date(matureDate).toLocaleDateString()}
+            value={new Date(
+              data ? data[matureDateIndex].toString() : matureDate
+            ).toLocaleDateString()}
           />
         </div>
         <div className="flex flex-col">

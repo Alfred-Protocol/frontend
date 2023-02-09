@@ -91,9 +91,7 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
         matureDate: new Date(matureDate!),
       }).then(() => {
         refetch();
-        console.log(
-          `Successfully created, transaction hash: ${JSON.stringify(txReceipt)}`
-        );
+        console.log(`Successfully created, transaction hash:`, txReceipt);
         toast.success(
           `Successfully created, transaction hash: ${txReceipt?.transactionHash}`
         );

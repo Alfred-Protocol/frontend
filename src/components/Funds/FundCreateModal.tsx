@@ -19,6 +19,7 @@ import CustomToastWithLink from '../Common/CustomToastWithLink';
 interface FundCreateModalProps {
   onClose: () => void;
   show: boolean;
+  refetchFunds: () => Promise<void>;
 }
 
 const getFundAddressFromReceipt = (
@@ -46,7 +47,11 @@ const WMATIC_MUMBAI_ADDRESS =
   process.env.WMATIC_MUMBAI_ADDRESS ??
   '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
 
-const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
+const FundCreateModal = ({
+  onClose,
+  show,
+  refetchFunds,
+}: FundCreateModalProps) => {
   const [fundName, setFundName] = useState('');
   const [fundDescription, setFundDescription] = useState('');
   const [startDate, setStartDate] = useState(0);
@@ -90,7 +95,7 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
         description: fundDescription,
         startDate: new Date(startDate!),
         matureDate: new Date(matureDate!),
-      }).then(() => {
+      }).then(async () => {
         refetch();
         console.log(`Successfully created, transaction hash:`, txReceipt);
         toast.success(
@@ -100,9 +105,24 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
           })
         );
         onClose();
+        await refetchFunds();
       });
     }
-  }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
+  }, [
+    address,
+    fundDescription,
+    fundName,
+    hasCreated,
+    matureDate,
+    mutateAsync,
+    onClose,
+    refetch,
+    refetchFunds,
+    startDate,
+    txIsSuccess,
+    txReceipt,
+    txReceipt?.transactionHash,
+  ]);
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();

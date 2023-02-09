@@ -116,6 +116,9 @@ const FundCards = () => {
         onClose={() => {
           setShowCreateFundModal(false);
         }}
+        refetchFunds={async () => {
+          await refetch();
+        }}
       />
     </>
   );

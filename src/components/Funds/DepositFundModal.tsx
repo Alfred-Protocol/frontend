@@ -87,8 +87,9 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     args: [ethers.utils.parseUnits(amountToDeposit.toString(), wmaticDecimals)],
     enabled:
       amountToDeposit > 0 &&
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) <
-        wmaticBalance,
+      ethers.utils
+        .parseUnits(`${amountToDeposit}`, wmaticDecimals)
+        .lt(wmaticBalance),
   });
   const { data, isSuccess, write } = useContractWrite(config);
   const {

@@ -1,4 +1,5 @@
 import useDatabaseFunds from '@/hooks/useDatabaseFunds';
+import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import AssetsHeader from '../Assets/AssetsHeader';
 import ManageFundCard from './ManageFundCard';
@@ -15,14 +16,15 @@ export type Fund = {
 const MaangeFundsSection = () => {
   const { address } = useAccount();
   const { data, isLoading } = useDatabaseFunds(address);
+  const [totalFund, setTotalFund] = useState(0);
 
   return (
     <div>
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
         <AssetsHeader
           managerAddress={address || ''}
-          netDeposit={3232.3}
-          netValue={3223.43}
+          netDeposit={totalFund}
+          netValue={totalFund * 1.1}
         />
         <div className="flex w-full flex-col items-center space-y-4">
           {isLoading ? (
@@ -34,7 +36,11 @@ const MaangeFundsSection = () => {
             </div>
           ) : (
             data?.map((fund) => (
-              <ManageFundCard key={fund.address} fund={fund} />
+              <ManageFundCard
+                key={fund.address}
+                fund={fund}
+                onGetTVL={(tvl) => setTotalFund(tvl)}
+              />
             ))
           )}
         </div>

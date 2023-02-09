@@ -1,7 +1,9 @@
+import type { Fund } from '@prisma/client';
 import { AssetTransfersCategory, AssetTransfersResponse } from 'alchemy-sdk';
 import { useEffect, useState } from 'react';
 import { Address, useAccount } from 'wagmi';
 import useAlchemy from './useAlchemy';
+import useDatabaseFunds from './useDatabaseFunds';
 import useFunds from './useFunds';
 
 export interface Deposit {
@@ -10,11 +12,11 @@ export interface Deposit {
 }
 
 const generateDeposits = (
-  fundAddresses: readonly Address[],
+  funds: Fund[],
   transactions: AssetTransfersResponse
 ) => {
   const validToAddresses = new Set(
-    fundAddresses.map((address) => address.toLowerCase())
+    funds.map((fund) => fund.address.toLowerCase())
   );
   const deposits: Record<string, Deposit[]> = {};
   transactions.transfers.forEach((transaction) => {
@@ -39,7 +41,7 @@ const generateDeposits = (
 
 const useDeposits = () => {
   const { address } = useAccount();
-  const { data: fundAddresses, isLoading } = useFunds();
+  const { data: funds, isLoading } = useDatabaseFunds();
 
   const [transactions, setTransactions] = useState<
     AssetTransfersResponse | undefined
@@ -66,11 +68,11 @@ const useDeposits = () => {
   }, [address, alchemy]);
 
   useEffect(() => {
-    if (fundAddresses && transactions) {
-      setDeposits(generateDeposits(fundAddresses, transactions));
+    if (funds && transactions) {
+      setDeposits(generateDeposits(funds, transactions));
       setIsFetching(false);
     }
-  }, [fundAddresses, transactions]);
+  }, [funds, transactions]);
   return { deposits, isLoading: isLoading || isFetching };
 };
 

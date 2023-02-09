@@ -78,10 +78,7 @@ const FundDetails = ({
       : [18, 'ETH', BigNumber.from(0)];
 
   return (
-    <div
-      className="min-h-40 w-full text-whiteFont"
-      style={{ position: 'relative' }}
-    >
+    <div className="min-h-40 w-full text-whiteFont"> 
       <div className="flex h-full flex-col justify-between">
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-2xl font-bold sm:text-4xl">{fundName}</h3>

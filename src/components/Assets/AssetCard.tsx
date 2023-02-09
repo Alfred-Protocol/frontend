@@ -5,8 +5,8 @@ import USDT from 'src/assets/USDT.jpg';
 
 import Funds from '@/abi/Funds';
 import type { Deposit } from '@/hooks/useDeposits';
-import useFund from '@/hooks/useFund';
-import { BigNumber, ethers } from 'ethers';
+import useDatabaseFund from '@/hooks/useDatabaseFund';
+import { ethers, BigNumber } from 'ethers';
 import Image from 'next/image';
 import {
   Address,
@@ -17,10 +17,12 @@ import {
   useWaitForTransaction,
 } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
+import type { Fund } from '@prisma/client';
 
 interface AssetsDetailProps {
   fundAddress: Address;
   deposits?: Deposit[];
+  fund: Fund;
 }
 
 // Convert to ENUM
@@ -29,9 +31,10 @@ const stableCoinAddressIndex = 1;
 const lpPositionsIndex = 2;
 const depositedAmountIndex = 3;
 
-const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
+const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
   const { address } = useAccount();
-  const { data: fund } = useFund(fundAddress);
+  // const { data: fund } = useFund(fundAddress);
+
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [

@@ -8,6 +8,7 @@ import ContextProvider from '@/context/ContextProvider';
 import { useEffect, useState } from 'react';
 import { fadeIn, bounce } from 'react-animations';
 import Radium from 'radium';
+import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
 
 const styles = {
   fadeIn: {
@@ -29,6 +30,7 @@ const ManageFundPage = () => {
   const [showPairModal, setShowPairModal] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
+  const [showCreateLPModal, setShowCreateLPModal] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -57,7 +59,7 @@ const ManageFundPage = () => {
                 />
               </div>
             ) : (
-              <div className="flex justify-center">
+              <div className="flex justify-center space-x-4">
                 <CustomButton
                   title="Change Settings"
                   theme="transparentPurple"
@@ -65,6 +67,15 @@ const ManageFundPage = () => {
                   onClick={() => {
                     setShowPairModal(true);
                     setShowComponent(false);
+                  }}
+                  style={styles.bounce as any}
+                />
+                <CustomButton
+                  title="+ Create LP Position"
+                  theme="solidPurple"
+                  className="w-1/5"
+                  onClick={() => {
+                    setShowCreateLPModal(true);
                   }}
                   style={styles.bounce as any}
                 />
@@ -78,18 +89,13 @@ const ManageFundPage = () => {
                   <Setting isLoading={isLoading} />
                 </div>
                 <LiquidityPositionChart isLoading={isLoading} />
-                <div className="flex justify-center">
-                  <CreatePosition />
-                </div>
               </div>
             )}
 
-            {/* {!showPairModal && <LiquidityPositionChart />}
-            {!showPairModal && (
-              <div className="flex justify-center">
-                <CreatePosition />
-              </div>
-            )} */}
+            <CreatePosition
+              show={showCreateLPModal}
+              onClose={() => setShowCreateLPModal(false)}
+            />
           </div>
         </div>
       </Layout>

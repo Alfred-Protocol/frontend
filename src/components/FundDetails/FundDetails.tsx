@@ -12,7 +12,7 @@ import FundDetailAssets from './FundDetailsAssets';
 import FundDetailGraph from './FundDetailsGraph';
 import Positions from './Positions';
 import { Address, useContractReads } from 'wagmi';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 
 interface FundDetailsProps {
   fundAddress: string;
@@ -60,7 +60,16 @@ const FundDetails = ({
 
   const tvlLocked = parseFloat(ethers.utils.formatUnits(data ? data[0] : 0));
 
+  const assetLocked = tvlLocked * 0.6;
+  const assetFree = tvlLocked * 0.4;
   const { address, status } = useAccount();
+
+  const LPPositionsMockAdjusted = LPPositionsMock;
+
+  if (assetLocked) {
+    LPPositionsMockAdjusted[0].amount0 = (assetLocked * 0.3) as any;
+    LPPositionsMockAdjusted[1].amount0 = (assetLocked * 0.7) as any;
+  }
 
   return (
     <div className="flex w-full flex-col items-center justify-center">

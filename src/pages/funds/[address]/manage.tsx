@@ -1,3 +1,4 @@
+import CorrelationChart from '@/components/Chart/CorrelationChart';
 import EstimatedFees from '@/components/Chart/EstimatedFees';
 import LiquidityPositionChart from '@/components/Chart/LiquidityPositionChart';
 import Setting from '@/components/Chart/setting/Setting';
@@ -70,12 +71,15 @@ const ManageFundPage = () => {
           )}
 
           {showComponent && (
-            <div className="flex flex-col space-y-10">
+            <div className="flex flex-col space-y-5">
               <div className="flex w-full space-x-5">
                 <EstimatedFees isLoading={isLoading} />
                 <Setting isLoading={isLoading} />
               </div>
-              <LiquidityPositionChart isLoading={isLoading} />
+              <div className="flex space-x-5">
+                <CorrelationChart />
+                <LiquidityPositionChart isLoading={isLoading} />
+              </div>
             </div>
           )}
 

@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
-import ReactLoading from 'react-loading';
 import Modal from 'react-modal';
 import { useModalContext } from '../../context/modal/modalContext';
 // import { Heading } from '../../common/components/atomic';
 import styled from 'styled-components';
 // import { PrimaryBlockButton } from '../../common/components/atomic';
+import { getPriceChart } from '@/repos/coingecko';
+import type { Network, Pool, Token } from '@/types/type';
 import { useState } from 'react';
+import { NETWORKS, setCurrentNetwork } from 'src/components/Assets/network';
 import { useAppContext } from '../../context/app/appContext';
 import { AppActionType } from '../../context/app/appReducer';
+import { ModalActionType } from '../../context/modal/modalReducer';
 import {
   getAvgTradingVolume,
   getPoolFromPair,
@@ -15,22 +18,11 @@ import {
   getToken,
   getTopTokenList,
 } from '../../repos/uniswap';
-import SearchTokenPage from './SearchTokenPage';
-// import { getPriceChart } from '../../repos/coingecko';
-import { NETWORKS, setCurrentNetwork } from 'src/components/Assets/network';
-import { ModalActionType } from '../../context/modal/modalReducer';
-import { sortTokens } from '../../utils/uniswapv3/helper';
-// import {
-//   Network,
-//   Pool,
-//   Token,
-// } from '../../common/interfaces/uniswap.interface';
-import { getPriceChart } from '@/repos/coingecko';
-import type { Network, Pool, Token } from '@/types/type';
 import { deleteQueryParam, getQueryParam } from '../../utils/querystring';
-import { Heading, PrimaryBlockButton } from '../Chart/atomic';
-import Image from 'next/image';
+import { sortTokens } from '../../utils/uniswapv3/helper';
+import { Heading } from '../Chart/atomic';
 import CustomButton from '../Common/CustomButton';
+import SearchTokenPage from './SearchTokenPage';
 
 const ModalStyle = {
   overlay: {
@@ -574,7 +566,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
             {selectedNetwork !== null && (
               <CustomButton
                 leftIcon={
-                  <Image
+                  <img
                     src={selectedNetwork.logoURI}
                     alt={selectedNetwork.name}
                     width={26}
@@ -613,7 +605,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                 }
                 leftIcon={
                   selectedTokens[0] && (
-                    <Image
+                    <img
                       src={selectedTokens[0].logoURI}
                       alt={selectedTokens[0].name}
                       width={26}
@@ -640,7 +632,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                 }
                 leftIcon={
                   selectedTokens[1] && (
-                    <Image
+                    <img
                       src={selectedTokens[1].logoURI}
                       alt={selectedTokens[1].name}
                       width={26}

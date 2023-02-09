@@ -6,6 +6,8 @@ import { Dollar, Heading, Table } from 'src/components/Chart/atomic';
 import { getTokensAmountFromDepositAmountUSD } from 'src/utils/uniswapv3/math';
 import { useAppContext } from '@/context/app/appContext';
 import { AppActionType } from '@/context/app/appReducer';
+import { TextInput } from 'flowbite-react';
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 
 const InputGroup = styled.div`
   display: flex;
@@ -79,7 +81,7 @@ const DepositAmount = () => {
     <div>
       <Heading>Deposit Amount</Heading>
       <InputGroup>
-        <Dollar>$</Dollar>
+        <span>$</span>
         <DepositInput
           defaultValue={1000}
           type="number"

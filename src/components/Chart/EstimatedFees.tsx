@@ -1,76 +1,14 @@
-import React, { useMemo } from 'react';
-import styled from 'styled-components';
-import { Dollar, Heading, Table } from 'src/components/Chart/atomic';
-// import { useAppContext } from '../context/app/appContext';
+import { useAppContext } from '@/context/app/appContext';
+import { useModalContext } from '@/context/modal/modalContext';
+import { useMemo } from 'react';
+import { Table } from 'src/components/Chart/atomic';
 import {
   estimateFee,
   getLiquidityDelta,
   getLiquidityFromTick,
   getTickFromPrice,
-  getTokensAmountFromDepositAmountUSD,
+  getTokensAmountFromDepositAmountUSD
 } from 'src/utils/uniswapv3/math';
-import { useModalContext } from '@/context/modal/modalContext';
-import { ModalActionType } from '@/context/modal/modalReducer';
-import { useAppContext } from '@/context/app/appContext';
-// import { ScreenWidth } from '../utils/styled';
-// import { useModalContext } from '../context/modal/modalContext';
-// import { ModalActionType } from '../context/modal/modalReducer';
-
-const SettingContainer = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  overflow: hidden;
-
-  & > div.padding {
-    padding: 16px;
-  }
-`;
-
-// @media only screen and (max-width: ${ScreenWidth.MOBILE}px) {
-//   & > div.padding {
-//     padding: 12px;
-//   }
-//   border-radius: 12px;
-// }
-const Fee = styled.span`
-  display: block;
-  color: rgb(37, 175, 96);
-  font-weight: 500;
-  font-size: 2.4rem;
-  margin-top: -10px;
-
-  & > span {
-    margin-right: 3px;
-    display: inline-block;
-    font-weight: 600;
-    transform: translateY(2px);
-  }
-`;
-const Tag = styled.div`
-  display: inline-block;
-  color: rgba(255, 255, 255, 0.3);
-`;
-const ILButton = styled.button`
-  border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.075);
-  background: rgba(255, 255, 255, 0.05);
-  display: flex;
-  justify-content: center;
-
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  color: #ccc;
-  font-weight: 500;
-  font-size: 0.9rem;
-  padding: 8px;
-
-  &:hover {
-    color: white;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.1);
-  }
-`;
 
 interface Props {
   isLoading: boolean;
@@ -140,15 +78,12 @@ const EstimatedFees = ({ isLoading }: Props) => {
   }
 
   return (
-    <div className="relative flex w-2/6 items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
-      <div className="padding">
-        <Heading>
-          Projected Fees <Tag>(24h)</Tag>
-        </Heading>
-        <div className="text-center text-3xl">
-          <Dollar>$</Dollar>
-          {estimatedFee.toFixed(2)}
-        </div>
+    <div className="relative flex w-2/6 items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100">
+      <div>
+        <h3 className="text-xl font-semibold mb-4">
+          Projected Fees <span className="inline text-gray-500">(24h)</span>
+        </h3>
+        <div className="text-center text-3xl mb-6">${estimatedFee.toFixed(2)}</div>
         <Table>
           <div>MONTHLY</div>
           <div>${(estimatedFee * 30).toFixed(2)}</div>

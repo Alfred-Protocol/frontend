@@ -12,7 +12,7 @@ const StyledSlider = styled(ReactSlider)`
 `;
 const StyledThumb = styled.div`
   height: 20px;
-  width: 5px;
+  width: 8px;
   text-align: center;
   background-color: white;
   cursor: grab;

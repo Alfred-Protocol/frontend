@@ -292,16 +292,13 @@ const LiquidityPositionChart = ({ isLoading }: Props) => {
   }
 
   return (
-    <div className="relative flex rounded-xl border-2 bg-blackfill text-left text-white">
-      <Container>
-        <Padding>
-          <WrappedHeader>
-            <Heading>Liquidity Position</Heading>
-          </WrappedHeader>
-        </Padding>
-
+    <div className="rounded-xl border-2 border-[#EF5DA8] bg-blackfill text-left text-fuchsia-100 flex-1">
+      <div className="w-full">
+        <div className="p-4">
+          <h3 className="text-xl font-semibold">Liquidity Position</h3>
+        </div>
         <div ref={refElement} />
-      </Container>
+      </div>
     </div>
   );
 };

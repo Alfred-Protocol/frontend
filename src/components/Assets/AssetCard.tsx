@@ -11,11 +11,13 @@ import Image from 'next/image';
 import { Address, useAccount, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import type { Fund } from '@prisma/client';
+import { useEffect } from 'react';
 
 interface AssetsDetailProps {
   fundAddress: Address;
   deposits?: Deposit[];
   fund: Fund;
+  onGetTVL: (tvl: number) => void;
 }
 
 // Convert to ENUM
@@ -24,7 +26,12 @@ const stableCoinAddressIndex = 1;
 const lpPositionsIndex = 2;
 const depositedAmountIndex = 3;
 
-const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
+const AssetCard = ({
+  fundAddress,
+  deposits,
+  fund,
+  onGetTVL,
+}: AssetsDetailProps) => {
   const { address } = useAccount();
   // const { data: fund } = useFund(fundAddress);
 
@@ -79,6 +86,13 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
     data[depositedAmountIndex],
     18
   );
+
+  useEffect(() => {
+    if (totalValueLocked && parseFloat(totalValueLocked) > 0) {
+      console.log('totalValueLocked ', totalValueLocked);
+      onGetTVL(parseFloat(totalValueLocked));
+    }
+  }, [totalValueLocked]);
 
   if (parseFloat(depositedAmount) <= 0) {
     return null;

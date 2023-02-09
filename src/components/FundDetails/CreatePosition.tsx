@@ -1,8 +1,14 @@
 import { nearestUsableTick } from '@uniswap/v3-sdk';
 import { ethers } from 'ethers';
 import { Label, Modal, TextInput } from 'flowbite-react';
-import { FormEventHandler, useMemo, useState } from 'react';
-import { Address, useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { FormEventHandler, useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
+import {
+  Address,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from 'wagmi';
 import DummyContract from '../../abi/DummyContract';
 import Funds from '../../abi/Funds';
 import { useAppContext } from '../../context/app/appContext';
@@ -73,6 +79,28 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
     token1Decimals
   );
 
+  // // wagmi hooks
+  // const { config } = usePrepareContractWrite({
+  //   address: fundAddress as Address,
+  //   abi: Funds,
+  //   functionName: 'deposit',
+  //   args: [ethers.utils.parseUnits(amountToDeposit.toString(), wmaticDecimals)],
+  //   enabled:
+  //     amountToDeposit > 0 &&
+  //     ethers.utils
+  //       .parseUnits(`${amountToDeposit}`, wmaticDecimals)
+  //       .lt(wmaticBalance),
+  // });
+  // const { data, isSuccess, write } = useContractWrite(config);
+  // const {
+  //   data: txReceipt,
+  //   isSuccess: txIsSuccess,
+  //   isLoading: txIsLoading,
+  // } = useWaitForTransaction({
+  //   hash: data?.hash,
+  //   enabled: isSuccess,
+  // });
+
   // Dummy contract, to mimic "createLpPosition" flow
   const { config } = usePrepareContractWrite({
     address: '0x37E14AcBdf310CEf93c0259f8CA6a703C77d56D4' as Address,
@@ -80,27 +108,31 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
     functionName: 'increment',
   });
 
-  const { data, isLoading, write: dummyWrite } = useContractWrite(config);
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    write: dummyWrite,
+  } = useContractWrite(config);
 
-  // TODO: @andyrobert3 look into "createLpPosition" not working
-  // const { config } = usePrepareContractWrite({
-  //   address: fundAddress as Address,
-  //   abi: Funds,
-  //   functionName: 'createLpPosition',
-  //   chainId: 80001,
-  //   args: [
-  //     token0Details?.id as `0x${string}`,
-  //     token1Details?.id as `0x${string}`,
-  //     amount0CalcInWei,
-  //     amount1InWei,
-  //     minTick,
-  //     maxTick,
-  //     Number(feeTier),
-  //   ],
-  //   enabled: true,
-  // });
+  const {
+    data: txReceipt,
+    isSuccess: txIsSuccess,
+    isLoading: txIsLoading,
+  } = useWaitForTransaction({
+    hash: data?.hash,
+    enabled: isSuccess,
+  });
 
-  // const { data, isLoading, write } = useContractWrite(config);
+  useEffect(() => {
+    if (txIsSuccess) {
+      console.log(`Successfully deposited, transaction hash:`, txReceipt);
+      toast.success(
+        `Successfully deposited, transaction hash: ${txReceipt?.transactionHash}`
+      );
+      onClose();
+    }
+  }, [txIsSuccess, txReceipt?.transactionHash]);
 
   const onSubmit = () => {
     // e.preventDefault();
@@ -117,7 +149,7 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
   return (
     <Modal show={show} dismissible onClose={onClose} className="dark h-full">
       <Modal.Header className="bg-gray-800">Create Fund</Modal.Header>
-      <Modal.Body className="bg-gray-800">
+      <Modal.Body className="space-y-4 bg-gray-800">
         <div className="space-y-2">
           {/* <span className="text-white">{state.token1?.symbol} amount</span> */}
           <Label>{state.token1?.symbol} amount</Label>
@@ -130,9 +162,8 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
             placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
           />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 pb-2">
           <Label>{state.token0?.symbol} amount</Label>
-
           {/* <span className="text-white">{state.token0?.symbol} amount</span> */}
           <TextInput
             id="token0Amount"
@@ -148,6 +179,7 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
           title="Create"
           theme="solidBlue"
           onClick={onSubmit}
+          isLoading={txIsLoading}
         />
       </Modal.Body>
     </Modal>

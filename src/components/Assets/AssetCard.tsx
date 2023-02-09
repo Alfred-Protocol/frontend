@@ -5,6 +5,8 @@ import type { Fund } from '@prisma/client';
 import { BigNumber, ethers } from 'ethers';
 import { Tooltip } from 'flowbite-react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { twMerge } from 'tailwind-merge';
 import {
   Address,
@@ -73,13 +75,18 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
     enabled: isSuccess,
   });
 
-  if (isLoading) {
-    return (
-      <div role="status" className="h-48 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl border-[1px] border-[#EF5DA8] bg-blackfillLess dark:bg-blackfill" />
-      </div>
-    );
-  }
+  // toasts
+  const [hasCreated, setHasCreated] = useState(false);
+
+  useEffect(() => {
+    if (txIsSuccess && !hasCreated) {
+      setHasCreated(true);
+      console.log(`Successfully withdrawn, transaction hash:`, txReceipt);
+      toast.success(
+        `Successfully withdrawn, transaction hash: ${txReceipt?.transactionHash}`
+      );
+    }
+  }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
 
   if (!fundAddress || !data || depositedAmount.lte(0)) {
     return null;
@@ -88,7 +95,9 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
   return (
     <div
       className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-all hover:bg-gray-800"
-      onClick={() => {}}
+      onClick={() => {
+        router.push(`/funds/${fundAddress}`);
+      }}
     >
       <div className="mb-4 flex items-start justify-between">
         <div className="flex space-x-8">
@@ -137,31 +146,39 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
           </div>
         </div>
         <div>
-          {write && (
-            <CustomButton
-              title="Withdraw"
-              theme="solidPurple"
-              isLoading={txIsLoading}
-              onClick={write}
-            />
-          )}
+          <CustomButton
+            title="Withdraw"
+            theme="solidPurple"
+            isLoading={txIsLoading}
+            onClick={write}
+            disabled={write === undefined}
+          />
+        </div>
+        <div className="flex space-x-8">
+          <div>
+            <h4 className="text-3xl font-semibold">Your Deposits</h4>
+            <span className="text-4xl">
+              {ethers.utils.formatEther(depositedAmount).toString() || '0'}{' '}
+              MATIC
+            </span>
+          </div>
+          <div>
+            <h4 className="text-3xl font-semibold">Your Share</h4>
+            {/* Update the text-green-300 based on amount relative to deposit */}
+            <span className={twMerge('text-4xl', 'text-green-400')}>
+              {ethers.utils.formatEther(depositedAmount).toString() || '0'}{' '}
+              MATIC
+            </span>
+          </div>
         </div>
       </div>
-      <div className="flex space-x-8">
-        <div>
-          <h4 className="text-3xl font-semibold">Your Deposits</h4>
-          <span className="text-4xl">
-            {ethers.utils.formatEther(depositedAmount).toString() || '0'} MATIC
-          </span>
-        </div>
-        <div>
-          <h4 className="text-3xl font-semibold">Your Share</h4>
-          {/* Update the text-green-300 based on amount relative to deposit */}
-          <span className={twMerge('text-4xl', 'text-green-400')}>
-            {ethers.utils.formatEther(depositedAmount).toString() || '0'} MATIC
-          </span>
-        </div>
-      </div>
+      <CustomButton
+        title="Withdraw"
+        theme="solidPurple"
+        className="absolute right-[2.5%] top-[10%]"
+        isLoading={txIsLoading}
+        onClick={write}
+      />
     </div>
   );
 };

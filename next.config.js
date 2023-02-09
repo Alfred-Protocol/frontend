@@ -8,6 +8,9 @@ const nextConfig = {
     USDC_MUMBAI_ADDRESS: process.env.USDC_MUMBAI_ADDRESS,
     DUMMY_ADDRESS: process.env.DUMMY_ADDRESS,
   },
+  images: {
+    domains: ['seeklogo.com', 'cdn.iconscout.com', 'friconix.com'],
+  },
 };
 
 module.exports = nextConfig;

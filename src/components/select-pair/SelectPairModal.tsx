@@ -29,6 +29,8 @@ import { getPriceChart } from '@/repos/coingecko';
 import type { Network, Pool, Token } from '@/types/type';
 import { deleteQueryParam, getQueryParam } from '../../utils/querystring';
 import { Heading, PrimaryBlockButton } from '../Chart/atomic';
+import Image from 'next/image';
+import CustomButton from '../Common/CustomButton';
 
 const ModalStyle = {
   overlay: {
@@ -492,60 +494,48 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        <>
-          {/* <GoBack>
-            <div
-              onClick={() => {
-                setShowSelectNetworkPage(false);
-              }}
-            >
-              <FontAwesomeIcon icon={faArrowLeft as IconProp} />
-            </div>
-            <span>Select Network</span>
-          </GoBack> */}
-          {NETWORKS.map((network, i) => {
-            return (
-              <div key={i}>
-                <NetworkItem
-                  style={
-                    network.disabled
-                      ? {
-                          cursor: 'not-allowed',
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          opacity: '0.4',
-                        }
-                      : {}
+        {NETWORKS.map((network, i) => {
+          return (
+            <div key={i}>
+              <NetworkItem
+                style={
+                  network.disabled
+                    ? {
+                        cursor: 'not-allowed',
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        opacity: '0.4',
+                      }
+                    : {}
+                }
+                onClick={() => {
+                  if (!network.disabled) {
+                    setCurrentNetwork(network);
+                    fetchTokens();
+
+                    setSelectedNetwork(network);
+                    setSelectedTokens([null, null]);
+                    setShowSelectNetworkPage(false);
+                    setPools([]);
+
+                    // setQueryParam('network', network.id);
+                    deleteQueryParam('token0');
+                    deleteQueryParam('token1');
+                    deleteQueryParam('feeTier');
                   }
-                  onClick={() => {
-                    if (!network.disabled) {
-                      setCurrentNetwork(network);
-                      fetchTokens();
-
-                      setSelectedNetwork(network);
-                      setSelectedTokens([null, null]);
-                      setShowSelectNetworkPage(false);
-                      setPools([]);
-
-                      // setQueryParam('network', network.id);
-                      deleteQueryParam('token0');
-                      deleteQueryParam('token1');
-                      deleteQueryParam('feeTier');
-                    }
-                  }}
-                  id={`${network.name}_${i}`}
-                >
-                  <img src={network.logoURI} alt={network.name} />
-                  <div>
-                    <h5>
-                      {network.name} {network.isNew && <span>NEW</span>}
-                    </h5>
-                    <span>{network.desc}</span>
-                  </div>
-                </NetworkItem>
-              </div>
-            );
-          })}
-        </>
+                }}
+                id={`${network.name}_${i}`}
+              >
+                <img src={network.logoURI} alt={network.name} />
+                <div>
+                  <h5>
+                    {network.name} {network.isNew && <span>NEW</span>}
+                  </h5>
+                  <span>{network.desc}</span>
+                </div>
+              </NetworkItem>
+            </div>
+          );
+        })}
       </Modal>
 
       <Modal
@@ -577,38 +567,36 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         </>
       </Modal>
 
-      <div className="relative flex justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
+      <div className="flex items-center justify-center space-x-4 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100">
         <div className="flex items-center space-x-10">
           <div className="text-center">
             <Heading>Select Network</Heading>
-            <div
-              onClick={() => {
-                if (!isSubmitLoading) {
-                  setShowSelectNetworkPage(true);
-                }
-              }}
-            >
-              {!selectedNetwork && <span>Select a network</span>}
-              {selectedNetwork !== null && (
-                <div className="align-center flex w-36 cursor-pointer justify-center space-x-2 rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight">
-                  <img
+            {selectedNetwork !== null && (
+              <CustomButton
+                leftIcon={
+                  <Image
                     src={selectedNetwork.logoURI}
                     alt={selectedNetwork.name}
                     width={26}
                     height={26}
                     className="rounded-3xl"
                   />
-                  <p>{selectedNetwork.name}</p>
-                </div>
-              )}
-            </div>
+                }
+                theme="transparentPurple"
+                title={selectedNetwork.name}
+                onClick={() => {
+                  if (!isSubmitLoading) {
+                    setShowSelectNetworkPage(true);
+                  }
+                }}
+              />
+            )}
           </div>
 
           <div className="text-center">
             <Heading>Select Pair</Heading>
             <div className="flex space-x-3">
-              <div
-                className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight px-2 py-2 hover:bg-purpleLight"
+              <CustomButton
                 onClick={() => {
                   if (!isSubmitLoading) {
                     setSelectedPool(null);
@@ -617,23 +605,25 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                     setSelectedTokenIndex(0);
                   }
                 }}
-              >
-                {!selectedTokens[0] && <div>Select token 1</div>}
-                {selectedTokens[0] && (
-                  <div className="flex space-x-2">
-                    <img
+                theme="transparentPurple"
+                title={
+                  selectedTokens[0]
+                    ? selectedTokens[0].symbol
+                    : 'Select token 1'
+                }
+                leftIcon={
+                  selectedTokens[0] && (
+                    <Image
                       src={selectedTokens[0].logoURI}
                       alt={selectedTokens[0].name}
                       width={26}
                       height={26}
                       className="rounded-3xl"
                     />
-                    <div>{selectedTokens[0].symbol}</div>
-                  </div>
-                )}
-              </div>
-              <div
-                className="align-center flex w-36 cursor-pointer justify-center rounded-xl border-2 border-purpleLight py-2 hover:bg-purpleLight"
+                  )
+                }
+              />
+              <CustomButton
                 onClick={() => {
                   if (!isSubmitLoading) {
                     setSelectedPool(null);
@@ -642,104 +632,104 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                     setSelectedTokenIndex(1);
                   }
                 }}
-              >
-                {!selectedTokens[1] && <p>Select token 2</p>}
-                {selectedTokens[1] && (
-                  <div className="flex space-x-2">
-                    <img
+                theme="transparentPurple"
+                title={
+                  selectedTokens[1]
+                    ? selectedTokens[1].symbol
+                    : 'Select token 2'
+                }
+                leftIcon={
+                  selectedTokens[1] && (
+                    <Image
                       src={selectedTokens[1].logoURI}
                       alt={selectedTokens[1].name}
                       width={26}
                       height={26}
                       className="rounded-3xl"
                     />
-                    <div> {selectedTokens[1].symbol}</div>
-                  </div>
-                )}
-              </div>
+                  )
+                }
+              />
             </div>
           </div>
+        </div>
 
-          <div className="text-center">
-            <Heading>Select Fee Tier</Heading>
-            <div className="flex space-x-2">
-              <Tier
-                style={getFeeTierStyle('100')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('100');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      // setQueryParam('feeTier', tier.feeTier);
-                    }
+        <div className="text-center">
+          <Heading>Select Fee Tier</Heading>
+          <div className="flex space-x-2">
+            <Tier
+              style={getFeeTierStyle('100')}
+              onClick={() => {
+                if (!isSubmitLoading) {
+                  const tier = getFeeTier('100');
+                  if (tier) {
+                    setSelectedPool(tier);
+                    // setQueryParam('feeTier', tier.feeTier);
                   }
-                }}
-              >
-                <h4 style={!getFeeTier('100') ? { color: '#999' } : {}}>
-                  0.01%
-                </h4>
-                <span>Best for very stable pairs.</span>
-                <div>{getFeeTierPercentage('100')}</div>
-              </Tier>
-              <Tier
-                style={getFeeTierStyle('500')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('500');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      // setQueryParam('feeTier', tier.feeTier);
-                    }
+                }
+              }}
+            >
+              <h4 style={!getFeeTier('100') ? { color: '#999' } : {}}>0.01%</h4>
+              <span>Best for very stable pairs.</span>
+              <div>{getFeeTierPercentage('100')}</div>
+            </Tier>
+            <Tier
+              style={getFeeTierStyle('500')}
+              onClick={() => {
+                if (!isSubmitLoading) {
+                  const tier = getFeeTier('500');
+                  if (tier) {
+                    setSelectedPool(tier);
+                    // setQueryParam('feeTier', tier.feeTier);
                   }
-                }}
-              >
-                <h4 style={!getFeeTier('500') ? { color: '#999' } : {}}>
-                  0.05%
-                </h4>
-                <span>Best for stable pairs.</span>
-                <div>{getFeeTierPercentage('500')}</div>
-              </Tier>
-              <Tier
-                style={getFeeTierStyle('3000')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('3000');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      // setQueryParam('feeTier', tier.feeTier);
-                    }
+                }
+              }}
+            >
+              <h4 style={!getFeeTier('500') ? { color: '#999' } : {}}>0.05%</h4>
+              <span>Best for stable pairs.</span>
+              <div>{getFeeTierPercentage('500')}</div>
+            </Tier>
+            <Tier
+              style={getFeeTierStyle('3000')}
+              onClick={() => {
+                if (!isSubmitLoading) {
+                  const tier = getFeeTier('3000');
+                  if (tier) {
+                    setSelectedPool(tier);
+                    // setQueryParam('feeTier', tier.feeTier);
                   }
-                }}
-              >
-                <h4 style={!getFeeTier('3000') ? { color: '#999' } : {}}>
-                  0.3%
-                </h4>
-                <span>Best for most pairs.</span>
-                <div>{getFeeTierPercentage('3000')}</div>
-              </Tier>
-              <Tier
-                style={getFeeTierStyle('10000')}
-                onClick={() => {
-                  if (!isSubmitLoading) {
-                    const tier = getFeeTier('10000');
-                    if (tier) {
-                      setSelectedPool(tier);
-                      // setQueryParam('feeTier', tier.feeTier);
-                    }
+                }
+              }}
+            >
+              <h4 style={!getFeeTier('3000') ? { color: '#999' } : {}}>0.3%</h4>
+              <span>Best for most pairs.</span>
+              <div>{getFeeTierPercentage('3000')}</div>
+            </Tier>
+            <Tier
+              style={getFeeTierStyle('10000')}
+              onClick={() => {
+                if (!isSubmitLoading) {
+                  const tier = getFeeTier('10000');
+                  if (tier) {
+                    setSelectedPool(tier);
+                    // setQueryParam('feeTier', tier.feeTier);
                   }
-                }}
-              >
-                <h4 style={!getFeeTier('10000') ? { color: '#999' } : {}}>
-                  1%
-                </h4>
-                <span>Best for exotic pairs.</span>
-                <div>{getFeeTierPercentage('10000')}</div>
-              </Tier>
-            </div>
+                }
+              }}
+            >
+              <h4 style={!getFeeTier('10000') ? { color: '#999' } : {}}>1%</h4>
+              <span>Best for exotic pairs.</span>
+              <div>{getFeeTierPercentage('10000')}</div>
+            </Tier>
           </div>
-          <PrimaryBlockButton
+        </div>
+        <div>
+          <CustomButton
             onClick={handleSubmit}
             disabled={isFormDisabled}
+            title={'Calculate'}
+            theme="transparentPurple"
+            isLoading={isSubmitLoading}
             style={
               isSubmitLoading
                 ? {
@@ -749,12 +739,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                   }
                 : {}
             }
-          >
-            {isSubmitLoading && (
-              <ReactLoading type="spin" color="white" height={18} width={18} />
-            )}
-            {!isSubmitLoading && <span>Calculate</span>}
-          </PrimaryBlockButton>
+          />
         </div>
       </div>
 

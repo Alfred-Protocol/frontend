@@ -9,6 +9,7 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const { address } = req.query;
+    console.log(address);
     if (!address || !isAddress(address.toString())) {
       return res.status(400).json({
         message: 'Invalid address',

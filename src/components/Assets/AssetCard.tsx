@@ -5,7 +5,7 @@ import USDT from 'src/assets/USDT.jpg';
 
 import Funds from '@/abi/Funds';
 import type { Deposit } from '@/hooks/useDeposits';
-import useFund from '@/hooks/useFund';
+import useDatabaseFund from '@/hooks/useDatabaseFund';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { Address, useAccount, useContractReads } from 'wagmi';
@@ -23,8 +23,9 @@ const lpPositionsIndex = 2;
 const depositedAmountIndex = 3;
 
 const AssetCard = ({ fundAddress, deposits }: AssetsDetailProps) => {
+  console.log(fundAddress);
   const { address } = useAccount();
-  const { data: fund } = useFund(fundAddress);
+  const { data: fund } = useDatabaseFund(fundAddress);
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [

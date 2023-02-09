@@ -1,31 +1,22 @@
-import PairValue from '../Common/PairValues';
-// import ETH from 'src/components/Assets/ETH.png';
-import ETH from 'src/assets/ETH.png';
-import USDT from 'src/assets/USDT.jpg';
-
 import Funds from '@/abi/Funds';
 import type { Deposit } from '@/hooks/useDeposits';
-import useDatabaseFund from '@/hooks/useDatabaseFund';
-import { ethers, BigNumber } from 'ethers';
-import Image from 'next/image';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import type { Fund } from '@prisma/client';
+import { BigNumber, ethers } from 'ethers';
+import { Tooltip } from 'flowbite-react';
+import { useRouter } from 'next/router';
+import { twMerge } from 'tailwind-merge';
 import {
   Address,
   useAccount,
   useContractReads,
-  usePrepareContractWrite,
   useContractWrite,
+  usePrepareContractWrite,
   useWaitForTransaction,
-  erc20ABI,
-  useContractRead,
 } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
-import { useRouter } from 'next/router';
-import type { Fund } from '@prisma/client';
-import { InformationCircleIcon } from '@heroicons/react/24/outline';
-import { Spinner, Tooltip } from 'flowbite-react';
+import PairValue from '../Common/PairValues';
 import { WMATIC_MUMBAI_ADDRESS } from '../Funds/WithdrawFundModal';
-import { useEffect, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 interface AssetsDetailProps {
   fundAddress: Address;
@@ -102,51 +93,50 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
       }}
     >
       <div className="mb-4 flex items-start justify-between">
-        <div className="max-w-xs space-y-2">
+        <div className="flex space-x-8">
           <h3 className="mb-4 text-2xl font-bold sm:text-4xl">
             {fund?.name || 'No fund name found'}
           </h3>
-        </div>
-
-        <div className="flex flex-col justify-center">
-          <PairValue
-            field="TVL"
-            containerClassName="sm:text-md"
-            value={ethers.utils.formatUnits(tvl, 18) + ' WMATIC'}
-            endComponent={
-              <Tooltip
-                content="Total Value Locked"
-                className="px-2 text-center"
-              >
-                <InformationCircleIcon
-                  height={16}
-                  width={16}
-                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
-                />
-              </Tooltip>
-            }
-          />
-          <PairValue
-            field="Mature Date"
-            containerClassName="sm:text-md"
-            value={
-              fund
-                ? new Date(fund.matureDate).toLocaleDateString()
-                : 'No mature date found'
-            }
-            endComponent={
-              <Tooltip
-                content="The date at which the fund will be disabled, and withdrawals will be enabled"
-                className="px-2 text-center"
-              >
-                <InformationCircleIcon
-                  height={16}
-                  width={16}
-                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
-                />
-              </Tooltip>
-            }
-          />
+          <div className="flex flex-col justify-center">
+            <PairValue
+              field="TVL"
+              containerClassName="sm:text-md"
+              value={ethers.utils.formatUnits(tvl, 18) + ' WMATIC'}
+              endComponent={
+                <Tooltip
+                  content="Total Value Locked"
+                  className="px-2 text-center"
+                >
+                  <InformationCircleIcon
+                    height={16}
+                    width={16}
+                    className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                  />
+                </Tooltip>
+              }
+            />
+            <PairValue
+              field="Mature Date"
+              containerClassName="sm:text-md"
+              value={
+                fund
+                  ? new Date(fund.matureDate).toLocaleDateString()
+                  : 'No mature date found'
+              }
+              endComponent={
+                <Tooltip
+                  content="The date at which the fund will be disabled, and withdrawals will be enabled"
+                  className="px-2 text-center"
+                >
+                  <InformationCircleIcon
+                    height={16}
+                    width={16}
+                    className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                  />
+                </Tooltip>
+              }
+            />
+          </div>
         </div>
         <div>
           <CustomButton
@@ -167,7 +157,7 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
         <div>
           <h4 className="text-3xl font-semibold">Your Share</h4>
           {/* Update the text-green-300 based on amount relative to deposit */}
-          <span className={twMerge("text-4xl", "text-green-400")}>
+          <span className={twMerge('text-4xl', 'text-green-400')}>
             {ethers.utils.formatEther(depositedAmount).toString() || '0'} MATIC
           </span>
         </div>

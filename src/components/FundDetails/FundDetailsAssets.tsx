@@ -1,5 +1,3 @@
-import USDT from 'src/assets/USDT.jpg';
-import ETH from 'src/assets/ETH.png';
 import Image from 'next/image';
 
 interface Props {
@@ -25,11 +23,23 @@ const renderSection = ({
   return (
     <>
       <div className="mb-2 flex items-center space-x-2">
-        <Image src={logo0} width={48} alt={''} style={{ borderRadius: 100 }} />
+        <Image
+          src={logo0}
+          width={48}
+          height={48}
+          alt={''}
+          style={{ borderRadius: 100 }}
+        />
         <p className="text-3xl">{amount0.toLocaleString()}</p>
       </div>
       <div className="flex items-center space-x-2">
-        <Image src={logo1} width={48} alt={''} style={{ borderRadius: 100 }} />
+        <Image
+          src={logo1}
+          width={48}
+          height={48}
+          alt={''}
+          style={{ borderRadius: 100 }}
+        />
         <p className="mb-2 text-3xl">{amount1.toLocaleString()}</p>
       </div>
     </>
@@ -37,8 +47,8 @@ const renderSection = ({
 };
 
 const FundDetailAssets = ({
-  logo0 = USDT,
-  logo1 = ETH,
+  logo0 = '/WMATIC.png',
+  logo1 = '/ETH.png',
   freeAmount0,
   freeAmount1,
   lockedAmount0,

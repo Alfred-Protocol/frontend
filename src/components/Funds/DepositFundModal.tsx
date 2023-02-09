@@ -52,11 +52,10 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     enabled: !!account?.address,
   });
 
-  const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [
-    18,
-    BigNumber.from(0),
-    BigNumber.from(0),
-  ];
+  const [wmaticDecimals, wmaticBalance, wmaticAllowance] =
+    wmatic !== undefined && wmatic.every(Boolean)
+      ? wmatic
+      : [18, BigNumber.from(0), BigNumber.from(0)];
 
   const { data: signer } = useSigner();
 
@@ -87,8 +86,9 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     args: [ethers.utils.parseUnits(amountToDeposit.toString(), wmaticDecimals)],
     enabled:
       amountToDeposit > 0 &&
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) <
-        wmaticBalance,
+      ethers.utils
+        .parseUnits(`${amountToDeposit}`, wmaticDecimals)
+        .lt(wmaticBalance),
   });
   const { data, isSuccess, write } = useContractWrite(config);
   const {

@@ -1,6 +1,11 @@
+import '@/styles/globals.css';
+import '@rainbow-me/rainbowkit/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   connectorsForWallets,
   getDefaultWallets,
+  lightTheme,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import {
@@ -9,9 +14,6 @@ import {
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import type { AppProps } from 'next/app';
-// import { QueryClient } from 'react-query';
-// import { ReactQueryDevtools } from 'react-query/devtools';
-// import { QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import {
@@ -25,25 +27,14 @@ import {
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
-import '@/styles/globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
-import 'react-toastify/dist/ReactToastify.css';
 import ContextProvider from '@/context/ContextProvider';
 import { useEffect } from 'react';
 
-export const { chains, provider, webSocketProvider } = configureChains(
-  [
-    polygon,
-    mainnet,
-    optimism,
-    arbitrum,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true'
-      ? [polygonMumbai, goerli]
-      : []),
-  ],
+const { chains, provider, webSocketProvider } = configureChains(
+  [polygonMumbai, goerli, polygon, mainnet, optimism, arbitrum],
   [
     alchemyProvider({
-      apiKey: 'SAWT5vv937fCafeAL4HLc4Qq_U2zjdzL',
+      apiKey: process.env.ALCHEMY_MUMBAI_API_KEY!,
     }),
     publicProvider(),
   ]
@@ -85,6 +76,9 @@ export default function App({ Component, pageProps }: AppProps) {
         appInfo={{
           appName: 'Alfred Protocol',
         }}
+        theme={lightTheme({
+          overlayBlur: 'large',
+        })}
         chains={chains}
       >
         <ContextProvider>

@@ -60,16 +60,16 @@ const WithdrawFundModal = ({
   });
 
   const [wmaticDecimals, wmaticBalance, depositedAmount, wmaticSymbol] =
-    wmatic ?? [18, BigNumber.from(0), BigNumber.from(0), 'WMATIC'];
-
-  const { data: signer } = useSigner();
+    wmatic !== undefined && wmatic.every(Boolean)
+      ? wmatic
+      : [18, BigNumber.from(0), BigNumber.from(0), 'WMATIC'];
 
   // wagmi hooks
   const { config } = usePrepareContractWrite({
     address: fundAddress as Address,
     abi: Funds,
     functionName: 'withdraw',
-    enabled: depositedAmount.gt(0),
+    enabled: depositedAmount?.gt(0),
   });
   const { data, isSuccess, write } = useContractWrite(config);
   const {

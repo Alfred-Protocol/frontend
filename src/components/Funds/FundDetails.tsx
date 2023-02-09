@@ -72,7 +72,9 @@ const FundDetails = ({
   });
 
   const [stableCoinDecimals, stableCoinSymbol, userDepositedAmount] =
-    stableCoin ?? [18, 'ETH', BigNumber.from(0)];
+    stableCoin !== undefined && stableCoin.every(Boolean)
+      ? stableCoin
+      : [18, 'ETH', BigNumber.from(0)];
 
   return (
     <div

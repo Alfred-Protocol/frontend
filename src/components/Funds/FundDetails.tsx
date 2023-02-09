@@ -26,6 +26,7 @@ export interface FundDetailsProps {
   description?: string;
   yieldPercentage?: number;
   fundName: string;
+  refetch: () => Promise<void>;
 }
 
 const FundDetails = ({
@@ -39,6 +40,7 @@ const FundDetails = ({
   manager,
   stableCoinAddress,
   yieldPercentage = 20.4,
+  refetch,
 }: FundDetailsProps) => {
   const account = useAccount();
 
@@ -58,21 +60,15 @@ const FundDetails = ({
         abi: erc20ABI,
         functionName: 'symbol',
       },
-      {
-        address: fundAddress as Address,
-        abi: Funds,
-        functionName: 'depositedAmount',
-        args: [account.address as Address],
-      },
     ],
     enabled:
       stableCoinAddress != ethers.constants.AddressZero && !!account?.address,
   });
 
-  const [stableCoinDecimals, stableCoinSymbol, userDepositedAmount] =
+  const [stableCoinDecimals, stableCoinSymbol] =
     stableCoin !== undefined && stableCoin.every(Boolean)
       ? stableCoin
-      : [18, 'ETH', BigNumber.from(0)];
+      : [18, 'ETH'];
 
   return (
     <div className="min-h-40 w-full text-fuchsia-100">
@@ -97,7 +93,7 @@ const FundDetails = ({
               className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
               onClick={() => {
                 navigator.clipboard.writeText(manager);
-                toast.success('Copied manager address to clipboard!');
+                toast.success('Manager address copied to clipboard!');
               }}
             />
           </p>
@@ -110,7 +106,7 @@ const FundDetails = ({
               className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
               onClick={() => {
                 navigator.clipboard.writeText(fundAddress);
-                toast.success('Copied manager address to clipboard!');
+                toast.success('Fund address copied to clipboard!');
               }}
             />
           </p>
@@ -121,11 +117,10 @@ const FundDetails = ({
           <div>
             <PairValue
               field="TVL"
-              value={
-                ethers.utils.formatUnits(totalValueLocked, stableCoinDecimals) +
-                ' ' +
-                stableCoinSymbol
-              }
+              value={`${ethers.utils.formatUnits(
+                totalValueLocked,
+                stableCoinDecimals
+              )} ${stableCoinSymbol}`}
               endComponent={
                 <Tooltip
                   content="Total Value Locked"
@@ -183,6 +178,7 @@ const FundDetails = ({
         fundAddress={fundAddress}
         show={showDepositFundModal}
         onClose={() => setDepositFundModal(false)}
+        refetch={refetch}
       />
       <SwapTokensModal
         fundAddress={fundAddress}

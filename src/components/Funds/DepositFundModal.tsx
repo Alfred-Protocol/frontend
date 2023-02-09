@@ -19,13 +19,19 @@ type DepositFundProps = {
   fundAddress: string;
   show: boolean;
   onClose: () => void;
+  refetch: () => Promise<void>;
 };
 
 const WMATIC_MUMBAI_ADDRESS =
   process.env.WMATIC_MUMBAI_ADDRESS ??
   '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
 
-const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
+const DepositFundModal = ({
+  fundAddress,
+  show,
+  onClose,
+  refetch,
+}: DepositFundProps) => {
   const [amountToDeposit, setAmountToDeposit] = useState(0);
 
   const account = useAccount();
@@ -91,7 +97,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
         .parseUnits(`${amountToDeposit}`, wmaticDecimals)
         .lt(wmaticBalance),
   });
-  const { data, isSuccess, write } = useContractWrite(config);
+  const { data, isSuccess, writeAsync } = useContractWrite(config);
   const {
     data: txReceipt,
     isSuccess: txIsSuccess,
@@ -111,6 +117,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
       toast.success(
         `Successfully deposited, transaction hash: ${txReceipt?.transactionHash}`
       );
+      refetch()
       onClose();
     }
   }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);
@@ -134,10 +141,9 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
     if ((wmaticAllowance as BigNumber).lt(amountToDepositWei)) {
       await approveErc20(WMATIC_MUMBAI_ADDRESS as Address);
     } else {
-      write?.();
+      await writeAsync?.();
     }
   };
-
   return (
     <Modal show={show} dismissible onClose={onClose} className="dark h-full">
       <Modal.Header className="bg-gray-800">Deposit Fund</Modal.Header>

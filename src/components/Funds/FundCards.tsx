@@ -3,7 +3,7 @@ import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import { ArrowPathIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAccount } from 'wagmi';
+import { useAccount, useQueryClient } from 'wagmi';
 import { ArrowDown, ArrowUp } from '../Common/Common';
 import CustomButton from '../Common/CustomButton';
 import CustomIconButton from '../Common/CustomIconButton';
@@ -63,6 +63,7 @@ const FundCards = () => {
             className={'px-4'}
             iconDescription={'Refresh'}
             onClick={async () => {
+              // Only refreshes database fund details, which does not include TVL
               await refetch();
               toast.success('Refreshed funds');
             }}

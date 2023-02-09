@@ -88,14 +88,7 @@ const PriceRange = () => {
   }, [state.priceRangeValue, min, max]);
 
   return (
-    <div
-      style={{
-        marginTop: 7,
-        // width: 450,
-        whiteSpace: 'nowrap',
-        overflowX: 'auto',
-      }}
-    >
+    <div style={{ marginTop: 7 }}>
       <Heading>
         <div
           style={{

@@ -137,8 +137,8 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
 
   return (
     <Modal show={show} dismissible onClose={onClose} className="h-full">
-      <Modal.Header className="bg-gray-800">Deposit Fund</Modal.Header>
-      <Modal.Body className="bg-gray-800">
+      <Modal.Header className="">Deposit Fund</Modal.Header>
+      <Modal.Body className="">
         <form className="space-y-4 rounded" onSubmit={onSubmit}>
           <div className="space-y-2">
             <Label htmlFor="amountToDeposit">WMATIC amount</Label>

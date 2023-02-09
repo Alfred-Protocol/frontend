@@ -1,6 +1,6 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
 import useDeposits from '@/hooks/useDeposits';
-import type { Address } from 'wagmi';
+import { Address, useAccount } from 'wagmi';
 import { LPPositionsMock } from '../../mockData/mockData';
 import AssetCard from './AssetCard';
 import AssetsHeader from './AssetsHeader';
@@ -78,13 +78,14 @@ const mockData = [
 ];
 
 const AssetsSection = () => {
+  const { address } = useAccount();
   const { deposits, isLoading } = useDeposits();
 
   return (
     <div>
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
         <AssetsHeader
-          managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
+          managerAddress={address ?? ''}
           netDeposit={3232.3}
           netValue={3223.43}
         />

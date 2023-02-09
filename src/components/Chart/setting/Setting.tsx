@@ -36,9 +36,16 @@ const Setting = ({ isLoading }: Props) => {
   }
 
   return (
-    <div className="relative flex items-center justify-center space-x-5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
+    <div
+      style={{
+        width: 700,
+        whiteSpace: 'nowrap',
+        overflowX: 'auto',
+      }}
+      className="relative flex items-center justify-center space-x-5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white"
+    >
       <DepositAmount />
-      <Br />
+
       <PriceRange />
     </div>
   );

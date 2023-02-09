@@ -76,7 +76,7 @@ const DepositAmount = () => {
   );
 
   return (
-    <div>
+    <div style={{ maxWidth: 250 }}>
       <Heading>Deposit Amount</Heading>
       <InputGroup>
         <Dollar>$</Dollar>
@@ -101,7 +101,7 @@ const DepositAmount = () => {
           <img alt={state.token0?.name} src={state.token0?.logoURI} />{' '}
           <span>{state.token0?.symbol}</span>
         </Token>
-        <div>{amount1.toFixed(5)}</div>
+        {/* <div>{amount1.toFixed(3)}</div> */}
         <div>${(amount1 * priceUSDY).toFixed(2)}</div>
       </Table>
       <Table>
@@ -109,7 +109,7 @@ const DepositAmount = () => {
           <img alt={state.token1?.name} src={state.token1?.logoURI} />{' '}
           <span>{state.token1?.symbol}</span>
         </Token>
-        <div>{amount0.toFixed(5)}</div>
+        {/* <div>{amount0.toFixed(3)}</div> */}
         <div>${(amount0 * priceUSDX).toFixed(2)}</div>
       </Table>
     </div>

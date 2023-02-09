@@ -43,8 +43,11 @@ const ManageFundPage = () => {
   return (
     <Radium.StyleRoot>
       <Layout>
-        <div className="flex w-full justify-center">
-          <div className="mt-10 flex w-4/5 flex-col space-y-10">
+        <div className="flex justify-center">
+          <div
+            className="mt-10 flex flex-col space-y-10"
+            style={{ width: '90%' }}
+          >
             {showPairModal ? (
               <div style={styles.fadeIn as any}>
                 <SelectPairModal
@@ -85,8 +88,12 @@ const ManageFundPage = () => {
             {showComponent && (
               <div className="flex flex-col space-y-10">
                 <div className="flex w-full space-x-5">
-                  <EstimatedFees isLoading={isLoading} />
-                  <Setting isLoading={isLoading} />
+                  <div className="w-2/5">
+                    <EstimatedFees isLoading={isLoading} />
+                  </div>
+                  <div className="">
+                    <Setting isLoading={isLoading} />
+                  </div>
                 </div>
                 <LiquidityPositionChart isLoading={isLoading} />
               </div>

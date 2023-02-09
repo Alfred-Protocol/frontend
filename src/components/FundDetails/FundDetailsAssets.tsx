@@ -30,7 +30,7 @@ const renderSection = ({
           alt={''}
           style={{ borderRadius: 100 }}
         />
-        <p className="text-3xl font-thin">{amount0.toFixed(5)}</p>
+        <p className="text-3xl font-thin">{amount0.toFixed(3)}</p>
       </div>
       {/* <div className="flex items-center space-x-2">
         <Image

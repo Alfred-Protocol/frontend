@@ -86,7 +86,7 @@ const ManageFundCard = ({
       onClick={() => router.push(`/funds/${address}`)}
     >
       <div className="relative mb-4 flex flex-col">
-        <h3 className="text-2xl font-bold text-fuchsia-100 sm:text-4xl">
+        <h3 className="mb-5 text-2xl font-bold text-fuchsia-100 sm:text-4xl">
           {name}
         </h3>
 
@@ -123,7 +123,7 @@ const ManageFundCard = ({
       </div>
       <div className="ml-4 flex flex-col">
         <div className="flex justify-between">
-          <div className="flex space-x-6">
+          <div className="mb-2 flex space-x-6">
             <div className="flex items-center space-x-2">
               <Image
                 src={logo1}

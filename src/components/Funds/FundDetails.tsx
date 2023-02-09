@@ -14,7 +14,6 @@ import PairValue from '../Common/PairValues';
 import DepositFundModal from './DepositFundModal';
 import FundTableList from './FundTableList';
 import SwapTokensModal from './SwapTokensModal';
-import WithdrawFundModal from './WithdrawFundModal';
 
 export interface FundDetailsProps {
   isLoading: boolean;
@@ -45,8 +44,6 @@ const FundDetails = ({
 
   const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
   const [showSwapTokensModal, setSwapTokensModal] = useState<boolean>(false);
-  const [showWithdrawFundModal, setWithdrawFundModal] =
-    useState<boolean>(false);
 
   const { data: stableCoin } = useContractReads({
     scopeKey: stableCoinAddress,
@@ -80,7 +77,7 @@ const FundDetails = ({
   return (
     <div className="min-h-40 w-full text-fuchsia-100">
       <div className="flex h-full flex-col justify-between">
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-2 flex items-start justify-between">
           <h3 className="text-2xl font-bold sm:text-4xl">{fundName}</h3>
           <div className="flex space-x-2">
             <CustomButton
@@ -191,11 +188,6 @@ const FundDetails = ({
         fundAddress={fundAddress}
         show={showSwapTokensModal}
         onClose={() => setSwapTokensModal(false)}
-      />
-      <WithdrawFundModal
-        fundAddress={fundAddress}
-        show={showWithdrawFundModal}
-        onClose={() => setWithdrawFundModal(false)}
       />
     </div>
   );

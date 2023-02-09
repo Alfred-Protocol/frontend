@@ -2,6 +2,7 @@ import FundCreateModal from '@/components/Funds/FundCreateModal';
 import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import { ArrowPathIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { useAccount } from 'wagmi';
 import { ArrowDown, ArrowUp } from '../Common/Common';
 import CustomButton from '../Common/CustomButton';
@@ -61,7 +62,10 @@ const FundCards = () => {
             icon={<ArrowPathIcon width={20} height={20} />}
             className={'px-4'}
             iconDescription={'Refresh'}
-            onClick={() => refetch()}
+            onClick={async () => {
+              await refetch();
+              toast.success('Refreshed funds');
+            }}
           />
           <CustomButton
             title="Choose Start Date"
@@ -103,9 +107,8 @@ const FundCards = () => {
       <div className="grid grid-cols-1 gap-y-10 gap-x-7 pb-12 xl:grid-cols-2 2xl:grid-cols-3">
         {isLoading
           ? renderSkeleton()
-          : data?.length
-          ? data.map((fund) => <FundCard key={fund.address} fund={fund} />)
-          : undefined}
+          : data?.length &&
+            data.map((fund) => <FundCard key={fund.address} fund={fund} />)}
       </div>
       <FundCreateModal
         show={showCreateFundModal}

@@ -20,6 +20,8 @@ type LPPosition = {
   tickLower: BigNumber;
   tickUpper: BigNumber;
   poolFee: BigNumber;
+  amount0: BigNumber;
+  amount1: BigNumber;
 };
 
 export interface Network {

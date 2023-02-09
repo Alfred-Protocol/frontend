@@ -6,7 +6,7 @@ interface Props {
 
 const AssetsHeader = ({ managerAddress, netDeposit, netValue }: Props) => {
   return (
-    <div className="mb-14 w-3/5 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left text-white">
+    <div className="mb-12 mt-10 w-full rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left text-white">
       <div className="mb-2 text-3xl font-bold">👋 Welcome Back</div>
       <div className="mb-5">{managerAddress}</div>
       <div className="flex">

@@ -1,9 +1,7 @@
-import useFund from '@/hooks/useFund';
 import truncateString from '@/utils/truncateString';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import { ethers } from 'ethers';
 import { Tooltip } from 'flowbite-react';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Address, erc20ABI, useAccount, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
@@ -37,7 +35,6 @@ const FundDetails = ({
   stableCoinAddress,
   yieldPercentage = 20.4,
 }: FundDetailsProps) => {
-  const router = useRouter();
   const account = useAccount();
 
   const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
@@ -63,7 +60,7 @@ const FundDetails = ({
 
   return (
     <div
-      className="min-h-40 w-full bg-blackfill text-whiteFont"
+      className="min-h-40 w-full text-whiteFont"
       style={{ position: 'relative' }}
     >
       <div className="flex flex-col justify-between">

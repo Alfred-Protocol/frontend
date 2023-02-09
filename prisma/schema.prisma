@@ -9,11 +9,11 @@ datasource db {
 }
 
 model Fund {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   manager     String
-  address     String
+  address     String  @unique
   description String?
-  startDate   DateTime
-  matureDate  DateTime
+  startDate   String
+  matureDate  String
 }

@@ -1,11 +1,10 @@
 import { Token } from '@uniswap/sdk-core';
 import { tickToPrice } from '@uniswap/v3-sdk';
-import React, { useEffect } from 'react';
-import { Address, useContractRead, useContractReads } from 'wagmi';
+import { polygonMumbai } from '@wagmi/chains';
+import { ethers } from 'ethers';
+import { Address, erc20ABI, useContractReads } from 'wagmi';
 import type { LPPosition } from '../../types/type';
 import PairImage from '../Common/PairImage';
-import { erc20ABI } from 'wagmi';
-import { ethers } from 'ethers';
 
 type Props = LPPosition;
 
@@ -18,6 +17,8 @@ const LPPair = ({
   tickLower,
   tickUpper,
   poolFee,
+  amount0,
+  amount1,
 }: Props) => {
   const { data, isLoading } = useContractReads({
     contracts: [
@@ -53,8 +54,8 @@ const LPPair = ({
         <PairImage logo1={undefined} logo2={undefined} />
         {`${token0Symbol} / ${token1Symbol}`}
       </td>
-      <td className="">{poolFee?.toNumber() / 10000}%</td>
-      <td className="">
+      <td>{poolFee?.toNumber() / 10000}%</td>
+      <td>
         {convertTickToPrice(
           tickLower?.toNumber(),
           token0,
@@ -63,7 +64,7 @@ const LPPair = ({
           token1Decimals ?? 18
         )}
       </td>
-      <td className="">
+      <td>
         {convertTickToPrice(
           tickUpper?.toNumber(),
           token0,
@@ -73,7 +74,10 @@ const LPPair = ({
         )}
       </td>
       <td className="flex-wrap items-center sm:flex">
-        <PairImage logo1={undefined} logo2={undefined} />
+        <PairImage />
+        <span>
+          {amount0.toString()} / {amount1.toString()}
+        </span>
         {/*
         // Not possible to do this without a subgraph that indexes blockchain events
         {`${truncateStrToDecimalPlaces(
@@ -91,8 +95,8 @@ const convertTickToPrice = (
   token1: Address,
   token1Decimals: number
 ) => {
-  const lpToken0 = new Token(80001, token0, token0Decimals);
-  const lpToken1 = new Token(80001, token1, token1Decimals);
+  const lpToken0 = new Token(polygonMumbai.id, token0, token0Decimals);
+  const lpToken1 = new Token(polygonMumbai.id, token1, token1Decimals);
 
   const price = tickToPrice(lpToken0, lpToken1, tick);
   const priceString = price.toSignificant(5);

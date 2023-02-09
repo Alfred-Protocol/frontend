@@ -1,15 +1,16 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import type { CSSProperties } from 'react';
 import USDT from 'src/assets/USDT.jpg';
 import ETH from 'src/assets/ETH.png';
+
 const PairImage = ({
   style,
   logo1 = USDT,
   logo2 = ETH,
 }: {
   style?: CSSProperties;
-  logo1: any;
-  logo2: any;
+  logo1?: string | StaticImageData;
+  logo2?: string | StaticImageData;
 }) => {
   return (
     <div className="flex" style={style}>

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import DepositFundModal from './DepositFundModal';
 import { ethers } from 'ethers';
 import type { Fund } from '@prisma/client';
+import { useRouter } from 'next/router';
 
 interface FundProps {
   fund: Fund;
@@ -43,7 +44,7 @@ const FundCard = ({
         minHeight: isMobile ? 300 : 470,
         minWidth: isMobile ? 100 : 460,
       }}
-      className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow sm:py-8 sm:px-8"
+      className="h-4600 flex flex-1 basis-[50%] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow transition-all hover:cursor-pointer hover:bg-gray-800 sm:py-8 sm:px-8"
     >
       <FundDetails
         fundAddress={address as Address}

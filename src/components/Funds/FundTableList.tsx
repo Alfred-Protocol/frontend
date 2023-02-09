@@ -1,35 +1,9 @@
+import { LPPositionsMock } from '@/mockData/mockData';
 import type { LPPosition } from '@/types/type';
 import { BigNumber } from 'ethers';
 import LPPair from './LPPair';
 
-const mockData: Array<LPPosition> = [
-  {
-    token0: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
-    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
-    poolFee: BigNumber.from(3000),
-    tickLower: BigNumber.from(192200),
-    tickUpper: BigNumber.from(198000),
-    liquidity: BigNumber.from(10).pow(18),
-    fundManager: '0xE1FAE6E277F8302d5BedD1C15e6480C9A75Fb3Bb',
-    tokenId: BigNumber.from(100),
-    amount0: BigNumber.from(200),
-    amount1: BigNumber.from(10),
-  },
-  {
-    token0: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
-    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
-    poolFee: BigNumber.from(3000),
-    tickLower: BigNumber.from(193600),
-    tickUpper: BigNumber.from(198400),
-    liquidity: BigNumber.from(10).pow(18),
-    fundManager: '0xE1FAE6E277F8302d5BedD1C15e6480C9A75Fb3Bb',
-    tokenId: BigNumber.from(150),
-    amount0: BigNumber.from(200),
-    amount1: BigNumber.from(10),
-  },
-];
-
-const FundTableList = ({ data = mockData }: { data?: LPPosition[] }) => {
+const FundTableList = ({ data = LPPositionsMock }: { data?: LPPosition[] }) => {
   return (
     <div className="rounded-lg shadow">
       <table className="w-full table-auto border-separate -translate-x-3 text-xs [border-spacing:0.75rem]">

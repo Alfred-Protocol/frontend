@@ -11,6 +11,8 @@ const LPPositionsMock: Array<LPPosition> = [
     liquidity: BigNumber.from(10).pow(18),
     fundManager: '0xE1FAE6E277F8302d5BedD1C15e6480C9A75Fb3Bb',
     tokenId: BigNumber.from(100),
+    amount0: BigNumber.from(200),
+    amount1: BigNumber.from(10),
   },
   {
     token0: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
@@ -21,6 +23,8 @@ const LPPositionsMock: Array<LPPosition> = [
     liquidity: BigNumber.from(10).pow(18),
     fundManager: '0xE1FAE6E277F8302d5BedD1C15e6480C9A75Fb3Bb',
     tokenId: BigNumber.from(150),
+    amount0: BigNumber.from(200),
+    amount1: BigNumber.from(10),
   },
 ];
 

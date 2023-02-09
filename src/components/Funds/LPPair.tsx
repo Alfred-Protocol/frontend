@@ -1,7 +1,7 @@
 import { Token } from '@uniswap/sdk-core';
 import { tickToPrice } from '@uniswap/v3-sdk';
 import { polygonMumbai } from '@wagmi/chains';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Address, erc20ABI, useContractReads } from 'wagmi';
 import type { LPPosition } from '../../types/type';
 import PairImage from '../Common/PairImage';

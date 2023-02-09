@@ -88,20 +88,6 @@ const FundDetails = ({
               theme="solidPurple"
               onClick={() => setDepositFundModal(true)}
             />
-            {manager.toLowerCase() === account?.address?.toLowerCase() && (
-              <CustomButton
-                title="Manage"
-                theme="solidPurple"
-                onClick={() => setSwapTokensModal(true)}
-              />
-            )}
-            {userDepositedAmount.gt(0) && (
-              <CustomButton
-                title="Withdraw"
-                theme="solidPurple"
-                onClick={() => setWithdrawFundModal(true)}
-              />
-            )}
           </div>
         </div>
         <div>

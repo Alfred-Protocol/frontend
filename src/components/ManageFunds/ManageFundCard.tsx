@@ -15,6 +15,7 @@ import FundTableList from '../Funds/FundTableList';
 interface AssetsDetailProps {
   fund: Fund;
   onGetTVL: (tvl: number) => void;
+  showLpPositions?: boolean;
 }
 
 // Convert to ENUM
@@ -27,6 +28,7 @@ const matureDateIndex = 3;
 const ManageFundCard = ({
   fund: { address, name, manager, startDate, matureDate, yield: fundYield },
   onGetTVL,
+  showLpPositions = true,
 }: AssetsDetailProps) => {
   const router = useRouter();
   const [getTVLDone, setGetTVLDone] = useState(false);
@@ -128,32 +130,36 @@ const ManageFundCard = ({
       <div className="flex flex-[67%] flex-col">
         <div className="flex justify-between">
           <div className="flex space-x-6">
-            <div className="flex items-center space-x-2">
-              <Image
-                src={logo1}
-                width={40}
-                height={40}
-                alt={'WETH'}
-                className="rounded-full"
-                style={{ borderRadius: 100 }}
-              />
-              <p className="text-2xl">{amount0.toLocaleString()}</p>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <Image
-                src={logo2}
-                width={40}
-                height={40}
-                alt={'USDC'}
-                className="rounded-full"
-                style={{ borderRadius: 100 }}
-              />
-              <p className="text-2xl">{amount1.toLocaleString()}</p>
-            </div>
+            {showLpPositions && (
+              <>
+                <div className="flex items-center space-x-2">
+                  <Image
+                    src={logo1}
+                    width={40}
+                    height={40}
+                    alt={'WETH'}
+                    className="rounded-full"
+                    style={{ borderRadius: 100 }}
+                  />
+                  <p className="text-2xl">{amount0.toLocaleString()}</p>
+                </div>
+                <div className="flex items-center justify-center space-x-2">
+                  <Image
+                    src={logo2}
+                    width={40}
+                    height={40}
+                    alt={'USDC'}
+                    className="rounded-full"
+                    style={{ borderRadius: 100 }}
+                  />
+                  <p className="text-2xl">{amount1.toLocaleString()}</p>
+                </div>
+              </>
+            )}
           </div>
           <CustomButton title="Add Position" theme="solidPurple" className="" />
         </div>
-        <FundTableList />
+        {showLpPositions && <FundTableList />}
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ const matureDateIndex = 3;
 // const stableCoinAddressIndex = 2;
 
 const ManageFundCard = ({
-  fund: { address, name, manager, startDate, matureDate },
+  fund: { address, name, manager, startDate, matureDate, yield: fundYield },
   onGetTVL,
 }: AssetsDetailProps) => {
   const router = useRouter();
@@ -74,11 +74,15 @@ const ManageFundCard = ({
   }
 
   const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);
-  const yieldPercentage = 12.2;
   const logo1 = '/WMATIC.png';
   const logo2 = '/ETH.png';
   const amount0 = 0;
   const amount1 = 1;
+
+  const displayedFundYield =
+    isNaN(Number(fundYield)) || Number(fundYield) == 0
+      ? `${(5.1).toFixed(1)}%`
+      : `${Number(fundYield).toFixed(1)}%`;
 
   return (
     <div
@@ -93,7 +97,7 @@ const ManageFundCard = ({
         <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
         <PairValue
           field="Yield"
-          value={`${yieldPercentage}%`}
+          value={displayedFundYield}
           valueClassName="text-green-500"
           endComponent={
             <Tooltip

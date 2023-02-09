@@ -1,6 +1,5 @@
 import { LPPositionsMock } from '@/mockData/mockData';
 import type { LPPosition } from '@/types/type';
-import { BigNumber } from 'ethers';
 import LPPair from './LPPair';
 
 const FundTableList = ({ data = LPPositionsMock }: { data?: LPPosition[] }) => {

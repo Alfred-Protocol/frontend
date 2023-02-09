@@ -1,20 +1,16 @@
-import PairValue from '../Common/PairValues';
-import FundTableList from '../Funds/FundTableList';
-// import ETH from 'src/components/Assets/ETH.png';
-import ETH from 'src/assets/ETH.png';
-import USDT from 'src/assets/USDT.jpg';
-
 import Funds from '@/abi/Funds';
 import { LPPositionsMock } from '@/mockData/mockData';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
 import type { Fund } from '@prisma/client';
 import { ethers } from 'ethers';
+import { Tooltip } from 'flowbite-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { Address, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
-import { InformationCircleIcon } from '@heroicons/react/24/outline';
-import { Tooltip } from 'flowbite-react';
-import { useEffect } from 'react';
+import PairValue from '../Common/PairValues';
+import FundTableList from '../Funds/FundTableList';
 
 interface AssetsDetailProps {
   fund: Fund;
@@ -30,7 +26,6 @@ const matureDateIndex = 3;
 
 const ManageFundCard = ({
   fund: { address, name, manager, startDate, matureDate },
-  onGetTVL,
 }: AssetsDetailProps) => {
   const router = useRouter();
 
@@ -67,17 +62,10 @@ const ManageFundCard = ({
 
   const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);
   const yieldPercentage = 12.2;
-  const logo1 = ETH;
-  const logo2 = USDT;
-  const lpPositions = data[lpPositionsIndex] || LPPositionsMock;
+  const logo1 = '/WMATIC.png';
+  const logo2 = '/ETH.png';
   const amount0 = 0;
   const amount1 = 1;
-
-  useEffect(() => {
-    if (totalValueLocked && parseFloat(totalValueLocked) > 0) {
-      onGetTVL(parseFloat(totalValueLocked));
-    }
-  }, [totalValueLocked]);
 
   return (
     <div
@@ -93,6 +81,7 @@ const ManageFundCard = ({
             <Image
               src={logo1}
               width={40}
+              height={40}
               alt={'WETH'}
               className="rounded-full"
               style={{ borderRadius: 100 }}
@@ -103,6 +92,7 @@ const ManageFundCard = ({
             <Image
               src={logo2}
               width={40}
+              height={40}
               alt={'USDC'}
               className="rounded-full"
               style={{ borderRadius: 100 }}

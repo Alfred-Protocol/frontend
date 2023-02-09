@@ -140,7 +140,7 @@ const EstimatedFees = ({ isLoading }: Props) => {
   }
 
   return (
-    <div className="relative flex w-2/6 items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
+    <div className="relative flex h-full items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white">
       <div className="padding">
         <Heading>
           Projected Fees <Tag>(24h)</Tag>

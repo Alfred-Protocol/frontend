@@ -1,14 +1,11 @@
 import { useCallback } from 'react';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
-import { TypeAnimation } from 'react-type-animation';
-import FancyButton from '../Layout/FancyButton';
-import PageTitle from '../Layout/PageTitle';
 import Particles from 'react-tsparticles';
-import type { Container, Engine } from 'tsparticles-engine';
-import { loadFull } from 'tsparticles';
+import { TypeAnimation } from 'react-type-animation';
 import animationJSON from 'src/assets/particles.json';
+import { loadFull } from 'tsparticles';
+import type { Container, Engine } from 'tsparticles-engine';
 import CustomButton from '../Common/CustomButton';
+import PageTitle from '../Layout/PageTitle';
 
 import { useRouter } from 'next/router';
 

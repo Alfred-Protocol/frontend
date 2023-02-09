@@ -1,7 +1,7 @@
 import { Token } from '@uniswap/sdk-core';
 import { tickToPrice } from '@uniswap/v3-sdk';
 import { polygonMumbai } from '@wagmi/chains';
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { Address, erc20ABI, useContractReads } from 'wagmi';
 import type { LPPosition } from '../../types/type';
 import PairImage from '../Common/PairImage';
@@ -46,7 +46,9 @@ const LPPair = ({
   });
 
   const [token0Symbol, token0Decimals, token1Symbol, token1Decimals] =
-    data ?? [];
+    data !== undefined && data.every(Boolean)
+      ? data
+      : ['WMATIC', 18, 'USDC', 18];
 
   return (
     <tr>

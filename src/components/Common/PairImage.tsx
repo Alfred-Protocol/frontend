@@ -1,12 +1,10 @@
 import Image, { StaticImageData } from 'next/image';
 import type { CSSProperties } from 'react';
-import USDT from 'src/assets/USDT.jpg';
-import ETH from 'src/assets/ETH.png';
 
 const PairImage = ({
   style,
-  logo1 = USDT,
-  logo2 = ETH,
+  logo1 = '/WMATIC.png',
+  logo2 = '/ETH.png',
 }: {
   style?: CSSProperties;
   logo1?: string | StaticImageData;
@@ -14,12 +12,19 @@ const PairImage = ({
 }) => {
   return (
     <div className="flex" style={style}>
-      <Image src={logo1} width={24} alt={''} style={{ borderRadius: 100 }} />
+      <Image
+        src={logo1}
+        width={24}
+        height={24}
+        alt={'ETH'}
+        style={{ borderRadius: 100 }}
+      />
       <Image
         className="-translate-x-2"
         src={logo2}
         width={24}
-        alt={''}
+        height={24}
+        alt={'WMATIC'}
         style={{ borderRadius: 100 }}
       />
     </div>

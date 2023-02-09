@@ -14,6 +14,7 @@ import {
 } from 'wagmi';
 import Web3 from 'web3';
 import CustomButton from '../Common/CustomButton';
+import CustomToastWithLink from '../Common/CustomToastWithLink';
 
 interface FundCreateModalProps {
   onClose: () => void;
@@ -93,7 +94,10 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
         refetch();
         console.log(`Successfully created, transaction hash:`, txReceipt);
         toast.success(
-          `Successfully created, transaction hash: ${txReceipt?.transactionHash}`
+          CustomToastWithLink({
+            txId: txReceipt?.transactionHash as any,
+            content: 'Fund Successfully created,  transaction hash:',
+          })
         );
         onClose();
       });

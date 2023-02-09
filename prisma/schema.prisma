@@ -12,6 +12,7 @@ model Fund {
   id          Int     @id @default(autoincrement())
   name        String
   manager     String
+  yield:      String
   address     String  @unique
   description String?
   startDate   String

@@ -10,6 +10,7 @@ import FundDetails from './FundDetails';
 
 interface FundProps {
   fund: Fund;
+  showLpPositions?: boolean;
 }
 
 // Convert to ENUM
@@ -27,6 +28,7 @@ const FundCard = ({
     name,
     yield: fundYield,
   },
+  showLpPositions = true,
 }: FundProps) => {
   const router = useRouter();
   const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
@@ -50,7 +52,7 @@ const FundCard = ({
     <div className="relative">
       <div
         className={
-          'md:min-w[460px] flex min-h-[300px] min-w-[100px] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow  transition-colors hover:cursor-pointer hover:bg-gray-800 sm:py-8 sm:px-8 md:min-h-[470px]'
+          'md:min-w[460px] flex min-h-[300px] min-w-[100px] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow  transition-colors hover:cursor-pointer hover:bg-gray-800 sm:py-8 sm:px-8 md:min-h-[350px]'
         }
         onClick={() => router.push(`/funds/${address}`)}
       >
@@ -71,6 +73,7 @@ const FundCard = ({
               : ethers.constants.AddressZero
           }
           yieldPercentage={fundYield}
+          showLpPositions={showLpPositions}
         />
       </div>
       <DepositFundModal

@@ -109,7 +109,13 @@ const FundCards = () => {
         {isLoading
           ? renderSkeleton()
           : data?.length &&
-            data.map((fund) => <FundCard key={fund.address} fund={fund} />)}
+            data.map((fund, idx) => (
+              <FundCard
+                key={fund.address}
+                showLpPositions={idx == 0}
+                fund={fund}
+              />
+            ))}
       </div>
       <FundCreateModal
         show={showCreateFundModal}

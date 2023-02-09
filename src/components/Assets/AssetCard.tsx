@@ -88,9 +88,7 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
   return (
     <div
       className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-all hover:bg-gray-800"
-      onClick={() => {
-        router.push(`/funds/${fundAddress}`);
-      }}
+      onClick={() => {}}
     >
       <div className="mb-4 flex items-start justify-between">
         <div className="flex space-x-8">
@@ -139,12 +137,14 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
           </div>
         </div>
         <div>
-          <CustomButton
-            title="Withdraw"
-            theme="solidPurple"
-            isLoading={txIsLoading}
-            onClick={write}
-          />
+          {write && (
+            <CustomButton
+              title="Withdraw"
+              theme="solidPurple"
+              isLoading={txIsLoading}
+              onClick={write}
+            />
+          )}
         </div>
       </div>
       <div className="flex space-x-8">

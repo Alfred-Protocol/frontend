@@ -29,14 +29,7 @@ const FundDetailsPage = () => {
 
   return (
     <Layout>
-      <FundDetails
-        fundAddress={address.toString()}
-        tokenA={'ETH'}
-        tokenB={'USDC'}
-        tokenAAmount={'10.001'}
-        tokenBAmount={'1000.0'}
-        manager={'0xf23c75Bc0e48Ac25883392D63DA556cB8aF40BA3'}
-      />
+      <FundDetails fundAddress={address.toString()} />
     </Layout>
   );
 };

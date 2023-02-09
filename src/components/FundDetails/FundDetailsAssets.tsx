@@ -30,7 +30,7 @@ const renderSection = ({
           alt={''}
           style={{ borderRadius: 100 }}
         />
-        <p className="text-3xl">{amount0.toFixed(5)}</p>
+        <p className="text-3xl font-thin">{amount0.toFixed(5)}</p>
       </div>
       {/* <div className="flex items-center space-x-2">
         <Image
@@ -55,7 +55,7 @@ const FundDetailAssets = ({
   lockedAmount1,
 }: Props) => {
   return (
-    <div className="flex-1 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left text-white">
+    <div className="flex-1 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left text-fuchsia-100">
       <div className="mb-2 text-3xl font-bold">Assets</div>
       <div className="flex">
         <div className="flex-1">

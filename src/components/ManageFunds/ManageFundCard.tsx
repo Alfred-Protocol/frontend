@@ -85,7 +85,7 @@ const ManageFundCard = ({
       className="flex w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-6 px-8 text-left text-white transition-all hover:bg-gray-800"
       onClick={() => router.push(`/funds/${address}`)}
     >
-      <div className="relative mb-4 flex flex-col">
+      <div className="relative flex flex-[33%] flex-col">
         <h3 className="mb-5 text-2xl font-bold text-fuchsia-100 sm:text-4xl">
           {name}
         </h3>
@@ -121,9 +121,9 @@ const ManageFundCard = ({
           ).toLocaleDateString()}
         />
       </div>
-      <div className="ml-4 flex flex-col">
+      <div className="flex flex-[67%] flex-col">
         <div className="flex justify-between">
-          <div className="mb-2 flex space-x-6">
+          <div className="flex space-x-6">
             <div className="flex items-center space-x-2">
               <Image
                 src={logo1}

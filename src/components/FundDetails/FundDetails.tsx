@@ -1,40 +1,24 @@
 import Funds from '@/abi/Funds';
+import useDatabaseFund from '@/hooks/useDatabaseFund';
 import { LPPositionsMock } from '@/mockData/mockData';
-import { useRouter } from 'next/router';
-import { useAccount } from 'wagmi';
-import AssetCard from '../Assets/AssetCard';
-import AssetsHeader from '../Assets/AssetsHeader';
-import FancyButton from '../Layout/FancyButton';
-import NormalButton from '../Layout/NormalButton';
-import PageTitle from '../Layout/PageTitle';
+import { ethers } from 'ethers';
+import { Address, useAccount, useContractReads } from 'wagmi';
 import FundDetailHeader from './FundDetailHeader';
 import FundDetailAssets from './FundDetailsAssets';
 import FundDetailGraph from './FundDetailsGraph';
 import Positions from './Positions';
-import { Address, useContractReads } from 'wagmi';
-import { BigNumber, ethers } from 'ethers';
 
 interface FundDetailsProps {
   fundAddress: string;
-  tokenA: string;
-  tokenB: string;
-  tokenAAmount: string;
-  tokenBAmount: string;
-  manager: string;
 }
 
-const FundDetails = ({
-  fundAddress,
-  tokenA,
-  tokenAAmount,
-  tokenB,
-  tokenBAmount,
-  manager,
-}: FundDetailsProps) => {
+const FundDetails = ({ fundAddress }: FundDetailsProps) => {
   const config = {
     address: fundAddress as Address,
     abi: Funds,
   };
+
+  const { data: fund } = useDatabaseFund(fundAddress);
 
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
@@ -62,7 +46,6 @@ const FundDetails = ({
 
   const assetLocked = tvlLocked * 0.6;
   const assetFree = tvlLocked * 0.4;
-  const { address, status } = useAccount();
 
   const LPPositionsMockAdjusted = LPPositionsMock;
 
@@ -75,9 +58,11 @@ const FundDetails = ({
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-3/5 flex-col items-center justify-center space-y-6">
         <FundDetailHeader
-          fundName="Fund A"
-          fundDescription="An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin). \n
-      By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. "
+          fundName={fund?.name || 'Fund A'}
+          fundDescription={
+            fund?.description ||
+            'An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin).\\n By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. '
+          }
           netValue={tvlLocked * 1.1}
           netDeposit={tvlLocked}
         />

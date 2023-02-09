@@ -162,9 +162,7 @@ const FundDetails = ({
             />
           </div>
         </div>
-        <div>
-          <FundTableList />
-        </div>
+        <FundTableList />
       </div>
       <SwapTokensModal
         fundAddress={fundAddress}

@@ -37,6 +37,7 @@ module.exports = {
         solidBlue: 'rgba(63, 55, 201, 0.7)',
         solidBlueDark: 'rgba(63, 55, 201, 1)',
         purpleLight: '#EF5DA8',
+        purpleDark: 'rgb(226 34 133)',
       },
       fontFamily: {
         sans: [

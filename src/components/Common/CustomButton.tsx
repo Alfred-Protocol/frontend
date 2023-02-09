@@ -23,7 +23,7 @@ export const THEME_MAP: Record<string, string> = {
   solidPurple: 'bg-solidPurpleDark hover:bg-solidPurple focus:ring-blue-400',
   solidBlue: 'bg-solidBlueDark hover:bg-solidBlue focus:ring-blue-400',
   transparentPurple:
-    'hover:bg-purpleLight bg-transparent border-purpleLight focus:ring-blue-400',
+    'hover:bg-purpleDark hover:border-purpleDark bg-transparent border-purpleLight focus:ring-blue-400',
 };
 
 const CustomButton = ({

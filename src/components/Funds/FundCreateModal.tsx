@@ -1,6 +1,6 @@
 import FundsFactory from '@/abi/FundsFactory';
 import useCreateFund from '@/hooks/useCreateFund';
-import useFunds from '@/hooks/useFunds';
+import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
 import { FormEventHandler, useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import {
   useAccount,
   useContractWrite,
   usePrepareContractWrite,
-  useWaitForTransaction
+  useWaitForTransaction,
 } from 'wagmi';
 import Web3 from 'web3';
 import CustomButton from '../Common/CustomButton';
@@ -74,7 +74,7 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
   });
   const { address } = useAccount();
   const { mutateAsync } = useCreateFund();
-  const { refetch } = useFunds();
+  const { refetch } = useDatabaseFunds();
 
   // toasts
   const [hasCreated, setHasCreated] = useState(false);

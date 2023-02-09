@@ -1,16 +1,12 @@
-import { BigNumber, ethers } from 'ethers';
-import { Label, Modal, TextInput } from 'flowbite-react';
-import React, { FormEventHandler, useMemo, useState } from 'react';
+import { nearestUsableTick } from '@uniswap/v3-sdk';
+import { ethers } from 'ethers';
+import { TextInput } from 'flowbite-react';
+import { FormEventHandler, useMemo, useState } from 'react';
 import { Address, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import Funds from '../../abi/Funds';
-import FundsFactory from '../../abi/FundsFactory';
 import { useAppContext } from '../../context/app/appContext';
-import CustomButton from '../Common/CustomButton';
-import { nearestUsableTick, priceToClosestTick } from '@uniswap/v3-sdk';
-import { Price } from '@uniswap/sdk-core';
-import { getTokensAmountFromDepositAmountUSD } from '../../utils/uniswapv3/math';
-import { useGetTokensAmount } from '../../hooks/useGetTokensAmount';
 import { useGetPairTokenAmount } from '../../hooks/useGetPairTokenAmount';
+import CustomButton from '../Common/CustomButton';
 
 type Props = {
   fundAddress?: string;

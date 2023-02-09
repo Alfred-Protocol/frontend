@@ -1,8 +1,12 @@
 import truncateString from '@/utils/truncateString';
-import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import {
+  ClipboardDocumentIcon,
+  InformationCircleIcon,
+} from '@heroicons/react/24/outline';
 import { ethers } from 'ethers';
 import { Tooltip } from 'flowbite-react';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Address, erc20ABI, useAccount, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
@@ -64,7 +68,7 @@ const FundDetails = ({
       style={{ position: 'relative' }}
     >
       <div className="flex flex-col justify-between">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-2">
           <h3 className="text-2xl font-bold sm:text-4xl">{fundName}</h3>
           <div className="flex space-x-2">
             <CustomButton
@@ -82,13 +86,31 @@ const FundDetails = ({
           </div>
         </div>
         <div>
-          <p className="mb-xs sm:text-md">
-            Manager:{' '}
-            <span className="slashed-zero">{truncateString(manager)}</span>
+          <p className="mb-xs sm:text-md flex items-center space-x-1">
+            <span>Manager:</span>
+            <span className="slashed-zero">{truncateString(manager)} </span>
+            <ClipboardDocumentIcon
+              width={16}
+              height={16}
+              className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
+              onClick={() => {
+                navigator.clipboard.writeText(manager);
+                toast.success('Copied manager address to clipboard!');
+              }}
+            />
           </p>
-          <p className="mb-xs sm:text-md">
-            Fund Address:{' '}
+          <p className="mb-xs sm:text-md flex items-center space-x-1">
+            <span>Fund Address:</span>
             <span className="slashed-zero">{truncateString(fundAddress)}</span>
+            <ClipboardDocumentIcon
+              width={16}
+              height={16}
+              className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
+              onClick={() => {
+                navigator.clipboard.writeText(fundAddress);
+                toast.success('Copied manager address to clipboard!');
+              }}
+            />
           </p>
           <p className="max-w-mlg mt-4 mb-8 text-lg">
             {description || 'No description found.'}
@@ -110,7 +132,7 @@ const FundDetails = ({
                 <InformationCircleIcon
                   height={16}
                   width={16}
-                  className="ml-1"
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
                 />
               </Tooltip>
             }
@@ -127,7 +149,7 @@ const FundDetails = ({
                 <InformationCircleIcon
                   height={16}
                   width={16}
-                  className="ml-1"
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
                 />
               </Tooltip>
             }
@@ -144,7 +166,7 @@ const FundDetails = ({
                 <InformationCircleIcon
                   height={16}
                   width={16}
-                  className="ml-1"
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
                 />
               </Tooltip>
             }

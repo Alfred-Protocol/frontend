@@ -1,13 +1,9 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
-import FundsFactory from '@/abi/FundsFactory';
-import { useState } from 'react';
-import { Address, useAccount, useContractRead, useSigner } from 'wagmi';
+import useDeposits from '@/hooks/useDeposits';
+import type { Address } from 'wagmi';
 import { LPPositionsMock } from '../../mockData/mockData';
-import AssetsDetail from './AssetsDetail';
+import AssetCard from './AssetCard';
 import AssetsHeader from './AssetsHeader';
-import DepositModal from './DepositModal';
-import SuccessModal from './SuccessModal';
-import WithdrawModal from './WithdrawModal';
 
 export type Fund = {
   fundName: string;
@@ -81,119 +77,40 @@ const mockData = [
   },
 ];
 
-type modalType = 'success' | 'deposit' | 'withdraw';
-
 const AssetsSection = () => {
-  const [assets, setAssets] = useState([]);
-  const [showModal, setShowModal] = useState(true);
-  const [modalFund, setModalFund] = useState<Fund | undefined>(undefined);
-  const [modalType, setModalType] = useState<modalType | undefined>(undefined);
-  const [sucessModalMessage, setSuccessModalMessage] = useState('');
-
-  const { data: signer } = useSigner();
-  const { data: addresses, isLoading } = useContractRead({
-    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
-    abi: FundsFactory,
-    functionName: 'getAllFunds',
-    cacheOnBlock: true,
-  });
-
-  const { status, address: curUserAddress } = useAccount();
-
-  const onClickDeposit = (fund: Fund) => {
-    setModalType('deposit');
-    setModalFund(fund);
-    // fetchCollection();
-    setShowModal(true);
-  };
-
-  const onClickWithdraw = (fund: Fund) => {
-    setModalType('withdraw');
-    setModalFund(fund);
-    // fetchCollection();
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setModalFund(undefined);
-  };
-
-  const handleDeposit = (number: string) => {
-    resetModal();
-
-    setTimeout(() => {
-      setSuccessModalMessage('Deposit has been successful');
-      setModalType('success');
-      setShowModal(true);
-    }, 400);
-  };
-
-  const handleWithdraw = () => {
-    resetModal();
-
-    setTimeout(() => {
-      setSuccessModalMessage('Withdraw has been successful');
-      setModalType('success');
-      setShowModal(true);
-    }, 400);
-  };
-
-  const resetModal = () => {
-    setShowModal(false);
-    setModalType(undefined);
-  };
-
-  const renderContent = () => {
-    if (isLoading) {
-      return (
-        <>
-          <div role="status" className="h-60 w-3/5 animate-pulse">
-            <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-          </div>
-          <div role="status" className="h-60 w-3/5 animate-pulse">
-            <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-          </div>
-          <div role="status" className="h-60 w-3/5 animate-pulse">
-            <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-          </div>
-        </>
-      );
-    }
-
-    return addresses?.map((address) => {
-      return (
-        <AssetsDetail
-          key={address}
-          fundAddress={address}
-          curUserAddress={curUserAddress}
-          // address={data.address}
-          // key={idx}
-          // lpPositions={data.positions}
-          // amount0={data.amount0}
-          // amount1={data.amount1}
-          // totalValueLocked={36}
-          // startDate="02/05/2023"
-          // matureDate="02/07/2023"
-          // fundName={data.fundName}
-          // logo1={undefined}
-          // logo2={undefined}
-          // yieldPercentage={30.2}
-        />
-      );
-    });
-  };
+  const { deposits, isLoading } = useDeposits();
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center">
+      <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
         <AssetsHeader
           managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
           netDeposit={3232.3}
           netValue={3223.43}
         />
-        <div className="flex w-full flex-col items-center space-y-10">
-          {renderContent()}
+        <div className="flex w-full flex-col items-center space-y-4">
+          {isLoading ? (
+            <>
+              <div role="status" className="h-60 w-full animate-pulse">
+                <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+              </div>
+              <div role="status" className="h-60 w-full animate-pulse">
+                <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+              </div>
+              <div role="status" className="h-60 w-full animate-pulse">
+                <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+              </div>
+            </>
+          ) : (
+            deposits &&
+            Object.keys(deposits).map((address) => (
+              <AssetCard
+                key={address}
+                fundAddress={address as Address}
+                deposits={deposits[address as Address]}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

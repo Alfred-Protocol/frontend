@@ -1,9 +1,9 @@
 import HeroSection from '@/components/Homepage/HeroSection';
 import Layout from '@/components/Layout/Layout';
-import useFunds from '@/hooks/useFunds';
+import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 
 export default function HomePage() {
-  const { data } = useFunds();
+  const { data } = useDatabaseFunds();
   console.log(data);
   return (
     <Layout className="flex items-center">

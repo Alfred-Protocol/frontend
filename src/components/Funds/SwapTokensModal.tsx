@@ -121,7 +121,7 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   };
 
   return (
-    <Modal show={show} dismissible onClose={onClose} className="h-full">
+    <Modal show={show} dismissible onClose={onClose} className="dark h-full">
       <Modal.Header className="bg-gray-800">Swap tokens in Fund</Modal.Header>
       <Modal.Body className="bg-gray-800">
         <form className="space-y-4 rounded" onSubmit={onSubmit}>

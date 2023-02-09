@@ -1,10 +1,7 @@
-import { useState } from 'react';
-import FundsFactory from '@/abi/FundsFactory';
-import { Address, useAccount, useContractRead, useSigner } from 'wagmi';
-import { LPPositionsMock } from '../../mockData/mockData';
+import useDatabaseFunds from '@/hooks/useDatabaseFunds';
+import { useAccount } from 'wagmi';
 import AssetsHeader from '../Assets/AssetsHeader';
 import ManageFundCard from './ManageFundCard';
-import useFunds from '@/hooks/useFunds';
 
 export type Fund = {
   fundName: string;
@@ -35,7 +32,7 @@ const FundsSectionLoading = () => {
 
 const MaangeFundsSection = () => {
   const { address } = useAccount();
-  const { data, isLoading } = useFunds(address);
+  const { data, isLoading } = useDatabaseFunds(address);
 
   return (
     <div>

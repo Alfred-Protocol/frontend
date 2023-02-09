@@ -1,14 +1,14 @@
-import type { Fund } from '@prisma/client';
-import { useQuery } from 'wagmi';
+import FundsFactory from '@/abi/FundsFactory';
+import { useContractRead, type Address } from 'wagmi';
 
-const getFunds = async (address?: string) => {
-  const url = `/api/funds${address ? `?address=${address}` : ''}`;
-  const res = await fetch(url);
-  return (await res.json()).data;
-};
-
-const useFunds = (address?: string) => {
-  return useQuery<Fund[]>(['funds'], () => getFunds(address));
+const useFunds = () => {
+  return useContractRead({
+    scopeKey: 'funds',
+    address: process.env.FUNDS_FACTORY_MUMBAI_ADDRESS as Address,
+    abi: FundsFactory,
+    functionName: 'getAllFunds',
+    cacheOnBlock: true,
+  });
 };
 
 export default useFunds;

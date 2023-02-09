@@ -1,5 +1,5 @@
 import FundCreateModal from '@/components/Funds/FundCreateModal';
-import useFunds from '@/hooks/useFunds';
+import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import { ArrowPathIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
@@ -14,7 +14,7 @@ enum ViewState {
 }
 
 const FundCards = () => {
-  const { data, isLoading, refetch } = useFunds();
+  const { data, isLoading, refetch } = useDatabaseFunds();
   const { status } = useAccount();
 
   const [viewState, setViewState] = useState(ViewState.CREATION_ASCENDING);

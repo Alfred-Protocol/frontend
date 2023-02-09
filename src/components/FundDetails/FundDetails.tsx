@@ -1,7 +1,7 @@
 import { LPPositionsMock } from '@/mockData/mockData';
 import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
-import AssetsDetail from '../Assets/AssetsDetail';
+import AssetCard from '../Assets/AssetCard';
 import AssetsHeader from '../Assets/AssetsHeader';
 import FancyButton from '../Layout/FancyButton';
 import NormalButton from '../Layout/NormalButton';
@@ -35,7 +35,7 @@ const FundDetails = ({
       <div className="flex w-3/5 flex-col items-center justify-center space-y-6">
         <FundDetailHeader
           fundName="Fund A"
-          fundDescription="An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin). \n 
+          fundDescription="An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin). \n
       By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. "
           netValue={2043}
           netDeposit={3432}

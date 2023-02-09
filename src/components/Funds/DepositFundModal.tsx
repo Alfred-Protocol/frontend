@@ -1,6 +1,6 @@
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Label, Modal, TextInput } from 'flowbite-react';
-import { FormEventHandler, useEffect, useState } from 'react';
+import { FormEventHandler, useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   Address,
@@ -9,6 +9,7 @@ import {
   useContractReads,
   useContractWrite,
   usePrepareContractWrite,
+  useSigner,
   useWaitForTransaction,
 } from 'wagmi';
 import Funds from '../../abi/Funds';
@@ -53,6 +54,27 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
 
   const [wmaticDecimals, wmaticBalance, wmaticAllowance] = wmatic ?? [18, 0, 0];
 
+  const { data: signer } = useSigner();
+
+  // approve hooks
+  const approveErc20 = useCallback(
+    async (address: Address) => {
+      if (!signer) return;
+
+      const erc20Contract = new ethers.Contract(
+        address as string,
+        erc20ABI,
+        signer
+      );
+      const tx = await erc20Contract.approve(
+        fundAddress as Address,
+        ethers.constants.MaxUint256
+      );
+      await tx.wait();
+    },
+    [fundAddress, signer]
+  );
+
   // wagmi hooks
   const { config } = usePrepareContractWrite({
     address: fundAddress as Address,
@@ -93,10 +115,12 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setHasCreated(false);
-    if (
-      ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals) >
-      wmaticBalance
-    ) {
+
+    const amountToDepositWei = ethers.utils.parseUnits(
+      `${amountToDeposit}`,
+      wmaticDecimals
+    );
+    if (amountToDepositWei.gt(wmaticBalance)) {
       toast.error(
         `Insufficient balance, currently you have ${ethers.utils.formatEther(
           wmaticBalance
@@ -104,7 +128,11 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
       );
     }
 
-    write?.();
+    if ((wmaticAllowance as BigNumber).lt(amountToDepositWei)) {
+      await approveErc20(WMATIC_MUMBAI_ADDRESS as Address);
+    } else {
+      write?.();
+    }
   };
 
   return (
@@ -131,8 +159,9 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
               className="focus:shadow-outline rounded py-2 px-4"
               type="submit"
               title={
-                wmaticAllowance <
-                ethers.utils.parseUnits(`${amountToDeposit}`, wmaticDecimals)
+                ethers.utils
+                  .parseUnits(`${amountToDeposit}`, wmaticDecimals)
+                  .gt(wmaticAllowance)
                   ? 'Approve'
                   : 'Deposit'
               }

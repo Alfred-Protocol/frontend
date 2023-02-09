@@ -11,10 +11,10 @@ export const getFeeTierPercentage = (tier: string): number => {
 };
 
 export const getTokenLogoURL = (platform: string, address: string): string => {
-  // const mapper = TokenImageURI as any;
-  // const imageURL = mapper[platform][address];
+  const mapper = TokenImageURI as any;
+  const imageURL = mapper['ethereum'][address];
 
-  // if (imageURL) return imageURL;
+  if (imageURL) return imageURL;
 
   return `https://friconix.com/png/fi-cnsuxl-question-mark.png`;
 };

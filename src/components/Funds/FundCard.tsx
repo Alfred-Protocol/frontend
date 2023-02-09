@@ -1,8 +1,11 @@
 import Funds from '@/abi/Funds';
 import type { Fund } from '@prisma/client';
 import { ethers } from 'ethers';
-import useMediaQuery from 'src/components/Common/useMediaQuery';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { Address, useContractReads } from 'wagmi';
+import CustomButton from '../Common/CustomButton';
+import DepositFundModal from './DepositFundModal';
 import FundDetails from './FundDetails';
 
 interface FundProps {
@@ -17,7 +20,8 @@ const lpPositionsIndex = 2;
 const FundCard = ({
   fund: { address, description, manager, matureDate, startDate, name },
 }: FundProps) => {
-  const isMobile = useMediaQuery(768);
+  const router = useRouter();
+  const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
 
   const config = {
     address: address as Address,
@@ -35,32 +39,44 @@ const FundCard = ({
   });
 
   return (
-    <div
-      style={{
-        minHeight: isMobile ? 300 : 470,
-        minWidth: isMobile ? 100 : 460,
-      }}
-      className="h-4600 flex rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow transition-all sm:py-8 sm:px-8"
-    >
-      <FundDetails
-        fundAddress={address as Address}
-        fundName={name}
-        description={description || undefined}
-        isLoading={isLoading}
-        manager={manager}
-        totalValueLocked={
-          data?.length && data[tvlIndex] ? data[tvlIndex].toString() : '0'
+    <div className="relative">
+      <div
+        className={
+          'md:min-w[460px] flex min-h-[300px] min-w-[100px] rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-4 text-left shadow  transition-colors hover:cursor-pointer hover:bg-gray-800 sm:py-8 sm:px-8 md:min-h-[470px]'
         }
-        startDate={new Date(startDate).toLocaleDateString()}
-        matureDate={new Date(matureDate).toLocaleDateString()}
-        stableCoinAddress={
-          data?.length && data[stableCoinAddressIndex]
-            ? data[stableCoinAddressIndex].toString()
-            : ethers.constants.AddressZero
-        }
-        refetch={async () => {
-          await refetch();
-        }}
+        onClick={() => router.push(`/funds/${address}`)}
+      >
+        <FundDetails
+          fundAddress={address as Address}
+          fundName={name}
+          description={description || undefined}
+          isLoading={isLoading}
+          manager={manager}
+          totalValueLocked={
+            data?.length && data[tvlIndex] ? data[tvlIndex].toString() : '0'
+          }
+          startDate={new Date(startDate).toLocaleDateString()}
+          matureDate={new Date(matureDate).toLocaleDateString()}
+          stableCoinAddress={
+            data?.length && data[stableCoinAddressIndex]
+              ? data[stableCoinAddressIndex].toString()
+              : ethers.constants.AddressZero
+          }
+        />
+        <DepositFundModal
+          fundAddress={address}
+          show={showDepositFundModal}
+          onClose={() => setDepositFundModal(false)}
+          refetch={async () => {
+            await refetch();
+          }}
+        />
+      </div>
+      <CustomButton
+        title="Deposit"
+        theme="solidPurple"
+        className="absolute top-[5%] right-[5%]"
+        onClick={() => setDepositFundModal(true)}
       />
     </div>
   );

@@ -123,7 +123,7 @@ const AssetCard = ({
   return (
     <div className="relative w-full">
       <div
-        className="cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-all hover:bg-gray-800"
+        className="cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-colors hover:bg-gray-800"
         onClick={() => {
           router.push(`/funds/${fundAddress}`);
         }}

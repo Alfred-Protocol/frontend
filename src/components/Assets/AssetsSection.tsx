@@ -32,7 +32,7 @@ const AssetsSection = () => {
 
   return (
     <div>
-      <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
+      <div className="mx-auto flex max-w-4xl flex-col items-center justify-center">
         <AssetsHeader
           managerAddress={address ?? ''}
           // 1633.56 is ETH to USDC, 1.1 to show profit

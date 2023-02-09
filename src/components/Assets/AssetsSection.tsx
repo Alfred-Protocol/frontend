@@ -89,8 +89,8 @@ const AssetsSection = () => {
         <AssetsHeader
           managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
           // 1633.56 is ETH to USDC, 1.1 to show profit
-          netDeposit={totalFundETH * 1633.56}
-          netValue={totalFundETH * 1633.56 * 1.1}
+          netDeposit={totalFundETH * 1.22}
+          netValue={totalFundETH * 1.22 * 1.1}
         />
         <div className="flex w-full flex-col items-center space-y-4">
           {isLoading ? (

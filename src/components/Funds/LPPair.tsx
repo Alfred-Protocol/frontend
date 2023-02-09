@@ -1,7 +1,7 @@
 import { Token } from '@uniswap/sdk-core';
 import { tickToPrice } from '@uniswap/v3-sdk';
 import React, { useEffect } from 'react';
-import { Address, useContractRead, useContractReads } from 'wagmi';
+import { Address, goerli, useContractRead, useContractReads } from 'wagmi';
 import type { LPPosition } from '../../types/type';
 import PairImage from '../Common/PairImage';
 import { erc20ABI } from 'wagmi';
@@ -91,13 +91,13 @@ const convertTickToPrice = (
   token1: Address,
   token1Decimals: number
 ) => {
-  const lpToken0 = new Token(80001, token0, token0Decimals);
-  const lpToken1 = new Token(80001, token1, token1Decimals);
+  const lpToken0 = new Token(goerli.id, token0, token0Decimals);
+  const lpToken1 = new Token(goerli.id, token1, token1Decimals);
 
   const price = tickToPrice(lpToken0, lpToken1, tick);
   const priceString = price.toSignificant(5);
 
-  return ethers.utils.formatUnits(priceString, token0Decimals);
+  return ethers.utils.formatUnits(Math.floor(priceString), token0Decimals);
 };
 
 export default LPPair;

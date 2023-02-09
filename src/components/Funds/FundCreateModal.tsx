@@ -40,15 +40,16 @@ const getFundAddressFromReceipt = (
   return fundAddress;
 };
 
-const WMATIC_MUMBAI_ADDRESS =
-  process.env.WMATIC_MUMBAI_ADDRESS ??
-  '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
+const WETH_ADDRESS =
+  process.env.WETH_GOERLI_ADDRESS ??
+  '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6';
 
 const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
   const [fundName, setFundName] = useState('');
   const [fundDescription, setFundDescription] = useState('');
   const [startDate, setStartDate] = useState(0);
   const [matureDate, setMatureDate] = useState(0);
+  console.log('wth', WETH_ADDRESS);
 
   // wagmi hooks
   const { config } = usePrepareContractWrite({
@@ -56,7 +57,7 @@ const FundCreateModal = ({ onClose, show }: FundCreateModalProps) => {
     abi: FundsFactory,
     functionName: 'createNewFund',
     args: [
-      WMATIC_MUMBAI_ADDRESS as Address,
+      WETH_ADDRESS as Address,
       BigNumber.from(startDate),
       BigNumber.from(matureDate),
     ],

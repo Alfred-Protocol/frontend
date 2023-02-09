@@ -1,11 +1,12 @@
 import Funds from '@/abi/Funds';
 import useMediaQuery from 'src/components/Common/useMediaQuery';
 import { tickToPrice } from '@uniswap/v3-sdk';
-import { Address, useContractReads, useQuery, useToken } from 'wagmi';
+import { Address, erc20ABI, useContractReads, useQuery, useToken } from 'wagmi';
 import FundDetails from './FundDetails';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DepositFundModal from './DepositFundModal';
 import { ethers } from 'ethers';
+import { WETH } from '@uniswap/sdk';
 
 interface FundProps {
   fundAddress: Address;
@@ -67,6 +68,12 @@ const FundCard = ({ fundAddress }: FundProps) => {
         abi: Funds,
         functionName: 'stablecoin',
       },
+      {
+        address: `0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6` as Address,
+        abi: erc20ABI,
+        functionName: 'balanceOf',
+        args: [fundAddress as Address],
+      },
     ],
     // @marcuspang -> Does it force a re-fetch every 1min?
     cacheTime: 60 * 1000, // 1min
@@ -79,6 +86,8 @@ const FundCard = ({ fundAddress }: FundProps) => {
       (data[stableCoinIndex].toString() as Address),
     enabled: !!(data?.length && data[stableCoinIndex]),
   });
+
+  console.log('data', ethers.utils.formatEther(data?.[8], 18));
 
   return (
     <div

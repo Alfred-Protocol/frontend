@@ -17,7 +17,7 @@ type Props = {
 };
 
 const CreatePosition = ({
-  fundAddress = '0x654ee4dc5ee1edf02dd27d3052c4df238a70c558',
+  fundAddress = '0x1062f695490B87Dc4a89B7b20f6AA57e749e0ffb',
 }: Props) => {
   const { state } = useAppContext();
 
@@ -80,10 +80,9 @@ const CreatePosition = ({
     address: fundAddress as Address,
     abi: Funds,
     functionName: 'createLpPosition',
-    chainId: 80001,
     args: [
-      token0Details?.id as `0x${string}`,
-      token1Details?.id as `0x${string}`,
+      '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
+      '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
       amount0CalcInWei,
       amount1InWei,
       minTick,
@@ -97,6 +96,7 @@ const CreatePosition = ({
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    console.log('write', write);
 
     write?.();
   };

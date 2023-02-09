@@ -97,8 +97,7 @@ FundDetailsProps) => {
             <span className="slashed-zero">{truncateString(manager)}</span>
           </p>
           <p className="text-l mb-xs sm:text-md">
-            Fund Address:{' '}
-            <span className="slashed-zero">{truncateString(fundAddress)}</span>
+            Fund Address: <span className="slashed-zero">{fundAddress}</span>
           </p>
           <p className="max-w-mlg mt-4 mb-8 text-xs sm:text-sm">
             {data?.description || 'No description found'}

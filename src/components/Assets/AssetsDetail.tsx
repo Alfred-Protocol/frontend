@@ -124,7 +124,7 @@ AssetsDetailProps) => {
   const logo1 = ETH;
   const logo2 = USDT;
   const lpPositions =
-    data[lpPositionsIndex].map((position) => ({
+    (data[lpPositionsIndex] ?? []).map((position) => ({
       ...position,
       tickLower: BigNumber.from(position.tickLower),
       tickUpper: BigNumber.from(position.tickUpper),

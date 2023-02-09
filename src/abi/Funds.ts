@@ -395,6 +395,11 @@ export default [
         name: '_amount',
         type: 'uint256',
       },
+      {
+        internalType: 'uint160',
+        name: '_sqrtPriceLimitX96',
+        type: 'uint160',
+      },
     ],
     name: 'swapTokens',
     outputs: [],

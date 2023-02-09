@@ -4,8 +4,8 @@ import LPPair from './LPPair';
 
 const mockData: Array<LPPosition> = [
   {
-    token0: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
-    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+    token1: '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
+    token0: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
     poolFee: BigNumber.from(3000),
     tickLower: BigNumber.from(192200),
     tickUpper: BigNumber.from(198000),
@@ -14,8 +14,8 @@ const mockData: Array<LPPosition> = [
     tokenId: BigNumber.from(100),
   },
   {
-    token0: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
-    token1: '0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747',
+    token1: '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6',
+    token0: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
     poolFee: BigNumber.from(3000),
     tickLower: BigNumber.from(193600),
     tickUpper: BigNumber.from(198400),

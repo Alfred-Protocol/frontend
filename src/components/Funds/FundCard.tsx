@@ -18,7 +18,15 @@ const stableCoinAddressIndex = 1;
 const lpPositionsIndex = 2;
 
 const FundCard = ({
-  fund: { address, description, manager, matureDate, startDate, name },
+  fund: {
+    address,
+    description,
+    manager,
+    matureDate,
+    startDate,
+    name,
+    yield: fundYield,
+  },
 }: FundProps) => {
   const router = useRouter();
   const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
@@ -62,6 +70,7 @@ const FundCard = ({
               ? data[stableCoinAddressIndex].toString()
               : ethers.constants.AddressZero
           }
+          yieldPercentage={fundYield}
         />
       </div>
       <DepositFundModal

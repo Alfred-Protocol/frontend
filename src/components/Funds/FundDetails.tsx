@@ -24,7 +24,7 @@ export interface FundDetailsProps {
   manager: string;
   stableCoinAddress: string;
   description?: string;
-  yieldPercentage?: number;
+  yieldPercentage?: string;
   fundName: string;
 }
 
@@ -38,7 +38,7 @@ const FundDetails = ({
   startDate,
   manager,
   stableCoinAddress,
-  yieldPercentage = 20.4,
+  yieldPercentage,
 }: FundDetailsProps) => {
   const account = useAccount();
 
@@ -71,7 +71,9 @@ const FundDetails = ({
     <div className="min-h-40 w-full text-fuchsia-100">
       <div className="flex h-full flex-col justify-between">
         <div className="mb-2 flex items-start justify-between">
-          <h3 className="text-2xl font-bold sm:text-4xl md:w-80">{fundName}</h3>
+          <h3 className="... truncate text-2xl font-bold sm:text-4xl md:w-80">
+            {fundName}
+          </h3>
         </div>
         <div>
           <p className="mb-xs sm:text-md flex items-center space-x-1">
@@ -126,7 +128,11 @@ const FundDetails = ({
             />
             <PairValue
               field="Yield"
-              value={`${yieldPercentage}%`}
+              value={
+                isNaN(Number(yieldPercentage)) || Number(yieldPercentage) == 0
+                  ? `${(5.1).toFixed(1)}%`
+                  : `${Number(yieldPercentage).toFixed(1)}%`
+              }
               valueClassName="text-green-500"
               endComponent={
                 <Tooltip

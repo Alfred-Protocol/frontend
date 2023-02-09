@@ -125,11 +125,14 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
 
   useEffect(() => {
     if (txIsSuccess) {
-      console.log(`Successfully deposited, transaction hash:`, txReceipt);
+      console.log(
+        `LP Position Created Successfully, transaction hash:`,
+        txReceipt
+      );
       toast.success(
         CustomToastWithLink({
           txId: txReceipt?.transactionHash as any,
-          content: 'Successfully deposited, transaction hash:',
+          content: 'LP Position Created Successfully, transaction hash:',
         })
       );
       onClose();
@@ -150,7 +153,7 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
 
   return (
     <Modal show={show} dismissible onClose={onClose} className="dark h-full">
-      <Modal.Header className="bg-gray-800">Create Fund</Modal.Header>
+      <Modal.Header className="bg-gray-800">Create LP Position</Modal.Header>
       <Modal.Body className="space-y-4 bg-gray-800">
         <div className="space-y-2">
           {/* <span className="text-white">{state.token1?.symbol} amount</span> */}

@@ -32,7 +32,7 @@ export default function Header() {
           </div>
           <Popover.Group
             as="nav"
-            className="!ml-5 hidden space-x-6 lg:flex xl:space-x-10"
+            className="hidden space-x-6 lg:flex xl:space-x-10"
           >
             {links.map(({ name, href }) => (
               <Link

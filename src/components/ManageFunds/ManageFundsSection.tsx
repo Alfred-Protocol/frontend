@@ -12,24 +12,6 @@ export type Fund = {
   withdrawEnable: boolean;
 };
 
-type modalType = 'success' | 'deposit' | 'withdraw';
-
-const FundsSectionLoading = () => {
-  return (
-    <>
-      <div role="status" className="h-60 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-      </div>
-      <div role="status" className="h-60 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-      </div>
-      <div role="status" className="h-60 w-full animate-pulse">
-        <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-      </div>
-    </>
-  );
-};
-
 const MaangeFundsSection = () => {
   const { address } = useAccount();
   const { data, isLoading } = useDatabaseFunds(address);
@@ -38,13 +20,18 @@ const MaangeFundsSection = () => {
     <div>
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
         <AssetsHeader
-          managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
+          managerAddress={address || ''}
           netDeposit={3232.3}
           netValue={3223.43}
         />
         <div className="flex w-full flex-col items-center space-y-4">
           {isLoading ? (
-            <FundsSectionLoading />
+            <div
+              role="status"
+              className="h-52 w-full animate-pulse border-[1px] border-[#EF5DA8]"
+            >
+              <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
+            </div>
           ) : (
             data?.map((fund) => (
               <ManageFundCard key={fund.address} fund={fund} />

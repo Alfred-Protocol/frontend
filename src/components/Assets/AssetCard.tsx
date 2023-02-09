@@ -6,10 +6,18 @@ import USDT from 'src/assets/USDT.jpg';
 import Funds from '@/abi/Funds';
 import type { Deposit } from '@/hooks/useDeposits';
 import useDatabaseFund from '@/hooks/useDatabaseFund';
-import { ethers } from 'ethers';
+import { ethers, BigNumber } from 'ethers';
 import Image from 'next/image';
-import { Address, useAccount, useContractReads } from 'wagmi';
+import {
+  Address,
+  useAccount,
+  useContractReads,
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from 'wagmi';
 import CustomButton from '../Common/CustomButton';
+import { useRouter } from 'next/router';
 import type { Fund } from '@prisma/client';
 import { useEffect } from 'react';
 
@@ -33,7 +41,7 @@ const AssetCard = ({
   onGetTVL,
 }: AssetsDetailProps) => {
   const { address } = useAccount();
-  // const { data: fund } = useFund(fundAddress);
+  const router = useRouter();
 
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
@@ -65,6 +73,27 @@ const AssetCard = ({
     enabled: !!fundAddress && !!address,
   });
 
+  const [tvl, stablecoin, allLpPositions, depositedAmount] =
+    data !== undefined
+      ? data
+      : [BigNumber.from(0), BigNumber.from(0), [], BigNumber.from(0)];
+
+  const { config } = usePrepareContractWrite({
+    address: fundAddress as Address,
+    abi: Funds,
+    functionName: 'withdraw',
+    enabled: depositedAmount?.gt(0),
+  });
+  const { data: withdrawAmount, isSuccess, write } = useContractWrite(config);
+  const {
+    data: txReceipt,
+    isSuccess: txIsSuccess,
+    isLoading: txIsLoading,
+  } = useWaitForTransaction({
+    hash: withdrawAmount?.hash,
+    enabled: isSuccess,
+  });
+
   if (!fundAddress || !data) {
     return null;
   }
@@ -82,10 +111,6 @@ const AssetCard = ({
   //   })) || LPPositionsMock;
   const amount0 = 0;
   const amount1 = 1;
-  const depositedAmount = ethers.utils.formatUnits(
-    data[depositedAmountIndex],
-    18
-  );
 
   useEffect(() => {
     if (totalValueLocked && parseFloat(totalValueLocked) > 0) {
@@ -94,14 +119,16 @@ const AssetCard = ({
     }
   }, [totalValueLocked]);
 
-  if (parseFloat(depositedAmount) <= 0) {
+  if (depositedAmount.lte(0)) {
     return null;
   }
 
   return (
     <div
       className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white transition-all hover:bg-gray-800"
-      onClick={() => {}}
+      onClick={() => {
+        router.push(`/funds/${fundAddress}`);
+      }}
     >
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-2xl font-bold text-fuchsia-100 sm:text-4xl">
@@ -129,11 +156,16 @@ const AssetCard = ({
             <p className="text-2xl">{amount1.toLocaleString()}</p>
           </div>
         </div>
-        <CustomButton title="Withdraw" theme="solidPurple" className="" />
+        <CustomButton
+          title="Withdraw"
+          theme="solidPurple"
+          isLoading={txIsLoading}
+          onClick={write}
+        />
       </div>
       <div className="mr-12 text-left">
         <p className="mb-2 text-2xl sm:text-3xl">{}</p>
-        <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
+        <PairValue field="TVL" value={totalValueLocked + ' WMATIC'} />
         <PairValue
           field="Start Date"
           value={

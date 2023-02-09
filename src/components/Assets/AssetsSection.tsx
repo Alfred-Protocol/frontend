@@ -2,7 +2,7 @@
 import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import useDeposits from '@/hooks/useDeposits';
 import { useEffect, useState } from 'react';
-import type { Address } from 'wagmi';
+import { Address, useAccount } from 'wagmi';
 import { LPPositionsMock } from '../../mockData/mockData';
 import AssetCard from './AssetCard';
 import AssetsHeader from './AssetsHeader';
@@ -80,6 +80,7 @@ const mockData = [
 ];
 
 const AssetsSection = () => {
+  const { address } = useAccount();
   const { data, isLoading, refetch } = useDatabaseFunds();
   const [totalFundETH, setTotalFundETH] = useState(0);
 
@@ -87,24 +88,16 @@ const AssetsSection = () => {
     <div>
       <div className="mx-auto flex max-w-3xl flex-col items-center justify-center">
         <AssetsHeader
-          managerAddress="0x7730b4cdc1b1e7a33a309ab7205411fad009c106"
+          managerAddress={address ?? ''}
           // 1633.56 is ETH to USDC, 1.1 to show profit
           netDeposit={totalFundETH * 1.22}
           netValue={totalFundETH * 1.22 * 1.1}
         />
         <div className="flex w-full flex-col items-center space-y-4">
           {isLoading ? (
-            <>
-              <div role="status" className="h-60 w-full animate-pulse">
-                <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-              </div>
-              <div role="status" className="h-60 w-full animate-pulse">
-                <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-              </div>
-              <div role="status" className="h-60 w-full animate-pulse">
-                <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-              </div>
-            </>
+            <div role="status" className="h-48 w-full animate-pulse">
+              <div className="mb-4 h-full w-full rounded-xl border-[1px] border-[#EF5DA8] bg-blackfillLess dark:bg-blackfill"></div>
+            </div>
           ) : (
             data &&
             data.map((fund) => (

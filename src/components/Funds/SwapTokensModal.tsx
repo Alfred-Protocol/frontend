@@ -13,6 +13,7 @@ import {
 } from 'wagmi';
 import Funds from '../../abi/Funds';
 import CustomButton from '../Common/CustomButton';
+import CustomToastWithLink from '../Common/CustomToastWithLink';
 
 type DepositFundProps = {
   fundAddress: string;
@@ -99,8 +100,12 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
       setHasCreated(true);
       console.log(`Successfully swapped, transaction hash:`, txReceipt);
       toast.success(
-        `Successfully swapped, transaction hash: ${txReceipt?.transactionHash}`
+        CustomToastWithLink({
+          txId: txReceipt?.transactionHash as any,
+          content: 'Successfully swapped, transaction hash:',
+        })
       );
+
       onClose();
     }
   }, [hasCreated, txIsSuccess, txReceipt?.transactionHash]);

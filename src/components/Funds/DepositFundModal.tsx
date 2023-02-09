@@ -68,30 +68,8 @@ const DepositFundModal = ({
 
   const { data: signer } = useSigner();
 
-  // approve hooks
-  const approveErc20 = useCallback(
-    async (address: Address) => {
-      if (!signer) return;
-
-      const erc20Contract = new ethers.Contract(
-        address as string,
-        erc20ABI,
-        signer
-      );
-      const tx = await erc20Contract.approve(
-        fundAddress as Address,
-        ethers.constants.MaxUint256
-      );
-      setIsApproving(true);
-      await tx.wait();
-      setIsApproving(false);
-      wmaticRefresh();
-    },
-    [fundAddress, signer, wmaticRefresh]
-  );
-
   // wagmi hooks
-  const { config } = usePrepareContractWrite({
+  const { config, refetch: depositRefresh } = usePrepareContractWrite({
     address: fundAddress as Address,
     abi: Funds,
     functionName: 'deposit',
@@ -111,6 +89,29 @@ const DepositFundModal = ({
     hash: data?.hash,
     enabled: isSuccess,
   });
+
+  // approve hooks
+  const approveErc20 = useCallback(
+    async (address: Address) => {
+      if (!signer) return;
+
+      const erc20Contract = new ethers.Contract(
+        address as string,
+        erc20ABI,
+        signer
+      );
+      const tx = await erc20Contract.approve(
+        fundAddress as Address,
+        ethers.constants.MaxUint256
+      );
+      setIsApproving(true);
+      await tx.wait();
+      setIsApproving(false);
+      await wmaticRefresh();
+      await depositRefresh();
+    },
+    [depositRefresh, fundAddress, signer, wmaticRefresh]
+  );
 
   // toasts
   const [hasCreated, setHasCreated] = useState(false);

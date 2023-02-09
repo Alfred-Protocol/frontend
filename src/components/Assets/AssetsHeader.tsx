@@ -14,11 +14,11 @@ const AssetsHeader = ({ managerAddress, netDeposit, netValue }: Props) => {
       <div className="flex">
         <div className="flex-1">
           <p className="mb-2 text-2xl font-bold ">Net WMATIC Value</p>
-          <p className="mb-2 text-4xl font-thin">{netValue.toFixed(6)}</p>
+          <p className="mb-2 text-4xl font-thin">{netValue.toFixed(3)}</p>
         </div>
         <div className="flex-1">
           <p className="mb-2 text-2xl font-bold">Net WMATIC Deposits</p>
-          <p className="mb-2 text-4xl font-thin">{netDeposit.toFixed(6)}</p>
+          <p className="mb-2 text-4xl font-thin">{netDeposit.toFixed(3)}</p>
         </div>
       </div>
     </div>

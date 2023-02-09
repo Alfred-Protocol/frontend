@@ -44,9 +44,10 @@ const MaangeFundsSection = () => {
               <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
             </div>
           ) : (
-            data?.map((fund) => (
+            data?.map((fund, idx) => (
               <ManageFundCard
                 key={fund.address}
+                showLpPositions={idx === 0}
                 fund={fund}
                 onGetTVL={(tvl) => setTotalFund(tvl + totalFund)}
               />

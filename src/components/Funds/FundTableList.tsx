@@ -2,7 +2,15 @@ import { LPPositionsMock } from '@/mockData/mockData';
 import type { LPPosition } from '@/types/type';
 import LPPair from './LPPair';
 
-const FundTableList = ({ data = LPPositionsMock }: { data?: LPPosition[] }) => {
+type FundTableListProps = {
+  data?: LPPosition[];
+  showList?: boolean;
+};
+
+const FundTableList = ({
+  data = LPPositionsMock,
+  showList = true,
+}: FundTableListProps) => {
   return (
     <table className="w-full table-fixed border-separate -translate-x-3 overflow-x-auto text-xs [border-spacing:0.75rem]">
       <thead>
@@ -24,11 +32,13 @@ const FundTableList = ({ data = LPPositionsMock }: { data?: LPPosition[] }) => {
           </th>
         </tr>
       </thead>
-      <tbody>
-        {data.map((lpPair) => (
-          <LPPair key={lpPair?.tokenId?.toString()} {...lpPair} />
-        ))}
-      </tbody>
+      {showList && (
+        <tbody>
+          {data.map((lpPair) => (
+            <LPPair key={lpPair?.tokenId?.toString()} {...lpPair} />
+          ))}
+        </tbody>
+      )}
     </table>
   );
 };

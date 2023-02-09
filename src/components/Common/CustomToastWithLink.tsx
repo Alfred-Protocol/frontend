@@ -15,6 +15,7 @@ const CustomToastWithLink = ({
       <a
         style={{ textDecoration: 'underline', color: '#0784C3' }}
         target="_blank"
+        rel="noreferrer"
         href={polygonScan}
       >
         {txId}

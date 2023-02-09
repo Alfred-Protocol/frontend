@@ -26,6 +26,7 @@ export interface FundDetailsProps {
   description?: string;
   yieldPercentage?: string;
   fundName: string;
+  showLpPositions?: boolean;
 }
 
 const FundDetails = ({
@@ -39,6 +40,7 @@ const FundDetails = ({
   manager,
   stableCoinAddress,
   yieldPercentage,
+  showLpPositions = true,
 }: FundDetailsProps) => {
   const account = useAccount();
 
@@ -166,7 +168,7 @@ const FundDetails = ({
             />
           </div>
         </div>
-        <FundTableList />
+        {showLpPositions && <FundTableList />}
       </div>
       <SwapTokensModal
         fundAddress={fundAddress}

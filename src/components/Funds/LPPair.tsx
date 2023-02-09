@@ -75,11 +75,12 @@ const LPPair = ({
           token1Decimals ?? 18
         )}
       </td>
-      <td className="items-center sm:flex">
-        <PairImage />
-        <span>
+      <td className="flex">
+        <div className="">
+          <PairImage />
           {amount0.toString()} / {amount1.toString()}
-        </span>
+        </div>
+
         {/*
         // Not possible to do this without a subgraph that indexes blockchain events
         {`${truncateStrToDecimalPlaces(
@@ -104,7 +105,13 @@ const convertTickToPrice = (
 
   const priceString = price.toSignificant(5);
 
-  return ethers.utils.formatUnits(priceString, token0Decimals);
+  const priceStringFloat = parseFloat(
+    ethers.utils.formatUnits(priceString, token0Decimals)
+  );
+
+  // console.log('priceStringFormatted ', priceStringFormatted);
+
+  return priceStringFloat.toFixed(5).toString();
 };
 
 export default LPPair;

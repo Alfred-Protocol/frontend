@@ -88,16 +88,10 @@ const PriceRange = () => {
   }, [state.priceRangeValue, min, max]);
 
   return (
-    <div style={{ marginTop: 7 }}>
-      <Heading>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <span>Price Range</span>
+    <div className="text-fuchsia-100">
+      <div>
+        <div className="flex items-center justify-between">
+          <span className="text-md pb-2 font-semibold">Price Range</span>
           {/* <FullRangeContainer>
             <span style={isFullRange ? { color: 'white' } : {}}>
               Full Range:{' '}
@@ -122,7 +116,7 @@ const PriceRange = () => {
             />
           </FullRangeContainer> */}
         </div>
-      </Heading>
+      </div>
       <Group>
         <MinMaxPriceContainer style={isFullRange ? { marginBottom: 2 } : {}}>
           <InputGroup>

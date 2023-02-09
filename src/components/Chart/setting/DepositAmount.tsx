@@ -14,7 +14,7 @@ const InputGroup = styled.div`
   align-items: center;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 4px 8px;
+  padding: 0px 8px;
 
   & > span {
     color: white;
@@ -22,7 +22,6 @@ const InputGroup = styled.div`
     margin-right: 5px;
     font-family: sans-serif;
     font-weight: bold;
-    transform: translateY(-1.5px);
   }
 `;
 const DepositInput = styled.input`
@@ -78,8 +77,8 @@ const DepositAmount = () => {
   );
 
   return (
-    <div>
-      <Heading>Deposit Amount</Heading>
+    <div className="text-fuchsia-100">
+      <p className="text-md font-semibold pb-2">Deposit Amount</p>
       <InputGroup>
         <span>$</span>
         <DepositInput

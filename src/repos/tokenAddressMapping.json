@@ -44,6 +44,10 @@
       "id": "1815-s-avers",
       "name": "RealT - 1815 S Avers Ave, Chicago, IL 60623"
     },
+    "0xd3c325848d7c6e29b574cb0789998b2ff901f17e": {
+      "id": "1art",
+      "name": "OneArt"
+    },
     "0x1af2eaeaf2b1d9dda800861268e6bbb3995a6c3b": {
       "id": "1eco",
       "name": "1eco"
@@ -3011,10 +3015,6 @@
     "0x8052327f1baf94a9dc8b26b9100f211ee3774f54": {
       "id": "catapult",
       "name": "A2DAO"
-    },
-    "0xcc1c0fbaecf0fe1c4703d77ec284cdf8a06253c5": {
-      "id": "catcher-dao",
-      "name": "Catcher DAO"
     },
     "0x3e362283b86c1b45097cc3fb02213b79cf6211df": {
       "id": "catcoin-cash",
@@ -6807,6 +6807,10 @@
     "0x41875c2332b0877cdfaa699b641402b7d4642c32": {
       "id": "futurax",
       "name": "FUTURAX"
+    },
+    "0x0ff534801e98a4976246d1f418e441783fc9aa15": {
+      "id": "future-ai",
+      "name": "Future AI"
     },
     "0x0e192d382a36de7011f795acc4391cd302003606": {
       "id": "futureswap",
@@ -11160,6 +11164,10 @@
       "id": "napoleon-x",
       "name": "Napoleon X"
     },
+    "0x01b443495834d667b42f54d2b77eed6951ed94a4": {
+      "id": "narfex",
+      "name": "Narfex"
+    },
     "0x333a4823466879eef910a04d473505da62142069": {
       "id": "nation3",
       "name": "Nation3"
@@ -12507,6 +12515,10 @@
     "0x20d60c6eb195868d4643f2c9b0809e4de6cc003d": {
       "id": "playnity",
       "name": "PlayNity"
+    },
+    "0x8f006d1e1d9dc6c98996f50a4c810f17a47fbf19": {
+      "id": "pleasure-coin",
+      "name": "Pleasure Coin"
     },
     "0x85ca6710d0f1d511d130f6935edda88acbd921bd": {
       "id": "pledgecamp",
@@ -17652,6 +17664,10 @@
       "id": "wrapped-memory",
       "name": "Wonderful Memories"
     },
+    "0x669c01caf0edcad7c2b8dc771474ad937a7ca4af": {
+      "id": "wrapped-minima",
+      "name": "Wrapped Minima"
+    },
     "0xf961a1fa7c781ecd23689fe1d0b7f3b6cbb2f972": {
       "id": "wrapped-moon-cats",
       "name": "Wrapped Moon Cats"
@@ -21145,10 +21161,6 @@
     "0x30ea765d4dda26e0f89e1b23a7c7b2526b7d29ec": {
       "id": "polypad",
       "name": "PolyPad"
-    },
-    "0xf13bfc42bfcc421db1fd471ec49bb865cede7270": {
-      "id": "polypug",
-      "name": "PolyPug"
     },
     "0xcfe2cf35d2bdde84967e67d00ad74237e234ce59": {
       "id": "polypup",
@@ -25434,9 +25446,9 @@
       "id": "fantums-of-opera-token",
       "name": "Fantums of Opera"
     },
-    "0x8503eb4a136bdbeb323e37aa6e0fa0c772228378": {
+    "0x74ccbe53f77b08632ce0cb91d3a545bf6b8e0979": {
       "id": "fbomb",
-      "name": "fBOMB"
+      "name": "Fantom Bomb"
     },
     "0x14418c22165553251b002b289f8abe4d1ed41d76": {
       "id": "fear",
@@ -32014,10 +32026,6 @@
       "id": "ecoin-finance",
       "name": "Ecoin Finance"
     },
-    "0x3a14785035cf80ad95a969bfc750584a3c16a6e6": {
-      "id": "ecoway",
-      "name": "Ecoway"
-    },
     "0xdcde89001be4e77ed88ff0c39bffb23055659d21": {
       "id": "edac",
       "name": "EDAC"
@@ -32681,6 +32689,10 @@
     "0x5d6df41d39efb3b07eaf79494e35c417f9d6910b": {
       "id": "favecoin",
       "name": "Favecoin"
+    },
+    "0x74ccbe53f77b08632ce0cb91d3a545bf6b8e0979": {
+      "id": "fbomb",
+      "name": "Fantom Bomb"
     },
     "0x49f2145d6366099e13b10fbf80646c0f377ee7f6": {
       "id": "fc-porto",
@@ -33718,10 +33730,6 @@
       "id": "global-trust-coin",
       "name": "Global Trust Coin"
     },
-    "0xcc5667333f5e997ac9f0c26d41b7dda65b2b675a": {
-      "id": "glorydoge",
-      "name": "GloryDoge"
-    },
     "0xc7baa7787bb40c5d2523252baf142413dcbbcd5b": {
       "id": "glow",
       "name": "Glow"
@@ -34258,10 +34266,6 @@
       "id": "helio-protocol-hay",
       "name": "Destablecoin HAY"
     },
-    "0xd55e4fcea77fd5902ad10914f8b2a5ad1ee606b5": {
-      "id": "helkin",
-      "name": "Helkin"
-    },
     "0xd01bc67a6d82a4e07e505d198a55316ec01684a8": {
       "id": "hell-hounds",
       "name": "HELL HOUNDS"
@@ -34445,10 +34449,6 @@
     "0x9d97c70fa2c9e7ad1e4e5d843d852772d63a2cea": {
       "id": "hold2earn",
       "name": "Hold2Earn"
-    },
-    "0xd85b5e9a7c33832dcdb554ec07cdcc56810b2e5a": {
-      "id": "holdex-finance",
-      "name": "Holdex Finance"
     },
     "0x1337bae199225795070dcf4f7aea733296ba77ea": {
       "id": "holoclear",
@@ -34669,10 +34669,6 @@
     "0x9a319b959e33369c5eaa494a770117ee3e585318": {
       "id": "hyper-finance",
       "name": "Hyper Finance"
-    },
-    "0xe3d2ba4ebcc6e9ae3569d6418bc2eaabb8feef60": {
-      "id": "hyperonchain",
-      "name": "HyperonChain"
     },
     "0xb15e296636cd8c447f0d2564ce4d7dfe4a72a910": {
       "id": "hyperone",
@@ -36969,10 +36965,6 @@
     "0xe3502567872cb3310143d7e00ae7c93e63315862": {
       "id": "metaland-dao",
       "name": "Metaland DAO"
-    },
-    "0x349a1b99944914628d13963e2905d6da95695f3b": {
-      "id": "metalandmap",
-      "name": "MetaLandmap"
     },
     "0x4d4af26f52c7e96a5f42d7a70caa43f2dab5acb4": {
       "id": "metal-friends",
@@ -39470,6 +39462,10 @@
       "id": "plearn",
       "name": "PLEARN"
     },
+    "0xaa076b62efc6f357882e07665157a271ab46a063": {
+      "id": "pleasure-coin",
+      "name": "Pleasure Coin"
+    },
     "0x09521ab68230a28a0e6814a35cb3fc2f7fa11e00": {
       "id": "plebe-gaming",
       "name": "Plebe Gaming"
@@ -40430,10 +40426,6 @@
       "id": "retawars-goldrose-token",
       "name": "Retawars GoldRose Token"
     },
-    "0x7dc27fc31924465faa76cb7cabf7c24e85372d03": {
-      "id": "retawatch",
-      "name": "RETAWATCH"
-    },
     "0x2d220f7f7ea450bae821424a4cdd5ff0b4513970": {
       "id": "retrocade",
       "name": "RetroCade"
@@ -41269,10 +41261,6 @@
     "0xfe974dfdc2df0ed326d0b303d18560c3824b2f94": {
       "id": "seesaw",
       "name": "Seesaw"
-    },
-    "0x7d59368eb0c23d299ebe12ebca58eae59f9fe028": {
-      "id": "sektor-token",
-      "name": "Sektor Token"
     },
     "0xe327ce757cd206721e100812e744fc56e4e0a969": {
       "id": "sekuya",
@@ -42541,6 +42529,10 @@
     "0x922c77c7724d7b77fd7791be5cc5314b70c3a781": {
       "id": "super-shiba",
       "name": "Super Shiba"
+    },
+    "0xad5452be97e257f7312ac7c681407a8b49ff1408": {
+      "id": "superstake",
+      "name": "Superstake"
     },
     "0x6f7a88274647ad54bcbe25e9d28c51ddb6b5b55f": {
       "id": "superstep",
@@ -43858,10 +43850,6 @@
       "id": "uvtoken",
       "name": "UvToken"
     },
-    "0xb80cfe66de9809f5528dbd794d25a4e61f5a28d9": {
-      "id": "uxcord-token",
-      "name": "Uxcord Token"
-    },
     "0x0df044b7f0aadfeab21bc134fe525a19484ac133": {
       "id": "uzyth",
       "name": "Uzyth"
@@ -45158,10 +45146,6 @@
       "id": "z7dao",
       "name": "Z7DAO"
     },
-    "0x1e5f009d4f8ca44b5fcc4963dd301da82b4eed09": {
-      "id": "zabaku-inu",
-      "name": "Zabaku Inu"
-    },
     "0xfcadd830ff2d6cf3ad1681e1e8fc5ddce9d59e74": {
       "id": "zada",
       "name": "Zada"
@@ -46004,6 +45988,10 @@
       "id": "ethrise",
       "name": "ETHRISE"
     },
+    "0x74ccbe53f77b08632ce0cb91d3a545bf6b8e0979": {
+      "id": "fbomb",
+      "name": "Fantom Bomb"
+    },
     "0x876ec6be52486eeec06bc06434f3e629d695c6ba": {
       "id": "fluidfi",
       "name": "FluidFi"
@@ -46740,9 +46728,17 @@
       "id": "dhedge-dao",
       "name": "dHEDGE DAO"
     },
+    "0x8ae125e8653821e851f12a49f7765db9a9ce7384": {
+      "id": "dola-usd",
+      "name": "Dola"
+    },
     "0x7b0bcc23851bbf7601efc9e9fe532bf5284f65d3": {
       "id": "erica-social-token",
       "name": "Erica Social Token"
+    },
+    "0x74ccbe53f77b08632ce0cb91d3a545bf6b8e0979": {
+      "id": "fbomb",
+      "name": "Fantom Bomb"
     },
     "0x2e3d870790dc77a83dd1d18184acc7439a53f475": {
       "id": "frax",
@@ -47565,6 +47561,10 @@
     "0xffffffff1fcacbd218edc0eba20fc2308c778080": {
       "id": "xcdot",
       "name": "xcDOT"
+    },
+    "0xffffffffea09fb06d082fd1275cd48b191cbcd1d": {
+      "id": "xcusdt",
+      "name": "xcUSDT"
     }
   },
   "chiliz": {
@@ -49355,6 +49355,20 @@
       "name": "Zenlink Network"
     }
   },
+  "aptos": {
+    "0x16fe2df00ea7dde4a63409201f7f4e536bde7bb7335526a35d05111e68aa322c::AnimeCoin::ANI": {
+      "id": "animeswap",
+      "name": "AnimeSwap"
+    },
+    "0x27fafcc4e39daac97556af8a803dbb52bcb03f0821898dc845ac54225b9793eb": {
+      "id": "bluemove",
+      "name": "BlueMove"
+    },
+    "0x159df6b7689437016108a019fd5bef736bac692b6d4a1f10c941f6fbb9a74ca6::oft::CakeOFT": {
+      "id": "pancakeswap-token",
+      "name": "PancakeSwap"
+    }
+  },
   "telos": {
     "0x667fd83e24ca1d935d36717d305d54fa0cac991c": {
       "id": "apeswap-finance",
@@ -50343,16 +50357,6 @@
       "name": "ZoomSwap"
     }
   },
-  "aptos": {
-    "0x27fafcc4e39daac97556af8a803dbb52bcb03f0821898dc845ac54225b9793eb": {
-      "id": "bluemove",
-      "name": "BlueMove"
-    },
-    "0x159df6b7689437016108a019fd5bef736bac692b6d4a1f10c941f6fbb9a74ca6::oft::CakeOFT": {
-      "id": "pancakeswap-token",
-      "name": "PancakeSwap"
-    }
-  },
   "arbitrum-nova": {
     "0x6dcb98f460457fe4952e12779ba852f82ecc62c1": {
       "id": "brick",
@@ -50439,6 +50443,10 @@
     "0x7264610a66eca758a8ce95cf11ff5741e1fd0455": {
       "id": "canto-inu",
       "name": "Canto Inu"
+    },
+    "0xa025ced4aab666c1bbbfd5a224816705b438e50b": {
+      "id": "canto-shib",
+      "name": "Canto Shib"
     },
     "0xeceeefcee421d8062ef8d6b4d814efe4dc898265": {
       "id": "cosmos",

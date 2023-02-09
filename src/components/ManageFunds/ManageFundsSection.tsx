@@ -1,5 +1,5 @@
 import useDatabaseFunds from '@/hooks/useDatabaseFunds';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import AssetsHeader from '../Assets/AssetsHeader';
 import ManageFundCard from './ManageFundCard';
@@ -16,7 +16,16 @@ export type Fund = {
 const MaangeFundsSection = () => {
   const { address } = useAccount();
   const { data, isLoading } = useDatabaseFunds(address);
+  const [isDomLoaded, setIsDomLoaded] = useState(false);
   const [totalFund, setTotalFund] = useState(0);
+
+  useEffect(() => {
+    setIsDomLoaded(true);
+  }, []);
+
+  if (!isDomLoaded) {
+    return null;
+  }
 
   return (
     <div>

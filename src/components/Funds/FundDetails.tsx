@@ -71,7 +71,9 @@ const FundDetails = ({
     <div className="min-h-40 w-full text-fuchsia-100">
       <div className="flex h-full flex-col justify-between">
         <div className="mb-2 flex items-start justify-between">
-          <h3 className="text-2xl font-bold sm:text-4xl md:w-80">{fundName}</h3>
+          <h3 className="... truncate text-2xl font-bold sm:text-4xl md:w-80">
+            {fundName}
+          </h3>
         </div>
         <div>
           <p className="mb-xs sm:text-md flex items-center space-x-1">
@@ -160,9 +162,7 @@ const FundDetails = ({
             />
           </div>
         </div>
-        <div>
-          <FundTableList />
-        </div>
+        <FundTableList />
       </div>
       <SwapTokensModal
         fundAddress={fundAddress}

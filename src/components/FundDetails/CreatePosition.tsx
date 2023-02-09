@@ -116,9 +116,9 @@ const CreatePosition = ({
   }
 
   return (
-    <Modal show={show} dismissible onClose={onClose} className="h-full">
-      <Modal.Header className="">Create Fund</Modal.Header>
-      <Modal.Body className="">
+    <Modal show={show} dismissible onClose={onClose} className="dark h-full">
+      <Modal.Header className="bg-gray-800">Create Fund</Modal.Header>
+      <Modal.Body className="bg-gray-800">
         <form className="flex flex-col space-y-6 rounded" onSubmit={onSubmit}>
           <div className="space-y-2">
             {/* <span className="text-white">{state.token1?.symbol} amount</span> */}

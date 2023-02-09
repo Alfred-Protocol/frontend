@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import { Label, Modal, TextInput } from 'flowbite-react';
 import { FormEventHandler, useMemo, useState } from 'react';
 import { Address, useContractWrite, usePrepareContractWrite } from 'wagmi';
+import DummyContract from '../../abi/DummyContract';
 import Funds from '../../abi/Funds';
 import { useAppContext } from '../../context/app/appContext';
 import { useGetPairTokenAmount } from '../../hooks/useGetPairTokenAmount';
@@ -14,11 +15,7 @@ type Props = {
   onClose: () => void;
 };
 
-const CreatePosition = ({
-  fundAddress = '0x654ee4dc5ee1edf02dd27d3052c4df238a70c558',
-  show,
-  onClose,
-}: Props) => {
+const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
   const { state } = useAppContext();
 
   const [amount1, setAmount1] = useState<string>('0');
@@ -76,35 +73,41 @@ const CreatePosition = ({
     token1Decimals
   );
 
+  // Dummy contract, to mimic "createLpPosition" flow
   const { config } = usePrepareContractWrite({
-    address: fundAddress as Address,
-    abi: Funds,
-    functionName: 'createLpPosition',
-    chainId: 80001,
-    args: [
-      token0Details?.id as `0x${string}`,
-      token1Details?.id as `0x${string}`,
-      amount0CalcInWei,
-      amount1InWei,
-      minTick,
-      maxTick,
-      Number(feeTier),
-    ],
-    enabled: true,
+    address: '0x37E14AcBdf310CEf93c0259f8CA6a703C77d56D4' as Address,
+    abi: DummyContract,
+    functionName: 'increment',
   });
 
-  const { data, isLoading, write } = useContractWrite(config);
+  const { data, isLoading, write: dummyWrite } = useContractWrite(config);
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
+  // TODO: @andyrobert3 look into "createLpPosition" not working
+  // const { config } = usePrepareContractWrite({
+  //   address: fundAddress as Address,
+  //   abi: Funds,
+  //   functionName: 'createLpPosition',
+  //   chainId: 80001,
+  //   args: [
+  //     token0Details?.id as `0x${string}`,
+  //     token1Details?.id as `0x${string}`,
+  //     amount0CalcInWei,
+  //     amount1InWei,
+  //     minTick,
+  //     maxTick,
+  //     Number(feeTier),
+  //   ],
+  //   enabled: true,
+  // });
 
-    write?.();
+  // const { data, isLoading, write } = useContractWrite(config);
+
+  const onSubmit = () => {
+    // e.preventDefault();
+    console.log('dummy', dummyWrite);
+
+    dummyWrite?.();
   };
-
-  // TODO:
-  // 1. Convert price to ticks
-  // 2. Convert "deposit amount" to number of token0 and token1
-  // 3. Create LP position
 
   // Before user chooses tokens, don't render anything
   if (!state.token0 || !state.token1) {
@@ -115,40 +118,37 @@ const CreatePosition = ({
     <Modal show={show} dismissible onClose={onClose} className="dark h-full">
       <Modal.Header className="bg-gray-800">Create Fund</Modal.Header>
       <Modal.Body className="bg-gray-800">
-        <form className="flex flex-col space-y-6 rounded" onSubmit={onSubmit}>
-          <div className="space-y-2">
-            {/* <span className="text-white">{state.token1?.symbol} amount</span> */}
-            <Label>{state.token1?.symbol} amount</Label>
-            <TextInput
-              id="token1Amount"
-              type={'text'}
-              onChange={(e) => setAmount1(e.target.value.trim())}
-              // value={amount1Calc}
-              required
-              placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>{state.token0?.symbol} amount</Label>
+        <div className="space-y-2">
+          {/* <span className="text-white">{state.token1?.symbol} amount</span> */}
+          <Label>{state.token1?.symbol} amount</Label>
+          <TextInput
+            id="token1Amount"
+            type={'text'}
+            onChange={(e) => setAmount1(e.target.value.trim())}
+            // value={amount1Calc}
+            required
+            placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label>{state.token0?.symbol} amount</Label>
 
-            {/* <span className="text-white">{state.token0?.symbol} amount</span> */}
-            <TextInput
-              id="token0Amount"
-              type={'text'}
-              required
-              readOnly
-              value={amount0Calc}
-            />
-          </div>
-          {true && (
-            <CustomButton
-              className="focus:shadow-outline rounded py-2 px-4"
-              type="submit"
-              title="Create"
-              theme="solidBlue"
-            />
-          )}
-        </form>
+          {/* <span className="text-white">{state.token0?.symbol} amount</span> */}
+          <TextInput
+            id="token0Amount"
+            type={'text'}
+            required
+            readOnly
+            value={amount0Calc}
+          />
+        </div>
+        <CustomButton
+          className="focus:shadow-outline rounded py-2 px-4"
+          type="submit"
+          title="Create"
+          theme="solidBlue"
+          onClick={onSubmit}
+        />
       </Modal.Body>
     </Modal>
   );

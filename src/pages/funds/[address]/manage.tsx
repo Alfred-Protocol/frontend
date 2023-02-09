@@ -23,6 +23,7 @@ const styles = {
 // import CreatePosition from '../../components/FundDetails/CreatePosition';
 import CustomButton from '@/components/Common/CustomButton';
 import CreatePosition from '@/components/FundDetails/CreatePosition';
+import { useRouter } from 'next/router';
 
 const ManageFundPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,6 +32,9 @@ const ManageFundPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
   const [showCreateLPModal, setShowCreateLPModal] = useState(false);
+  const { query } = useRouter();
+
+  const fundAddress = query.address as string;
 
   useEffect(() => {
     setIsLoaded(true);
@@ -95,6 +99,7 @@ const ManageFundPage = () => {
             <CreatePosition
               show={showCreateLPModal}
               onClose={() => setShowCreateLPModal(false)}
+              fundAddress={fundAddress}
             />
           </div>
         </div>

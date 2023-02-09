@@ -49,6 +49,7 @@ const FundDetails = ({
     useState<boolean>(false);
 
   const { data: stableCoin } = useContractReads({
+    scopeKey: stableCoinAddress,
     contracts: [
       {
         address: stableCoinAddress as Address,

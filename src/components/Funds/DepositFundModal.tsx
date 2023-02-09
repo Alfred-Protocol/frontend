@@ -30,6 +30,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
 
   const account = useAccount();
   const { data: wmatic } = useContractReads({
+    scopeKey: WMATIC_MUMBAI_ADDRESS,
     contracts: [
       {
         address: WMATIC_MUMBAI_ADDRESS as Address,

@@ -101,6 +101,7 @@ const convertTickToPrice = (
   const lpToken1 = new Token(polygonMumbai.id, token1, token1Decimals);
 
   const price = tickToPrice(lpToken0, lpToken1, tick);
+
   const priceString = price.toSignificant(5);
 
   return ethers.utils.formatUnits(priceString, token0Decimals);

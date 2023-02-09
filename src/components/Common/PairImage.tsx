@@ -14,18 +14,17 @@ const PairImage = ({
     <div className="flex" style={style}>
       <Image
         src={logo1}
-        width={24}
-        height={24}
+        className="rounded-full"
+        width={20}
+        height={20}
         alt={'ETH'}
-        style={{ borderRadius: 100 }}
       />
       <Image
-        className="-translate-x-2"
+        className="-translate-x-2 rounded-full"
         src={logo2}
-        width={24}
-        height={24}
+        width={20}
+        height={20}
         alt={'WMATIC'}
-        style={{ borderRadius: 100 }}
       />
     </div>
   );

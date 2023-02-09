@@ -52,12 +52,12 @@ const LPPair = ({
 
   return (
     <tr>
-      <td className="flex-wrap items-center sm:flex">
+      <td className="items-center sm:flex">
         <PairImage logo1={undefined} logo2={undefined} />
         {`${token0Symbol} / ${token1Symbol}`}
       </td>
       <td>{poolFee?.toNumber() / 10000}%</td>
-      <td>
+      <td className="break-words">
         {convertTickToPrice(
           tickLower?.toNumber(),
           token0,
@@ -66,7 +66,7 @@ const LPPair = ({
           token1Decimals ?? 18
         )}
       </td>
-      <td>
+      <td className="break-words">
         {convertTickToPrice(
           tickUpper?.toNumber(),
           token0,
@@ -75,7 +75,7 @@ const LPPair = ({
           token1Decimals ?? 18
         )}
       </td>
-      <td className="flex-wrap items-center sm:flex">
+      <td className="items-center sm:flex">
         <PairImage />
         <span>
           {amount0.toString()} / {amount1.toString()}

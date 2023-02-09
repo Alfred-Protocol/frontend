@@ -23,22 +23,22 @@ const FundCards = () => {
   const renderSkeleton = () => {
     return (
       <>
-        <div role="status" className="w-50 h-96 animate-pulse">
+        <div
+          role="status"
+          className="w-50 h-96 animate-pulse rounded-lg border-[1px] border-[#EF5DA8]"
+        >
           <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
-        <div role="status" className="w-50 h-96 animate-pulse">
+        <div
+          role="status"
+          className="w-50 h-96 animate-pulse rounded-lg border-[1px] border-[#EF5DA8]"
+        >
           <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
-        <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-        </div>
-        <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-        </div>
-        <div role="status" className="w-50 h-96 animate-pulse">
-          <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
-        </div>
-        <div role="status" className="w-50 h-96 animate-pulse">
+        <div
+          role="status"
+          className="w-50 h-96 animate-pulse rounded-lg border-[1px] border-[#EF5DA8]"
+        >
           <div className="mb-4 h-full w-full rounded-xl bg-blackfillLess dark:bg-blackfill"></div>
         </div>
       </>

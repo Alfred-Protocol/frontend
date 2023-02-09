@@ -21,7 +21,7 @@ type WithdrawFundProps = {
   onClose: () => void;
 };
 
-const WMATIC_MUMBAI_ADDRESS =
+export const WMATIC_MUMBAI_ADDRESS =
   process.env.WMATIC_MUMBAI_ADDRESS ??
   '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889';
 

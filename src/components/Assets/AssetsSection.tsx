@@ -1,6 +1,7 @@
 // TODO: add wavy background? https://kevinhufnagl.com/how-to-stripe-website-gradient-effect/
 import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import useDeposits from '@/hooks/useDeposits';
+import fund from '@/pages/api/fund';
 import { useEffect, useState } from 'react';
 import { Address, useAccount } from 'wagmi';
 import { LPPositionsMock } from '../../mockData/mockData';
@@ -81,7 +82,7 @@ const mockData = [
 
 const AssetsSection = () => {
   const { address } = useAccount();
-  const { data, isLoading, refetch } = useDatabaseFunds();
+  const { data, isLoading } = useDatabaseFunds();
 
   return (
     <div>
@@ -92,21 +93,14 @@ const AssetsSection = () => {
           netValue={3223.43}
         />
         <div className="flex w-full flex-col items-center space-y-4">
-          {isLoading ? (
-            <div role="status" className="h-48 w-full animate-pulse">
-              <div className="mb-4 h-full w-full rounded-xl border-[1px] border-[#EF5DA8] bg-blackfillLess dark:bg-blackfill"></div>
-            </div>
-          ) : (
-            data &&
+          {data?.length &&
             data.map((fund) => (
               <AssetCard
                 key={fund.address}
                 fundAddress={fund.address as Address}
                 fund={fund}
-                // deposits={deposits[address as Address]}
               />
-            ))
-          )}
+            ))}
         </div>
       </div>
     </div>

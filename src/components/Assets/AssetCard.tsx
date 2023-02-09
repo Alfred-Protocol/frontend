@@ -15,10 +15,17 @@ import {
   usePrepareContractWrite,
   useContractWrite,
   useWaitForTransaction,
+  erc20ABI,
+  useContractRead,
 } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import { useRouter } from 'next/router';
 import type { Fund } from '@prisma/client';
+import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { Spinner, Tooltip } from 'flowbite-react';
+import { WMATIC_MUMBAI_ADDRESS } from '../Funds/WithdrawFundModal';
+import { useEffect, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface AssetsDetailProps {
   fundAddress: Address;
@@ -26,16 +33,10 @@ interface AssetsDetailProps {
   fund: Fund;
 }
 
-// Convert to ENUM
-const tvlIndex = 0;
-const stableCoinAddressIndex = 1;
-const lpPositionsIndex = 2;
-const depositedAmountIndex = 3;
-
 const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
-  const { address } = useAccount();
   const router = useRouter();
 
+  const { address } = useAccount();
   const { data, isLoading } = useContractReads({
     scopeKey: fundAddress, // cache with individual fund page
     contracts: [
@@ -52,24 +53,18 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
       {
         address: fundAddress,
         abi: Funds,
-        functionName: 'fetchAllLpPositions',
-      },
-      {
-        address: fundAddress,
-        abi: Funds,
         functionName: 'depositedAmount',
         args: [address!],
       },
     ],
-    // @marcuspang -> Does it force a re-fetch every 1min?
     cacheTime: 60 * 1000, // 1min
     enabled: !!fundAddress && !!address,
   });
 
-  const [tvl, stablecoin, allLpPositions, depositedAmount] =
-    data !== undefined
+  const [tvl, stablecoin, depositedAmount] =
+    data !== undefined && data.every(Boolean)
       ? data
-      : [BigNumber.from(0), BigNumber.from(0), [], BigNumber.from(0)];
+      : [BigNumber.from(0), WMATIC_MUMBAI_ADDRESS, BigNumber.from(0)];
 
   const { config } = usePrepareContractWrite({
     address: fundAddress as Address,
@@ -87,87 +82,95 @@ const AssetCard = ({ fundAddress, deposits, fund }: AssetsDetailProps) => {
     enabled: isSuccess,
   });
 
-  if (!fundAddress || !data) {
-    return null;
+  if (isLoading) {
+    return (
+      <div role="status" className="h-48 w-full animate-pulse">
+        <div className="mb-4 h-full w-full rounded-xl border-[1px] border-[#EF5DA8] bg-blackfillLess dark:bg-blackfill" />
+      </div>
+    );
   }
 
-  const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);
-  const yieldPercentage = 12.2;
-  const logo1 = ETH;
-  const logo2 = USDT;
-  // const lpPositions =
-  //   data[lpPositionsIndex]?.map((position) => ({
-  //     ...position,
-  //     tickLower: BigNumber.from(position.tickLower),
-  //     tickUpper: BigNumber.from(position.tickUpper),
-  //     poolFee: BigNumber.from(position.poolFee),
-  //   })) || LPPositionsMock;
-  const amount0 = 0;
-  const amount1 = 1;
-
-  if (depositedAmount.lte(0)) {
+  if (!fundAddress || !data || depositedAmount.lte(0)) {
     return null;
   }
 
   return (
     <div
-      className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-white transition-all hover:bg-gray-800"
+      className="w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left text-fuchsia-100 transition-all hover:bg-gray-800"
       onClick={() => {
         router.push(`/funds/${fundAddress}`);
       }}
     >
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-2xl font-bold text-fuchsia-100 sm:text-4xl">
-          {fund?.name || 'No fund name found'}
-        </h3>
-        <div className="flex justify-center space-x-6">
-          <div className="flex items-center space-x-2">
-            <Image
-              src={logo1}
-              width={40}
-              alt={'WETH'}
-              className="rounded-full"
-              style={{ borderRadius: 100 }}
-            />
-            <p className="text-2xl">{amount0.toLocaleString()}</p>
-          </div>
-          <div className="flex items-center justify-center space-x-2">
-            <Image
-              src={logo2}
-              width={40}
-              alt={'USDC'}
-              className="rounded-full"
-              style={{ borderRadius: 100 }}
-            />
-            <p className="text-2xl">{amount1.toLocaleString()}</p>
-          </div>
+      <div className="mb-4 flex items-start justify-between">
+        <div className="max-w-xs space-y-2">
+          <h3 className="mb-4 text-2xl font-bold sm:text-4xl">
+            {fund?.name || 'No fund name found'}
+          </h3>
         </div>
-        <CustomButton
-          title="Withdraw"
-          theme="solidPurple"
-          isLoading={txIsLoading}
-          onClick={write}
-        />
+
+        <div className="flex flex-col justify-center">
+          <PairValue
+            field="TVL"
+            containerClassName="sm:text-md"
+            value={ethers.utils.formatUnits(tvl, 18) + ' WMATIC'}
+            endComponent={
+              <Tooltip
+                content="Total Value Locked"
+                className="px-2 text-center"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                />
+              </Tooltip>
+            }
+          />
+          <PairValue
+            field="Mature Date"
+            containerClassName="sm:text-md"
+            value={
+              fund
+                ? new Date(fund.matureDate).toLocaleDateString()
+                : 'No mature date found'
+            }
+            endComponent={
+              <Tooltip
+                content="The date at which the fund will be disabled, and withdrawals will be enabled"
+                className="px-2 text-center"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                />
+              </Tooltip>
+            }
+          />
+        </div>
+        <div>
+          <CustomButton
+            title="Withdraw"
+            theme="solidPurple"
+            isLoading={txIsLoading}
+            onClick={write}
+          />
+        </div>
       </div>
-      <div className="mr-12 text-left">
-        <p className="mb-2 text-2xl sm:text-3xl">{}</p>
-        <PairValue field="TVL" value={totalValueLocked + ' WMATIC'} />
-        <PairValue
-          field="Start Date"
-          value={
-            fund
-              ? new Date(fund.startDate).toLocaleDateString()
-              : 'No start date found'
-          }
-        />
-        <PairValue
-          field="Mature Date"
-          value={
-            fund
-              ? new Date(fund.matureDate).toLocaleDateString()
-              : 'No mature date found'
-          }
-        />
+      <div className="flex space-x-8">
+        <div>
+          <h4 className="text-3xl font-semibold">Your Deposits</h4>
+          <span className="text-4xl">
+            {ethers.utils.formatEther(depositedAmount).toString() || '0'} MATIC
+          </span>
+        </div>
+        <div>
+          <h4 className="text-3xl font-semibold">Your Share</h4>
+          {/* Update the text-green-300 based on amount relative to deposit */}
+          <span className={twMerge("text-4xl", "text-green-400")}>
+            {ethers.utils.formatEther(depositedAmount).toString() || '0'} MATIC
+          </span>
+        </div>
       </div>
     </div>
   );

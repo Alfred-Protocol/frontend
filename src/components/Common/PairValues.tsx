@@ -5,6 +5,7 @@ interface PairValueProps {
   field: string;
   value: string;
   valueClassName?: string;
+  containerClassName?: string;
   endComponent?: ReactNode;
   style?: CSSProperties;
 }
@@ -15,11 +16,15 @@ const PairValue = ({
   endComponent,
   style,
   valueClassName,
+  containerClassName,
 }: PairValueProps) => {
   return (
-    <div className="flex items-center sm:text-xl" style={style}>
-      <p className="pr-2 font-bold">{field}:</p>
-      <p className={twMerge('slashed-zero', valueClassName)}>{value}</p>
+    <div
+      className={twMerge('flex items-center sm:text-xl', containerClassName)}
+      style={style}
+    >
+      <span className="pr-2 font-bold">{field}:</span>
+      <span className={twMerge('slashed-zero', valueClassName)}>{value}</span>
       {endComponent}
     </div>
   );

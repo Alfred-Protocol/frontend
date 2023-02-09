@@ -23,7 +23,7 @@ const FundCard = ({
     address: address as Address,
     abi: Funds,
   };
-  const { data, isLoading } = useContractReads({
+  const { data, isLoading, refetch } = useContractReads({
     scopeKey: address, // cache with individual fund page
     contracts: [
       { ...config, functionName: 'totalValueLocked' },
@@ -58,6 +58,9 @@ const FundCard = ({
             ? data[stableCoinAddressIndex].toString()
             : ethers.constants.AddressZero
         }
+        refetch={async () => {
+          await refetch();
+        }}
       />
     </div>
   );

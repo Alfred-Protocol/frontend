@@ -27,6 +27,9 @@ export default async function handler(
         message: 'Invalid fund data',
       });
     }
+
+    const fundYield = Math.random() * 10;
+
     const data = await prisma.fund.create({
       data: {
         address,
@@ -35,6 +38,7 @@ export default async function handler(
         description,
         startDate,
         matureDate,
+        yield: fundYield.toString(),
       },
     });
     return res.status(200).json({

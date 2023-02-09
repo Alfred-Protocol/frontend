@@ -34,9 +34,10 @@ const DepositFundModal = ({
   refetch,
 }: DepositFundProps) => {
   const [amountToDeposit, setAmountToDeposit] = useState(0);
+  const [isApproving, setIsApproving] = useState(false);
 
   const account = useAccount();
-  const { data: wmatic } = useContractReads({
+  const { data: wmatic, refetch: wmaticRefresh } = useContractReads({
     scopeKey: WMATIC_MUMBAI_ADDRESS,
     contracts: [
       {
@@ -81,9 +82,12 @@ const DepositFundModal = ({
         fundAddress as Address,
         ethers.constants.MaxUint256
       );
+      setIsApproving(true);
       await tx.wait();
+      setIsApproving(false);
+      wmaticRefresh();
     },
-    [fundAddress, signer]
+    [fundAddress, signer, wmaticRefresh]
   );
 
   // wagmi hooks
@@ -148,6 +152,7 @@ const DepositFundModal = ({
       await writeAsync?.();
     }
   };
+
   return (
     <Modal show={show} dismissible onClose={onClose} className="dark h-full">
       <Modal.Header className="bg-gray-800">Deposit Fund</Modal.Header>
@@ -182,7 +187,7 @@ const DepositFundModal = ({
                   : 'Deposit'
               }
               theme="solidBlue"
-              isLoading={txIsLoading}
+              isLoading={txIsLoading || isApproving}
             />
             <CustomButton
               className="focus:shadow-outline rounded py-2 px-4"

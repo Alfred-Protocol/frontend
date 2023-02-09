@@ -63,15 +63,15 @@ const FundCard = ({
               : ethers.constants.AddressZero
           }
         />
-        <DepositFundModal
-          fundAddress={address}
-          show={showDepositFundModal}
-          onClose={() => setDepositFundModal(false)}
-          refetch={async () => {
-            await refetch();
-          }}
-        />
       </div>
+      <DepositFundModal
+        fundAddress={address}
+        show={showDepositFundModal}
+        onClose={() => setDepositFundModal(false)}
+        refetch={async () => {
+          await refetch();
+        }}
+      />
       <CustomButton
         title="Deposit"
         theme="solidPurple"

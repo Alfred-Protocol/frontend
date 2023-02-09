@@ -1,14 +1,16 @@
 import truncateString from '@/utils/truncateString';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
-import { ethers } from 'ethers';
+import { BigNumber, ethers } from 'ethers';
 import { Tooltip } from 'flowbite-react';
 import { useState } from 'react';
 import { Address, erc20ABI, useAccount, useContractReads } from 'wagmi';
+import Funds from '../../abi/Funds';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
 import DepositFundModal from './DepositFundModal';
 import FundTableList from './FundTableList';
 import SwapTokensModal from './SwapTokensModal';
+import WithdrawFundModal from './WithdrawFundModal';
 
 export interface FundDetailsProps {
   isLoading: boolean;
@@ -39,6 +41,8 @@ const FundDetails = ({
 
   const [showDepositFundModal, setDepositFundModal] = useState<boolean>(false);
   const [showSwapTokensModal, setSwapTokensModal] = useState<boolean>(false);
+  const [showWithdrawFundModal, setWithdrawFundModal] =
+    useState<boolean>(false);
 
   const { data: stableCoin } = useContractReads({
     contracts: [
@@ -52,11 +56,19 @@ const FundDetails = ({
         abi: erc20ABI,
         functionName: 'symbol',
       },
+      {
+        address: fundAddress as Address,
+        abi: Funds,
+        functionName: 'depositedAmount',
+        args: [account.address as Address],
+      },
     ],
-    enabled: stableCoinAddress != ethers.constants.AddressZero,
+    enabled:
+      stableCoinAddress != ethers.constants.AddressZero && !!account?.address,
   });
 
-  const [stableCoinDecimals, stableCoinSymbol] = stableCoin ?? [18, 'ETH'];
+  const [stableCoinDecimals, stableCoinSymbol, userDepositedAmount] =
+    stableCoin ?? [18, 'ETH', BigNumber.from(0)];
 
   return (
     <div
@@ -77,6 +89,13 @@ const FundDetails = ({
                 title="Manage"
                 theme="solidPurple"
                 onClick={() => setSwapTokensModal(true)}
+              />
+            )}
+            {userDepositedAmount.gt(0) && (
+              <CustomButton
+                title="Withdraw"
+                theme="solidPurple"
+                onClick={() => setWithdrawFundModal(true)}
               />
             )}
           </div>
@@ -161,6 +180,11 @@ const FundDetails = ({
         fundAddress={fundAddress}
         show={showSwapTokensModal}
         onClose={() => setSwapTokensModal(false)}
+      />
+      <WithdrawFundModal
+        fundAddress={fundAddress}
+        show={showWithdrawFundModal}
+        onClose={() => setWithdrawFundModal(false)}
       />
     </div>
   );

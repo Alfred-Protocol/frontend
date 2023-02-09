@@ -107,9 +107,7 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   useEffect(() => {
     if (txIsSuccess && !hasCreated) {
       setHasCreated(true);
-      console.log(
-        `Successfully deposited, transaction hash: ${JSON.stringify(txReceipt)}`
-      );
+      console.log(`Successfully deposited, transaction hash:`, txReceipt);
       toast.success(
         `Successfully deposited, transaction hash: ${txReceipt?.transactionHash}`
       );
@@ -151,7 +149,10 @@ const DepositFundModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
               id="amountToDeposit"
               type="text"
               onChange={(e) => {
-                if (!isNaN(Number(e.target.value))) {
+                if (
+                  !isNaN(Number(e.target.value)) &&
+                  Number(e.target.value) > 0
+                ) {
                   setAmountToDeposit(Number(e.target.value));
                 }
               }}

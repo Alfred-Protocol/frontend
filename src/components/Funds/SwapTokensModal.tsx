@@ -1,15 +1,15 @@
-import { BigNumber, ethers } from 'ethers';
-import { Label, Modal, Textarea, TextInput } from 'flowbite-react';
-import React, { FormEventHandler, useEffect, useState } from 'react';
+import { ethers } from 'ethers';
+import { Label, Modal, TextInput } from 'flowbite-react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   Address,
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
+  erc20ABI,
   useAccount,
   useContractReads,
-  erc20ABI,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
 } from 'wagmi';
 import Funds from '../../abi/Funds';
 import CustomButton from '../Common/CustomButton';
@@ -94,9 +94,7 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
   useEffect(() => {
     if (txIsSuccess && !hasCreated) {
       setHasCreated(true);
-      console.log(
-        `Successfully swapped, transaction hash: ${JSON.stringify(txReceipt)}`
-      );
+      console.log(`Successfully swapped, transaction hash:`, txReceipt);
       toast.success(
         `Successfully swapped, transaction hash: ${txReceipt?.transactionHash}`
       );
@@ -131,7 +129,10 @@ const SwapTokensModal = ({ fundAddress, show, onClose }: DepositFundProps) => {
               id="amountToSwap"
               type="text"
               onChange={(e) => {
-                if (!isNaN(Number(e.target.value))) {
+                if (
+                  !isNaN(Number(e.target.value)) &&
+                  Number(e.target.value) > 0
+                ) {
                   setSwapAmount(Number(e.target.value));
                 }
               }}

@@ -1,6 +1,7 @@
 import FundCreateModal from '@/components/Funds/FundCreateModal';
 import useDatabaseFunds from '@/hooks/useDatabaseFunds';
 import { ArrowPathIcon, CalendarIcon } from '@heroicons/react/24/outline';
+import { Dropdown } from 'flowbite-react';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAccount, useQueryClient } from 'wagmi';
@@ -53,11 +54,12 @@ const FundCards = () => {
           <CustomButton
             title="Create Fund"
             theme="solidBlue"
+            className="text-md sm:px-2 lg:text-lg"
             disabled={status !== 'connected'}
             onClick={() => setShowCreateFundModal(true)}
           />
         </div>
-        <div className="mt-4 flex space-x-4 sm:mt-0">
+        <div className="mt-4 hidden space-x-2 sm:mt-0 lg:flex lg:space-x-4">
           <CustomIconButton
             icon={<ArrowPathIcon width={20} height={20} />}
             className={'px-4'}
@@ -72,11 +74,13 @@ const FundCards = () => {
             title="Choose Start Date"
             theme="transparentPurple"
             onClick={() => {}}
+            className="text-md sm:px-2 lg:text-lg"
             leftIcon={<CalendarIcon width={20} height={20} />}
           />
           <CustomButton
             title="Choose Mature Date"
             theme="transparentPurple"
+            className="text-md sm:px-2 lg:text-lg"
             onClick={() => {}}
             leftIcon={<CalendarIcon width={20} height={20} />}
           />
@@ -86,6 +90,7 @@ const FundCards = () => {
                 ? 'Newest Funds'
                 : 'Oldest Funds'
             }
+            className="text-md sm:px-2 lg:text-lg"
             theme="transparentPurple"
             onClick={() => {
               setViewState((prev) => {

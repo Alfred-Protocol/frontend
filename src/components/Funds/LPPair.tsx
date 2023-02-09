@@ -76,11 +76,10 @@ const LPPair = ({
         )}
       </td>
       <td className="flex">
-        <div className="">
+        <div>
           <PairImage />
           {amount0.toString()} / {amount1.toString()}
         </div>
-
         {/*
         // Not possible to do this without a subgraph that indexes blockchain events
         {`${truncateStrToDecimalPlaces(

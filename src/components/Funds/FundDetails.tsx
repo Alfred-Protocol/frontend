@@ -81,28 +81,10 @@ const FundDetails = ({
           <p className="mb-xs sm:text-md flex items-center space-x-1">
             <span>Manager:</span>
             <span className="slashed-zero">{truncateString(manager)} </span>
-            <ClipboardDocumentIcon
-              width={16}
-              height={16}
-              className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
-              onClick={() => {
-                navigator.clipboard.writeText(manager);
-                toast.success('Manager address copied to clipboard!');
-              }}
-            />
           </p>
           <p className="mb-xs sm:text-md flex items-center space-x-1">
             <span>Fund Address:</span>
             <span className="slashed-zero">{truncateString(fundAddress)}</span>
-            <ClipboardDocumentIcon
-              width={16}
-              height={16}
-              className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
-              onClick={() => {
-                navigator.clipboard.writeText(fundAddress);
-                toast.success('Fund address copied to clipboard!');
-              }}
-            />
           </p>
           <p className="max-w-mlg mt-4 mb-8 text-lg">
             {description || 'No description found.'}

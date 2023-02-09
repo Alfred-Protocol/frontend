@@ -54,11 +54,17 @@ const FundDetails = ({ fundAddress }: FundDetailsProps) => {
     LPPositionsMockAdjusted[1].amount0 = (assetLocked * 0.7) as any;
   }
 
+  if (!fund) {
+    return null;
+  }
+
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-3/5 flex-col items-center justify-center space-y-6">
         <FundDetailHeader
           fundName={fund?.name || 'Fund A'}
+          fundAddress={fundAddress}
+          fundManager={fund?.manager}
           fundDescription={
             fund?.description ||
             'An ETF LP token of DAI and WBTC on Uniswap V3 represents a liquidity pool that holds both DAI (a stablecoin pegged to the US dollar) and WBTC (Wrapped Bitcoin).\\n By holding this LP token, an investor has a stake in the liquidity pool and is entitled to a portion of the fees generated from trading activity in the pool. '

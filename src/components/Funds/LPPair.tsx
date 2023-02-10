@@ -52,7 +52,7 @@ const LPPair = ({
 
   return (
     <tr>
-      <td className="items-center sm:flex py-1">
+      <td className="items-center py-1 sm:flex">
         <PairImage />
         <span className="break-words">{`${token0Symbol} / ${token1Symbol}`}</span>
       </td>

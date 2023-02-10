@@ -84,8 +84,8 @@ const ManageFundCard = ({
   const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);
   const logo1 = '/WMATIC.png';
   const logo2 = '/ETH.png';
-  const amount0 = 0;
-  const amount1 = 1;
+  const amount0 = totalValueLocked;
+  const amount1 = 0;
 
   const displayedFundYield =
     isNaN(Number(fundYield)) || Number(fundYield) == 0

@@ -13,7 +13,7 @@ const FundTableList = ({
 }: FundTableListProps) => {
   return (
     <div className="relative overflow-x-auto">
-      <table className="w-full table-auto md:table-fixed border-separate border-spacing-0 text-xs">
+      <table className="w-full table-auto border-separate border-spacing-0 text-xs md:table-fixed">
         <thead>
           <tr className="text-grayDark">
             <th className="w-4/12 pb-2">PAIR</th>

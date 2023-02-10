@@ -557,10 +557,10 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         </>
       </Modal>
 
-      <div className="flex flex-col items-center justify-center space-x-4 space-y-4 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100 lg:flex-row">
-        <div className="flex items-center space-x-10">
+      <div className="grid grid-cols-1 lg:grid-cols-6 items-start justify-center space-y-8 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100 lg:flex-row lg:space-x-4 lg:space-y-0">
+        <div className="col-span-2 flex justify-center lg:justify-start space-x-4">
           <div className="text-center">
-            <Heading>Select Network</Heading>
+            <Heading>1. Select Network</Heading>
             {selectedNetwork !== null && (
               <CustomButton
                 leftIcon={
@@ -572,6 +572,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                     className="rounded-3xl"
                   />
                 }
+                className="text-md"
                 theme="transparentPurple"
                 title={selectedNetwork.name}
                 onClick={() => {
@@ -583,8 +584,8 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
             )}
           </div>
           <div className="text-center">
-            <Heading>Select Pair</Heading>
-            <div className="flex space-x-3">
+            <Heading>2. Select Pair</Heading>
+            <div className="flex flex-col space-y-2">
               <CustomButton
                 onClick={() => {
                   if (!isSubmitLoading) {
@@ -600,6 +601,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                     ? selectedTokens[0].symbol
                     : 'Select token 1'
                 }
+                className="text-md"
                 leftIcon={
                   selectedTokens[0] && (
                     <img
@@ -627,6 +629,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
                     ? selectedTokens[1].symbol
                     : 'Select token 2'
                 }
+                className="text-md"
                 leftIcon={
                   selectedTokens[1] && (
                     <img
@@ -643,81 +646,94 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
           </div>
         </div>
 
-        <div className="text-center">
-          <Heading>Select Fee Tier</Heading>
-          <div className="flex space-x-2">
-            <Tier
-              style={getFeeTierStyle('100')}
-              onClick={() => {
-                if (!isSubmitLoading) {
-                  const tier = getFeeTier('100');
-                  if (tier) {
-                    setSelectedPool(tier);
-                    // setQueryParam('feeTier', tier.feeTier);
+        <div className="w-full col-span-3 justify-center text-center">
+          <Heading>3. Select Fee Tier</Heading>
+          <div className="grid justify-center gap-2 md:flex-row lg:grid-cols-2">
+            <div className="flex space-x-2">
+              <Tier
+                style={getFeeTierStyle('100')}
+                onClick={() => {
+                  if (!isSubmitLoading) {
+                    const tier = getFeeTier('100');
+                    if (tier) {
+                      setSelectedPool(tier);
+                      // setQueryParam('feeTier', tier.feeTier);
+                    }
                   }
-                }
-              }}
-            >
-              <h4 style={!getFeeTier('100') ? { color: '#999' } : {}}>0.01%</h4>
-              <span>Best for very stable pairs.</span>
-              <div>{getFeeTierPercentage('100')}</div>
-            </Tier>
-            <Tier
-              style={getFeeTierStyle('500')}
-              onClick={() => {
-                if (!isSubmitLoading) {
-                  const tier = getFeeTier('500');
-                  if (tier) {
-                    setSelectedPool(tier);
-                    // setQueryParam('feeTier', tier.feeTier);
+                }}
+              >
+                <h4 style={!getFeeTier('100') ? { color: '#999' } : {}}>
+                  0.01%
+                </h4>
+                <span>Best for very stable pairs.</span>
+                <div>{getFeeTierPercentage('100')}</div>
+              </Tier>
+              <Tier
+                style={getFeeTierStyle('500')}
+                onClick={() => {
+                  if (!isSubmitLoading) {
+                    const tier = getFeeTier('500');
+                    if (tier) {
+                      setSelectedPool(tier);
+                      // setQueryParam('feeTier', tier.feeTier);
+                    }
                   }
-                }
-              }}
-            >
-              <h4 style={!getFeeTier('500') ? { color: '#999' } : {}}>0.05%</h4>
-              <span>Best for stable pairs.</span>
-              <div>{getFeeTierPercentage('500')}</div>
-            </Tier>
-            <Tier
-              style={getFeeTierStyle('3000')}
-              onClick={() => {
-                if (!isSubmitLoading) {
-                  const tier = getFeeTier('3000');
-                  if (tier) {
-                    setSelectedPool(tier);
-                    // setQueryParam('feeTier', tier.feeTier);
+                }}
+              >
+                <h4 style={!getFeeTier('500') ? { color: '#999' } : {}}>
+                  0.05%
+                </h4>
+                <span>Best for stable pairs.</span>
+                <div>{getFeeTierPercentage('500')}</div>
+              </Tier>
+            </div>
+            <div className="flex space-x-2">
+              <Tier
+                style={getFeeTierStyle('3000')}
+                onClick={() => {
+                  if (!isSubmitLoading) {
+                    const tier = getFeeTier('3000');
+                    if (tier) {
+                      setSelectedPool(tier);
+                      // setQueryParam('feeTier', tier.feeTier);
+                    }
                   }
-                }
-              }}
-            >
-              <h4 style={!getFeeTier('3000') ? { color: '#999' } : {}}>0.3%</h4>
-              <span>Best for most pairs.</span>
-              <div>{getFeeTierPercentage('3000')}</div>
-            </Tier>
-            <Tier
-              style={getFeeTierStyle('10000')}
-              onClick={() => {
-                if (!isSubmitLoading) {
-                  const tier = getFeeTier('10000');
-                  if (tier) {
-                    setSelectedPool(tier);
-                    // setQueryParam('feeTier', tier.feeTier);
+                }}
+              >
+                <h4 style={!getFeeTier('3000') ? { color: '#999' } : {}}>
+                  0.3%
+                </h4>
+                <span>Best for most pairs.</span>
+                <div>{getFeeTierPercentage('3000')}</div>
+              </Tier>
+              <Tier
+                style={getFeeTierStyle('10000')}
+                onClick={() => {
+                  if (!isSubmitLoading) {
+                    const tier = getFeeTier('10000');
+                    if (tier) {
+                      setSelectedPool(tier);
+                      // setQueryParam('feeTier', tier.feeTier);
+                    }
                   }
-                }
-              }}
-            >
-              <h4 style={!getFeeTier('10000') ? { color: '#999' } : {}}>1%</h4>
-              <span>Best for exotic pairs.</span>
-              <div>{getFeeTierPercentage('10000')}</div>
-            </Tier>
+                }}
+              >
+                <h4 style={!getFeeTier('10000') ? { color: '#999' } : {}}>
+                  1%
+                </h4>
+                <span>Best for exotic pairs.</span>
+                <div>{getFeeTierPercentage('10000')}</div>
+              </Tier>
+            </div>
           </div>
         </div>
-        <div>
+        <div className="flex col-span-1 justify-center mx-auto w-full">
           <CustomButton
             onClick={handleSubmit}
             disabled={isFormDisabled}
             title={'Calculate'}
             theme="transparentPurple"
+            className="text-md"
             isLoading={isSubmitLoading}
             style={
               isSubmitLoading

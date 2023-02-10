@@ -78,7 +78,7 @@ const EstimatedFees = ({ isLoading }: Props) => {
   }
 
   return (
-    <div className="relative flex w-2/6 items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100">
+    <div className="relative flex lg:w-2/6 items-center justify-center rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100">
       <div>
         <h3 className="text-xl font-semibold mb-4">
           Projected Fees <span className="inline text-gray-500">(24h)</span>

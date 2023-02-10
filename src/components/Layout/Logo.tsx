@@ -7,7 +7,7 @@ const Logo = () => {
       <AlfredLogo width={20} />
       <Link href="/">
         <span className="sr-only">Alfred Protocol</span>
-        <p className="font-bold text-purple-200 transition-colors hover:text-fuchsia-200 sm:text-fuchsia-50">
+        <p className="font-bold text-fuchsia-100 md:text-purple-200 transition-colors hover:text-fuchsia-200 sm:text-fuchsia-50">
           Alfred Protocol
         </p>
       </Link>

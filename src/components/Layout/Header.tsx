@@ -68,7 +68,7 @@ export default function Header() {
       >
         <Popover.Panel
           focus
-          className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition lg:hidden z-50"
+          className="absolute inset-x-0 top-0 z-50 origin-top-right transform p-2 transition lg:hidden"
         >
           <div className="divide-y-2 divide-gray-800 rounded-lg bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="py-4 px-5">
@@ -89,6 +89,13 @@ export default function Header() {
                     key={name}
                     href={href}
                     className="text-base font-medium text-fuchsia-50 transition-all hover:text-purple-300"
+                    style={{
+                      textDecoration:
+                        router.asPath.split('/')[1] === href.replace('/', '')
+                          ? 'underline'
+                          : undefined,
+                      textUnderlineOffset: 3,
+                    }}
                   >
                     {name}
                   </Link>

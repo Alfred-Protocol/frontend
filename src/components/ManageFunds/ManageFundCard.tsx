@@ -7,7 +7,7 @@ import { Tooltip } from 'flowbite-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Address, useContractReads } from 'wagmi';
+import { Address, useAccount, useContractReads } from 'wagmi';
 import CustomButton from '../Common/CustomButton';
 import PairValue from '../Common/PairValues';
 import FundTableList from '../Funds/FundTableList';
@@ -31,6 +31,8 @@ const ManageFundCard = ({
   showLpPositions = true,
 }: AssetsDetailProps) => {
   const router = useRouter();
+
+  const { address: userAddress } = useAccount();
   const [getTVLDone, setGetTVLDone] = useState(false);
   const config = {
     address: address as Address,
@@ -71,15 +73,19 @@ const ManageFundCard = ({
     }
   }, [data]);
 
-  if (!address || !data || !manager) {
+  if (!address || !data || !manager || isLoading) {
     return null;
+  }
+
+  if (manager.toLocaleLowerCase() != userAddress?.toLocaleLowerCase()) {
+    return;
   }
 
   const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);
   const logo1 = '/WMATIC.png';
   const logo2 = '/ETH.png';
-  const amount0 = 0;
-  const amount1 = 1;
+  const amount0 = totalValueLocked;
+  const amount1 = 0;
 
   const displayedFundYield =
     isNaN(Number(fundYield)) || Number(fundYield) == 0
@@ -98,7 +104,7 @@ const ManageFundCard = ({
 
         <PairValue
           field="TVL"
-          value={totalValueLocked + ' ETH'}
+          value={totalValueLocked + ' WMATIC'}
           endComponent={
             <Tooltip
               content="Total Value Locked"

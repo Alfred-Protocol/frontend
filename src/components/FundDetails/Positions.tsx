@@ -5,9 +5,10 @@ import FundTableList from '../Funds/FundTableList';
 
 interface Props {
   lpPositions: LPPosition[];
+  showLpPositions?: boolean;
 }
 
-const Positions = ({ lpPositions }: Props) => {
+const Positions = ({ lpPositions, showLpPositions = true }: Props) => {
   const router = useRouter();
 
   return (
@@ -21,7 +22,7 @@ const Positions = ({ lpPositions }: Props) => {
         }}
       />
       <div className="mb-6 text-3xl font-bold">Positions</div>
-      <FundTableList data={lpPositions} />
+      {showLpPositions && <FundTableList data={lpPositions} />}
     </div>
   );
 };

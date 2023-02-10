@@ -10,9 +10,13 @@ import Positions from './Positions';
 
 interface FundDetailsProps {
   fundAddress: string;
+  showLpPositions?: boolean;
 }
 
-const FundDetails = ({ fundAddress }: FundDetailsProps) => {
+const FundDetails = ({
+  fundAddress,
+  showLpPositions = true,
+}: FundDetailsProps) => {
   const config = {
     address: fundAddress as Address,
     abi: Funds,
@@ -72,7 +76,7 @@ const FundDetails = ({ fundAddress }: FundDetailsProps) => {
           netValue={tvlLocked * 1.1}
           netDeposit={tvlLocked}
         />
-        <div className="flex w-full flex-col space-y-4 md:space-y-0 md:space-x-4 md:flex-row">
+        <div className="flex w-full flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
           <FundDetailAssets
             freeAmount0={tvlLocked * 0.4}
             freeAmount1={tvlLocked}
@@ -83,7 +87,10 @@ const FundDetails = ({ fundAddress }: FundDetailsProps) => {
           />
           <FundDetailGraph />
         </div>
-        <Positions lpPositions={LPPositionsMock} />
+        <Positions
+          lpPositions={LPPositionsMock}
+          showLpPositions={showLpPositions}
+        />
       </div>
     </div>
   );

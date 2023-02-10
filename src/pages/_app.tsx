@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import ContextProvider from '@/context/ContextProvider';
 import {
   connectorsForWallets,
   getDefaultWallets,
@@ -14,6 +15,7 @@ import {
   trustWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 import type { AppProps } from 'next/app';
+import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import {
@@ -26,9 +28,6 @@ import {
 } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-
-import ContextProvider from '@/context/ContextProvider';
-import { useEffect } from 'react';
 
 const { chains, provider, webSocketProvider } = configureChains(
   [polygonMumbai, goerli, polygon, mainnet, optimism, arbitrum],

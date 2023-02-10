@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
-import type { Axis, AxisOptions } from 'react-charts';
+import type { AxisOptions } from 'react-charts';
 
 type DailyData = {
   date: Date;
@@ -70,6 +70,7 @@ const FundLiquidityGraph = () => {
         primaryAxis: primaryAxis as AxisOptions<unknown>,
         secondaryAxes: secondaryAxes as AxisOptions<unknown>[],
         interactionMode: 'closest',
+        dark: true,
       }}
     />
   );

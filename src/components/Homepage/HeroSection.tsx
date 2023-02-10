@@ -55,6 +55,7 @@ const HeroSection = () => {
           onClick={() => router.push('/home')}
         />
       </div>
+      <p className="text-sm text-fuchsia-200 mt-2">{`(Make sure you're on Polygon Mumbai!)`}</p>
     </div>
   );
 };

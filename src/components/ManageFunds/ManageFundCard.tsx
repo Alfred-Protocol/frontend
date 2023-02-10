@@ -93,75 +93,75 @@ const ManageFundCard = ({
       : `${Number(fundYield).toFixed(1)}%`;
 
   return (
-    <div
-      className="flex w-full cursor-pointer rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-6 px-8 text-left text-white transition-all hover:bg-gray-800"
-      onClick={() => router.push(`/funds/${address}`)}
-    >
-      <div className="relative flex flex-[33%] flex-col">
-        <h3 className="mb-5 text-2xl font-bold text-fuchsia-100 sm:text-4xl">
-          {name}
-        </h3>
+    <div className="relative w-full">
+      <div
+        className="flex w-full cursor-pointer flex-col space-y-4 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-6 px-8 text-left text-white transition-all hover:bg-gray-800 lg:flex-row lg:space-y-0"
+        onClick={() => router.push(`/funds/${address}`)}
+      >
+        <div className="relative flex flex-[33%] flex-col">
+          <h3 className="mb-5 text-2xl font-bold text-fuchsia-100 sm:text-4xl">
+            {name}
+          </h3>
 
-        <PairValue
-          field="TVL"
-          value={totalValueLocked + ' WMATIC'}
-          endComponent={
-            <Tooltip
-              content="Total Value Locked"
-              className="px-2 text-center shadow-xl"
-            >
-              <InformationCircleIcon
-                height={16}
-                width={16}
-                className="ml-1 transition-colors hover:stroke-fuchsia-300"
-              />
-            </Tooltip>
-          }
-        />
-        <PairValue
-          field="Yield"
-          value={displayedFundYield}
-          valueClassName="text-green-500"
-          endComponent={
-            <Tooltip
-              content="Lifetime yield earned"
-              className="px-2 text-center shadow-xl"
-            >
-              <InformationCircleIcon
-                height={16}
-                width={16}
-                className="ml-1 transition-colors hover:stroke-fuchsia-300"
-              />
-            </Tooltip>
-          }
-        />
-        <PairValue
-          field="Start Date"
-          value={new Date(
-            startDate ? startDate.toString() : startDate
-          ).toLocaleDateString()}
-        />
-        <PairValue
-          field="Mature Date"
-          value={new Date(
-            matureDate ? matureDate.toString() : matureDate
-          ).toLocaleDateString()}
-          endComponent={
-            <Tooltip
-              content="The date at which the fund will be disabled, and withdrawals will be enabled"
-              className="px-2 text-center shadow-xl"
-            >
-              <InformationCircleIcon
-                height={16}
-                width={16}
-                className="ml-1 transition-colors hover:stroke-fuchsia-300"
-              />
-            </Tooltip>
-          }
-        />
-      </div>
-      <div className="flex flex-[67%] flex-col space-y-6">
-        <div className="flex justify-between">
+          <PairValue
+            field="TVL"
+            value={totalValueLocked + ' WMATIC'}
+            endComponent={
+              <Tooltip
+                content="Total Value Locked"
+                className="px-2 text-center shadow-xl"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                />
+              </Tooltip>
+            }
+          />
+          <PairValue
+            field="Yield"
+            value={displayedFundYield}
+            valueClassName="text-green-500"
+            endComponent={
+              <Tooltip
+                content="Lifetime yield earned"
+                className="px-2 text-center shadow-xl"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                />
+              </Tooltip>
+            }
+          />
+          <PairValue
+            field="Start Date"
+            value={new Date(
+              startDate ? startDate.toString() : startDate
+            ).toLocaleDateString()}
+          />
+          <PairValue
+            field="Mature Date"
+            value={new Date(
+              matureDate ? matureDate.toString() : matureDate
+            ).toLocaleDateString()}
+            endComponent={
+              <Tooltip
+                content="The date at which the fund will be disabled, and withdrawals will be enabled"
+                className="px-2 text-center shadow-xl"
+              >
+                <InformationCircleIcon
+                  height={16}
+                  width={16}
+                  className="ml-1 transition-colors hover:stroke-fuchsia-300"
+                />
+              </Tooltip>
+            }
+          />
+        </div>
+        <div className="flex flex-[67%] flex-col space-y-6">
           <div className="flex space-x-6">
             {showLpPositions && (
               <>
@@ -190,10 +190,14 @@ const ManageFundCard = ({
               </>
             )}
           </div>
-          <CustomButton title="Add Position" theme="solidPurple" className="" />
+          {showLpPositions && <FundTableList />}
         </div>
-        {showLpPositions && <FundTableList />}
       </div>
+      <CustomButton
+        title="Add Position"
+        theme="solidPurple"
+        className="absolute top-[6%] right-[5%] md:right-[2%]"
+      />
     </div>
   );
 };

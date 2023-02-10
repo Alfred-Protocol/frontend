@@ -486,48 +486,46 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        {NETWORKS.map((network, i) => {
-          return (
-            <div key={i}>
-              <NetworkItem
-                style={
-                  network.disabled
-                    ? {
-                        cursor: 'not-allowed',
-                        background: 'rgba(255, 255, 255, 0.1)',
-                        opacity: '0.4',
-                      }
-                    : {}
+        {NETWORKS.map((network, i) => (
+          <div key={i}>
+            <NetworkItem
+              style={
+                network.disabled
+                  ? {
+                      cursor: 'not-allowed',
+                      background: 'rgba(255, 255, 255, 0.1)',
+                      opacity: '0.4',
+                    }
+                  : {}
+              }
+              onClick={() => {
+                if (!network.disabled) {
+                  setCurrentNetwork(network);
+                  fetchTokens();
+
+                  setSelectedNetwork(network);
+                  setSelectedTokens([null, null]);
+                  setShowSelectNetworkPage(false);
+                  setPools([]);
+
+                  // setQueryParam('network', network.id);
+                  deleteQueryParam('token0');
+                  deleteQueryParam('token1');
+                  deleteQueryParam('feeTier');
                 }
-                onClick={() => {
-                  if (!network.disabled) {
-                    setCurrentNetwork(network);
-                    fetchTokens();
-
-                    setSelectedNetwork(network);
-                    setSelectedTokens([null, null]);
-                    setShowSelectNetworkPage(false);
-                    setPools([]);
-
-                    // setQueryParam('network', network.id);
-                    deleteQueryParam('token0');
-                    deleteQueryParam('token1');
-                    deleteQueryParam('feeTier');
-                  }
-                }}
-                id={`${network.name}_${i}`}
-              >
-                <img src={network.logoURI} alt={network.name} />
-                <div>
-                  <h5>
-                    {network.name} {network.isNew && <span>NEW</span>}
-                  </h5>
-                  <span>{network.desc}</span>
-                </div>
-              </NetworkItem>
-            </div>
-          );
-        })}
+              }}
+              id={`${network.name}_${i}`}
+            >
+              <img src={network.logoURI} alt={network.name} />
+              <div>
+                <h5>
+                  {network.name} {network.isNew && <span>NEW</span>}
+                </h5>
+                <span>{network.desc}</span>
+              </div>
+            </NetworkItem>
+          </div>
+        ))}
       </Modal>
 
       <Modal
@@ -559,7 +557,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         </>
       </Modal>
 
-      <div className="flex items-center justify-center space-x-4 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100">
+      <div className="flex flex-col items-center justify-center space-x-4 space-y-4 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100 lg:flex-row">
         <div className="flex items-center space-x-10">
           <div className="text-center">
             <Heading>Select Network</Heading>
@@ -584,7 +582,6 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
               />
             )}
           </div>
-
           <div className="text-center">
             <Heading>Select Pair</Heading>
             <div className="flex space-x-3">

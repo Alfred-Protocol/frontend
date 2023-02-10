@@ -59,8 +59,8 @@ const FundDetails = ({ fundAddress }: FundDetailsProps) => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
-      <div className="flex w-3/5 flex-col items-center justify-center space-y-6">
+    <div className="mx-auto md:max-w-4xl">
+      <div className="flex w-full flex-col items-center justify-center space-y-4">
         <FundDetailHeader
           fundName={fund?.name || 'Fund A'}
           fundAddress={fundAddress}
@@ -72,7 +72,7 @@ const FundDetails = ({ fundAddress }: FundDetailsProps) => {
           netValue={tvlLocked * 1.1}
           netDeposit={tvlLocked}
         />
-        <div className="flex w-full space-x-6">
+        <div className="flex w-full flex-col space-y-4 md:space-y-0 md:space-x-4 md:flex-row">
           <FundDetailAssets
             freeAmount0={tvlLocked * 0.4}
             freeAmount1={tvlLocked}

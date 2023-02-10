@@ -26,7 +26,7 @@ const FundDetailHeader = ({
     <div className="w-full rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left text-fuchsia-100">
       <h1 className="mb-2 text-5xl font-bold">{fundName}</h1>
       <p className="mb-3 text-lg">{fundDescription}</p>
-      <p className="mb-1 text-sm">
+      <p className="mb-1 break-all text-sm">
         Address: {fundAddress}{' '}
         <ClipboardDocumentIcon
           width={14}
@@ -38,7 +38,7 @@ const FundDetailHeader = ({
           }}
         />
       </p>
-      <p className="mb-5 text-sm">
+      <p className="mb-5 break-all text-sm">
         Manager: {fundManager}{' '}
         <ClipboardDocumentIcon
           width={14}
@@ -50,7 +50,7 @@ const FundDetailHeader = ({
           }}
         />
       </p>
-      <div className="flex">
+      <div className="flex flex-col md:flex-row">
         <div className="flex-1">
           <div className="mb-2 flex items-center">
             <p className="text-2xl font-bold">Net WMATIC Value</p>

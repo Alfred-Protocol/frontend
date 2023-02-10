@@ -19,7 +19,7 @@ const AboutPage = () => {
     <Layout>
       <PageTitle title="Roadmap" />
       <div className="mx-auto max-w-6xl rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 pb-6 text-left">
-        <Timeline horizontal className="space-x-6 pt-8">
+        <Timeline horizontal className="md:space-x-6 pt-8">
           <Timeline.Item>
             <Timeline.Point />
             <Timeline.Content>

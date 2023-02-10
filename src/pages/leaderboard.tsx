@@ -51,30 +51,38 @@ const LeaderboardPage = () => {
         <table className="text-md w-full table-fixed border-separate -translate-x-3 overflow-x-auto [border-spacing:0.75rem]">
           <thead>
             <tr className="text-grayDark">
-              <th className="py-2">MANAGER</th>
-              <th className="py-2">LIFETIME APR (%)</th>
-              <th className="py-2">AVERAGE YIELD (%)</th>
+              <th className="py-2" colSpan={8}>
+                MANAGER
+              </th>
+              <th className="py-2" colSpan={2}>
+                LIFETIME APR (%)
+              </th>
+              <th className="py-2" colSpan={2}>
+                AVERAGE YIELD (%)
+              </th>
             </tr>
           </thead>
           <tbody>
-            {data.map((cell, index) => {
-              return (
-                <tr key={index}>
-                  <td className="py-2">
-                    <a
-                      target={'_blank'}
-                      href={`https://polygonscan.com/address/0x7730b4cdc1b1e7a33a309ab7205411fad009c106`}
-                      rel="noreferrer"
-                      className="text-blue-700 transition-colors hover:text-blue-900"
-                    >
-                      {cell.manager}
-                    </a>
-                  </td>
-                  <td className="py-2">{cell.lifetimeApr}</td>
-                  <td className="py-2">{cell.averageYield}</td>
-                </tr>
-              );
-            })}
+            {data.map((cell, index) => (
+              <tr key={index}>
+                <td className="py-2" colSpan={8}>
+                  <a
+                    target={'_blank'}
+                    href={`https://polygonscan.com/address/${cell.manager}`}
+                    rel="noreferrer"
+                    className="break-all text-blue-600 transition-colors hover:text-blue-800"
+                  >
+                    {cell.manager}
+                  </a>
+                </td>
+                <td className="py-2" colSpan={2}>
+                  {cell.lifetimeApr}
+                </td>
+                <td className="py-2" colSpan={2}>
+                  {cell.averageYield}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

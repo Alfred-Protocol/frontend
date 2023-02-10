@@ -1,5 +1,6 @@
 import { LPPositionsMock } from '@/mockData/mockData';
 import type { LPPosition } from '@/types/type';
+import { Table } from 'flowbite-react';
 import LPPair from './LPPair';
 
 type FundTableListProps = {
@@ -12,24 +13,14 @@ const FundTableList = ({
   showList = true,
 }: FundTableListProps) => {
   return (
-    <table className="w-full table-fixed border-separate -translate-x-3 overflow-x-auto text-xs [border-spacing:0.75rem]">
+    <table className="w-full table-fixed border-separate border-spacing-0 overflow-x-auto text-xs">
       <thead>
         <tr className="text-grayDark">
-          <th scope="col" className="w-4/12 p-0">
-            PAIR
-          </th>
-          <th scope="col" className="w-1/12 p-0">
-            FEE
-          </th>
-          <th scope="col" className="w-2/12 p-0">
-            MIN
-          </th>
-          <th scope="col" className="w-2/12 p-0">
-            MAX
-          </th>
-          <th scope="col" className="w-2/12 p-0">
-            AMOUNTS
-          </th>
+          <th className="w-4/12">PAIR</th>
+          <th className="w-1/12">FEE</th>
+          <th className="w-2/12">MIN</th>
+          <th className="w-2/12">MAX</th>
+          <th className="w-3/12">AMOUNTS</th>
         </tr>
       </thead>
       {showList && (

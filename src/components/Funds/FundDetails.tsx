@@ -77,7 +77,7 @@ const FundDetails = ({
             {fundName}
           </h3>
         </div>
-        <div>
+        <div className="pb-6">
           <p className="mb-xs sm:text-md flex items-center space-x-1">
             <span>Manager:</span>
             <span className="slashed-zero">{truncateString(manager)} </span>

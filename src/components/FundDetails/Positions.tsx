@@ -1,6 +1,5 @@
 import type { LPPosition } from '@/types/type';
 import { useRouter } from 'next/router';
-import { Router } from 'react-router-dom';
 import CustomButton from '../Common/CustomButton';
 import FundTableList from '../Funds/FundTableList';
 
@@ -21,7 +20,7 @@ const Positions = ({ lpPositions }: Props) => {
           router.push(router.asPath + '/manage');
         }}
       />
-      <div className="mb-2 text-3xl font-bold">Positions</div>
+      <div className="mb-6 text-3xl font-bold">Positions</div>
       <FundTableList data={lpPositions} />
     </div>
   );

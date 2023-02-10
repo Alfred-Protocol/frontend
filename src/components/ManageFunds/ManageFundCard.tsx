@@ -127,7 +127,7 @@ const ManageFundCard = ({
           ).toLocaleDateString()}
         />
       </div>
-      <div className="flex flex-[67%] flex-col">
+      <div className="flex flex-[67%] flex-col space-y-6">
         <div className="flex justify-between">
           <div className="flex space-x-6">
             {showLpPositions && (

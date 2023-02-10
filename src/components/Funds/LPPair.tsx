@@ -52,9 +52,9 @@ const LPPair = ({
 
   return (
     <tr>
-      <td className="items-center sm:flex">
-        <PairImage logo1={undefined} logo2={undefined} />
-        {`${token0Symbol} / ${token1Symbol}`}
+      <td className="items-center sm:flex py-1">
+        <PairImage />
+        <span className="break-words">{`${token0Symbol} / ${token1Symbol}`}</span>
       </td>
       <td>{poolFee?.toNumber() / 10000}%</td>
       <td className="break-words">
@@ -75,11 +75,11 @@ const LPPair = ({
           token1Decimals ?? 18
         )}
       </td>
-      <td className="flex">
-        <div>
-          <PairImage />
+      <td className="items-center sm:flex">
+        <PairImage />
+        <span className="break-words">
           {amount0.toString()} / {amount1.toString()}
-        </div>
+        </span>
         {/*
         // Not possible to do this without a subgraph that indexes blockchain events
         {`${truncateStrToDecimalPlaces(

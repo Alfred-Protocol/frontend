@@ -22,11 +22,11 @@ const FundDetailHeader = ({
     <div className="w-full rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-8 px-8 text-left text-fuchsia-100">
       <h1 className="mb-2 text-5xl font-bold">{fundName}</h1>
       <p className="mb-3 text-lg">{fundDescription}</p>
-      <p className="text-md">
+      <p className="text-sm mb-1">
         Address: {fundAddress}{' '}
         <ClipboardDocumentIcon
-          width={16}
-          height={16}
+          width={14}
+          height={14}
           className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
           onClick={() => {
             navigator.clipboard.writeText(fundAddress);
@@ -34,11 +34,11 @@ const FundDetailHeader = ({
           }}
         />
       </p>
-      <p className="text-md mb-5">
+      <p className="mb-5 text-sm">
         Manager: {fundManager}{' '}
         <ClipboardDocumentIcon
-          width={16}
-          height={16}
+          width={14}
+          height={14}
           className="inline transition-colors hover:cursor-pointer hover:stroke-fuchsia-300"
           onClick={() => {
             navigator.clipboard.writeText(fundManager);

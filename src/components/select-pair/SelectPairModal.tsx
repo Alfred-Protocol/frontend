@@ -557,8 +557,8 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
         </>
       </Modal>
 
-      <div className="grid grid-cols-1 lg:grid-cols-6 items-start justify-center space-y-8 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100 lg:flex-row lg:space-x-4 lg:space-y-0">
-        <div className="col-span-2 flex justify-center lg:justify-start space-x-4">
+      <div className="grid grid-cols-1 items-start justify-center space-y-8 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-4 px-8 text-left text-fuchsia-100 lg:grid-cols-6 lg:flex-row lg:space-x-4 lg:space-y-0">
+        <div className="col-span-2 flex justify-center space-x-4 lg:justify-start">
           <div className="text-center">
             <Heading>1. Select Network</Heading>
             {selectedNetwork !== null && (
@@ -646,7 +646,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
           </div>
         </div>
 
-        <div className="w-full col-span-3 justify-center text-center">
+        <div className="col-span-3 w-full justify-center text-center">
           <Heading>3. Select Fee Tier</Heading>
           <div className="grid justify-center gap-2 md:flex-row lg:grid-cols-2">
             <div className="flex space-x-2">
@@ -727,7 +727,7 @@ const SelectPairModal = ({ submitEnded, submitStart }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex col-span-1 justify-center mx-auto w-full">
+        <div className="col-span-1 mx-auto flex h-full w-full items-center justify-center">
           <CustomButton
             onClick={handleSubmit}
             disabled={isFormDisabled}

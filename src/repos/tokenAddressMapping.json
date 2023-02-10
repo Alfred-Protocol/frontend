@@ -10284,6 +10284,10 @@
       "id": "memecoin",
       "name": "Memecoin"
     },
+    "0xf6043bea98b07f0bea7813aeb22d0cb70c91c0c4": {
+      "id": "memedao-ai",
+      "name": "MemeDao.Ai"
+    },
     "0x02814f435dd04e254be7ae69f61fca19881a780d": {
       "id": "meme-dollar",
       "name": "Meme Dollar"
@@ -12411,6 +12415,10 @@
     "0xe3818504c1b32bf1557b16c238b2e01fd3149c17": {
       "id": "pillar",
       "name": "Pillar"
+    },
+    "0x569424c5ee13884a193773fdc5d1c5f79c443a51": {
+      "id": "pine",
+      "name": "Pine"
     },
     "0xaf691508ba57d416f895e32a1616da1024e882d2": {
       "id": "pinknode",
@@ -21037,6 +21045,10 @@
     "0xa6b37fc85d870711c56fbcb8afe2f8db049ae774": {
       "id": "pillar",
       "name": "Pillar"
+    },
+    "0x612d833c0c7a54cdfbe9a4328b6d658020563ec0": {
+      "id": "pine",
+      "name": "Pine"
     },
     "0x08158a6b5d4018340387d1a302f882e98a8bc5b4": {
       "id": "plasma-finance",
@@ -50435,6 +50447,10 @@
     "0x38d11b40d2173009adb245b869e90525950ae345": {
       "id": "cantobonk",
       "name": "CantoBonk"
+    },
+    "0xf567ce29547a97c9f5ca3daf693f7e900877fff4": {
+      "id": "canto-crabs-chip",
+      "name": "Canto Crabs Chip"
     },
     "0x533c0f08be45eaac821392b85e67fb0c7dc2cab7": {
       "id": "cantohm",

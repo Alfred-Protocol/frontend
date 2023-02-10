@@ -87,10 +87,7 @@ const FundDetails = ({
           />
           <FundDetailGraph />
         </div>
-        <Positions
-          lpPositions={LPPositionsMock}
-          showLpPositions={showLpPositions}
-        />
+        <Positions lpPositions={[]} showLpPositions={showLpPositions} />
       </div>
     </div>
   );

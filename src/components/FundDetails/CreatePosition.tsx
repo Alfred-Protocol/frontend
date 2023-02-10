@@ -25,7 +25,7 @@ type Props = {
 const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
   const { state } = useAppContext();
 
-  const [amount1, setAmount1] = useState<string>('0');
+  const [amount1, setAmount1] = useState(0);
 
   const [minPrice, maxPrice] = state.priceRangeValue;
   const feeTier = state.pool?.feeTier;
@@ -161,7 +161,14 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
           <TextInput
             id="token1Amount"
             type={'text'}
-            onChange={(e) => setAmount1(e.target.value.trim())}
+            onChange={(e) => {
+              if (
+                !isNaN(Number(e.target.value)) &&
+                Number(e.target.value) > 0
+              ) {
+                setAmount1(Number(e.target.value));
+              }
+            }}
             // value={amount1Calc}
             required
             placeholder={`Enter amounts of ${state.token1?.symbol} to deposit`}
@@ -174,7 +181,9 @@ const CreatePosition = ({ fundAddress, show, onClose }: Props) => {
             id="token0Amount"
             type={'text'}
             required
+            disabled
             readOnly
+            className="dark:text-gray-300"
             value={amount0Calc}
           />
         </div>

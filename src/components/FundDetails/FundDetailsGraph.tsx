@@ -67,8 +67,8 @@ const FundDetailGraph = (props: Props) => {
   );
 
   return (
-    <div className="relative max-w-full flex-1 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-2 px-2 text-left text-white">
-      <div className="relative h-full w-full">
+    <div className="max-w-full flex-1 rounded-xl border-2 border-[#EF5DA8] bg-blackfill py-2 px-2 text-left text-white">
+      <div className="relative h-[200px] w-full">
         <Chart
           options={{
             data,

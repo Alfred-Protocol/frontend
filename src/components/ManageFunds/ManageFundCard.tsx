@@ -69,7 +69,9 @@ const ManageFundCard = ({
 
     if (!getTVLDone && totalValueLocked && parseFloat(totalValueLocked)) {
       setGetTVLDone(true);
-      onGetTVL(parseFloat(totalValueLocked));
+      if (manager === userAddress) {
+        onGetTVL(parseFloat(totalValueLocked));
+      }
     }
   }, [data]);
 

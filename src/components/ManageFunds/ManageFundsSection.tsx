@@ -33,7 +33,7 @@ const MaangeFundsSection = () => {
         <AssetsHeader
           managerAddress={address || ''}
           netDeposit={totalFund}
-          netValue={totalFund * 1.1}
+          netValue={totalFund}
         />
         <div className="flex w-full flex-col items-center space-y-4">
           {isLoading ? (
@@ -49,7 +49,7 @@ const MaangeFundsSection = () => {
                 key={fund.address}
                 showLpPositions={idx === 0}
                 fund={fund}
-                onGetTVL={(tvl) => setTotalFund(tvl + totalFund)}
+                onGetTVL={(tvl) => setTotalFund((prev) => tvl + prev)}
               />
             ))
           )}

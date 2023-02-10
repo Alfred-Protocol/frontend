@@ -100,7 +100,7 @@ const FundDetails = ({
               endComponent={
                 <Tooltip
                   content="Total Value Locked"
-                  className="px-2 text-center"
+                  className="px-2 text-center shadow-xl"
                 >
                   <InformationCircleIcon
                     height={16}
@@ -121,7 +121,7 @@ const FundDetails = ({
               endComponent={
                 <Tooltip
                   content="Lifetime yield earned"
-                  className="px-2 text-center"
+                  className="px-2 text-center shadow-xl"
                 >
                   <InformationCircleIcon
                     height={16}
@@ -138,7 +138,7 @@ const FundDetails = ({
               endComponent={
                 <Tooltip
                   content="The date at which the fund will be disabled, and withdrawals will be enabled"
-                  className="px-2 text-center"
+                  className="px-2 text-center shadow-xl"
                 >
                   <InformationCircleIcon
                     height={16}

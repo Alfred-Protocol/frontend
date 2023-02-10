@@ -20,7 +20,7 @@ const AssetsHeader = ({ managerAddress, netDeposit, netValue }: Props) => {
             <p className="text-2xl font-bold">Net WMATIC Value</p>
             <Tooltip
               content="Total net value of your funds"
-              className="px-2 text-center"
+              className="px-2 text-center shadow-xl"
             >
               <InformationCircleIcon
                 height={20}
@@ -36,7 +36,7 @@ const AssetsHeader = ({ managerAddress, netDeposit, netValue }: Props) => {
             <p className="text-2xl font-bold">Net WMATIC Deposits</p>
             <Tooltip
               content="Total net value of your funds"
-              className="px-2 text-center"
+              className="px-2 text-center shadow-xl"
             >
               <InformationCircleIcon
                 height={20}

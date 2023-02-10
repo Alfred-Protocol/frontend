@@ -96,7 +96,22 @@ const ManageFundCard = ({
           {name}
         </h3>
 
-        <PairValue field="TVL" value={totalValueLocked + ' ETH'} />
+        <PairValue
+          field="TVL"
+          value={totalValueLocked + ' ETH'}
+          endComponent={
+            <Tooltip
+              content="Total Value Locked"
+              className="px-2 text-center shadow-xl"
+            >
+              <InformationCircleIcon
+                height={16}
+                width={16}
+                className="ml-1 transition-colors hover:stroke-fuchsia-300"
+              />
+            </Tooltip>
+          }
+        />
         <PairValue
           field="Yield"
           value={displayedFundYield}
@@ -104,7 +119,7 @@ const ManageFundCard = ({
           endComponent={
             <Tooltip
               content="Lifetime yield earned"
-              className="px-2 text-center"
+              className="px-2 text-center shadow-xl"
             >
               <InformationCircleIcon
                 height={16}
@@ -125,6 +140,18 @@ const ManageFundCard = ({
           value={new Date(
             matureDate ? matureDate.toString() : matureDate
           ).toLocaleDateString()}
+          endComponent={
+            <Tooltip
+              content="The date at which the fund will be disabled, and withdrawals will be enabled"
+              className="px-2 text-center shadow-xl"
+            >
+              <InformationCircleIcon
+                height={16}
+                width={16}
+                className="ml-1 transition-colors hover:stroke-fuchsia-300"
+              />
+            </Tooltip>
+          }
         />
       </div>
       <div className="flex flex-[67%] flex-col space-y-6">

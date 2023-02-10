@@ -1,6 +1,5 @@
 import { getCurrentNetwork } from '@/components/Assets/network';
 import type { Price, PriceChart } from '@/types/type';
-import axios from 'axios';
 // import { Price, PriceChart } from '../common/interfaces/coingecko.interface';
 // import { getCurrentNetwork } from '../common/network';
 import tokenAddressMapping from './tokenAddressMapping.json';
@@ -40,11 +39,12 @@ export const getPriceChart = async (
 
   if (!token) return null;
 
-  const marketChartRes = (await axios.get(
-    `https://api.coingecko.com/api/v3/coins/${token.id}/market_chart?vs_currency=usd&days=${queryPeriod}`
-  )) as any;
-
-  const prices = marketChartRes.data.prices.map(
+  const marketChartRes = (await (
+    await fetch(
+      `https://api.coingecko.com/api/v3/coins/${token.id}/market_chart?vs_currency=usd&days=${queryPeriod}`
+    )
+  ).json()) as any;
+  const prices = marketChartRes.prices.map(
     (d: any) =>
       ({
         timestamp: d[0],
@@ -55,7 +55,7 @@ export const getPriceChart = async (
   return {
     tokenId: token.id,
     tokenName: token.name,
-    currentPriceUSD: prices[prices.length - 1].value,
+    currentPriceUSD: prices?.length ? prices[prices.length - 1].value : 0,
     prices,
   };
 };

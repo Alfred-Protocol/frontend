@@ -14,7 +14,7 @@ type SeriesData = {
   data: DailyData[];
 };
 
-const generateData = (numberOfDays: number = 5, maxData: number = 10) => {
+const generateData = (numberOfDays: number = 20, maxData: number = 10) => {
   const today = new Date();
   const dates = new Array(numberOfDays).fill(0).map((_, index) => {
     const date = new Date();
@@ -22,12 +22,10 @@ const generateData = (numberOfDays: number = 5, maxData: number = 10) => {
     return date;
   });
 
-  return new Array(numberOfDays).fill(0).map((_, index) => {
-    return {
-      date: dates[index],
-      value: Math.random() * maxData,
-    };
-  }) as DailyData[];
+  return new Array(numberOfDays).fill(0).map((_, index) => ({
+    date: dates[index],
+    value: Math.random() * maxData + 10,
+  })) as DailyData[];
 };
 
 const Chart = dynamic(() => import('react-charts').then((mod) => mod.Chart), {
@@ -37,11 +35,11 @@ const Chart = dynamic(() => import('react-charts').then((mod) => mod.Chart), {
 const FundDetailGraph = (props: Props) => {
   const data: SeriesData[] = [
     {
-      label: 'Free Assets',
+      label: 'Fee APR (%)',
       data: generateData(),
     },
     {
-      label: 'Locked Assets',
+      label: 'Daily Yield (%)',
       data: generateData(),
     },
   ];
@@ -59,7 +57,10 @@ const FundDetailGraph = (props: Props) => {
     (): AxisOptions<DailyData>[] => [
       {
         getValue: (datum) => datum.value,
+        formatters: { scale: (value: number) => `${value?.toFixed(4)}` },
         show: false,
+        min: 0,
+        max: 30,
       },
     ],
     []
@@ -73,8 +74,6 @@ const FundDetailGraph = (props: Props) => {
             data,
             primaryAxis: primaryAxis as AxisOptions<unknown>,
             secondaryAxes: secondaryAxes as AxisOptions<unknown>[],
-            interactionMode: 'closest',
-            dark: true,
           }}
           className="h-full w-full"
         />

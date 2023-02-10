@@ -178,7 +178,7 @@ const AssetCard = ({
         <div className="flex space-x-8">
           <div>
             <h4 className="text-3xl font-semibold">Your Deposits</h4>
-            <span className="text-4xl">
+            <span className="text-4xl font-thin">
               {ethers.utils.formatEther(depositedAmount).toString() || '0'}{' '}
               MATIC
             </span>
@@ -186,7 +186,7 @@ const AssetCard = ({
           <div>
             <h4 className="text-3xl font-semibold">Your Share</h4>
             {/* Update the text-green-300 based on amount relative to deposit */}
-            <span className={twMerge('text-4xl', 'text-green-400')}>
+            <span className={twMerge('text-4xl font-thin', 'text-green-400')}>
               {ethers.utils.formatEther(depositedAmount).toString() || '0'}{' '}
               MATIC
             </span>

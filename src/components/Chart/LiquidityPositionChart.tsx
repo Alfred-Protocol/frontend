@@ -292,7 +292,7 @@ const LiquidityPositionChart = ({ isLoading }: Props) => {
   }
 
   return (
-    <div className="rounded-xl border-2 border-[#EF5DA8] bg-blackfill text-left text-fuchsia-100 flex-1">
+    <div className="rounded-xl border-2 min-h-[200px] border-[#EF5DA8] bg-blackfill text-left text-fuchsia-100 flex-1">
       <div className="w-full">
         <div className="p-4">
           <h3 className="text-xl font-semibold">Liquidity Position</h3>

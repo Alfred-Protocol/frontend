@@ -33,7 +33,7 @@ const ManageFundPage = () => {
 
   return (
     <Layout>
-      <div className="mx-auto flex w-full max-w-2xl lg:max-w-5xl justify-center">
+      <div className="mx-auto flex w-full max-w-2xl justify-center lg:max-w-5xl">
         <div className="mt-10 flex w-full flex-col space-y-10">
           {showPairModal ? (
             <div>
@@ -53,7 +53,7 @@ const ManageFundPage = () => {
               <CustomButton
                 title="Change Settings"
                 theme="transparentPurple"
-                className="w-1/5"
+                className="lg:w-1/5"
                 onClick={() => {
                   setShowPairModal(true);
                   setShowComponent(false);
@@ -62,7 +62,7 @@ const ManageFundPage = () => {
               <CustomButton
                 title="+ Create LP Position"
                 theme="solidPurple"
-                className="w-1/5"
+                className="lg:w-1/5"
                 onClick={() => {
                   setShowCreateLPModal(true);
                 }}
@@ -72,11 +72,11 @@ const ManageFundPage = () => {
 
           {showComponent && (
             <div className="flex flex-col space-y-5">
-              <div className="flex w-full space-x-5">
+              <div className="flex w-full flex-col space-y-5 lg:flex-row lg:space-y-0 lg:space-x-5">
                 <EstimatedFees isLoading={isLoading} />
                 <Setting isLoading={isLoading} />
               </div>
-              <div className="flex space-x-5">
+              <div className="flex flex-col space-y-5 lg:flex-row lg:space-y-0 lg:space-x-5">
                 <CorrelationChart />
                 <LiquidityPositionChart isLoading={isLoading} />
               </div>

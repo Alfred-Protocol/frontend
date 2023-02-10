@@ -52,7 +52,7 @@ export default function Header() {
             ))}
           </Popover.Group>
           <div className="!ml-5 hidden items-center justify-end text-sm lg:flex lg:flex-1">
-            <ConnectButton />
+            <ConnectButton chainStatus={'icon'} />
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <ConnectButton />
+              <ConnectButton chainStatus={'icon'} />
             </div>
           </div>
         </Popover.Panel>

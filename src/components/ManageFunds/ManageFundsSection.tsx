@@ -15,7 +15,7 @@ export type Fund = {
 
 const MaangeFundsSection = () => {
   const { address } = useAccount();
-  const { data, isLoading } = useDatabaseFunds(address);
+  const { data = [], isLoading } = useDatabaseFunds(address);
   const [isDomLoaded, setIsDomLoaded] = useState(false);
   const [totalFund, setTotalFund] = useState(0);
 

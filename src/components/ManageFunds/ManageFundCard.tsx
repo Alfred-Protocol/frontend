@@ -78,7 +78,7 @@ const ManageFundCard = ({
   }
 
   if (manager.toLocaleLowerCase() != userAddress?.toLocaleLowerCase()) {
-    return;
+    return null;
   }
 
   const totalValueLocked = ethers.utils.formatUnits(data[tvlIndex], 18);

@@ -33,7 +33,7 @@ const ManageFundPage = () => {
 
   return (
     <Layout>
-      <div className="mx-auto flex w-full max-w-5xl justify-center">
+      <div className="mx-auto flex w-full max-w-2xl lg:max-w-5xl justify-center">
         <div className="mt-10 flex w-full flex-col space-y-10">
           {showPairModal ? (
             <div>
